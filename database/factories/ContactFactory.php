@@ -2,8 +2,8 @@
 
 namespace Homeful\Contacts\Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Homeful\Contacts\Models\Contact;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ContactFactory extends Factory
 {
@@ -15,9 +15,9 @@ class ContactFactory extends Factory
             'first_name' => $this->faker->firstName(),
             'middle_name' => $this->faker->lastName(),
             'last_name' => $this->faker->lastName(),
-            'civil_status' => $this->faker->randomElement(['Single','Married','Annulled/Divorced','Legally Seperated','Widow/er']),
-            'sex' => $this->faker->randomElement(['Male','Female']),
-            'nationality' => "Filipino",
+            'civil_status' => $this->faker->randomElement(['Single', 'Married', 'Annulled/Divorced', 'Legally Seperated', 'Widow/er']),
+            'sex' => $this->faker->randomElement(['Male', 'Female']),
+            'nationality' => 'Filipino',
             'date_of_birth' => $this->faker->date(),
             'email' => $this->faker->email(),
             'mobile' => $this->faker->phoneNumber(),
@@ -25,9 +25,9 @@ class ContactFactory extends Factory
                 'first_name' => $this->faker->firstName(),
                 'middle_name' => $this->faker->lastName(),
                 'last_name' => $this->faker->lastName(),
-                'civil_status' => $this->faker->randomElement(['Single','Married','Annulled/Divorced','Legally Seperated','Widow/er']),
-                'sex' => $this->faker->randomElement(['Male','Female']),
-                'nationality' => "Filipino",
+                'civil_status' => $this->faker->randomElement(['Single', 'Married', 'Annulled/Divorced', 'Legally Seperated', 'Widow/er']),
+                'sex' => $this->faker->randomElement(['Male', 'Female']),
+                'nationality' => 'Filipino',
                 'date_of_birth' => $this->faker->date(),
                 'email' => $this->faker->email(),
                 'mobile' => $this->faker->phoneNumber(),
@@ -39,16 +39,16 @@ class ContactFactory extends Factory
                     'address1' => $this->faker->address(),
                     'locality' => $this->faker->city(),
                     'postal_code' => $this->faker->postcode(),
-                    'country' => 'PH'
+                    'country' => 'PH',
                 ],
                 [
-                    'type' => "secondary",
+                    'type' => 'secondary',
                     'ownership' => $this->faker->word(),
                     'address1' => $this->faker->address(),
                     'locality' => $this->faker->city(),
                     'postal_code' => $this->faker->postcode(),
-                    'country' => 'PH'
-                ]
+                    'country' => 'PH',
+                ],
             ],
             'employment' => [
                 'employment_status' => $this->faker->word(),
@@ -65,7 +65,7 @@ class ContactFactory extends Factory
                         'address1' => $this->faker->address(),
                         'locality' => $this->faker->city(),
                         'postal_code' => $this->faker->postcode(),
-                        'country' => 'PH'
+                        'country' => 'PH',
                     ],
                     'contact_no' => $this->faker->word(),
                 ],
@@ -81,9 +81,9 @@ class ContactFactory extends Factory
                     'first_name' => $this->faker->firstName(),
                     'middle_name' => $this->faker->lastName(),
                     'last_name' => $this->faker->lastName(),
-                    'civil_status' => $this->faker->randomElement(['Single','Married','Annulled/Divorced','Legally Seperated','Widow/er']),
-                    'sex' => $this->faker->randomElement(['Male','Female']),
-                    'nationality' => "Filipino",
+                    'civil_status' => $this->faker->randomElement(['Single', 'Married', 'Annulled/Divorced', 'Legally Seperated', 'Widow/er']),
+                    'sex' => $this->faker->randomElement(['Male', 'Female']),
+                    'nationality' => 'Filipino',
                     'date_of_birth' => $this->faker->date(),
                     'email' => $this->faker->email(),
                     'mobile' => $this->faker->phoneNumber(),
@@ -92,13 +92,13 @@ class ContactFactory extends Factory
                     'first_name' => $this->faker->firstName(),
                     'middle_name' => $this->faker->lastName(),
                     'last_name' => $this->faker->lastName(),
-                    'civil_status' => $this->faker->randomElement(['Single','Married','Annulled/Divorced','Legally Seperated','Widow/er']),
-                    'sex' => $this->faker->randomElement(['Male','Female']),
-                    'nationality' => "Filipino",
+                    'civil_status' => $this->faker->randomElement(['Single', 'Married', 'Annulled/Divorced', 'Legally Seperated', 'Widow/er']),
+                    'sex' => $this->faker->randomElement(['Male', 'Female']),
+                    'nationality' => 'Filipino',
                     'date_of_birth' => $this->faker->date(),
                     'email' => $this->faker->email(),
                     'mobile' => $this->faker->phoneNumber(),
-                ]
+                ],
             ],
             'order' => [
                 'sku' => $this->faker->word(),
@@ -111,7 +111,7 @@ class ContactFactory extends Factory
             'voluntarySurrenderFormDocument' => null,
             'usufructAgreementDocument' => null,
             'contractToSellDocument' => null,
-            'reference_code' => $this->faker->word()
+            'reference_code' => $this->faker->word(),
         ];
     }
 }

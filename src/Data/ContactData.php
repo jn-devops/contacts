@@ -2,7 +2,9 @@
 
 namespace Homeful\Contacts\Data;
 
-use Spatie\LaravelData\{Data, DataCollection, Optional};
+use Spatie\LaravelData\Data;
+use Spatie\LaravelData\DataCollection;
+use Spatie\LaravelData\Optional;
 
 class ContactData extends Data
 {
@@ -19,46 +21,47 @@ class ContactData extends Data
         /** @var UploadData[] */
         public DataCollection|Optional $uploads,
         public ?string $reference_code,
-    ) {}
+    ) {
+    }
 
-//    public static function from(...$payloads): static
-//    {
-//        $attribs = (object) $payloads[0];
-//
-//        return new self(
-//            uid: $attribs->uid,
-//            profile: new PersonData(
-//                first_name: $attribs->first_name,
-//                middle_name: $attribs->middle_name,
-//                last_name: $attribs->last_name,
-//                civil_status: $attribs->civil_status,
-//                sex: $attribs->sex,
-//                nationality: $attribs->nationality,
-//                date_of_birth: $attribs->date_of_birth,
-//                email: $attribs->email,
-//                mobile: $attribs->mobile
-//            ),
-//            spouse: $attribs->spouse ? PersonData::from($attribs->spouse) : null,
-//            addresses: new DataCollection(AddressData::class, $attribs->addresses),
-//            employment: $attribs->employment ? ContactEmploymentData::from($attribs->employment) : null,
-//            co_borrowers: new DataCollection(PersonData::class, $attribs->co_borrowers),
-//            order: $attribs->order ? ContactOrderData::from($attribs->order) : null,
-//            uploads: new DataCollection(
-//                dataClass: UploadData::class,
-//                items: collect($attribs->media)
-//                    ->mapWithKeys(function ($item, $key) {
-//                        return [
-//                            $key => [
-//                                'name' => $item['name'],
-//                                'url' => $item['original_url']
-//                            ]
-//                        ];
-//                    })
-//                    ->toArray()
-//            ),
-//            reference_code: $attribs->reference_code ?: null
-//        );
-//    }
+    //    public static function from(...$payloads): static
+    //    {
+    //        $attribs = (object) $payloads[0];
+    //
+    //        return new self(
+    //            uid: $attribs->uid,
+    //            profile: new PersonData(
+    //                first_name: $attribs->first_name,
+    //                middle_name: $attribs->middle_name,
+    //                last_name: $attribs->last_name,
+    //                civil_status: $attribs->civil_status,
+    //                sex: $attribs->sex,
+    //                nationality: $attribs->nationality,
+    //                date_of_birth: $attribs->date_of_birth,
+    //                email: $attribs->email,
+    //                mobile: $attribs->mobile
+    //            ),
+    //            spouse: $attribs->spouse ? PersonData::from($attribs->spouse) : null,
+    //            addresses: new DataCollection(AddressData::class, $attribs->addresses),
+    //            employment: $attribs->employment ? ContactEmploymentData::from($attribs->employment) : null,
+    //            co_borrowers: new DataCollection(PersonData::class, $attribs->co_borrowers),
+    //            order: $attribs->order ? ContactOrderData::from($attribs->order) : null,
+    //            uploads: new DataCollection(
+    //                dataClass: UploadData::class,
+    //                items: collect($attribs->media)
+    //                    ->mapWithKeys(function ($item, $key) {
+    //                        return [
+    //                            $key => [
+    //                                'name' => $item['name'],
+    //                                'url' => $item['original_url']
+    //                            ]
+    //                        ];
+    //                    })
+    //                    ->toArray()
+    //            ),
+    //            reference_code: $attribs->reference_code ?: null
+    //        );
+    //    }
 
     public static function fromModel(object $model): self
     {
@@ -92,7 +95,8 @@ class ContactOrderData extends Data
         public string $sku,
         public string $seller_commission_code,
         public string $property_code,
-    ) {}
+    ) {
+    }
 }
 
 class ContactEmploymentData extends Data
@@ -104,7 +108,8 @@ class ContactEmploymentData extends Data
         public string $employment_type,
         public ContactEmploymentEmployerData $employer,
         public ContactEmploymentIdData|Optional $id,
-    ) {}
+    ) {
+    }
 }
 
 class ContactEmploymentEmployerData extends Data
@@ -115,7 +120,8 @@ class ContactEmploymentEmployerData extends Data
         public string $nationality,
         public AddressData $address,
         public string $contact_no,
-    ) {}
+    ) {
+    }
 }
 
 class ContactEmploymentIdData extends Data
@@ -125,7 +131,8 @@ class ContactEmploymentIdData extends Data
         public ?string $pagibig,
         public ?string $sss,
         public ?string $gsis,
-    ) {}
+    ) {
+    }
 }
 
 class UploadData extends Data
@@ -133,5 +140,6 @@ class UploadData extends Data
     public function __construct(
         public string $name,
         public string $url
-    ) {}
+    ) {
+    }
 }

@@ -1,12 +1,16 @@
 <?php
-use Homeful\Contacts\Data\{ContactData, ContactEmploymentData, ContactOrderData};
-use Illuminate\Foundation\Testing\{RefreshDatabase, WithFaker};
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
+use Homeful\Contacts\Data\ContactData;
+use Homeful\Contacts\Data\ContactEmploymentData;
+use Homeful\Contacts\Data\ContactOrderData;
 use Homeful\Contacts\Models\Contact;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 uses(RefreshDatabase::class, WithFaker::class);
 
-beforeEach(function() {
+beforeEach(function () {
     $this->faker = $this->makeFaker('en_PH');
     $migration = include 'vendor/spatie/laravel-medialibrary/database/migrations/create_media_table.php.stub';
     $migration->up();
@@ -29,8 +33,8 @@ dataset('contact', function () {
                 'invoiceDocument' => 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf',
                 'receiptDocument' => 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf',
                 'deedOfSaleDocument' => 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf',
-            ])
-        ]
+            ]),
+        ],
     ];
 });
 
@@ -91,7 +95,7 @@ test('contact can attach media', function () {
         'statementOfAccountDocument' => null,
         'invoiceDocument' => null,
         'receiptDocument' => null,
-        'deedOfSaleDocument' => null
+        'deedOfSaleDocument' => null,
     ]);
     $contact->idImage = $idImageUrl;
     $contact->selfieImage = $selfieImageUrl;
@@ -220,14 +224,14 @@ test('contact has data', function (Contact $contact) {
     expect($data->employment->toArray())->toBe(ContactEmploymentData::from($contact->employment)->toArray());
     foreach ($data->co_borrowers->toArray() as $index => $co_borrower) {
         expect(array_filter($co_borrower))->toBe(array_filter($contact->co_borrowers[$index]));
-    };
+    }
     expect($data->order->toArray())->toBe(ContactOrderData::from($contact->order)->toArray());
 
     foreach (array_filter($data->uploads->toArray()) as $upload) {
         $name = $upload['name'];
         $url = $upload['url'];
         expect($contact->$name->getUrl())->toBe($url);
-    };
+    }
     expect($data->uploads->toArray())->toBe($contact->uploads);
     expect($data->reference_code)->toBe($contact->reference_code);
 })->with('contact');
