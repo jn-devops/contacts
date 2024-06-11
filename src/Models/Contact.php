@@ -2,24 +2,24 @@
 
 namespace Homeful\Contacts\Models;
 
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileCannotBeAdded;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\MediaLibrary\MediaCollections\File;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Database\Eloquent\Model;
 use Homeful\Contacts\Data\ContactData;
-use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Spatie\Image\Enums\Fit;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileCannotBeAdded;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
+use Spatie\MediaLibrary\MediaCollections\File;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * Class Contact
  *
- * @property int    $id
+ * @property int $id
  * @property string $reference_code
  * @property string $first_name
  * @property string $middle_name
@@ -30,26 +30,26 @@ use Spatie\Image\Enums\Fit;
  * @property Carbon $date_of_birth
  * @property string $email
  * @property string $mobile
- * @property array  $spouse
- * @property array  $addresses
- * @property array  $employment
- * @property array  $co_borrowers
- * @property array  $uploads
- * @property array  $order
- * @property array  $media
- * @property Media  $idImage
- * @property Media  $selfieImage
- * @property Media  $payslipImage
- * @property Media  $voluntarySurrenderFormDocument
- * @property Media  $usufructAgreementDocument
- * @property Media  $contractToSellDocument
- * @property Media  $deedOfRestrictionsDocument
- * @property Media  $disclosureDocument
- * @property Media  $borrowerConformityDocument
- * @property Media  $statementOfAccountDocument
- * @property Media  $invoiceDocument
- * @property Media  $receiptDocument
- * @property Media  $deedOfSaleDocument
+ * @property array $spouse
+ * @property array $addresses
+ * @property array $employment
+ * @property array $co_borrowers
+ * @property array $uploads
+ * @property array $order
+ * @property array $media
+ * @property Media $idImage
+ * @property Media $selfieImage
+ * @property Media $payslipImage
+ * @property Media $voluntarySurrenderFormDocument
+ * @property Media $usufructAgreementDocument
+ * @property Media $contractToSellDocument
+ * @property Media $deedOfRestrictionsDocument
+ * @property Media $disclosureDocument
+ * @property Media $borrowerConformityDocument
+ * @property Media $statementOfAccountDocument
+ * @property Media $invoiceDocument
+ * @property Media $receiptDocument
+ * @property Media $deedOfSaleDocument
  *
  * @method int getKey()
  */

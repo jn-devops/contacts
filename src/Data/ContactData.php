@@ -2,9 +2,9 @@
 
 namespace Homeful\Contacts\Data;
 
+use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\Optional;
-use Spatie\LaravelData\Data;
 
 class ContactData extends Data
 {
@@ -20,7 +20,8 @@ class ContactData extends Data
         public ?ContactOrderData $order,
         /** @var UploadData[] */
         public DataCollection|Optional $uploads
-    ) {}
+    ) {
+    }
 
     //    public static function from(...$payloads): static
     //    {
