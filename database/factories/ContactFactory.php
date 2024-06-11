@@ -2,8 +2,8 @@
 
 namespace Homeful\Contacts\Database\Factories;
 
-use Homeful\Contacts\Models\Contact;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Homeful\Contacts\Models\Contact;
 
 class ContactFactory extends Factory
 {
@@ -111,12 +111,7 @@ class ContactFactory extends Factory
             'payslipImage' => null,
             'voluntarySurrenderFormDocument' => null,
             'usufructAgreementDocument' => null,
-<<<<<<< HEAD
             'contractToSellDocument' => null
-=======
-            'contractToSellDocument' => null,
-            'reference_code' => $this->faker->word(),
->>>>>>> ce1d9183e1db4346a1e0c4e4e9e35f394d64215c
         ];
     }
 }
