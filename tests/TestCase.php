@@ -2,9 +2,9 @@
 
 namespace Homeful\Contacts\Tests;
 
+use Homeful\Contacts\ContactsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Homeful\Contacts\ContactsServiceProvider;
 
 class TestCase extends Orchestra
 {
