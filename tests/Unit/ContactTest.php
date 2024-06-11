@@ -1,12 +1,12 @@
 <?php
 
-use Homeful\Contacts\Data\ContactData;
-use Homeful\Contacts\Data\ContactEmploymentData;
-use Homeful\Contacts\Data\ContactOrderData;
-use Homeful\Contacts\Models\Contact;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Homeful\Contacts\Data\ContactEmploymentData;
+use Illuminate\Foundation\Testing\WithFaker;
+use Homeful\Contacts\Data\ContactOrderData;
+use Homeful\Contacts\Data\ContactData;
+use Homeful\Contacts\Models\Contact;
 
 uses(RefreshDatabase::class, WithFaker::class);
 
