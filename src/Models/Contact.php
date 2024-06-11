@@ -2,7 +2,6 @@
 
 namespace Homeful\Contacts\Models;
 
-
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileCannotBeAdded;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
@@ -11,16 +10,16 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\MediaCollections\File;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\{Arr, Str};
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Support\Carbon;
 use Spatie\Image\Enums\Fit;
+use Illuminate\Support\Str;
 
 /**
  * Class Contact
  *
  * @property int    $id
- * @property string $uid
+ * @property string $reference_code
  * @property string $first_name
  * @property string $middle_name
  * @property string $last_name
@@ -50,7 +49,6 @@ use Spatie\Image\Enums\Fit;
  * @property Media  $invoiceDocument
  * @property Media  $receiptDocument
  * @property Media  $deedOfSaleDocument
- * @property string $reference_code
  *
  * @method   int    getKey()
  */
@@ -60,6 +58,7 @@ class Contact extends Model implements HasMedia
     use HasFactory;
 
     protected $fillable = [
+        'reference_code',
         'first_name',
         'middle_name',
         'last_name',
@@ -87,7 +86,6 @@ class Contact extends Model implements HasMedia
         'invoiceDocument',
         'receiptDocument',
         'deedOfSaleDocument',
-        'reference_code'
     ];
 
     protected $casts = [
@@ -105,15 +103,6 @@ class Contact extends Model implements HasMedia
     public function toData(): array
     {
         return ContactData::fromModel($this)->toArray();
-    }
-
-    protected static function boot(): void
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            $model->uid = Str::orderedUuid()->toString();
-        });
     }
 
     public function resolveRouteBinding($value, $field = null)

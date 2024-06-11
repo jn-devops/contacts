@@ -35,6 +35,7 @@ dataset('contact', function () {
 });
 
 test('contact has schema attributes', function (Contact $contact) {
+    expect($contact->reference_code)->toBeString();
     expect($contact->first_name)->toBeString();
     expect($contact->middle_name)->toBeString();
     expect($contact->last_name)->toBeString();
@@ -61,7 +62,6 @@ test('contact has schema attributes', function (Contact $contact) {
     expect($contact->invoiceDocument)->toBeInstanceOf(Media::class);
     expect($contact->receiptDocument)->toBeInstanceOf(Media::class);
     expect($contact->deedOfSaleDocument)->toBeInstanceOf(Media::class);
-    expect($contact->reference_code)->toBeString();
 })->with('contact');
 
 test('contact can attach media', function () {
@@ -192,8 +192,7 @@ test('contact can attach media', function () {
 
 test('contact has data', function (Contact $contact) {
     $data = ContactData::fromModel($contact);
-
-    expect($data->uid)->toBe($contact->uid);
+    expect($data->reference_code)->toBe($contact->reference_code);
     expect($data->profile->first_name)->toBe($contact->first_name);
     expect($data->profile->middle_name)->toBe($contact->middle_name);
     expect($data->profile->last_name)->toBe($contact->last_name);
@@ -229,5 +228,4 @@ test('contact has data', function (Contact $contact) {
         expect($contact->$name->getUrl())->toBe($url);
     };
     expect($data->uploads->toArray())->toBe($contact->uploads);
-    expect($data->reference_code)->toBe($contact->reference_code);
 })->with('contact');

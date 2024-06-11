@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
              $table->id();
-             $table->uuid('uid');
+             $table->string('reference_code')->unique();
              $table->string('first_name');
              $table->string('middle_name');
              $table->string('last_name');
@@ -25,7 +25,6 @@ return new class extends Migration
              $table->json('employment')->nullable();
              $table->json('co_borrowers')->nullable();
              $table->json('order')->nullable();
-             $table->string('reference_code')->nullable()->index();
              $table->timestamps();
         });
     }

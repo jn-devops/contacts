@@ -7,7 +7,7 @@ use Spatie\LaravelData\{Data, DataCollection, Optional};
 class ContactData extends Data
 {
     public function __construct(
-        public string $uid,
+        public string $reference_code,
         public PersonData $profile,
         public ?PersonData $spouse,
         /** @var AddressData[] */
@@ -17,8 +17,7 @@ class ContactData extends Data
         public DataCollection|Optional $co_borrowers,
         public ?ContactOrderData $order,
         /** @var UploadData[] */
-        public DataCollection|Optional $uploads,
-        public ?string $reference_code,
+        public DataCollection|Optional $uploads
     ) {}
 
 //    public static function from(...$payloads): static
@@ -63,7 +62,7 @@ class ContactData extends Data
     public static function fromModel(object $model): self
     {
         return new self(
-            uid: $model->uid,
+            reference_code: $model->reference_code,
             profile: new PersonData(
                 first_name: $model->first_name,
                 middle_name: $model->middle_name,
@@ -80,8 +79,7 @@ class ContactData extends Data
             employment: $model->employment ? ContactEmploymentData::from($model->employment) : null,
             co_borrowers: new DataCollection(PersonData::class, $model->co_borrowers),
             order: $model->order ? ContactOrderData::from($model->order) : null,
-            uploads: new DataCollection(UploadData::class, $model->uploads),
-            reference_code: $model->reference_code ?: null
+            uploads: new DataCollection(UploadData::class, $model->uploads)
         );
     }
 }

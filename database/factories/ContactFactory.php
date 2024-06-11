@@ -12,6 +12,7 @@ class ContactFactory extends Factory
     public function definition()
     {
         return [
+            'reference_code' => $this->faker->word(),
             'first_name' => $this->faker->firstName(),
             'middle_name' => $this->faker->lastName(),
             'last_name' => $this->faker->lastName(),
@@ -110,8 +111,7 @@ class ContactFactory extends Factory
             'payslipImage' => null,
             'voluntarySurrenderFormDocument' => null,
             'usufructAgreementDocument' => null,
-            'contractToSellDocument' => null,
-            'reference_code' => $this->faker->word()
+            'contractToSellDocument' => null
         ];
     }
 }
