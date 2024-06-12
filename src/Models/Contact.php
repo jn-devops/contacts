@@ -3,7 +3,7 @@
 namespace Homeful\Contacts\Models;
 
 use Spatie\MediaLibrary\MediaCollections\Exceptions\{FileCannotBeAdded, FileDoesNotExist, FileIsTooBig};
-use Homeful\Common\Traits\HasPackageFactory as HasFactory;
+use Homeful\Contacts\Traits\HasPackageFactory as HasFactory;
 use Spatie\MediaLibrary\{HasMedia, InteractsWithMedia};
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\MediaCollections\File;
