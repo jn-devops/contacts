@@ -2,9 +2,9 @@
 
 namespace Homeful\Contacts;
 
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Homeful\Contacts\Commands\ContactsCommand;
 use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class ContactsServiceProvider extends PackageServiceProvider
 {

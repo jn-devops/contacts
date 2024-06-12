@@ -2,8 +2,8 @@
 
 namespace Homeful\Contacts\Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Homeful\Contacts\Models\Contact;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ContactFactory extends Factory
 {

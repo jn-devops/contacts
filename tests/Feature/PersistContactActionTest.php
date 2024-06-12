@@ -1,10 +1,10 @@
 <?php
 
 use Homeful\Contacts\Actions\PersistContactAction;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Homeful\Contacts\Data\ContactData;
 use Homeful\Contacts\Models\Contact;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Arr;
 
 uses(RefreshDatabase::class, WithFaker::class);

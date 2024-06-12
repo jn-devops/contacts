@@ -2,15 +2,19 @@
 
 namespace Homeful\Contacts\Models;
 
-use Spatie\MediaLibrary\MediaCollections\Exceptions\{FileCannotBeAdded, FileDoesNotExist, FileIsTooBig};
 use Homeful\Common\Traits\HasPackageFactory as HasFactory;
-use Spatie\MediaLibrary\{HasMedia, InteractsWithMedia};
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\MediaLibrary\MediaCollections\File;
-use Illuminate\Database\Eloquent\Model;
 use Homeful\Contacts\Data\ContactData;
-use Illuminate\Support\{Carbon, Str};
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Spatie\Image\Enums\Fit;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileCannotBeAdded;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
+use Spatie\MediaLibrary\MediaCollections\File;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * Class Contact

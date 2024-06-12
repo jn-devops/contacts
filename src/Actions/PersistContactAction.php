@@ -3,10 +3,10 @@
 namespace Homeful\Contacts\Actions;
 
 use Homeful\Contacts\Events\ContactPersisted;
-use Illuminate\Support\Facades\Validator;
-use Lorisleiva\Actions\Concerns\AsAction;
-use Lorisleiva\Actions\ActionRequest;
 use Homeful\Contacts\Models\Contact;
+use Illuminate\Support\Facades\Validator;
+use Lorisleiva\Actions\ActionRequest;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class PersistContactAction
 {
