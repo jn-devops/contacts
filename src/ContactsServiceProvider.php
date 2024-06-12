@@ -19,6 +19,7 @@ class ContactsServiceProvider extends PackageServiceProvider
             ->name('contacts')
             ->hasConfigFile(['contacts', 'data', 'media-library'])
             ->hasViews()
+            ->hasRoute('api')
             ->hasMigration('create_contacts_table')
             ->hasCommand(ContactsCommand::class);
     }
