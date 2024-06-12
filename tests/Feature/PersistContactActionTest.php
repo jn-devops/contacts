@@ -130,12 +130,12 @@ test('persist contact action', function (array $attribs) {
     expect(Contact::count())->toBe(1);
     expect($contact)->toBeInstanceOf(Contact::class);
     expect($contact->toData())->toBe(ContactData::fromModel($contact)->toArray());
-})->with('attribs')->skip();
+})->with('attribs');
 
-//test('persist contact end point', function (array $attribs) {
-//    $response = $this->postJson(route('persist-contact'), $attribs);
-//    $response->assertStatus(200);
-//    $search = Arr::only($attribs, ['first_name', 'middle_name', 'last_name']);
-//    $contact = app(Contact::class)->where($search)->first();
-//    $response->assertJson(['code' => $contact->reference_code, 'status' => 1]);
-//})->with('attribs')->skip();
+test('persist contact end point', function (array $attribs) {
+    $response = $this->postJson(route('persist-contact'), $attribs);
+    $response->assertStatus(200);
+    $search = Arr::only($attribs, ['first_name', 'middle_name', 'last_name']);
+    $contact = app(Contact::class)->where($search)->first();
+    $response->assertJson(['code' => $contact->reference_code, 'status' => 1]);
+})->with('attribs');

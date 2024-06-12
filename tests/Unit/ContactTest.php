@@ -148,6 +148,8 @@ test('contact can attach media', function () {
     expect($contact->invoiceDocument->file_name)->toBe('test.pdf');
     expect($contact->receiptDocument->file_name)->toBe('test.pdf');
     expect($contact->deedOfSaleDocument->file_name)->toBe('test.pdf');
+    $host = (config('app.url'));
+    config()->set('app.url', '');
     tap(config('app.url'), function ($host) use ($contact) {
         expect($contact->idImage->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->idImage->getPathRelativeToRoot()]));
         expect($contact->selfieImage->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->selfieImage->getPathRelativeToRoot()]));
@@ -163,6 +165,7 @@ test('contact can attach media', function () {
         expect($contact->receiptDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->receiptDocument->getPathRelativeToRoot()]));
         expect($contact->deedOfSaleDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->deedOfSaleDocument->getPathRelativeToRoot()]));
     });
+    config()->set('app.url', $host);
     $contact->idImage->delete();
     $contact->selfieImage->delete();
     $contact->payslipImage->delete();
