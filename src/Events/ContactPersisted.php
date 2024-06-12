@@ -2,20 +2,18 @@
 
 namespace Homeful\Contacts\Events;
 
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\Channel;
 use Homeful\Contacts\Models\Contact;
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
 class ContactPersisted implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public Contact $contact;
-
 
     public function __construct(Contact $contact)
     {
@@ -30,7 +28,7 @@ class ContactPersisted implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('contact.' . $this->contact->reference_code),
+            new Channel('contact.'.$this->contact->reference_code),
         ];
     }
 
@@ -42,7 +40,7 @@ class ContactPersisted implements ShouldBroadcast
     public function broadcastWith(): array
     {
         return [
-            'contact_reference_code' => $this->contact->reference_code
+            'contact_reference_code' => $this->contact->reference_code,
         ];
     }
 }

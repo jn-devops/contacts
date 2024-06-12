@@ -3,19 +3,15 @@
 namespace Homeful\Contacts\Actions;
 
 use Homeful\Contacts\Events\ContactPersisted;
-use Illuminate\Support\Facades\Validator;
-use Lorisleiva\Actions\Concerns\AsAction;
-use Lorisleiva\Actions\ActionRequest;
 use Homeful\Contacts\Models\Contact;
+use Illuminate\Support\Facades\Validator;
+use Lorisleiva\Actions\ActionRequest;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class PersistContactAction
 {
     use AsAction;
 
-    /**
-     * @param array $validated
-     * @return Contact
-     */
     protected function persist(array $validated): Contact
     {
         return tap(new Contact($validated), function ($contact) {
@@ -24,10 +20,6 @@ class PersistContactAction
         });
     }
 
-    /**
-     * @param array $attribs
-     * @return Contact
-     */
     public function handle(array $attribs): Contact
     {
         $validated = Validator::validate($attribs, $this->rules());
@@ -57,10 +49,10 @@ class PersistContactAction
             'addresses.*.type' => ['required', 'string'],
             'addresses.*.ownership' => ['required', 'string'],
             'addresses.*.full_address' => ['nullable', 'string'],
-            'addresses.*.address1' => ['nullable', 'string'],//improve this, required if full address
+            'addresses.*.address1' => ['nullable', 'string'], //improve this, required if full address
             'addresses.*.address2' => ['nullable', 'string'],
             'addresses.*.sublocality' => ['nullable', 'string'],
-            'addresses.*.locality' => ['nullable', 'string'],//improve this, required if full address
+            'addresses.*.locality' => ['nullable', 'string'], //improve this, required if full address
             'addresses.*.administrative_area' => ['nullable', 'string'],
             'addresses.*.postal_code' => ['nullable', 'string'],
             'addresses.*.sorting_code' => ['nullable', 'string'],
@@ -118,17 +110,13 @@ class PersistContactAction
         ];
     }
 
-    /**
-     * @param ActionRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function asController(ActionRequest $request): \Illuminate\Http\JsonResponse
     {
         $contact = $this->persist($request->validated());
 
         return response()->json([
             'code' => $contact->reference_code,
-            'status' => $contact->exists
+            'status' => $contact->exists,
         ]);
     }
 }

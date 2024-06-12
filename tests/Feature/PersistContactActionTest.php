@@ -1,14 +1,15 @@
 <?php
 
-use Illuminate\Foundation\Testing\{RefreshDatabase, WithFaker};
 use Homeful\Contacts\Actions\PersistContactAction;
 use Homeful\Contacts\Data\ContactData;
 use Homeful\Contacts\Models\Contact;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Arr;
 
 uses(RefreshDatabase::class, WithFaker::class);
 
-beforeEach(function() {
+beforeEach(function () {
     $this->faker = $this->makeFaker('en_PH');
     $migration = include 'vendor/spatie/laravel-medialibrary/database/migrations/create_media_table.php.stub';
     $migration->up();
@@ -16,15 +17,15 @@ beforeEach(function() {
 
 dataset('attribs', function () {
     return [
-        fn() => [
+        fn () => [
             'reference_code' => $this->faker->word(),
 
             'first_name' => $this->faker->firstName(),
             'middle_name' => $this->faker->lastName(),
             'last_name' => $this->faker->lastName(),
-            'civil_status' => $this->faker->randomElement(['Single','Married','Annuled/Divorced','Legally Seperated','Widow/er']),
-            'sex' => $this->faker->randomElement(['Male','Female']),
-            'nationality' => "Filipino",
+            'civil_status' => $this->faker->randomElement(['Single', 'Married', 'Annuled/Divorced', 'Legally Seperated', 'Widow/er']),
+            'sex' => $this->faker->randomElement(['Male', 'Female']),
+            'nationality' => 'Filipino',
             'date_of_birth' => $this->faker->date(),
             'email' => $this->faker->email(),
             'mobile' => $this->faker->phoneNumber(),
@@ -32,9 +33,9 @@ dataset('attribs', function () {
                 'first_name' => $this->faker->firstName(),
                 'middle_name' => $this->faker->lastName(),
                 'last_name' => $this->faker->lastName(),
-                'civil_status' => $this->faker->randomElement(['Single','Married','Annuled/Divorced','Legally Seperated','Widow/er']),
-                'sex' => $this->faker->randomElement(['Male','Female']),
-                'nationality' => "Filipino",
+                'civil_status' => $this->faker->randomElement(['Single', 'Married', 'Annuled/Divorced', 'Legally Seperated', 'Widow/er']),
+                'sex' => $this->faker->randomElement(['Male', 'Female']),
+                'nationality' => 'Filipino',
                 'date_of_birth' => $this->faker->date(),
                 'email' => $this->faker->email(),
                 'mobile' => $this->faker->phoneNumber(),
@@ -46,16 +47,16 @@ dataset('attribs', function () {
                     'address1' => $this->faker->address(),
                     'locality' => $this->faker->city(),
                     'postal_code' => $this->faker->postcode(),
-                    'country' => 'PH'
+                    'country' => 'PH',
                 ],
                 [
-                    'type' => "secondary",
+                    'type' => 'secondary',
                     'ownership' => $this->faker->word(),
                     'address1' => $this->faker->address(),
                     'locality' => $this->faker->city(),
                     'postal_code' => $this->faker->postcode(),
-                    'country' => 'PH'
-                ]
+                    'country' => 'PH',
+                ],
             ],
             'employment' => [
                 'employment_status' => $this->faker->word(),
@@ -72,7 +73,7 @@ dataset('attribs', function () {
                         'address1' => $this->faker->address(),
                         'locality' => $this->faker->city(),
                         'postal_code' => $this->faker->postcode(),
-                        'country' => 'PH'
+                        'country' => 'PH',
                     ],
                     'contact_no' => $this->faker->word(),
                 ],
@@ -88,9 +89,9 @@ dataset('attribs', function () {
                     'first_name' => $this->faker->firstName(),
                     'middle_name' => $this->faker->lastName(),
                     'last_name' => $this->faker->lastName(),
-                    'civil_status' => $this->faker->randomElement(['Single','Married','Annulled/Divorced','Legally Seperated','Widow/er']),
-                    'sex' => $this->faker->randomElement(['Male','Female']),
-                    'nationality' => "Filipino",
+                    'civil_status' => $this->faker->randomElement(['Single', 'Married', 'Annulled/Divorced', 'Legally Seperated', 'Widow/er']),
+                    'sex' => $this->faker->randomElement(['Male', 'Female']),
+                    'nationality' => 'Filipino',
                     'date_of_birth' => $this->faker->date(),
                     'email' => $this->faker->email(),
                     'mobile' => $this->faker->phoneNumber(),
@@ -99,27 +100,27 @@ dataset('attribs', function () {
                     'first_name' => $this->faker->firstName(),
                     'middle_name' => $this->faker->lastName(),
                     'last_name' => $this->faker->lastName(),
-                    'civil_status' => $this->faker->randomElement(['Single','Married','Annulled/Divorced','Legally Seperated','Widow/er']),
-                    'sex' => $this->faker->randomElement(['Male','Female']),
-                    'nationality' => "Filipino",
+                    'civil_status' => $this->faker->randomElement(['Single', 'Married', 'Annulled/Divorced', 'Legally Seperated', 'Widow/er']),
+                    'sex' => $this->faker->randomElement(['Male', 'Female']),
+                    'nationality' => 'Filipino',
                     'date_of_birth' => $this->faker->date(),
                     'email' => $this->faker->email(),
                     'mobile' => $this->faker->phoneNumber(),
-                ]
+                ],
             ],
             'order' => [
                 'sku' => $this->faker->word(),
                 'seller_commission_code' => $this->faker->word(),
                 'property_code' => $this->faker->word(),
             ],
-        ]
+        ],
     ];
 });
 
 test('persist contact action', function (array $attribs) {
     expect(Contact::count())->toBe(0);
     $original_queries_count = 2;
-    $image_query_count = 0;//5;
+    $image_query_count = 0; //5;
     $contact_query_count = 1;
     $data_query_count = 1;
     $queries_count = $original_queries_count + $image_query_count + $contact_query_count + $data_query_count;
