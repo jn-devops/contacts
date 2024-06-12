@@ -1,10 +1,10 @@
 <?php
 
 use Homeful\Contacts\Actions\PersistContactAction;
-use Homeful\Contacts\Data\ContactData;
-use Homeful\Contacts\Models\Contact;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Homeful\Contacts\Data\ContactData;
+use Homeful\Contacts\Models\Contact;
 use Illuminate\Support\Arr;
 
 uses(RefreshDatabase::class, WithFaker::class);
@@ -18,7 +18,7 @@ beforeEach(function () {
 dataset('attribs', function () {
     return [
         fn () => [
-            'reference_code' => $this->faker->word(),
+            'reference_code' => $this->faker->uuid(),
 
             'first_name' => $this->faker->firstName(),
             'middle_name' => $this->faker->lastName(),

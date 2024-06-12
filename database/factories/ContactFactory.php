@@ -2,8 +2,8 @@
 
 namespace Homeful\Contacts\Database\Factories;
 
-use Homeful\Contacts\Models\Contact;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Homeful\Contacts\Models\Contact;
 
 class ContactFactory extends Factory
 {
@@ -12,7 +12,7 @@ class ContactFactory extends Factory
     public function definition()
     {
         return [
-            'reference_code' => $this->faker->word(),
+            'reference_code' => $this->faker->uuid(),
             'first_name' => $this->faker->firstName(),
             'middle_name' => $this->faker->lastName(),
             'last_name' => $this->faker->lastName(),
