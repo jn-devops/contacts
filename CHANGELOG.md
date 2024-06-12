@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.2.0 - 2024-06-12
+
+add PersistContactAction and end point
+
 ## #v1.1.0 - 2024-06-12
 
 Add persist contact action
