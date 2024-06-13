@@ -2,7 +2,7 @@
 
 namespace Homeful\Contacts\Models;
 
-use Homeful\Common\Traits\HasPackageFactory as HasFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Homeful\Contacts\Data\ContactData;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -100,6 +100,14 @@ class Contact extends Model implements HasMedia
     protected array $dates = [
         'date_of_birth',
     ];
+
+    protected static function newFactory()
+    {
+        $modelName = static::class;
+        $path = 'Homeful\\Contacts\\Database\\Factories\\'.class_basename($modelName).'Factory';
+
+        return app($path)->new();
+    }
 
     public function toData(): array
     {
