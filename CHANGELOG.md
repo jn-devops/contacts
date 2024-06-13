@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.2.1 - 2024-06-13
+
+add newFactory() in Contact
+
 ## #v1.2.0 - 2024-06-12
 
 add PersistContactAction and end point
