@@ -20,8 +20,7 @@ class ContactData extends Data
         public ?ContactOrderData $order,
         /** @var UploadData[] */
         public DataCollection|Optional $uploads
-    ) {
-    }
+    ) {}
 
     //    public static function from(...$payloads): static
     //    {
@@ -93,8 +92,7 @@ class ContactOrderData extends Data
         public string $sku,
         public string $seller_commission_code,
         public string $property_code,
-    ) {
-    }
+    ) {}
 }
 
 class ContactEmploymentData extends Data
@@ -106,8 +104,7 @@ class ContactEmploymentData extends Data
         public string $employment_type,
         public ContactEmploymentEmployerData $employer,
         public ContactEmploymentIdData|Optional $id,
-    ) {
-    }
+    ) {}
 }
 
 class ContactEmploymentEmployerData extends Data
@@ -118,8 +115,7 @@ class ContactEmploymentEmployerData extends Data
         public string $nationality,
         public AddressData $address,
         public string $contact_no,
-    ) {
-    }
+    ) {}
 }
 
 class ContactEmploymentIdData extends Data
@@ -129,8 +125,7 @@ class ContactEmploymentIdData extends Data
         public ?string $pagibig,
         public ?string $sss,
         public ?string $gsis,
-    ) {
-    }
+    ) {}
 }
 
 class UploadData extends Data
@@ -138,6 +133,5 @@ class UploadData extends Data
     public function __construct(
         public string $name,
         public string $url
-    ) {
-    }
+    ) {}
 }

@@ -1,7 +1,7 @@
 <?php
 
-
-use Homeful\Contacts\Actions\{AttachContactMediaAction, PersistContactAction};
+use Homeful\Contacts\Actions\AttachContactMediaAction;
+use Homeful\Contacts\Actions\PersistContactAction;
 use Homeful\Contacts\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -22,16 +22,16 @@ Route::post('persist-contact', function (Request $request): \Illuminate\Http\Jso
 
 Route::post('attach-contact-media/{reference_code}', function (Request $request, string $reference_code): \Illuminate\Http\JsonResponse {
     $contact = app(Contact::class)->where('reference_code', $reference_code)->firstOrFail();
-    $rules =  Arr::mapWithKeys(app(Contact::class)->getMediaFieldNames(), function (string $mediaFieldName) {
+    $rules = Arr::mapWithKeys(app(Contact::class)->getMediaFieldNames(), function (string $mediaFieldName) {
         return [
-            $mediaFieldName => ['nullable', 'url']
+            $mediaFieldName => ['nullable', 'url'],
         ];
     });
     $validated = Validator::make($request->all(), $rules)->validate();
     $contact = app(AttachContactMediaAction::class)->run($contact, $validated);
 
     return response()->json([
-        'contact' => $contact->toData()
+        'contact' => $contact->toData(),
     ]);
 })
     ->prefix('api')

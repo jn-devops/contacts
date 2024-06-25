@@ -2,10 +2,10 @@
 
 namespace Homeful\Contacts\Actions;
 
-use Lorisleiva\Actions\Concerns\AsAction;
-use Lorisleiva\Actions\ActionRequest;
 use Homeful\Contacts\Models\Contact;
 use Illuminate\Support\Arr;
+use Lorisleiva\Actions\ActionRequest;
+use Lorisleiva\Actions\Concerns\AsAction;
 
 class AttachContactMediaAction
 {
@@ -23,7 +23,7 @@ class AttachContactMediaAction
     {
         return Arr::mapWithKeys(app(Contact::class)->getMediaFieldNames(), function (string $mediaFieldName) {
             return [
-                $mediaFieldName => ['nullable', 'url']
+                $mediaFieldName => ['nullable', 'url'],
             ];
         });
     }
@@ -34,7 +34,7 @@ class AttachContactMediaAction
         $contact = $this->handle($contact, $request->validated());
 
         return response()->json([
-            'contact' => $contact->toData()
+            'contact' => $contact->toData(),
         ]);
     }
 }

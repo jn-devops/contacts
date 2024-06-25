@@ -16,6 +16,5 @@ class PersonData extends Data
         public string $date_of_birth,
         public string $email,
         public string $mobile,
-    ) {
-    }
+    ) {}
 }

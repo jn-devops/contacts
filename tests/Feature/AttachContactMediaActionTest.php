@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Foundation\Testing\{RefreshDatabase, WithFaker};
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Homeful\Contacts\Actions\AttachContactMediaAction;
 use Homeful\Contacts\Models\Contact;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 uses(RefreshDatabase::class, WithFaker::class);
 
@@ -15,7 +16,7 @@ beforeEach(function () {
 
 dataset('contact', function () {
     return [
-        [fn () => Contact::factory()->create(['idImage' => null, 'selfieImage' => null, 'payslipImage' => null])]
+        [fn () => Contact::factory()->create(['idImage' => null, 'selfieImage' => null, 'payslipImage' => null])],
     ];
 });
 
@@ -48,55 +49,55 @@ test('attach contact media action works', function (Contact $contact) {
     expect($contact->uploads)->toBe([
         [
             'name' => $contact->idImage->name,
-            'url' => $contact->idImage->getUrl()
+            'url' => $contact->idImage->getUrl(),
         ],
         [
             'name' => $contact->selfieImage->name,
-            'url' => $contact->selfieImage->getUrl()
+            'url' => $contact->selfieImage->getUrl(),
         ],
         [
             'name' => $contact->payslipImage->name,
-            'url' => $contact->payslipImage->getUrl()
+            'url' => $contact->payslipImage->getUrl(),
         ],
         [
             'name' => $contact->voluntarySurrenderFormDocument->name,
-            'url' => $contact->voluntarySurrenderFormDocument->getUrl()
+            'url' => $contact->voluntarySurrenderFormDocument->getUrl(),
         ],
         [
             'name' => $contact->usufructAgreementDocument->name,
-            'url' => $contact->usufructAgreementDocument->getUrl()
+            'url' => $contact->usufructAgreementDocument->getUrl(),
         ],
         [
             'name' => $contact->contractToSellDocument->name,
-            'url' => $contact->contractToSellDocument->getUrl()
+            'url' => $contact->contractToSellDocument->getUrl(),
         ],
         [
             'name' => $contact->deedOfRestrictionsDocument->name,
-            'url' => $contact->deedOfRestrictionsDocument->getUrl()
+            'url' => $contact->deedOfRestrictionsDocument->getUrl(),
         ],
         [
             'name' => $contact->disclosureDocument->name,
-            'url' => $contact->disclosureDocument->getUrl()
+            'url' => $contact->disclosureDocument->getUrl(),
         ],
         [
             'name' => $contact->borrowerConformityDocument->name,
-            'url' => $contact->borrowerConformityDocument->getUrl()
+            'url' => $contact->borrowerConformityDocument->getUrl(),
         ],
         [
             'name' => $contact->statementOfAccountDocument->name,
-            'url' => $contact->statementOfAccountDocument->getUrl()
+            'url' => $contact->statementOfAccountDocument->getUrl(),
         ],
         [
             'name' => $contact->invoiceDocument->name,
-            'url' => $contact->invoiceDocument->getUrl()
+            'url' => $contact->invoiceDocument->getUrl(),
         ],
         [
             'name' => $contact->receiptDocument->name,
-            'url' => $contact->receiptDocument->getUrl()
+            'url' => $contact->receiptDocument->getUrl(),
         ],
         [
             'name' => $contact->deedOfSaleDocument->name,
-            'url' => $contact->deedOfSaleDocument->getUrl()
+            'url' => $contact->deedOfSaleDocument->getUrl(),
         ],
     ]);
     $contact->idImage->delete();
@@ -140,55 +141,55 @@ test('attach contact media action has an endpoint', function (Contact $contact) 
         [
             [
                 'name' => $contact->idImage->name,
-                'url' => $contact->idImage->getUrl()
+                'url' => $contact->idImage->getUrl(),
             ],
             [
                 'name' => $contact->selfieImage->name,
-                'url' => $contact->selfieImage->getUrl()
+                'url' => $contact->selfieImage->getUrl(),
             ],
             [
                 'name' => $contact->payslipImage->name,
-                'url' => $contact->payslipImage->getUrl()
+                'url' => $contact->payslipImage->getUrl(),
             ],
             [
                 'name' => $contact->voluntarySurrenderFormDocument->name,
-                'url' => $contact->voluntarySurrenderFormDocument->getUrl()
+                'url' => $contact->voluntarySurrenderFormDocument->getUrl(),
             ],
             [
                 'name' => $contact->usufructAgreementDocument->name,
-                'url' => $contact->usufructAgreementDocument->getUrl()
+                'url' => $contact->usufructAgreementDocument->getUrl(),
             ],
             [
                 'name' => $contact->contractToSellDocument->name,
-                'url' => $contact->contractToSellDocument->getUrl()
+                'url' => $contact->contractToSellDocument->getUrl(),
             ],
             [
                 'name' => $contact->deedOfRestrictionsDocument->name,
-                'url' => $contact->deedOfRestrictionsDocument->getUrl()
+                'url' => $contact->deedOfRestrictionsDocument->getUrl(),
             ],
             [
                 'name' => $contact->disclosureDocument->name,
-                'url' => $contact->disclosureDocument->getUrl()
+                'url' => $contact->disclosureDocument->getUrl(),
             ],
             [
                 'name' => $contact->borrowerConformityDocument->name,
-                'url' => $contact->borrowerConformityDocument->getUrl()
+                'url' => $contact->borrowerConformityDocument->getUrl(),
             ],
             [
                 'name' => $contact->statementOfAccountDocument->name,
-                'url' => $contact->statementOfAccountDocument->getUrl()
+                'url' => $contact->statementOfAccountDocument->getUrl(),
             ],
             [
                 'name' => $contact->invoiceDocument->name,
-                'url' => $contact->invoiceDocument->getUrl()
+                'url' => $contact->invoiceDocument->getUrl(),
             ],
             [
                 'name' => $contact->receiptDocument->name,
-                'url' => $contact->receiptDocument->getUrl()
+                'url' => $contact->receiptDocument->getUrl(),
             ],
             [
                 'name' => $contact->deedOfSaleDocument->name,
-                'url' => $contact->deedOfSaleDocument->getUrl()
+                'url' => $contact->deedOfSaleDocument->getUrl(),
             ],
         ]
     );
@@ -199,4 +200,3 @@ test('attach contact media action has an endpoint', function (Contact $contact) 
     $contact->clearMediaCollection('selfie-images');
     $contact->clearMediaCollection('payslip-images');
 })->with('contact');
-

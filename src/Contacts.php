@@ -2,6 +2,4 @@
 
 namespace Homeful\Contacts;
 
-class Contacts
-{
-}
+class Contacts {}

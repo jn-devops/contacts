@@ -19,6 +19,5 @@ class AddressData extends Data
         public ?string $sorting_code,
         public string $country = 'PH',
 
-    ) {
-    }
+    ) {}
 }
