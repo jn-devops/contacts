@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.4.0 - 2024-06-29
+
+use HasPackageFactory from jn-devops/common
+
 ## #v1.3.1 - 2024-06-29
 
 update jn-devops/common:^v1.2.0
