@@ -2,11 +2,13 @@
 
 namespace Homeful\Contacts\Models;
 
+use Brick\Money\Money;
 use Homeful\Common\Traits\HasPackageFactory as HasFactory;
 use Homeful\Contacts\Data\ContactData;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Propaganistas\LaravelPhone\PhoneNumber;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -15,6 +17,7 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Spatie\MediaLibrary\MediaCollections\File;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Homeful\Common\Interfaces\BorrowerInterface;
 
 /**
  * Class Contact
@@ -53,7 +56,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  *
  * @method int getKey()
  */
-class Contact extends Model implements HasMedia
+class Contact extends Model implements HasMedia, BorrowerInterface
 {
     use HasFactory;
     use InteractsWithMedia;
@@ -490,5 +493,32 @@ class Contact extends Model implements HasMedia
                 return Str::singular(Str::camel($key));
             })
             ->toArray();
+    }
+
+    public function getBirthdate(): Carbon
+    {
+        return $this->date_of_birth;
+    }
+
+    public function getWages(): Money|float
+    {
+        return Money::of($this->getAttribute('employment')->get('monthly_gross_income', 0), 'PHP');
+    }
+
+    public function getRegional(): bool
+    {
+        $region = $this->getAttribute('addresses')->get('0.administrative_area', 'NCR');
+
+        return !($region == 'NCR' || $region == 'Metro Manila');
+    }
+
+    public function getMobile(): PhoneNumber
+    {
+        return new PhoneNumber($this->mobile, 'PH');
+    }
+
+    public function getSellerCommissionCode(): string
+    {
+        return $this->getAttribute('order')->get('seller_commission_code', 'N/A');
     }
 }
