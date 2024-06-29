@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.3.1 - 2024-06-29
+
+update jn-devops/common:^v1.2.0
+
 ## #v1.3.0 - 2024-06-25
 
 add attach-contact-media route
