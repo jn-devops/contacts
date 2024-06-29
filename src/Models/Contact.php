@@ -6,9 +6,12 @@ use Brick\Money\Money;
 use Homeful\Common\Interfaces\BorrowerInterface;
 use Homeful\Common\Traits\HasPackageFactory as HasFactory;
 use Homeful\Contacts\Data\ContactData;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Propaganistas\LaravelPhone\Casts\RawPhoneNumberCast;
 use Propaganistas\LaravelPhone\PhoneNumber;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
@@ -18,9 +21,6 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Spatie\MediaLibrary\MediaCollections\File;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Propaganistas\LaravelPhone\Casts\RawPhoneNumberCast;
-use Illuminate\Support\Arr;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * Class Contact
@@ -96,7 +96,7 @@ class Contact extends Model implements BorrowerInterface, HasMedia
     ];
 
     protected $casts = [
-        'mobile' => RawPhoneNumberCast::class . ":PH",
+        'mobile' => RawPhoneNumberCast::class.':PH',
         'spouse' => 'array',
         'addresses' => 'array',
         'employment' => 'array',
@@ -499,16 +499,16 @@ class Contact extends Model implements BorrowerInterface, HasMedia
             ->toArray();
     }
 
-//    protected function casts(): array
-//    {
-//        return [
-//            'date_of_birth' => 'datetime:Y-m-d',
-//        ];
-//    }
+    //    protected function casts(): array
+    //    {
+    //        return [
+    //            'date_of_birth' => 'datetime:Y-m-d',
+    //        ];
+    //    }
 
     public function getBirthdate(): Carbon
     {
-        return new Carbon ($this->date_of_birth);
+        return new Carbon($this->date_of_birth);
     }
 
     public function getWages(): Money|float

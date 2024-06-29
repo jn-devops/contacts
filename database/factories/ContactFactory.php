@@ -2,9 +2,9 @@
 
 namespace Homeful\Contacts\Database\Factories;
 
+use Faker\Provider\en_PH\PhoneNumber;
 use Homeful\Contacts\Models\Contact;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Faker\Provider\en_PH\PhoneNumber;
 
 class ContactFactory extends Factory
 {

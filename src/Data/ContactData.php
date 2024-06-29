@@ -2,11 +2,10 @@
 
 namespace Homeful\Contacts\Data;
 
+use Homeful\Contacts\Models\Contact;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\Optional;
-use Propaganistas\LaravelPhone\PhoneNumber;
-use Homeful\Contacts\Models\Contact;
 
 class ContactData extends Data
 {

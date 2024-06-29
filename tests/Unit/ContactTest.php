@@ -1,17 +1,15 @@
 <?php
 
-use Brick\Money\Money;
 use Homeful\Contacts\Data\ContactData;
 use Homeful\Contacts\Data\ContactEmploymentData;
 use Homeful\Contacts\Data\ContactOrderData;
 use Homeful\Contacts\Models\Contact;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Homeful\Common\Interfaces\BorrowerInterface;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Propaganistas\LaravelPhone\PhoneNumber;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 uses(RefreshDatabase::class, WithFaker::class);
 
@@ -247,7 +245,7 @@ test('contact implements BorrowerInterface', function (Contact $contact) {
     expect($contact->getBirthdate())->toBeInstanceOf(Carbon::class);
     expect($contact->getBirthdate()->eq($contact->date_of_birth))->toBeTrue();
     expect($contact->getMobile()->equals($contact->mobile))->toBeTrue();
-    expect($contact->getWages()->compareTo(Arr::get($contact->employment,'monthly_gross_income')))->toBe(0);
+    expect($contact->getWages()->compareTo(Arr::get($contact->employment, 'monthly_gross_income')))->toBe(0);
     $region = Arr::get($contact->addresses, '0.administrative_area');
     expect($contact->getRegional())->toBe(! ($region == 'NCR' || $region == 'Metro Manila'));
 })->with('contact');
