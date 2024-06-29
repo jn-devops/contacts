@@ -3,6 +3,7 @@
 namespace Homeful\Contacts\Models;
 
 use Brick\Money\Money;
+use Homeful\Common\Interfaces\BorrowerInterface;
 use Homeful\Common\Traits\HasPackageFactory as HasFactory;
 use Homeful\Contacts\Data\ContactData;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +18,6 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Spatie\MediaLibrary\MediaCollections\File;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Homeful\Common\Interfaces\BorrowerInterface;
 
 /**
  * Class Contact
@@ -56,7 +56,7 @@ use Homeful\Common\Interfaces\BorrowerInterface;
  *
  * @method int getKey()
  */
-class Contact extends Model implements HasMedia, BorrowerInterface
+class Contact extends Model implements BorrowerInterface, HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
@@ -509,7 +509,7 @@ class Contact extends Model implements HasMedia, BorrowerInterface
     {
         $region = $this->getAttribute('addresses')->get('0.administrative_area', 'NCR');
 
-        return !($region == 'NCR' || $region == 'Metro Manila');
+        return ! ($region == 'NCR' || $region == 'Metro Manila');
     }
 
     public function getMobile(): PhoneNumber
