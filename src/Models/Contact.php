@@ -2,8 +2,8 @@
 
 namespace Homeful\Contacts\Models;
 
-use Homeful\Contacts\Data\ContactData;
 use Homeful\Common\Traits\HasPackageFactory as HasFactory;
+use Homeful\Contacts\Data\ContactData;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
