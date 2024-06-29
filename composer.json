@@ -18,7 +18,7 @@
     "require": {
         "php": "^8.2",
         "illuminate/contracts": "^10.0||^11.0",
-        "jn-devops/common": "^1.0",
+        "jn-devops/common": "^1.2",
         "lorisleiva/laravel-actions": "^2.8",
         "spatie/laravel-data": "^4.6",
         "spatie/laravel-medialibrary": "^11.5",
