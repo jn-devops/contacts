@@ -18,6 +18,9 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Spatie\MediaLibrary\MediaCollections\File;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Propaganistas\LaravelPhone\Casts\RawPhoneNumberCast;
+use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * Class Contact
@@ -32,7 +35,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string $nationality
  * @property Carbon $date_of_birth
  * @property string $email
- * @property string $mobile
+ * @property PhoneNumber $mobile
  * @property array $spouse
  * @property array $addresses
  * @property array $employment
@@ -93,6 +96,7 @@ class Contact extends Model implements BorrowerInterface, HasMedia
     ];
 
     protected $casts = [
+        'mobile' => RawPhoneNumberCast::class . ":PH",
         'spouse' => 'array',
         'addresses' => 'array',
         'employment' => 'array',
@@ -495,19 +499,26 @@ class Contact extends Model implements BorrowerInterface, HasMedia
             ->toArray();
     }
 
+//    protected function casts(): array
+//    {
+//        return [
+//            'date_of_birth' => 'datetime:Y-m-d',
+//        ];
+//    }
+
     public function getBirthdate(): Carbon
     {
-        return $this->date_of_birth;
+        return new Carbon ($this->date_of_birth);
     }
 
     public function getWages(): Money|float
     {
-        return Money::of($this->getAttribute('employment')->get('monthly_gross_income', 0), 'PHP');
+        return Money::of(Arr::get($this->employment, 'monthly_gross_income', 0), 'PHP');
     }
 
     public function getRegional(): bool
     {
-        $region = $this->getAttribute('addresses')->get('0.administrative_area', 'NCR');
+        $region = Arr::get($this->addresses, '0.administrative_area', 'NCR');
 
         return ! ($region == 'NCR' || $region == 'Metro Manila');
     }
@@ -515,6 +526,14 @@ class Contact extends Model implements BorrowerInterface, HasMedia
     public function getMobile(): PhoneNumber
     {
         return new PhoneNumber($this->mobile, 'PH');
+    }
+
+    protected function DateOfBirth(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value) => new Carbon($value),
+            set: fn (mixed $value) => $value instanceof Carbon ? $value->format('Y-m-d') : $value
+        );
     }
 
     public function getSellerCommissionCode(): string

@@ -1,5 +1,6 @@
 <?php
 
+use Brick\Money\Money;
 use Homeful\Contacts\Data\ContactData;
 use Homeful\Contacts\Data\ContactEmploymentData;
 use Homeful\Contacts\Data\ContactOrderData;
@@ -7,6 +8,10 @@ use Homeful\Contacts\Models\Contact;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Homeful\Common\Interfaces\BorrowerInterface;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
+use Propaganistas\LaravelPhone\PhoneNumber;
 
 uses(RefreshDatabase::class, WithFaker::class);
 
@@ -46,9 +51,9 @@ test('contact has schema attributes', function (Contact $contact) {
     expect($contact->civil_status)->toBeString();
     expect($contact->sex)->toBeString();
     expect($contact->nationality)->toBeString();
-    expect($contact->date_of_birth)->toBeString();
+    expect($contact->date_of_birth)->toBeInstanceOf(Carbon::class);
     expect($contact->email)->toBeString();
-    expect($contact->mobile)->toBeString();
+    expect($contact->mobile)->toBeInstanceOf(PhoneNumber::class);
     expect($contact->addresses)->toBeArray();
     expect($contact->employment)->toBeArray();
     expect($contact->co_borrowers)->toBeArray();
@@ -206,9 +211,10 @@ test('contact has data', function (Contact $contact) {
     expect($data->profile->civil_status)->toBe($contact->civil_status);
     expect($data->profile->sex)->toBe($contact->sex);
     expect($data->profile->nationality)->toBe($contact->nationality);
-    expect($data->profile->date_of_birth)->toBe($contact->date_of_birth);
+    expect($data->profile->date_of_birth)->toBe($contact->date_of_birth->format('Y-m-d'));
     expect($data->profile->email)->toBe($contact->email);
-    expect($data->profile->mobile)->toBe($contact->mobile);
+
+    expect($contact->mobile->equals($data->profile->mobile, 'PH'))->toBeTrue();
     if ($contact->spouse) {
         expect($data->spouse->first_name)->toBe($contact->spouse['first_name']);
         expect($data->spouse->middle_name)->toBe($contact->spouse['middle_name']);
@@ -235,4 +241,13 @@ test('contact has data', function (Contact $contact) {
         expect($contact->$name->getUrl())->toBe($url);
     }
     expect($data->uploads->toArray())->toBe($contact->uploads);
+})->with('contact');
+
+test('contact implements BorrowerInterface', function (Contact $contact) {
+    expect($contact->getBirthdate())->toBeInstanceOf(Carbon::class);
+    expect($contact->getBirthdate()->eq($contact->date_of_birth))->toBeTrue();
+    expect($contact->getMobile()->equals($contact->mobile))->toBeTrue();
+    expect($contact->getWages()->compareTo(Arr::get($contact->employment,'monthly_gross_income')))->toBe(0);
+    $region = Arr::get($contact->addresses, '0.administrative_area');
+    expect($contact->getRegional())->toBe(! ($region == 'NCR' || $region == 'Metro Manila'));
 })->with('contact');

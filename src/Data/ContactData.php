@@ -5,6 +5,8 @@ namespace Homeful\Contacts\Data;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\Optional;
+use Propaganistas\LaravelPhone\PhoneNumber;
+use Homeful\Contacts\Models\Contact;
 
 class ContactData extends Data
 {
@@ -61,7 +63,7 @@ class ContactData extends Data
     //        );
     //    }
 
-    public static function fromModel(object $model): self
+    public static function fromModel(Contact $model): self
     {
         return new self(
             reference_code: $model->reference_code,
@@ -72,9 +74,9 @@ class ContactData extends Data
                 civil_status: $model->civil_status,
                 sex: $model->sex,
                 nationality: $model->nationality,
-                date_of_birth: $model->date_of_birth,
+                date_of_birth: $model->date_of_birth->format('Y-m-d'),
                 email: $model->email,
-                mobile: $model->mobile
+                mobile: $model->mobile->formatNational()
             ),
             spouse: $model->spouse ? PersonData::from($model->spouse) : null,
             addresses: new DataCollection(AddressData::class, $model->addresses),

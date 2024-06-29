@@ -4,6 +4,7 @@ namespace Homeful\Contacts\Database\Factories;
 
 use Homeful\Contacts\Models\Contact;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Faker\Provider\en_PH\PhoneNumber;
 
 class ContactFactory extends Factory
 {
@@ -21,7 +22,7 @@ class ContactFactory extends Factory
             'nationality' => 'Filipino',
             'date_of_birth' => $this->faker->date(),
             'email' => $this->faker->email(),
-            'mobile' => $this->faker->phoneNumber(),
+            'mobile' => PhoneNumber::mobileNumber(),
             'spouse' => [
                 'first_name' => $this->faker->firstName(),
                 'middle_name' => $this->faker->lastName(),
@@ -39,6 +40,7 @@ class ContactFactory extends Factory
                     'ownership' => $this->faker->word(),
                     'address1' => $this->faker->address(),
                     'locality' => $this->faker->city(),
+                    'administrative_area' => $this->faker->randomElement(['NCR', 'Metro Manila', 'Cebu']),
                     'postal_code' => $this->faker->postcode(),
                     'country' => 'PH',
                 ],
@@ -53,7 +55,7 @@ class ContactFactory extends Factory
             ],
             'employment' => [
                 'employment_status' => $this->faker->word(),
-                'monthly_gross_income' => $this->faker->word(),
+                'monthly_gross_income' => $this->faker->numberBetween(12000, 25000) * 100,
                 'current_position' => $this->faker->word(),
                 'employment_type' => $this->faker->word(),
                 'employer' => [
