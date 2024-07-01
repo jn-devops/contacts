@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #1.4.3 - 2024-07-01
+
+update migration file, make reference_code and spouse optional
+
 ## #v1.4.2 - 2024-06-29
 
 test BorrowerInterface in Contact Model
