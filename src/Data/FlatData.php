@@ -3,7 +3,6 @@
 namespace Homeful\Contacts\Data;
 
 use Homeful\Contacts\Models\Contact;
-use Spatie\LaravelData\DataCollection;
 use NumberToWords\NumberToWords;
 
 class FlatData extends \Spatie\LaravelData\Data
@@ -49,7 +48,6 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $mrif_fee,
         public ?string $reservation_rate,
 
-
         public ?string $lot_area,
         public ?string $lot_area_in_words,
         public ?string $floor_area,
@@ -63,21 +61,19 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $sku,
         public ?string $seller_commission_code,
         public ?string $property_code,
-    ) {
-    }
-
-
+    ) {}
 
     public static function fromModel(Contact $model): self
     {
         $numberToWords = new NumberToWords();
         $data = ContactData::fromModel($model);
+
         return new self(
             reference_code: $data->reference_code,
             buyer_first_name: $data->profile->first_name,
             buyer_middle_name: $data->profile->middle_name,
             buyer_last_name: $data->profile->last_name,
-            buyer_name: $data->profile->first_name.' '. $data->profile->middle_name.' '. $data->profile->last_name,
+            buyer_name: $data->profile->first_name.' '.$data->profile->middle_name.' '.$data->profile->last_name,
             buyer_civil_status: $data->profile->civil_status,
             buyer_spouse_name: $data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name,
             buyer_nationality: $data->profile->nationality,
@@ -98,7 +94,7 @@ class FlatData extends \Spatie\LaravelData\Data
             spouse_email: $data->spouse->email,
             spouse_mobile: $data->spouse->mobile,
 
-            buyer_address:$data->addresses[0]->full_address,
+            buyer_address: $data->addresses[0]->full_address,
 
             company_name: $data->order->company_name,
             project_name: $data->order->project_name,
@@ -114,12 +110,12 @@ class FlatData extends \Spatie\LaravelData\Data
             reservation_rate: $data->order->reservation_rate,
 
             lot_area: $data->order->lot_area,
-            lot_area_in_words:$data->order->lot_area==null?'': $numberToWords->getNumberTransformer('en')->toWords($data->order->lot_area),
+            lot_area_in_words: $data->order->lot_area == null ? '' : $numberToWords->getNumberTransformer('en')->toWords($data->order->lot_area),
             floor_area: $data->order->floor_area,
-            floor_area_in_words: $data->order->floor_area==null?'': $numberToWords->getNumberTransformer('en')->toWords($data->order->floor_area),
+            floor_area_in_words: $data->order->floor_area == null ? '' : $numberToWords->getNumberTransformer('en')->toWords($data->order->floor_area),
 
             tcp: $data->order->tcp,
-            tcp_in_words:$data->order->tcp==null?'': $numberToWords->getNumberTransformer('en')->toWords($data->order->tcp),
+            tcp_in_words: $data->order->tcp == null ? '' : $numberToWords->getNumberTransformer('en')->toWords($data->order->tcp),
             loan_term: $data->order->loan_term,
             loan_interest_rate: $data->order->loan_interest_rate,
             tct_no: $data->order->tct_no,
@@ -130,5 +126,4 @@ class FlatData extends \Spatie\LaravelData\Data
 
         );
     }
-
 }

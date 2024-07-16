@@ -23,6 +23,7 @@ class PersistContactAction
     public function handle(array $attribs): Contact
     {
         $validated = Validator::validate($attribs, $this->rules());
+
         return $this->persist($validated);
     }
 
@@ -126,8 +127,6 @@ class PersistContactAction
             'order.reservation_rate' => ['nullable', 'numeric'],
         ];
     }
-
-
 
     public function asController(ActionRequest $request): \Illuminate\Http\JsonResponse
     {

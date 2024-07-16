@@ -22,7 +22,6 @@ class ContactData extends Data
         /** @var UploadData[] */
         public DataCollection|Optional $uploads,
 
-
     ) {}
 
     //    public static function from(...$payloads): static
