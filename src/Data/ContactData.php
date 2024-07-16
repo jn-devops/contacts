@@ -20,7 +20,9 @@ class ContactData extends Data
         public DataCollection|Optional $co_borrowers,
         public ?ContactOrderData $order,
         /** @var UploadData[] */
-        public DataCollection|Optional $uploads
+        public DataCollection|Optional $uploads,
+
+
     ) {}
 
     //    public static function from(...$payloads): static
@@ -82,7 +84,7 @@ class ContactData extends Data
             employment: $model->employment ? ContactEmploymentData::from($model->employment) : null,
             co_borrowers: new DataCollection(PersonData::class, $model->co_borrowers),
             order: $model->order ? ContactOrderData::from($model->order) : null,
-            uploads: new DataCollection(UploadData::class, $model->uploads)
+            uploads: new DataCollection(UploadData::class, $model->uploads),
         );
     }
 }
@@ -93,6 +95,24 @@ class ContactOrderData extends Data
         public string $sku,
         public string $seller_commission_code,
         public string $property_code,
+        //for GNC
+        public ?string $company_name,
+        public ?string $project_name,
+        public ?string $project_code,
+        public ?string $property_name,
+        public ?string $phase,
+        public ?string $block,
+        public ?string $lot,
+        public ?string $lot_area,
+        public ?string $floor_area,
+        public ?string $tcp,
+        public ?string $loan_term,
+        public ?string $loan_interest_rate,
+        public ?string $tct_no,
+        public ?string $project_location,
+        public ?string $project_address,
+        public ?string $mrif_fee,
+        public ?string $reservation_rate,
     ) {}
 }
 

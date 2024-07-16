@@ -23,7 +23,6 @@ class PersistContactAction
     public function handle(array $attribs): Contact
     {
         $validated = Validator::validate($attribs, $this->rules());
-
         return $this->persist($validated);
     }
 
@@ -107,8 +106,28 @@ class PersistContactAction
             'order.sku' => ['nullable', 'string'],
             'order.seller_commission_code' => ['nullable', 'string'],
             'order.property_code' => ['nullable', 'string'],
+
+            'order.company_name' => ['nullable', 'string'],
+            'order.project_name' => ['nullable', 'string'],
+            'order.project_code' => ['nullable', 'string'],
+            'order.property_name' => ['nullable', 'string'],
+            'order.phase' => ['nullable', 'string'],
+            'order.block' => ['nullable', 'numeric'],
+            'order.lot' => ['nullable', 'numeric'],
+            'order.lot_area' => ['nullable', 'numeric'],
+            'order.floor_area' => ['nullable', 'numeric'],
+            'order.tcp' => ['nullable', 'numeric'],
+            'order.loan_term' => ['nullable', 'numeric'],
+            'order.loan_interest_rate' => ['nullable', 'numeric'],
+            'order.tct_no' => ['nullable', 'string'],
+            'order.project_location' => ['nullable', 'string'],
+            'order.project_address' => ['nullable', 'string'],
+            'order.mrif_fee' => ['nullable', 'numeric'],
+            'order.reservation_rate' => ['nullable', 'numeric'],
         ];
     }
+
+
 
     public function asController(ActionRequest $request): \Illuminate\Http\JsonResponse
     {

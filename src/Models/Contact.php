@@ -93,6 +93,7 @@ class Contact extends Model implements BorrowerInterface, HasMedia
         'invoiceDocument',
         'receiptDocument',
         'deedOfSaleDocument',
+
     ];
 
     protected $casts = [
