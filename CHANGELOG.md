@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.4.4 - 2024-07-18
+
+add fields in order, flat data
+
 ## #1.4.3 - 2024-07-01
 
 update migration file, make reference_code and spouse optional
