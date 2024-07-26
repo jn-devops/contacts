@@ -30,12 +30,18 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string $first_name
  * @property string $middle_name
  * @property string $last_name
+ * @property string $name_suffix
  * @property string $civil_status
  * @property string $sex
  * @property string $nationality
  * @property Carbon $date_of_birth
  * @property string $email
  * @property PhoneNumber $mobile
+ * @property PhoneNumber $other_mobile
+ * @property PhoneNumber $help_number
+ * @property string $landline
+ * @property string $mothers_maiden_name
+
  * @property array $spouse
  * @property array $addresses
  * @property array $employment
@@ -43,6 +49,8 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property array $uploads
  * @property array $order
  * @property array $media
+
+
  * @property Media $idImage
  * @property Media $selfieImage
  * @property Media $payslipImage
@@ -69,12 +77,17 @@ class Contact extends Model implements BorrowerInterface, HasMedia
         'first_name',
         'middle_name',
         'last_name',
+        'name_suffix',
         'civil_status',
         'sex',
         'nationality',
         'date_of_birth',
         'email',
         'mobile',
+        'other_mobile',
+        'help_number',
+        'landline',
+        'mothers_maiden_name',
         'spouse',
         'addresses',
         'employment',
@@ -98,11 +111,13 @@ class Contact extends Model implements BorrowerInterface, HasMedia
 
     protected $casts = [
         'mobile' => RawPhoneNumberCast::class.':PH',
+        'other_mobile' => RawPhoneNumberCast::class.':PH',
         'spouse' => 'array',
         'addresses' => 'array',
         'employment' => 'array',
         'co_borrowers' => 'array',
         'order' => 'array',
+
     ];
 
     protected array $dates = [
