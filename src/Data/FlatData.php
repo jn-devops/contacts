@@ -65,7 +65,7 @@ class FlatData extends \Spatie\LaravelData\Data
 
     public static function fromModel(Contact $model): self
     {
-        $numberToWords = new NumberToWords();
+        $numberToWords = new NumberToWords;
         $data = ContactData::fromModel($model);
 
         return new self(

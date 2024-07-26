@@ -22,8 +22,5 @@ class PersonData extends Data
         public ?string $landline,
         public ?string $mothers_maiden_name,
 
-
-
-
     ) {}
 }

@@ -14,7 +14,7 @@ class PersistContactAction
 
     protected function persist(array $validated): Contact
     {
-        return tap(new Contact($validated), function ($contact) use ($validated){
+        return tap(new Contact($validated), function ($contact) use ($validated) {
             $contact = Contact::updateOrCreate(
                 ['reference_code' => $validated['reference_code']], // Unique identifier, adjust as needed
                 $validated
