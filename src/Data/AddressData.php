@@ -17,7 +17,7 @@ class AddressData extends Data
         public ?string $administrative_area, //province
         public ?string $postal_code, //zip code
         public ?string $sorting_code,
-        public string $country = 'PH',
+        public string $country,
         //for GNC 7/22/2024
         public ?string $block,
         public ?string $lot,
@@ -26,7 +26,6 @@ class AddressData extends Data
         public ?string $street,
         public ?string $building,
         public ?string $length_of_stay, //should be date to be calculated
-
 
     ) {}
 }

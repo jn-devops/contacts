@@ -3,7 +3,6 @@
 namespace Homeful\Contacts\Data;
 
 use Homeful\Contacts\Models\Contact;
-use PhpOption\Option;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 use Spatie\LaravelData\Optional;
@@ -23,7 +22,6 @@ class ContactData extends Data
         public ?ContactOrderData $order,
         /** @var UploadData[] */
         public DataCollection|Optional $uploads,
-
 
     ) {}
 
@@ -88,7 +86,7 @@ class ContactData extends Data
             ),
             spouse: $model->spouse ? PersonData::from($model->spouse) : null,
             addresses: new DataCollection(AddressData::class, $model->addresses),
-            employment: new DataCollection(ContactEmploymentData::class, $model->employement) ,
+            employment: new DataCollection(ContactEmploymentData::class, $model->employement),
             co_borrowers: new DataCollection(PersonData::class, $model->co_borrowers),
             order: $model->order ? ContactOrderData::from($model->order) : null,
             uploads: new DataCollection(UploadData::class, $model->uploads),
@@ -140,7 +138,6 @@ class ContactOrderData extends Data
         public ?string $reservation_date,
         public ?string $circular_number,
 
-
         //out of place fields
         public ?string $date_created,
         public ?string $ra_date,
@@ -158,7 +155,6 @@ class ContactOrderData extends Data
 
         public PaymentSchemeData|Optional $payment_scheme,
         public SellerData|Optional $seller_data,
-
 
     ) {}
 }
@@ -218,7 +214,8 @@ class UploadData extends Data
     ) {}
 }
 
-class SellerData{
+class SellerData
+{
     public function __construct(
         public ?string $name,
         public ?string $id,
@@ -231,9 +228,8 @@ class SellerData{
     ) {}
 }
 
-
-
-class PaymentSchemeData{
+class PaymentSchemeData
+{
     public function __construct(
         public ?string $scheme,
         public ?string $method,
@@ -254,11 +250,11 @@ class PaymentSchemeData{
         public ?string $conditional_discount,
         public ?string $transaction_sub_status,
 
-
     ) {}
 }
 
-class PaymentData{
+class PaymentData
+{
     public function __construct(
         public ?string $type, //processing_fee, home_utility_connection_fee, equity, balance
         public ?string $amount_paid,
@@ -267,10 +263,10 @@ class PaymentData{
     ) {}
 }
 
-class FeesData{
+class FeesData
+{
     public function __construct(
         public ?string $name, //processing fee, home_utility_connection_fee, mrif, rental,
         public ?string $amount,
     ) {}
 }
-

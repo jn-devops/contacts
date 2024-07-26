@@ -41,7 +41,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property PhoneNumber $help_number
  * @property string $landline
  * @property string $mothers_maiden_name
-
  * @property array $spouse
  * @property array $addresses
  * @property array $employment
@@ -49,8 +48,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property array $uploads
  * @property array $order
  * @property array $media
-
-
  * @property Media $idImage
  * @property Media $selfieImage
  * @property Media $payslipImage
