@@ -193,7 +193,7 @@ class ContactEmploymentEmployerData extends Data
         public ?string $employer_status,
         public ?string $type,
         public ?string $status,
-        public ?string $year_stablished,
+        public ?string $year_established,
         public ?string $total_number_of_employees,
         public ?string $email,
 
@@ -227,7 +227,8 @@ class SellerData{
         public ?string $chief_seller_officer,
         public ?string $deputy_chief_seller_officer,
         public ?string $type,
-        public ?string $reference_no //seller id
+        public ?string $reference_no, //seller id
+        public ?string $unit //seller id
     ) {}
 }
 
@@ -243,7 +244,6 @@ class PaymentSchemeData{
         public ?string $evat_amount,
         public ?string $net_total_contact_price,
         public ?string $total_contact_price,
-        public ?string $total_selling_price,
         /** @var PaymentData[] */
         public PaymentData $payments,
         /** @var FeesData[] */

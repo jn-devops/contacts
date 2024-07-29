@@ -21,6 +21,7 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Spatie\MediaLibrary\MediaCollections\File;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Whitecube\Price\Price;
 
 /**
  * Class Contact
@@ -555,5 +556,9 @@ class Contact extends Model implements BorrowerInterface, HasMedia
     public function getSellerCommissionCode(): string
     {
         return $this->getAttribute('order')->get('seller_commission_code', 'N/A');
+    }
+
+    public function getGrossMonthlyIncome():Price{
+        return $this->getGrossMonthlyIncome();
     }
 }
