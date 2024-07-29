@@ -555,7 +555,8 @@ class Contact extends Model implements BorrowerInterface, HasMedia
         return $this->getAttribute('order')->get('seller_commission_code', 'N/A');
     }
 
-    public function getGrossMonthlyIncome():Price{
+    public function getGrossMonthlyIncome(): Price
+    {
         return $this->getGrossMonthlyIncome();
     }
 }
