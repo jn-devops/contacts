@@ -20,7 +20,6 @@ class PersistContactAction
                 $validated
             );
 
-            dd($contact);
 
             ContactPersisted::dispatch($contact);
         });
