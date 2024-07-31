@@ -20,7 +20,6 @@ class PersistContactAction
                 $validated
             );
 
-            //            dd($contact);
 
             ContactPersisted::dispatch($contact);
         });
@@ -297,7 +296,7 @@ class PersistContactAction
             'order.circular_number' => ['nullable', 'string'],
             'order.date_created' => ['nullable'],
             'order.ra_date' => ['nullable'],
-            'order.date_approved' => ['nullable'],
+            'order.date_approved' => ['nullable', 'string'],
             'order.date_expiration' => ['nullable'],
             'order.os_month' => ['nullable'],
             'order.due_date' => ['nullable'],
