@@ -67,7 +67,7 @@ class FlatData extends \Spatie\LaravelData\Data
     {
         $numberToWords = new NumberToWords;
         $data = ContactData::fromModel($model);
-
+//        dd($data);
         return new self(
             reference_code: $data->reference_code,
             buyer_first_name: $data->profile->first_name,
@@ -77,7 +77,7 @@ class FlatData extends \Spatie\LaravelData\Data
             buyer_civil_status: $data->profile->civil_status,
             buyer_spouse_name: $data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name,
             buyer_nationality: $data->profile->nationality,
-            tin_no: $data->employment->id->tin,
+            tin_no: ($data->employment->count() === 0) ? '' : $data->employment->id->tin,
             buyer_sex: $data->profile->sex,
             buyer_date_of_birth: $data->profile->date_of_birth,
             buyer_email: $data->profile->email,
@@ -114,8 +114,8 @@ class FlatData extends \Spatie\LaravelData\Data
             floor_area: $data->order->floor_area,
             floor_area_in_words: $data->order->floor_area == null ? '' : $numberToWords->getNumberTransformer('en')->toWords($data->order->floor_area),
 
-            tcp: $data->order->tcp,
-            tcp_in_words: $data->order->tcp == null ? '' : $numberToWords->getNumberTransformer('en')->toWords($data->order->tcp),
+            tcp: $data->order->tcp ?? '',
+            tcp_in_words: isset($data->order->tcp) ? $numberToWords->getNumberTransformer('en')->toWords($data->order->tcp) : '',
             loan_term: $data->order->loan_term,
             loan_interest_rate: $data->order->loan_interest_rate,
             tct_no: $data->order->tct_no,
