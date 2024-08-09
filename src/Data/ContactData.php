@@ -66,6 +66,68 @@ class ContactData extends Data
 
     public static function fromModel(Contact $model): self
     {
+        $order = $model->order;
+        $order['payment_scheme'] = new PaymentSchemeData(
+                        scheme: $order['payment_scheme']['scheme'],
+                        method: $order['payment_scheme']['method'],
+                        collectible_price: $order['payment_scheme']['collectible_price'],
+                        commissionable_amount: $order['payment_scheme']['commissionable_amount'],
+                        evat_percentage: $order['payment_scheme']['evat_percentage'],
+                        evat_amount: $order['payment_scheme']['evat_amount'],
+                        net_total_contact_price: $order['payment_scheme']['net_total_contract_price'],
+                        total_contact_price: $order['payment_scheme']['total_contract_price'],
+                        payments: new DataCollection(PaymentData::class, [
+                            [
+                                'type'=>'processing_fee',
+                                'amount_paid'=>$order['payment_scheme']['payments'][0]['amount_paid'],
+                                'date'=>$order['payment_scheme']['payments'][0]['date'],
+                                'reference_number'=>$order['payment_scheme']['payments'][0]['reference_number'],
+                            ],
+                            [
+                                'type'=>'home_utility_connection_fee',
+                                'amount_paid'=>$order['payment_scheme']['payments'][1]['amount_paid'],
+                                'date'=>$order['payment_scheme']['payments'][1]['date'],
+                                'reference_number'=>$order['payment_scheme']['payments'][1]['reference_number'],
+                            ],
+                            [
+                                'type'=>'balance',
+                                'amount_paid'=>$order['payment_scheme']['payments'][2]['amount_paid'],
+                                'date'=>$order['payment_scheme']['payments'][2]['date'],
+                                'reference_number'=>$order['payment_scheme']['payments'][2]['reference_number'],
+                            ],
+                            [
+                                'type'=>'equity',
+                                'amount_paid'=>$order['payment_scheme']['payments'][3]['amount_paid'],
+                                'date'=>$order['payment_scheme']['payments'][3]['date'],
+                                'reference_number'=>$order['payment_scheme']['payments'][3]['reference_number'],
+                            ],
+                        ]),
+                        fees: new DataCollection(FeesData::class, [
+                            [
+                                'name'=>'processing',
+                                'amount'=>$order['payment_scheme']['fees'][0]['amount'],
+                            ],
+                            [
+                                'name'=>'home_utility_connection',
+                                'amount'=>$order['payment_scheme']['fees'][1]['amount'],
+                            ],
+                            [
+                                'name'=>'mrif',
+                                'amount'=>$order['payment_scheme']['fees'][2]['amount'],
+                            ],
+                            [
+                                'name'=>'rental',
+                                'amount'=>$order['payment_scheme']['fees'][3]['amount'],
+                            ],
+                        ]),
+                        payment_remarks: $order['payment_scheme']['payment_remarks'],
+                        transaction_remarks: $order['payment_scheme']['transaction_remarks'],
+                        discount_rate: $order['payment_scheme']['discount_rate'],
+                        conditional_discount: $order['payment_scheme']['conditional_discount'],
+                        transaction_sub_status: $order['payment_scheme']['transaction_sub_status'],
+                    );
+        dd($order);
+
         return new self(
             reference_code: $model->reference_code,
             profile: new PersonData(
@@ -88,7 +150,7 @@ class ContactData extends Data
             addresses: new DataCollection(AddressData::class, $model->addresses),
             employment: new DataCollection(ContactEmploymentData::class, $model->employement),
             co_borrowers: new DataCollection(PersonData::class, $model->co_borrowers),
-            order: $model->order ? ContactOrderData::from($model->order) : null,
+            order: $model->order ? ContactOrderData::from($order) : null,
             uploads: new DataCollection(UploadData::class, $model->uploads),
         );
     }
@@ -241,7 +303,7 @@ class PaymentSchemeData
         public ?string $net_total_contact_price,
         public ?string $total_contact_price,
         /** @var PaymentData[] */
-        public PaymentData $payments,
+        public DataCollection $payments,
         /** @var FeesData[] */
         public DataCollection $fees,
         public ?string $payment_remarks,
@@ -253,7 +315,7 @@ class PaymentSchemeData
     ) {}
 }
 
-class PaymentData
+class PaymentData extends Data
 {
     public function __construct(
         public ?string $type, //processing_fee, home_utility_connection_fee, equity, balance
@@ -263,7 +325,7 @@ class PaymentData
     ) {}
 }
 
-class FeesData
+class FeesData extends Data
 {
     public function __construct(
         public ?string $name, //processing fee, home_utility_connection_fee, mrif, rental,
