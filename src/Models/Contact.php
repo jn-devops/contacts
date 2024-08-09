@@ -107,6 +107,11 @@ class Contact extends Model implements BorrowerInterface, HasMedia
 
     ];
 
+    public function getContactId(): string
+    {
+        return (string) $this->id;
+    }
+
     protected $casts = [
         'mobile' => RawPhoneNumberCast::class.':PH',
         'other_mobile' => RawPhoneNumberCast::class.':PH',
