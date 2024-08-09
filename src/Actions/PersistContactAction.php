@@ -227,6 +227,7 @@ class PersistContactAction
             'spouse.mothers_maiden_name' => ['nullable', 'string'],
 
             'employment' => ['nullable', 'array'],
+            'employment.*.type' => ['nullable', 'string'],
             'employment.*.employment_status' => ['nullable', 'string'],
             'employment.*.monthly_gross_income' => ['nullable', 'string'],
             'employment.*.current_position' => ['nullable', 'string'],
@@ -235,14 +236,27 @@ class PersistContactAction
             'employment.*.employer.name' => ['nullable', 'string'],
             'employment.*.employer.industry' => ['nullable', 'string'],
             'employment.*.employer.nationality' => ['nullable', 'string'],
+            'employment.*.employer.contact_no' => ['nullable', 'string'],
+
             'employment.*.employer.address' => ['nullable', 'array'],
             'employment.*.employer.address.type' => ['nullable', 'string'],
             'employment.*.employer.address.ownership' => ['nullable', 'string'],
             'employment.*.employer.address.address1' => ['nullable', 'string'],
+            'employment.*.employer.address.address2' => ['nullable', 'string'],
+            'employment.*.employer.address.sublocality' => ['nullable', 'string'],
             'employment.*.employer.address.locality' => ['nullable', 'string'],
+            'employment.*.employer.address.administrative_area' => ['nullable', 'string'],
             'employment.*.employer.address.postal_code' => ['nullable', 'string'],
             'employment.*.employer.address.country' => ['nullable', 'string'],
-            'employment.*.employer.contact_no' => ['nullable', 'string'],
+
+            'employment.*.employer.address.block' => ['nullable', 'string'],
+            'employment.*.employer.address.lot' => ['nullable', 'string'],
+            'employment.*.employer.address.unit' => ['nullable', 'string'],
+            'employment.*.employer.address.floor' => ['nullable', 'string'],
+            'employment.*.employer.address.street' => ['nullable', 'string'],
+            'employment.*.employer.address.building' => ['nullable', 'string'],
+            'employment.*.employer.address.length_of_stay' => ['nullable', 'string'],
+
             'employment.*.id' => ['required', 'array'],
             'employment.*.id.tin' => ['nullable', 'string'],
             'employment.*.id.pagibig' => ['nullable', 'string'],
@@ -281,10 +295,20 @@ class PersistContactAction
             'order.loan_term' => ['nullable', 'numeric'],
             'order.loan_interest_rate' => ['nullable', 'numeric'],
             'order.tct_no' => ['nullable', 'string'],
+            
             'order.project_location' => ['nullable', 'string'],
             'order.project_address' => ['nullable', 'string'],
             'order.mrif_fee' => ['nullable', 'numeric'],
             'order.reservation_rate' => ['nullable', 'numeric'],
+
+            'order.class_field' => ['nullable', 'string'],
+            'order.segment_field' => ['nullable', 'string'],
+            'order.rebooked_id_form' => ['nullable', 'numeric'],
+            'order.buyer_action_form_number' => ['nullable', 'numeric'],
+            'order.buyer_action_form_date' => ['nullable', 'string'],
+            'order.cancellation_type' => ['nullable', 'string'],
+            'order.cancellation_reason' => ['nullable', 'string'],
+            'order.cancellation_remarks' => ['nullable', 'string'],
 
             'order.unit_type' => ['nullable', 'string'],
             'order.unit_type_interior' => ['nullable', 'string'],
@@ -293,6 +317,7 @@ class PersistContactAction
             'order.transaction_reference' => ['nullable', 'string'],
             'order.reservation_date' => ['nullable'],
             'order.circular_number' => ['nullable', 'string'],
+
             'order.date_created' => ['nullable'],
             'order.ra_date' => ['nullable'],
             'order.date_approved' => ['nullable'],
@@ -314,6 +339,48 @@ class PersistContactAction
 
             'order.fees.*.name' => ['nullable', 'string'],
             'order.fees.*.amount' => ['nullable', 'string'],
+
+            'order.seller' => ['nullable', 'array'],
+            'order.seller.unit' => ['nullable', 'string'],
+            'order.seller.id' => ['nullable', 'string'],
+            'order.seller.name' => ['nullable', 'string'],
+            'order.seller.superior'=> ['nullable', 'string'],
+            'order.seller.team_head' => ['nullable', 'string'],
+            'order.seller.chief_seller_officer' => ['nullable', 'string'],
+            'order.seller.deputy_chief_seller_officer' => ['nullable', 'string'],
+            'order.seller.type' => ['nullable', 'string'],
+            'order.seller.reference_no' => ['nullable', 'string'],
+
+            'order.payment_scheme' => ['nullable', 'array'],
+            'order.payment_scheme.scheme' => ['nullable', 'string'],
+            'order.payment_scheme.method' => ['nullable', 'string'],
+            'order.payment_scheme.collectible_price' => ['nullable', 'numeric'],
+            'order.payment_scheme.commissionable_amount' => ['nullable', 'numeric'],
+            'order.payment_scheme.evat_percentage' => ['nullable','numeric'],
+            'order.payment_scheme.net_total_contract_price' => ['nullable','numeric'],
+            'order.payment_scheme.total_contract_price' => ['nullable','numeric'],
+            'order.payment_scheme.*.payment' => ['nullable','array'],
+
+            'order.payment_scheme.payment.*.type' => ['nullable','array'],
+            'order.payment_scheme.payment.*.amount_paid' => ['nullable','numeric'],
+            'order.payment_scheme.payment.*.date' => ['nullable','numeric'],
+            'order.payment_scheme.payment.*.reference_number' => ['nullable','numeric'],
+
+            'order.payment_scheme.fees.*.name' => ['nullable','array'],
+            'order.payment_scheme.fees.*.amount' => ['nullable','numeric'],
+
+            'order.payment_scheme.payment_remarks' => ['nullable','string'],
+            'order.payment_scheme.transaction_remarks' => ['nullable','string'],
+            'order.payment_scheme.discount_rate' => ['nullable','numeric'],
+            'order.payment_scheme.conditional_discount' => ['nullable','numeric'],
+            'order.payment_scheme.transaction_sub_status' => ['nullable','string'],
+
+            'co_borrower' => ['nullable','array'],
+            'co_borrower.last_name' => ['nullable','string'],
+            'co_borrower.first_name' => ['nullable','string'],
+            'co_borrower.middle_name' => ['nullable','string'],
+
+
         ];
     }
 
