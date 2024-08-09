@@ -126,7 +126,6 @@ class ContactData extends Data
             conditional_discount: $order['payment_scheme']['conditional_discount'],
             transaction_sub_status: $order['payment_scheme']['transaction_sub_status'],
         );
-        dd($order);
 
         return new self(
             reference_code: $model->reference_code,
