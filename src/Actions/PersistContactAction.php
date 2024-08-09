@@ -295,7 +295,7 @@ class PersistContactAction
             'order.loan_term' => ['nullable', 'numeric'],
             'order.loan_interest_rate' => ['nullable', 'numeric'],
             'order.tct_no' => ['nullable', 'string'],
-            
+
             'order.project_location' => ['nullable', 'string'],
             'order.project_address' => ['nullable', 'string'],
             'order.mrif_fee' => ['nullable', 'numeric'],
@@ -344,7 +344,7 @@ class PersistContactAction
             'order.seller.unit' => ['nullable', 'string'],
             'order.seller.id' => ['nullable', 'string'],
             'order.seller.name' => ['nullable', 'string'],
-            'order.seller.superior'=> ['nullable', 'string'],
+            'order.seller.superior' => ['nullable', 'string'],
             'order.seller.team_head' => ['nullable', 'string'],
             'order.seller.chief_seller_officer' => ['nullable', 'string'],
             'order.seller.deputy_chief_seller_officer' => ['nullable', 'string'],
@@ -356,30 +356,29 @@ class PersistContactAction
             'order.payment_scheme.method' => ['nullable', 'string'],
             'order.payment_scheme.collectible_price' => ['nullable', 'numeric'],
             'order.payment_scheme.commissionable_amount' => ['nullable', 'numeric'],
-            'order.payment_scheme.evat_percentage' => ['nullable','numeric'],
-            'order.payment_scheme.net_total_contract_price' => ['nullable','numeric'],
-            'order.payment_scheme.total_contract_price' => ['nullable','numeric'],
-            'order.payment_scheme.*.payment' => ['nullable','array'],
+            'order.payment_scheme.evat_percentage' => ['nullable', 'numeric'],
+            'order.payment_scheme.net_total_contract_price' => ['nullable', 'numeric'],
+            'order.payment_scheme.total_contract_price' => ['nullable', 'numeric'],
+            'order.payment_scheme.*.payment' => ['nullable', 'array'],
 
-            'order.payment_scheme.payment.*.type' => ['nullable','array'],
-            'order.payment_scheme.payment.*.amount_paid' => ['nullable','numeric'],
-            'order.payment_scheme.payment.*.date' => ['nullable','numeric'],
-            'order.payment_scheme.payment.*.reference_number' => ['nullable','numeric'],
+            'order.payment_scheme.payment.*.type' => ['nullable', 'array'],
+            'order.payment_scheme.payment.*.amount_paid' => ['nullable', 'numeric'],
+            'order.payment_scheme.payment.*.date' => ['nullable', 'numeric'],
+            'order.payment_scheme.payment.*.reference_number' => ['nullable', 'numeric'],
 
-            'order.payment_scheme.fees.*.name' => ['nullable','array'],
-            'order.payment_scheme.fees.*.amount' => ['nullable','numeric'],
+            'order.payment_scheme.fees.*.name' => ['nullable', 'array'],
+            'order.payment_scheme.fees.*.amount' => ['nullable', 'numeric'],
 
-            'order.payment_scheme.payment_remarks' => ['nullable','string'],
-            'order.payment_scheme.transaction_remarks' => ['nullable','string'],
-            'order.payment_scheme.discount_rate' => ['nullable','numeric'],
-            'order.payment_scheme.conditional_discount' => ['nullable','numeric'],
-            'order.payment_scheme.transaction_sub_status' => ['nullable','string'],
+            'order.payment_scheme.payment_remarks' => ['nullable', 'string'],
+            'order.payment_scheme.transaction_remarks' => ['nullable', 'string'],
+            'order.payment_scheme.discount_rate' => ['nullable', 'numeric'],
+            'order.payment_scheme.conditional_discount' => ['nullable', 'numeric'],
+            'order.payment_scheme.transaction_sub_status' => ['nullable', 'string'],
 
-            'co_borrower' => ['nullable','array'],
-            'co_borrower.last_name' => ['nullable','string'],
-            'co_borrower.first_name' => ['nullable','string'],
-            'co_borrower.middle_name' => ['nullable','string'],
-
+            'co_borrower' => ['nullable', 'array'],
+            'co_borrower.last_name' => ['nullable', 'string'],
+            'co_borrower.first_name' => ['nullable', 'string'],
+            'co_borrower.middle_name' => ['nullable', 'string'],
 
         ];
     }
