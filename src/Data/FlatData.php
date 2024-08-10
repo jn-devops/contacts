@@ -26,14 +26,14 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $buyer_residence_type,
         public ?string $buyer_ownership_type,
         public ?string $buyer_unit_lot, // can't be declare as a buyer_unit/lot
-        public ?string $buyer_block, 
-        public ?string $buyer_street, 
-        public ?string $buyer_barangay, 
-        public ?string $buyer_city, 
-        public ?string $buyer_place_of_residency_1_city_of_residency, 
-        public ?string $buyer_place_of_residency_2_province_of_residency, 
-        public ?string $buyer_sss_gsis_number, 
-        public ?string $buyer_pagibig_number, 
+        public ?string $buyer_block,
+        public ?string $buyer_street,
+        public ?string $buyer_barangay,
+        public ?string $buyer_city,
+        public ?string $buyer_place_of_residency_1_city_of_residency,
+        public ?string $buyer_place_of_residency_2_province_of_residency,
+        public ?string $buyer_sss_gsis_number,
+        public ?string $buyer_pagibig_number,
 
         public ?string $spouse_first_name,
         public ?string $spouse_middle_name,
@@ -128,7 +128,6 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $transaction_remarks,
         public ?string $mothers_maiden_name,
 
-
     ) {}
 
     public static function fromModel(Contact $model): self
@@ -136,13 +135,13 @@ class FlatData extends \Spatie\LaravelData\Data
         $numberToWords = new NumberToWords;
         $data = ContactData::fromModel($model);
 
-            //    dd($data);
+        //    dd($data);
         return new self(
             reference_code: $data->reference_code,
             buyer_first_name: $data->profile->first_name,
             buyer_middle_name: $data->profile->middle_name,
             buyer_last_name: $data->profile->last_name,
-            buyer_name: $data->profile->first_name.' '.$data->profile->middle_name.' '.$data->profile->last_name, 
+            buyer_name: $data->profile->first_name.' '.$data->profile->middle_name.' '.$data->profile->last_name,
             buyer_birthday: $data->profile->date_of_birth,
             buyer_civil_status: $data->profile->civil_status,
             buyer_spouse_name: $data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name,
@@ -156,7 +155,7 @@ class FlatData extends \Spatie\LaravelData\Data
             buyer_other_contact_number: $data->profile->other_mobile,
             help_number: $data->profile->help_number,
             mothers_maiden_name: $data->profile->mothers_maiden_name,
-            
+
             spouse_first_name: $data->spouse->first_name,
             spouse_middle_name: $data->spouse->middle_name,
             spouse_last_name: $data->spouse->last_name,
@@ -169,16 +168,16 @@ class FlatData extends \Spatie\LaravelData\Data
             spouse_mobile: $data->spouse->mobile,
 
             buyer_address: $data->addresses[0]->full_address,
-            buyer_province:$data->addresses[0]->administrative_area,
-            buyer_residence_type:$data->addresses[0]->type,
-            buyer_ownership_type:$data->addresses[0]->ownership,
-            buyer_unit_lot:$data->addresses[0]->unit,
-            buyer_block:$data->addresses[0]->block,
-            buyer_street:$data->addresses[0]->street,
-            buyer_barangay:$data->addresses[0]->sublocality,
-            buyer_city:$data->addresses[0]->locality,
-            buyer_place_of_residency_1_city_of_residency:$data->addresses[0]->address1,
-            buyer_place_of_residency_2_province_of_residency:$data->addresses[0]->address2,
+            buyer_province: $data->addresses[0]->administrative_area,
+            buyer_residence_type: $data->addresses[0]->type,
+            buyer_ownership_type: $data->addresses[0]->ownership,
+            buyer_unit_lot: $data->addresses[0]->unit,
+            buyer_block: $data->addresses[0]->block,
+            buyer_street: $data->addresses[0]->street,
+            buyer_barangay: $data->addresses[0]->sublocality,
+            buyer_city: $data->addresses[0]->locality,
+            buyer_place_of_residency_1_city_of_residency: $data->addresses[0]->address1,
+            buyer_place_of_residency_2_province_of_residency: $data->addresses[0]->address2,
 
             company_name: $data->order->company_name,
             project_name: $data->order->project_name,
@@ -212,8 +211,8 @@ class FlatData extends \Spatie\LaravelData\Data
             class_field: $data->order->class_field,
             segment_field: $data->order->segment_field,
             rebooked_id_form: $data->order->rebooked_id_form, // for checking
-            cancellation_type: $data->order->cancellation_type, 
-            cancellation_reason: $data->order->cancellation_reason, 
+            cancellation_type: $data->order->cancellation_type,
+            cancellation_reason: $data->order->cancellation_reason,
             cancellation_remarks: $data->order->cancellation_remarks,
             unit_type: $data->order->unit_type,
             unit_type_interior: $data->order->unit_type_interior,
@@ -234,7 +233,7 @@ class FlatData extends \Spatie\LaravelData\Data
             closed_reason: $data->order->closed_reason,
             date_cancellation: $data->order->date_cancellation,
             reservation_date: $data->order->reservation_date,
-         
+
             // payment_scheme: $data->order->payment_scheme,
             discount_rate: $data->order->payment_scheme->discount_rate,
             conditional_discount: $data->order->payment_scheme->conditional_discount,
@@ -261,11 +260,6 @@ class FlatData extends \Spatie\LaravelData\Data
             equity_payment_amount_paid: $data->order->payment_scheme->payments[0]->amount_paid,
             equity_payment_reference_number: $data->order->payment_scheme->payments[0]->reference_number,
             equity_payment_date: $data->order->payment_scheme->payments[0]->date,
-
-
-            
-
-
 
         );
     }
