@@ -63,6 +63,7 @@ class ContactFactory extends Factory
                 ],
             ],
             'employment' => [
+                'type' => $this->faker->word(),
                 'employment_status' => $this->faker->word(),
                 'monthly_gross_income' => $this->faker->numberBetween(12000, 25000) * 100,
                 'current_position' => $this->faker->word(),
@@ -129,4 +130,6 @@ class ContactFactory extends Factory
             'contractToSellDocument' => null,
         ];
     }
+
+
 }

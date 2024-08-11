@@ -200,6 +200,7 @@ class ContactData extends Data
             'uploads' => $this->uploads->toArray(),
         ];
 
+
         return $array;
     }
 }
@@ -268,10 +269,12 @@ class ContactOrderData extends Data
         public ?string $buyer_age,
         public ?string $client_id_spouse,
 
-        public ?PaymentSchemeData $payment_scheme,
+        public PaymentSchemeData|null $payment_scheme,
         public ?SellerData $seller_data,
 
-    ) {}
+    ) {
+
+    }
 
     public function toArray(): array
     {
@@ -442,7 +445,9 @@ class PaymentSchemeData
         public ?string $conditional_discount,
         public ?string $transaction_sub_status,
 
-    ) {}
+    ) {
+
+    }
 
     public function toArray(): array
     {

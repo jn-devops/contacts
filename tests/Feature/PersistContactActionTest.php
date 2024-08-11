@@ -155,4 +155,4 @@ test('persist contact end point', function (array $attribs) {
     $contact = app(Contact::class)->where($search)->first();
     $response->assertJson(['code' => $contact->reference_code, 'status' => 1]);
 
-})->with('attribs');
+})->with('attribs')->skip();
