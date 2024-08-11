@@ -153,9 +153,6 @@ test('persist contact end point', function (array $attribs) {
     $response->assertStatus(200);
     $search = Arr::only($attribs, ['first_name', 'middle_name', 'last_name']);
     $contact = app(Contact::class)->where($search)->first();
-<<<<<<< HEAD
     $response->assertJson(['code' => $contact->reference_code, 'status' => 1]);
-=======
-    //    $response->assertJson(['code' => $contact->reference_code, 'status' => 1]);
->>>>>>> d3818590e245ef4776088f2a754c7329b45ca283
+
 })->with('attribs');
