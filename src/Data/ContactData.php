@@ -69,8 +69,7 @@ class ContactData extends Data
 
         $order = $model->order;
 
-
-        $order['baf_date'] =isset($order['baf_date']) && $order['baf_date'] !== null
+        $order['baf_date'] = isset($order['baf_date']) && $order['baf_date'] !== null
             ? date('Y-m-d', strtotime($order['baf_date']))
             : '';
         $order['date_created'] = isset($order['date_created']) && $order['date_created'] !== null
@@ -78,23 +77,23 @@ class ContactData extends Data
             : '';
 
         $order['payment_scheme'] = new PaymentSchemeData(
-            scheme:isset($order['payment_scheme']['scheme']) && $order['payment_scheme']['scheme'] !== null ?$order['payment_scheme']['scheme']:null,
-            method:isset($order['payment_scheme']['method']) && $order['payment_scheme']['method'] !== null ?$order['payment_scheme']['method']:null,
-            collectible_price:isset($order['payment_scheme']['collectible_price']) && $order['payment_scheme']['collectible_price'] !== null ?$order['payment_scheme']['collectible_price']:null,
-            commissionable_amount:isset($order['payment_scheme']['commissionable_amount']) && $order['payment_scheme']['commissionable_amount'] !== null ?$order['payment_scheme']['commissionable_amount']:null,
-            evat_percentage:isset($order['payment_scheme']['evat_percentage']) && $order['payment_scheme']['evat_percentage'] !== null ?$order['payment_scheme']['evat_percentage']:null,
-            evat_amount:isset($order['payment_scheme']['evat_amount']) && $order['payment_scheme']['evat_amount'] !== null ?$order['payment_scheme']['evat_amount']:null,
-            net_total_contact_price:isset($order['payment_scheme']['net_total_contract_price']) && $order['payment_scheme']['net_total_contract_price'] !== null ?$order['payment_scheme']['net_total_contract_price']:null,
-            total_contact_price:isset($order['payment_scheme']['total_contract_price']) && $order['payment_scheme']['total_contract_price'] !== null ?$order['payment_scheme']['total_contract_price']:null,
-            payments:isset($order['payment_scheme']['payments']) && $order['payment_scheme']['payments'] !== null
-                ?new DataCollection(PaymentData::class, $order['payment_scheme']['payments']):null,
+            scheme: isset($order['payment_scheme']['scheme']) && $order['payment_scheme']['scheme'] !== null ? $order['payment_scheme']['scheme'] : null,
+            method: isset($order['payment_scheme']['method']) && $order['payment_scheme']['method'] !== null ? $order['payment_scheme']['method'] : null,
+            collectible_price: isset($order['payment_scheme']['collectible_price']) && $order['payment_scheme']['collectible_price'] !== null ? $order['payment_scheme']['collectible_price'] : null,
+            commissionable_amount: isset($order['payment_scheme']['commissionable_amount']) && $order['payment_scheme']['commissionable_amount'] !== null ? $order['payment_scheme']['commissionable_amount'] : null,
+            evat_percentage: isset($order['payment_scheme']['evat_percentage']) && $order['payment_scheme']['evat_percentage'] !== null ? $order['payment_scheme']['evat_percentage'] : null,
+            evat_amount: isset($order['payment_scheme']['evat_amount']) && $order['payment_scheme']['evat_amount'] !== null ? $order['payment_scheme']['evat_amount'] : null,
+            net_total_contact_price: isset($order['payment_scheme']['net_total_contract_price']) && $order['payment_scheme']['net_total_contract_price'] !== null ? $order['payment_scheme']['net_total_contract_price'] : null,
+            total_contact_price: isset($order['payment_scheme']['total_contract_price']) && $order['payment_scheme']['total_contract_price'] !== null ? $order['payment_scheme']['total_contract_price'] : null,
+            payments: isset($order['payment_scheme']['payments']) && $order['payment_scheme']['payments'] !== null
+                ? new DataCollection(PaymentData::class, $order['payment_scheme']['payments']) : null,
             fees: isset($order['payment_scheme']['fees']) && $order['payment_scheme']['fees'] !== null
-                ?new DataCollection(PaymentData::class, $order['payment_scheme']['fees']):null,
-            payment_remarks: isset($order['payment_scheme']['payment_remarks']) && $order['payment_scheme']['payment_remarks'] !== null ?$order['payment_scheme']['payment_remarks']:null,
-            transaction_remarks:isset($order['payment_scheme']['transaction_remarks']) && $order['payment_scheme']['transaction_remarks'] !== null ? $order['payment_scheme']['transaction_remarks']:null,
-            discount_rate:isset($order['payment_scheme']['discount_rate']) && $order['payment_scheme']['discount_rate'] !== null ? $order['payment_scheme']['discount_rate']:null,
-            conditional_discount: isset($order['payment_scheme']['conditional_discount']) && $order['payment_scheme']['conditional_discount'] !== null ?$order['payment_scheme']['conditional_discount']:null,
-            transaction_sub_status: isset($order['payment_scheme']['transaction_sub_status']) && $order['payment_scheme']['transaction_sub_status'] !== null ?$order['payment_scheme']['transaction_sub_status']:null,
+                ? new DataCollection(PaymentData::class, $order['payment_scheme']['fees']) : null,
+            payment_remarks: isset($order['payment_scheme']['payment_remarks']) && $order['payment_scheme']['payment_remarks'] !== null ? $order['payment_scheme']['payment_remarks'] : null,
+            transaction_remarks: isset($order['payment_scheme']['transaction_remarks']) && $order['payment_scheme']['transaction_remarks'] !== null ? $order['payment_scheme']['transaction_remarks'] : null,
+            discount_rate: isset($order['payment_scheme']['discount_rate']) && $order['payment_scheme']['discount_rate'] !== null ? $order['payment_scheme']['discount_rate'] : null,
+            conditional_discount: isset($order['payment_scheme']['conditional_discount']) && $order['payment_scheme']['conditional_discount'] !== null ? $order['payment_scheme']['conditional_discount'] : null,
+            transaction_sub_status: isset($order['payment_scheme']['transaction_sub_status']) && $order['payment_scheme']['transaction_sub_status'] !== null ? $order['payment_scheme']['transaction_sub_status'] : null,
         );
 
         return new self(
@@ -127,15 +126,15 @@ class ContactData extends Data
     public function toArray(): array
     {
         $array = [
-          'reference_code' => $this->reference_code,
-            'profile'=>$this->profile->toArray(),
-            'spouse'=>$this->spouse->toArray(),
-            'addresses'=> $this->addresses->toArray(),
-            'employment'=> $this->employment->toArray(),
-            'co_borrowers'=> $this->co_borrowers->toArray(),
-            'order'=>[
-                'sku'=>$this->order->sku,
-                'seller_commission_code'=>$this->order->seller_commission_code,
+            'reference_code' => $this->reference_code,
+            'profile' => $this->profile->toArray(),
+            'spouse' => $this->spouse->toArray(),
+            'addresses' => $this->addresses->toArray(),
+            'employment' => $this->employment->toArray(),
+            'co_borrowers' => $this->co_borrowers->toArray(),
+            'order' => [
+                'sku' => $this->order->sku,
+                'seller_commission_code' => $this->order->seller_commission_code,
                 'property_code' => $this->order->property_code,
                 // for GNC
                 'company_name' => $this->order->company_name,
@@ -195,11 +194,12 @@ class ContactData extends Data
                 'client_id_buyer' => $this->order->client_id_buyer,
                 'buyer_age' => $this->order->buyer_age,
                 'client_id_spouse' => $this->order->client_id_spouse,
-                'payment_scheme'=>$this->order->payment_scheme==null?null:$this->order->payment_scheme->toArray(),
-                'seller_data'=>$this->order->seller_data==null?null:$this->order->seller_data->toArray(),
+                'payment_scheme' => $this->order->payment_scheme == null ? null : $this->order->payment_scheme->toArray(),
+                'seller_data' => $this->order->seller_data == null ? null : $this->order->seller_data->toArray(),
             ],
-            'uploads'=> $this->uploads->toArray(),
+            'uploads' => $this->uploads->toArray(),
         ];
+
         return $array;
     }
 }
@@ -404,6 +404,7 @@ class SellerData
         public ?string $reference_no, //seller id
         public ?string $unit //seller id
     ) {}
+
     public function toArray(): array
     {
         return [

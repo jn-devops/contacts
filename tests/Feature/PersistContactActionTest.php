@@ -30,9 +30,9 @@ dataset('attribs', function () {
             'date_of_birth' => $this->faker->date(),
             'email' => $this->faker->email(),
             'mobile' => '09177789989',
-            'other_mobile' =>  $this->faker->phoneNumber(),
-            'help_number' =>  $this->faker->phoneNumber(),
-            'landline' =>  $this->faker->phoneNumber(),
+            'other_mobile' => $this->faker->phoneNumber(),
+            'help_number' => $this->faker->phoneNumber(),
+            'landline' => $this->faker->phoneNumber(),
             'mothers_maiden_name' => $this->faker->lastName().', '.$this->faker->firstName().' '.$this->faker->lastName(),
             'spouse' => [
                 'first_name' => $this->faker->firstName(),
@@ -44,9 +44,9 @@ dataset('attribs', function () {
                 'date_of_birth' => $this->faker->date(),
                 'email' => $this->faker->email(),
                 'mobile' => $this->faker->phoneNumber(),
-                'other_mobile' =>  $this->faker->phoneNumber(),
-                'help_number' =>  $this->faker->phoneNumber(),
-                'landline' =>  $this->faker->phoneNumber(),
+                'other_mobile' => $this->faker->phoneNumber(),
+                'help_number' => $this->faker->phoneNumber(),
+                'landline' => $this->faker->phoneNumber(),
                 'mothers_maiden_name' => $this->faker->lastName().', '.$this->faker->firstName().' '.$this->faker->lastName(),
             ],
             'addresses' => [
@@ -94,7 +94,7 @@ dataset('attribs', function () {
                         'sss' => $this->faker->word(),
                         'gsis' => $this->faker->word(),
                     ],
-                ]
+                ],
             ],
             'co_borrowers' => [
                 [
@@ -124,10 +124,10 @@ dataset('attribs', function () {
                 'sku' => $this->faker->word(),
                 'seller_commission_code' => $this->faker->word(),
                 'property_code' => $this->faker->word(),
-                'payment_scheme'=>[
-                    'payments'=>[],
-                    'fess'=>[],
-                ]
+                'payment_scheme' => [
+                    'payments' => [],
+                    'fess' => [],
+                ],
             ],
         ],
     ];
@@ -153,5 +153,5 @@ test('persist contact end point', function (array $attribs) {
     $response->assertStatus(200);
     $search = Arr::only($attribs, ['first_name', 'middle_name', 'last_name']);
     $contact = app(Contact::class)->where($search)->first();
-//    $response->assertJson(['code' => $contact->reference_code, 'status' => 1]);
+    //    $response->assertJson(['code' => $contact->reference_code, 'status' => 1]);
 })->with('attribs');

@@ -2,7 +2,6 @@
 
 namespace Homeful\Contacts\Database\Factories;
 
-use Faker\Provider\en_PH\PhoneNumber;
 use Homeful\Contacts\Models\Contact;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,10 +22,10 @@ class ContactFactory extends Factory
             'nationality' => 'Filipino',
             'date_of_birth' => $this->faker->date(),
             'email' => $this->faker->email(),
-            'mobile' =>  $this->faker->phoneNumber(),
-            'other_mobile' =>  $this->faker->phoneNumber(),
-            'help_number' =>  $this->faker->phoneNumber(),
-            'landline' =>  $this->faker->phoneNumber(),
+            'mobile' => $this->faker->phoneNumber(),
+            'other_mobile' => $this->faker->phoneNumber(),
+            'help_number' => $this->faker->phoneNumber(),
+            'landline' => $this->faker->phoneNumber(),
             'mothers_maiden_name' => $this->faker->lastName().', '.$this->faker->firstName().' '.$this->faker->lastName(),
             'spouse' => [
                 'first_name' => $this->faker->firstName(),
@@ -117,9 +116,9 @@ class ContactFactory extends Factory
                 'sku' => $this->faker->word(),
                 'seller_commission_code' => $this->faker->word(),
                 'property_code' => $this->faker->word(),
-                'payment_scheme'=>[
-                    'payments'=>[],
-                    'fess'=>[],
+                'payment_scheme' => [
+                    'payments' => [],
+                    'fess' => [],
                 ],
             ],
             'idImage' => null,
