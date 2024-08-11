@@ -67,6 +67,8 @@ class ContactData extends Data
     public static function fromModel(Contact $model): self
     {
         $order = $model->order;
+        $order['baf_date'] = date('Y-m-d', strtotime($model->order['baf_date']));
+        $order['date_created'] = date('Y-m-d', strtotime($model->order['date_created']));
         $order['payment_scheme'] = new PaymentSchemeData(
             scheme: $order['payment_scheme']['scheme'],
             method: $order['payment_scheme']['method'],
@@ -213,6 +215,11 @@ class ContactOrderData extends Data
         public ?string $date_closed,
         public ?string $closed_reason,
         public ?string $date_cancellation,
+        public ?string $baf_number,
+        public ?string $baf_date,
+        public ?string $client_id_buyer,
+        public ?string $buyer_age,
+        public ?string $client_id_spouse,
 
         public PaymentSchemeData|Optional $payment_scheme,
         public SellerData|Optional $seller_data,

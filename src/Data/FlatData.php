@@ -8,7 +8,7 @@ use NumberToWords\NumberToWords;
 class FlatData extends \Spatie\LaravelData\Data
 {
     public function __construct(
-        public string $reference_code,
+        public string $brn,
         public string $buyer_first_name,
         public ?string $buyer_middle_name,
         public string $buyer_last_name,
@@ -45,6 +45,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $spouse_date_of_birth,
         public ?string $spouse_email,
         public ?string $spouse_mobile,
+        public ?string $client_id_spouse,
 
         public ?string $buyer_address,
 
@@ -127,6 +128,10 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $payment_remarks,
         public ?string $transaction_remarks,
         public ?string $mothers_maiden_name,
+        public ?string $baf_number,
+        public ?string $baf_date,
+        public ?string $client_id,
+        public ?string $buyer_age,
 
     ) {}
 
@@ -137,7 +142,7 @@ class FlatData extends \Spatie\LaravelData\Data
 
         //    dd($data);
         return new self(
-            reference_code: $data->reference_code,
+            brn: $data->reference_code,
             buyer_first_name: $data->profile->first_name,
             buyer_middle_name: $data->profile->middle_name,
             buyer_last_name: $data->profile->last_name,
@@ -166,6 +171,7 @@ class FlatData extends \Spatie\LaravelData\Data
             spouse_date_of_birth: $data->spouse->date_of_birth,
             spouse_email: $data->spouse->email,
             spouse_mobile: $data->spouse->mobile,
+            client_id_spouse: $data->order->client_id_spouse, // temporary location of client_id
 
             buyer_address: $data->addresses[0]->full_address,
             buyer_province: $data->addresses[0]->administrative_area,
@@ -206,6 +212,10 @@ class FlatData extends \Spatie\LaravelData\Data
             sku: $data->order->sku,
             seller_commission_code: $data->order->seller_commission_code,
             property_code: $data->order->property_code,
+            baf_number: $data->order->baf_number,
+            baf_date: $data->order->baf_date,
+            client_id: $data->order->client_id_buyer,
+            buyer_age: $data->order->buyer_age,
 
             os_status: $data->order->os_status,
             class_field: $data->order->class_field,

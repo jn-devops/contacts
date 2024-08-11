@@ -225,6 +225,7 @@ class PersistContactAction
             'spouse.other_mobile' => ['nullable', 'string'],
             'spouse.help_number' => ['nullable', 'string'],
             'spouse.mothers_maiden_name' => ['nullable', 'string'],
+            'spouse.client_id' => ['nullable'],
 
             'employment' => ['nullable', 'array'],
             'employment.*.type' => ['nullable', 'string'],
@@ -281,6 +282,10 @@ class PersistContactAction
             'order.sku' => ['nullable', 'string'],
             'order.seller_commission_code' => ['nullable', 'string'],
             'order.property_code' => ['nullable', 'string'],
+            'order.baf_number' => ['nullable'],
+            'order.baf_date' => ['nullable', 'date'],
+            'order.client_id_buyer' => ['nullable'],
+            'order.buyer_age' => ['nullable'],
 
             'order.company_name' => ['nullable', 'string'],
             'order.project_name' => ['nullable', 'string'],
