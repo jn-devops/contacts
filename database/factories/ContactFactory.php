@@ -130,6 +130,4 @@ class ContactFactory extends Factory
             'contractToSellDocument' => null,
         ];
     }
-
-
 }
