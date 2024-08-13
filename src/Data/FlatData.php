@@ -35,7 +35,6 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $buyer_sss_gsis_number,
         public ?string $buyer_pagibig_number,
 
-     
         public ?string $spouse_name,
         public ?string $spouse_civil_status,
         public ?string $spouse_nationality,
@@ -298,7 +297,7 @@ class FlatData extends \Spatie\LaravelData\Data
         $numberToWords = new NumberToWords;
         $data = ContactData::fromModel($model);
 
-        dd($data);
+        // dd($data);
         return new self(
             brn: $data->reference_code,
             buyer_first_name: $data->profile->first_name,
@@ -341,6 +340,7 @@ class FlatData extends \Spatie\LaravelData\Data
             spouse_primary_contact_number: $data->spouse->mobile,
             spouse_residence_landline: $data->spouse->landline,
             spouse_fb_account_name: $data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name,
+<<<<<<< HEAD
             spouse_age: $data->spouse->age,
             spouse_tin: $data->employment->toCollection()->firstWhere('type', 'spouse')->id->tin,
             spouse_pagibig_number:  $data->employment->toCollection()->firstWhere('type', 'spouse')->id->pagibig,
@@ -356,6 +356,8 @@ class FlatData extends \Spatie\LaravelData\Data
             zip_code:  $data->addresses->toCollection()->firstWhere('type', 'spouse')->postal_code,
             length_of_stay:  $data->employment->toCollection()->firstWhere('type', 'spouse')->years_in_service,
             
+=======
+>>>>>>> b036605ff4e6345bda28ed3d7705bbd1bb513c64
 
             buyer_address: $data->addresses->toCollection()->firstWhere('type', 'primary')->full_address,
             buyer_province: $data->addresses->toCollection()->firstWhere('type', 'primary')->administrative_area,
@@ -471,10 +473,10 @@ class FlatData extends \Spatie\LaravelData\Data
             equity_payment_reference_number: $data->order->payment_scheme->payments->toCollection()->firstWhere('type', 'equity')->reference_number,
             equity_payment_date: $data->order->payment_scheme->payments->toCollection()->firstWhere('type', 'equity')->date,
 
-            rental_fee: $data->order->payment_scheme->fees->toCollection()->firstWhere('name' , 'rental')->amount,
-            present_rental_fee: $data->order->payment_scheme->fees->toCollection()->firstWhere('name' , 'rental')->amount,
+            rental_fee: $data->order->payment_scheme->fees->toCollection()->firstWhere('name', 'rental')->amount,
+            present_rental_fee: $data->order->payment_scheme->fees->toCollection()->firstWhere('name', 'rental')->amount,
 
-            aif_name: $data->co_borrower->aif_name ?? "",
+            aif_name: $data->co_borrower->aif_name ?? '',
 
             co_borrower_name: ($data->co_borrower['first_name'] ?? '') .($data->co_borrower['middle_name'] ?? '') .($data->co_borrower['last_name'] ?? ''),
           

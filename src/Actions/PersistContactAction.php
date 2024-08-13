@@ -429,7 +429,7 @@ class PersistContactAction
             'order.spouse_address' => ['nullable', 'string'],
             'order.total_miscellaneous_fee_in_words' => ['nullable', 'string'],
             'order.tmf' => ['nullable', 'string'],
-            
+
             'order.cash_outlay_1_terms' => ['nullable'],
             'order.cash_outlay_1_monthly_payment' => ['nullable'],
             'order.cash_outlay_1_effective_date' => ['nullable'],
@@ -482,7 +482,6 @@ class PersistContactAction
             'co_borrower.*.company_phone_number' => ['nullable', 'string'],
             'co_borrower.*.fax' => ['nullable', 'string'],
             'co_borrower.*.company_email' => ['nullable', 'string'],
-
 
         ];
     }
