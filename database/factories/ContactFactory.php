@@ -2,9 +2,9 @@
 
 namespace Homeful\Contacts\Database\Factories;
 
+use Faker\Generator as BaseGenerator;
 use Homeful\Contacts\Models\Contact;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Faker\Generator as BaseGenerator;
 
 class ContactFactory extends Factory
 {
@@ -12,7 +12,8 @@ class ContactFactory extends Factory
 
     public function definition()
     {
-        $customFaker = new CustomFakerGenerator();
+        $customFaker = new CustomFakerGenerator;
+
         return [
             'reference_code' => $this->faker->uuid(),
             'first_name' => $this->faker->firstName(),
@@ -138,7 +139,6 @@ class CustomFakerGenerator extends BaseGenerator
     /**
      * Get a random element from an array.
      *
-     * @param array $array
      * @return mixed
      */
     public function randomElement(array $array)
@@ -148,18 +148,21 @@ class CustomFakerGenerator extends BaseGenerator
         }
 
         $index = array_rand($array);
+
         return $array[$index];
     }
 
     public function nameSuffix()
     {
         $suffixes = ['Jr.', 'Sr.', 'I', 'II', 'III', 'IV', 'V'];
+
         return $this->randomElement($suffixes);
     }
 
     public function phoneNumber(): string
     {
         $randomNumber = str_pad(rand(0, 999999999), 9, '0', STR_PAD_LEFT);
-        return '+639' . $randomNumber;
+
+        return '+639'.$randomNumber;
     }
 }
