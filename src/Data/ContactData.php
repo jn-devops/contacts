@@ -88,7 +88,7 @@ class ContactData extends Data
             payments: isset($order['payment_scheme']['payments']) && $order['payment_scheme']['payments'] !== null
                 ? new DataCollection(PaymentData::class, $order['payment_scheme']['payments']) : null,
             fees: isset($order['payment_scheme']['fees']) && $order['payment_scheme']['fees'] !== null
-                ? new DataCollection(PaymentData::class, $order['payment_scheme']['fees']) : null,
+                ? new DataCollection(FeesData::class, $order['payment_scheme']['fees']) : null,
             payment_remarks: isset($order['payment_scheme']['payment_remarks']) && $order['payment_scheme']['payment_remarks'] !== null ? $order['payment_scheme']['payment_remarks'] : null,
             transaction_remarks: isset($order['payment_scheme']['transaction_remarks']) && $order['payment_scheme']['transaction_remarks'] !== null ? $order['payment_scheme']['transaction_remarks'] : null,
             discount_rate: isset($order['payment_scheme']['discount_rate']) && $order['payment_scheme']['discount_rate'] !== null ? $order['payment_scheme']['discount_rate'] : null,
