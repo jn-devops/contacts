@@ -4,6 +4,7 @@ namespace Homeful\Contacts\Database\Factories;
 
 use Homeful\Contacts\Models\Contact;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Faker\Generator as BaseGenerator;
 
 class ContactFactory extends Factory
 {
@@ -11,36 +12,37 @@ class ContactFactory extends Factory
 
     public function definition()
     {
+        $customFaker = new CustomFakerGenerator();
         return [
             'reference_code' => $this->faker->uuid(),
             'first_name' => $this->faker->firstName(),
             'middle_name' => $this->faker->lastName(),
             'last_name' => $this->faker->lastName(),
-            'name_suffix' => $this->faker->nameSuffix(),
+            'name_suffix' => $customFaker->nameSuffix(),
             'civil_status' => $this->faker->randomElement(['Single', 'Married', 'Annulled/Divorced', 'Legally Seperated', 'Widow/er']),
             'sex' => $this->faker->randomElement(['Male', 'Female']),
             'nationality' => 'Filipino',
             'date_of_birth' => $this->faker->date(),
             'email' => $this->faker->email(),
-            'mobile' => $this->faker->phoneNumber(),
-            'other_mobile' => $this->faker->phoneNumber(),
-            'help_number' => $this->faker->phoneNumber(),
-            'landline' => $this->faker->phoneNumber(),
+            'mobile' => $customFaker->phoneNumber(),
+            'other_mobile' => $customFaker->phoneNumber(),
+            'help_number' => $customFaker->phoneNumber(),
+            'landline' => $customFaker->phoneNumber(),
             'mothers_maiden_name' => $this->faker->lastName().', '.$this->faker->firstName().' '.$this->faker->lastName(),
             'spouse' => [
                 'first_name' => $this->faker->firstName(),
                 'middle_name' => $this->faker->lastName(),
                 'last_name' => $this->faker->lastName(),
-                'name_suffix' => $this->faker->nameSuffix(),
+                'name_suffix' => $customFaker->nameSuffix(),
                 'civil_status' => $this->faker->randomElement(['Single', 'Married', 'Annulled/Divorced', 'Legally Seperated', 'Widow/er']),
                 'sex' => $this->faker->randomElement(['Male', 'Female']),
                 'nationality' => 'Filipino',
                 'date_of_birth' => $this->faker->date(),
                 'email' => $this->faker->email(),
-                'mobile' => $this->faker->phoneNumber(),
-                'other_mobile' => $this->faker->phoneNumber(),
-                'help_number' => $this->faker->phoneNumber(),
-                'landline' => $this->faker->phoneNumber(),
+                'mobile' => $customFaker->phoneNumber(),
+                'other_mobile' => $customFaker->phoneNumber(),
+                'help_number' => $customFaker->phoneNumber(),
+                'landline' => $customFaker->phoneNumber(),
                 'mothers_maiden_name' => $this->faker->lastName().', '.$this->faker->firstName().' '.$this->faker->lastName(),
             ],
             'addresses' => [
@@ -99,7 +101,7 @@ class ContactFactory extends Factory
                     'nationality' => 'Filipino',
                     'date_of_birth' => $this->faker->date(),
                     'email' => $this->faker->email(),
-                    'mobile' => $this->faker->phoneNumber(),
+                    'mobile' => $customFaker->phoneNumber(),
                 ],
                 [
                     'first_name' => $this->faker->firstName(),
@@ -110,7 +112,7 @@ class ContactFactory extends Factory
                     'nationality' => 'Filipino',
                     'date_of_birth' => $this->faker->date(),
                     'email' => $this->faker->email(),
-                    'mobile' => $this->faker->phoneNumber(),
+                    'mobile' => $customFaker->phoneNumber(),
                 ],
             ],
             'order' => [
@@ -129,5 +131,35 @@ class ContactFactory extends Factory
             'usufructAgreementDocument' => null,
             'contractToSellDocument' => null,
         ];
+    }
+}
+class CustomFakerGenerator extends BaseGenerator
+{
+    /**
+     * Get a random element from an array.
+     *
+     * @param array $array
+     * @return mixed
+     */
+    public function randomElement(array $array)
+    {
+        if (empty($array)) {
+            throw new InvalidArgumentException('Array cannot be empty.');
+        }
+
+        $index = array_rand($array);
+        return $array[$index];
+    }
+
+    public function nameSuffix()
+    {
+        $suffixes = ['Jr.', 'Sr.', 'I', 'II', 'III', 'IV', 'V'];
+        return $this->randomElement($suffixes);
+    }
+
+    public function phoneNumber(): string
+    {
+        $randomNumber = str_pad(rand(0, 999999999), 9, '0', STR_PAD_LEFT);
+        return '+639' . $randomNumber;
     }
 }
