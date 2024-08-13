@@ -239,6 +239,10 @@ class PersistContactAction
             'employment.*.employer.nationality' => ['nullable', 'string'],
             'employment.*.employer.contact_no' => ['nullable', 'string'],
 
+            'employment.*.years_in_service' => ['nullable', 'string'],
+            'employment.*.salary_range' => ['nullable', 'string'],
+            'employment.*.department_name' => ['nullable', 'string'],
+
             'employment.*.employer.address' => ['nullable', 'array'],
             'employment.*.employer.address.type' => ['nullable', 'string'],
             'employment.*.employer.address.ownership' => ['nullable', 'string'],
@@ -368,7 +372,7 @@ class PersistContactAction
             'order.payment_scheme.evat_percentage' => ['nullable'],
             'order.payment_scheme.net_total_contract_price' => ['nullable'],
             'order.payment_scheme.total_contract_price' => ['nullable'],
-            
+
             'order.payment_scheme.*.payment' => ['nullable', 'array'],
             'order.payment_scheme.payment.*.type' => ['nullable', 'array'],
             'order.payment_scheme.payment.*.amount_paid' => ['nullable'],
