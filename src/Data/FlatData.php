@@ -35,7 +35,6 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $buyer_sss_gsis_number,
         public ?string $buyer_pagibig_number,
 
-     
         public ?string $spouse_name,
         public ?string $spouse_civil_status,
         public ?string $spouse_nationality,
@@ -201,13 +200,11 @@ class FlatData extends \Spatie\LaravelData\Data
             spouse_mobile: $data->spouse->mobile,
             client_id_spouse: $data->order->client_id_spouse, // temporary location of client_id
 
-           
             spouse_extension_name: $data->spouse->name_suffix,
             spouse_mothers_maiden_name: $data->spouse->mothers_maiden_name,
             spouse_primary_contact_number: $data->spouse->mobile,
             spouse_residence_landline: $data->spouse->landline,
             spouse_fb_account_name: $data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name,
-            
 
             buyer_address: $data->addresses->toCollection()->firstWhere('type', 'primary')->full_address,
             buyer_province: $data->addresses->toCollection()->firstWhere('type', 'primary')->administrative_area,
@@ -322,10 +319,10 @@ class FlatData extends \Spatie\LaravelData\Data
             equity_payment_reference_number: $data->order->payment_scheme->payments->toCollection()->firstWhere('type', 'equity')->reference_number,
             equity_payment_date: $data->order->payment_scheme->payments->toCollection()->firstWhere('type', 'equity')->date,
 
-            rental_fee: $data->order->payment_scheme->fees->toCollection()->firstWhere('name' , 'rental')->amount,
-            present_rental_fee: $data->order->payment_scheme->fees->toCollection()->firstWhere('name' , 'rental')->amount,
+            rental_fee: $data->order->payment_scheme->fees->toCollection()->firstWhere('name', 'rental')->amount,
+            present_rental_fee: $data->order->payment_scheme->fees->toCollection()->firstWhere('name', 'rental')->amount,
 
-            aif_name: $data->co_borrower->aif_name ?? "",
+            aif_name: $data->co_borrower->aif_name ?? '',
 
         );
     }

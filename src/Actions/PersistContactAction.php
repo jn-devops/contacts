@@ -368,7 +368,7 @@ class PersistContactAction
             'order.payment_scheme.evat_percentage' => ['nullable'],
             'order.payment_scheme.net_total_contract_price' => ['nullable'],
             'order.payment_scheme.total_contract_price' => ['nullable'],
-            
+
             'order.payment_scheme.*.payment' => ['nullable', 'array'],
             'order.payment_scheme.payment.*.type' => ['nullable', 'array'],
             'order.payment_scheme.payment.*.amount_paid' => ['nullable'],
@@ -425,7 +425,7 @@ class PersistContactAction
             'order.spouse_address' => ['nullable', 'string'],
             'order.total_miscellaneous_fee_in_words' => ['nullable', 'string'],
             'order.tmf' => ['nullable', 'string'],
-            
+
             'order.cash_outlay_1_terms' => ['nullable'],
             'order.cash_outlay_1_monthly_payment' => ['nullable'],
             'order.cash_outlay_1_effective_date' => ['nullable'],
@@ -478,7 +478,6 @@ class PersistContactAction
             'co_borrower.*.company_phone_number' => ['nullable', 'string'],
             'co_borrower.*.fax' => ['nullable', 'string'],
             'co_borrower.*.company_email' => ['nullable', 'string'],
-
 
         ];
     }
