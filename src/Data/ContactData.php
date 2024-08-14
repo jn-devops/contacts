@@ -99,12 +99,13 @@ class ContactData extends Data
             ? $order['seller']
             : [];
         // dd(new DataCollection(ContactEmploymentData::class, $model->employment));
-// Create DataCollection for employment data
+        // Create DataCollection for employment data
         $employmentDataCollection = isset($model->employment) && is_array($model->employment)
             ? new DataCollection(ContactEmploymentData::class, array_map(function ($employment) {
                 $addressData = isset($employment['employer']['address']) && is_array($employment['employer']['address'])
-                    ?AddressData::from($employment['employer']['address'])
+                    ? AddressData::from($employment['employer']['address'])
                     : null;
+
                 return new ContactEmploymentData(
                     employment_status: $employment['employment_status'] ?? '',
                     monthly_gross_income: $employment['monthly_gross_income'] ?? '0',
@@ -164,7 +165,7 @@ class ContactData extends Data
             spouse: $model->spouse ? PersonData::from($model->spouse) : null,
             addresses: new DataCollection(AddressData::class, $model->addresses),
             employment: $employmentDataCollection,
-//            employment: new DataCollection(ContactEmploymentData::class, $model->employment),
+            //            employment: new DataCollection(ContactEmploymentData::class, $model->employment),
             co_borrowers: new DataCollection(PersonData::class, $model->co_borrowers),
             order: $model->order ? ContactOrderData::from($order) : null,
             uploads: new DataCollection(UploadData::class, $model->uploads),
@@ -505,7 +506,6 @@ class ContactEmploymentData extends Data
     }
 }
 
-
 class ContactEmploymentEmployerData extends Data
 {
     public function __construct(
@@ -539,7 +539,6 @@ class ContactEmploymentEmployerData extends Data
         ];
     }
 }
-
 
 class ContactEmploymentIdData extends Data
 {
