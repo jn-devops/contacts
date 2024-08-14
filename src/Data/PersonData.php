@@ -21,6 +21,12 @@ class PersonData extends Data
         public ?string $help_number,
         public ?string $landline,
         public ?string $mothers_maiden_name,
+        public ?string $age,
+        public ?string $relationship_to_buyer,
+        public ?string $passport,
+        public ?string $date_issued,
+        public ?string $place_issued,
+       
 
     ) {}
 }
