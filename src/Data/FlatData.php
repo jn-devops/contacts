@@ -288,8 +288,47 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $aif_industry,
         public ?string $aif_salary_gross_income,
         public ?string $aif_company_phone_number,
-       
-
+        public ?string $aif_fax,
+        public ?string $aif_company_email,
+        public ?string $term_1,
+        public ?string $term_2,
+        public ?string $term_3,
+        public ?string $amort_mrisri1,
+        public ?string $amort_mrisri2,
+        public ?string $amort_mrisri3,
+        public ?string $amort_nonlife1,
+        public ?string $amort_nonlife2,
+        public ?string $amort_nonlife3,
+        public ?string $amort_princ_int1,
+        public ?string $amort_princ_int2,
+        public ?string $amort_princ_int3,
+        public ?string $monthly_amort1,
+        public ?string $monthly_amort2,
+        public ?string $monthly_amort3,
+        public ?string $cct,
+        public ?string $witness1,
+        public ?string $witness2,
+        public ?string $page,
+        public ?string $buyer_extension_name,
+        public ?string $spouse_industry,
+        public ?string $exec_signatories,
+        public ?string $exec_position,
+        public ?string $exec_tin_no,
+        public ?string $board_resolution_date,
+        public ?string $repricing_period,
+        public ?string $loan_terms_in_word,
+        public ?string $repricing_period_in_words,
+        public ?string $registry_of_deeds_address,
+        public ?string $scheme,
+        public ?string $company_tin,
+        public ?string $company_address,
+        public ?string $loan_value_after_downpayment,
+        public ?string $company_acronym,
+        public ?string $total_selling_price,
+        public ?string $client_id_co_borrower,
+        public ?string $client_id_aif,
+    
+    
     ) {}
 
     public static function fromModel(Contact $model): self
@@ -340,7 +379,6 @@ class FlatData extends \Spatie\LaravelData\Data
             spouse_primary_contact_number: $data->spouse->mobile,
             spouse_residence_landline: $data->spouse->landline,
             spouse_fb_account_name: $data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name,
-<<<<<<< HEAD
             spouse_age: $data->spouse->age,
             spouse_tin: $data->employment->toCollection()->firstWhere('type', 'spouse')->id->tin,
             spouse_pagibig_number:  $data->employment->toCollection()->firstWhere('type', 'spouse')->id->pagibig,
@@ -355,9 +393,8 @@ class FlatData extends \Spatie\LaravelData\Data
             spouse_salary_gross_income:  $data->employment->toCollection()->firstWhere('type', 'spouse')->monthly_gross_income,
             zip_code:  $data->addresses->toCollection()->firstWhere('type', 'spouse')->postal_code,
             length_of_stay:  $data->employment->toCollection()->firstWhere('type', 'spouse')->years_in_service,
+            spouse_industry:  $data->employment->toCollection()->firstWhere('type', 'spouse')->industry,
             
-=======
->>>>>>> b036605ff4e6345bda28ed3d7705bbd1bb513c64
 
             buyer_address: $data->addresses->toCollection()->firstWhere('type', 'primary')->full_address,
             buyer_province: $data->addresses->toCollection()->firstWhere('type', 'primary')->administrative_area,
@@ -525,6 +562,8 @@ class FlatData extends \Spatie\LaravelData\Data
             aif_industry: $data->employment->toCollection()->firstWhere('type', 'co_borrower')->industry,
             aif_salary_gross_income: $data->employment->toCollection()->firstWhere('type', 'co_borrower')->monthly_gross_income,
             aif_company_phone_number: $data->employment->toCollection()->firstWhere('type', 'co_borrower')->employer->contact_no,
+            aif_fax: $data->employment->toCollection()->firstWhere('type', 'co_borrower')->employer->fax,
+            aif_company_email: $data->employment->toCollection()->firstWhere('type', 'co_borrower')->employer->email,
 
 
             buyer_years_in_service: $data->employment->toCollection()->firstWhere('type', 'buyer')->years_in_service,
@@ -601,7 +640,43 @@ class FlatData extends \Spatie\LaravelData\Data
             interest_in_words: $data->order->interest_in_words ?? '',
             logo: $data->order->logo ?? '',
             loan_period_months: $data->order->loan_period_months ?? '',
-
+            term_1: $data->order->term_1 ?? '',
+            term_2: $data->order->term_2 ?? '',
+            term_3: $data->order->term_3 ?? '',
+            amort_mrisri1: $data->order->amort_mrisri1 ?? '',
+            amort_mrisri2: $data->order->amort_mrisri2 ?? '',
+            amort_mrisri3: $data->order->amort_mrisri3 ?? '',
+            amort_nonlife1: $data->order->amort_nonlife1 ?? '',
+            amort_nonlife2: $data->order->amort_nonlife2 ?? '',
+            amort_nonlife3: $data->order->amort_nonlife3 ?? '',
+            amort_princ_int1: $data->order->amort_princ_int1 ?? '',
+            amort_princ_int2: $data->order->amort_princ_int2 ?? '',
+            amort_princ_int3: $data->order->amort_princ_int3 ?? '',
+            monthly_amort1: $data->order->monthly_amort1 ?? '',
+            monthly_amort2: $data->order->monthly_amort2 ?? '',
+            monthly_amort3: $data->order->monthly_amort3 ?? '',
+            cct: $data->order->cct ?? '',
+            witness1: $data->order->witness1 ?? '',
+            witness2: $data->order->witness2 ?? '',
+            page: $data->order->page ?? '',
+            buyer_extension_name: $data->order->buyer_extension_name ?? '',
+            exec_signatories: $data->order->exec_signatories ?? '',
+            exec_position: $data->order->exec_position ?? '',
+            exec_tin_no: $data->order->exec_tin_no ?? '',
+            board_resolution_date: $data->order->board_resolution_date ?? '',
+            repricing_period: $data->order->repricing_period ?? '',
+            loan_terms_in_word: $data->order->loan_terms_in_word ?? '',
+            repricing_period_in_words: $data->order->repricing_period_in_words ?? '',
+            registry_of_deeds_address: $data->order->registry_of_deeds_address ?? '',
+            scheme: $data->order->payment_scheme->scheme,
+            company_tin: $data->order->company_tin,
+            company_address: $data->order->company_address,
+            loan_value_after_downpayment: $data->order->loan_value_after_downpayment,
+            company_acronym: $data->order->company_acronym,
+            total_selling_price: $data->order->total_selling_price,
+            client_id_co_borrower: $data->order->client_id_co_borrower,
+            client_id_aif: $data->order->client_id_aif,
+            
 
         );
     }
