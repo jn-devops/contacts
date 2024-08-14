@@ -566,6 +566,6 @@ class Contact extends Model implements BorrowerInterface, HasMedia
 
     public function getGrossMonthlyIncome(): Price
     {
-        return new Price($this->getWages()) ;
+        return new Price($this->getWages());
     }
 }
