@@ -26,7 +26,6 @@ class PersonData extends Data
         public ?string $passport,
         public ?string $date_issued,
         public ?string $place_issued,
-       
 
     ) {}
 }

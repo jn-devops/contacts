@@ -530,7 +530,7 @@ class Contact extends Model implements BorrowerInterface, HasMedia
         return new Carbon($this->date_of_birth);
     }
 
-    public function getWages():Money|float
+    public function getWages(): Money|float
     {
         $buyerEmployment = collect($this->employment)->firstWhere('type', 'buyer');
 
