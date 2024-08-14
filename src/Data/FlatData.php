@@ -105,7 +105,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $total_contract_price,
         public ?string $evat_amount,
         public ?string $net_total_contact_price,
-        public string $payment_scheme, 
+        public string $payment_scheme,
         public ?string $payment_method_name,
         public ?string $collectible_price,
         public ?string $reservation_date,
@@ -347,10 +347,10 @@ class FlatData extends \Spatie\LaravelData\Data
             buyer_civil_status: $data->profile->civil_status,
             buyer_spouse_name: $data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name,
             buyer_nationality: $data->profile->nationality,
-            
+
             buyer_tin: $data->employment->toCollection()->firstWhere('type', 'buyer')->id->tin,
             buyer_sss_gsis_number: $data->employment->toCollection()->firstWhere('type', 'buyer')->id->sss,
-            buyer_pagibig_number:  $data->employment->toCollection()->firstWhere('type', 'buyer')->id->pagibig,
+            buyer_pagibig_number: $data->employment->toCollection()->firstWhere('type', 'buyer')->id->pagibig,
 
             buyer_gender: $data->profile->sex,
             buyer_principal_email: $data->profile->email,
@@ -394,7 +394,6 @@ class FlatData extends \Spatie\LaravelData\Data
             zip_code:  $data->addresses->toCollection()->firstWhere('type', 'spouse')->postal_code,
             length_of_stay:  $data->employment->toCollection()->firstWhere('type', 'spouse')->years_in_service,
             spouse_industry:  $data->employment->toCollection()->firstWhere('type', 'spouse')->industry,
-            
 
             buyer_address: $data->addresses->toCollection()->firstWhere('type', 'primary')->full_address,
             buyer_province: $data->addresses->toCollection()->firstWhere('type', 'primary')->administrative_area,
@@ -420,10 +419,7 @@ class FlatData extends \Spatie\LaravelData\Data
             building: $data->addresses->toCollection()->firstWhere('type', 'primary')->building,
             floor: $data->addresses->toCollection()->firstWhere('type', 'primary')->floor,
             unit: $data->addresses->toCollection()->firstWhere('type', 'primary')->unit,
-
             aif_address: $data->addresses->toCollection()->firstWhere('type', 'co_borrower')->full_address ?? '',
-            
-
             company_name: $data->order->company_name,
             project_name: $data->order->project_name,
             project_code: $data->order->project_code,
@@ -433,10 +429,8 @@ class FlatData extends \Spatie\LaravelData\Data
             phase: $data->order->phase,
             block: $data->order->block,
             lot: $data->order->lot,
-
             mrif_fee: $data->order->mrif_fee,
             reservation_rate: $data->order->reservation_rate,
-
             lot_area: $data->order->lot_area,
             lot_area_in_words: $data->order->lot_area == null ? '' : $numberToWords->getNumberTransformer('en')->toWords($data->order->lot_area),
             floor_area: $data->order->floor_area,
@@ -515,14 +509,13 @@ class FlatData extends \Spatie\LaravelData\Data
 
             aif_name: $data->co_borrower->aif_name ?? '',
 
-            co_borrower_name: ($data->co_borrower['first_name'] ?? '') .($data->co_borrower['middle_name'] ?? '') .($data->co_borrower['last_name'] ?? ''),
-          
+            co_borrower_name: ($data->co_borrower['first_name'] ?? '').($data->co_borrower['middle_name'] ?? '').($data->co_borrower['last_name'] ?? ''),
+
             co_borrower_address: $data->addresses->toCollection()->firstWhere('type', 'co_borrower')->full_address ?? '',
             co_borrower_civil_status: $data->co_borrower['civil_status'] ?? '',
             co_borrower_nationality: $data->co_borrower['nationality'] ?? '',
             co_borrower_spouse: $data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name,
             co_borrower_tin: $data->employment->toCollection()->firstWhere('type', 'co_borrower')->id->tin,
-            
 
             aif_last_name: $data->co_borrower['last_name'] ?? '',
             aif_first_name: $data->co_borrower['first_name'] ?? '',
@@ -546,7 +539,7 @@ class FlatData extends \Spatie\LaravelData\Data
             aif_primary_contact_number: $data->co_borrower['mobile'] ?? '',
             aif_email: $data->co_borrower['email'] ?? '',
             aif_relationship_to_buyer: $data->co_borrower['relationship_to_buyer'] ?? '',
-            aif_account_name: ($data->co_borrower['first_name'] ?? '') .($data->co_borrower['middle_name'] ?? '') .($data->co_borrower['last_name'] ?? ''),
+            aif_account_name: ($data->co_borrower['first_name'] ?? '').($data->co_borrower['middle_name'] ?? '').($data->co_borrower['last_name'] ?? ''),
             aif_username_or_email: $data->co_borrower['email'] ?? '',
             aif_tin: $data->employment->toCollection()->firstWhere('type', 'co_borrower')->id->tin,
             aif_sss: $data->employment->toCollection()->firstWhere('type', 'co_borrower')->id->sss,
@@ -565,7 +558,6 @@ class FlatData extends \Spatie\LaravelData\Data
             aif_fax: $data->employment->toCollection()->firstWhere('type', 'co_borrower')->employer->fax,
             aif_company_email: $data->employment->toCollection()->firstWhere('type', 'co_borrower')->employer->email,
 
-
             buyer_years_in_service: $data->employment->toCollection()->firstWhere('type', 'buyer')->years_in_service,
             buyer_employer_type: $data->employment->toCollection()->firstWhere('type', 'buyer')->employment_type,
             buyer_employer_status: $data->employment->toCollection()->firstWhere('type', 'buyer')->employer->status,
@@ -583,13 +575,13 @@ class FlatData extends \Spatie\LaravelData\Data
             buyer_salary_range: $data->employment->toCollection()->firstWhere('type', 'buyer')->salary_range,
             industry: $data->employment->toCollection()->firstWhere('type', 'buyer')->employer->industry,
 
-            selling_unit: $data->order->seller_data->unit,
-            seller_id: $data->order->seller_data->id,
-            seller_name: $data->order->seller_data->name,
-            seller_superior: $data->order->seller_data->superior,
-            sales_team_head: $data->order->seller_data->team_head,
-            chief_seller_officer: $data->order->seller_data->chief_seller_officer,
-            seller_type: $data->order->seller_data->type,
+            selling_unit: $data->order->seller->unit,
+            seller_id: $data->order->seller->id,
+            seller_name: $data->order->seller->name,
+            seller_superior: $data->order->seller->superior,
+            sales_team_head: $data->order->seller->team_head,
+            chief_seller_officer: $data->order->seller->chief_seller_officer,
+            seller_type: $data->order->seller->type,
             cancellation_reason2: $data->order->cancellation_reason2 ?? '',
             hucf_move_in_fee: $data->order->hucf_move_in_fee ?? '',
             reservation_rate_processing_fee: $data->order->reservation_rate ?? '',
@@ -676,7 +668,6 @@ class FlatData extends \Spatie\LaravelData\Data
             total_selling_price: $data->order->total_selling_price,
             client_id_co_borrower: $data->order->client_id_co_borrower,
             client_id_aif: $data->order->client_id_aif,
-            
 
         );
     }

@@ -532,7 +532,11 @@ class Contact extends Model implements BorrowerInterface, HasMedia
 
     public function getWages(): Money|float
     {
-        return Money::of(Arr::get($this->employment, 'monthly_gross_income', 0), 'PHP');
+        $buyerEmployment = collect($this->employment)->firstWhere('type', 'buyer');
+
+        return $buyerEmployment
+            ? Money::of(Arr::get($buyerEmployment, 'monthly_gross_income', 0), 'PHP')
+            : 0;
     }
 
     public function getRegional(): bool
@@ -562,6 +566,10 @@ class Contact extends Model implements BorrowerInterface, HasMedia
 
     public function getGrossMonthlyIncome(): Price
     {
-        return $this->getGrossMonthlyIncome();
+        $buyerEmployment = collect($this->employment)->firstWhere('type', 'buyer');
+
+        return $buyerEmployment
+            ? Price::make(Arr::get($buyerEmployment, 'monthly_gross_income', 0), 'PHP')
+            : 0;
     }
 }

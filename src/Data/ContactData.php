@@ -96,10 +96,51 @@ class ContactData extends Data
             conditional_discount: isset($order['payment_scheme']['conditional_discount']) && $order['payment_scheme']['conditional_discount'] !== null ? $order['payment_scheme']['conditional_discount'] : null,
             transaction_sub_status: isset($order['payment_scheme']['transaction_sub_status']) && $order['payment_scheme']['transaction_sub_status'] !== null ? $order['payment_scheme']['transaction_sub_status'] : null,
         );
-        // $order['seller_data'] = SellerData::from($order['seller_data']);
-        (isset($model->order['seller_data'])) ? $order['seller_data'] = SellerData::from($order['seller_data']) :null;
-        
+        $sellerData = isset($order['seller']) && is_array($order['seller'])
+             ? $order['seller']
+            : [];
+        // (isset($model->order['seller'])) ? $order['seller'] = SellerData::from($order['seller']) :null;
         // dd(new DataCollection(ContactEmploymentData::class, $model->employment));
+        // Create DataCollection for employment data
+        $employmentDataCollection = isset($model->employment) && is_array($model->employment)
+            ? new DataCollection(ContactEmploymentData::class, array_map(function ($employment) {
+                $addressData = isset($employment['employer']['address']) && is_array($employment['employer']['address'])
+                    ? AddressData::from($employment['employer']['address'])
+                    : null;
+
+                return new ContactEmploymentData(
+                    employment_status: $employment['employment_status'] ?? '',
+                    monthly_gross_income: $employment['monthly_gross_income'] ?? '0',
+                    current_position: $employment['current_position'] ?? '',
+                    employment_type: $employment['employment_type'] ?? '',
+                    employer: new ContactEmploymentEmployerData(
+                        name: $employment['employer']['name'] ?? '',
+                        industry: $employment['employer']['industry'] ?? '',
+                        nationality: $employment['employer']['nationality'] ?? '',
+                        address: $addressData,
+                        contact_no: $employment['employer']['contact_no'] ?? '',
+                        employer_status: $employment['employer']['employer_status'] ?? null,
+                        type: $employment['employer']['type'] ?? null,
+                        status: $employment['employer']['status'] ?? null,
+                        year_established: $employment['employer']['year_established'] ?? null,
+                        total_number_of_employees: $employment['employer']['total_number_of_employees'] ?? null,
+                        email: $employment['employer']['email'] ?? null,
+                        fax: $employment['employer']['fax'] ?? null
+                    ),
+                    id: isset($employment['id']) ? new ContactEmploymentIdData(
+                        tin: $employment['id']['tin'] ?? '',
+                        pagibig: $employment['id']['pagibig'] ?? '',
+                        sss: $employment['id']['sss'] ?? '',
+                        gsis: $employment['id']['gsis'] ?? ''
+                    ) : null,
+                    years_in_service: $employment['years_in_service'] ?? null,
+                    salary_range: $employment['salary_range'] ?? null,
+                    industry: $employment['industry'] ?? null,
+                    department_name: $employment['department_name'] ?? null,
+                    type: $employment['type'] ?? null
+                );
+            }, $model->employment))
+            : new DataCollection(ContactEmploymentData::class, []);
 
         return new self(
             reference_code: $model->reference_code,
@@ -126,7 +167,8 @@ class ContactData extends Data
             ),
             spouse: $model->spouse ? PersonData::from($model->spouse) : null,
             addresses: new DataCollection(AddressData::class, $model->addresses),
-            employment: new DataCollection(ContactEmploymentData::class, $model->employment),
+            employment: $employmentDataCollection,
+            //            employment: new DataCollection(ContactEmploymentData::class, $model->employment),
             co_borrowers: new DataCollection(PersonData::class, $model->co_borrowers),
             order: $model->order ? ContactOrderData::from($order) : null,
             uploads: new DataCollection(UploadData::class, $model->uploads),
@@ -205,7 +247,7 @@ class ContactData extends Data
                 'buyer_age' => $this->order->buyer_age,
                 'client_id_spouse' => $this->order->client_id_spouse,
                 'payment_scheme' => $this->order->payment_scheme == null ? null : $this->order->payment_scheme->toArray(),
-                'seller_data' => $this->order->seller_data == null ? null : $this->order->seller_data->toArray(),
+                'seller' => $this->order->seller == null ? null : $this->order->seller->toArray(),
             ],
             'uploads' => $this->uploads->toArray(),
         ];
@@ -377,7 +419,7 @@ class ContactOrderData extends Data
         public ?string $client_id_co_borrower,
 
         public ?PaymentSchemeData $payment_scheme,
-        public ?SellerData $seller_data,
+        public ?SellerData $seller,
 
     ) {}
 
@@ -439,7 +481,7 @@ class ContactOrderData extends Data
             'buyer_age' => $this->buyer_age,
             'client_id_spouse' => $this->client_id_spouse,
             'payment_scheme' => $this->payment_scheme ? $this->payment_scheme->toArray() : null,
-            'seller_data' => $this->seller_data ? $this->seller_data->toArray() : null,
+            'seller' => $this->seller ? $this->seller->toArray() : null,
         ];
     }
 }
@@ -452,14 +494,30 @@ class ContactEmploymentData extends Data
         public string $current_position,
         public string $employment_type,
         public ContactEmploymentEmployerData $employer,
-        public ContactEmploymentIdData|Optional $id,
-        //for GNC
+        public ?ContactEmploymentIdData $id,
         public ?string $years_in_service,
         public ?string $salary_range,
         public ?string $industry,
         public ?string $department_name,
-        public ?string $type, //spouse, coborrower, buyer
+        public ?string $type, //spouse, co-borrower, buyer
     ) {}
+
+    public function toArray(): array
+    {
+        return [
+            'employment_status' => $this->employment_status,
+            'monthly_gross_income' => $this->monthly_gross_income,
+            'current_position' => $this->current_position,
+            'employment_type' => $this->employment_type,
+            'employer' => $this->employer ? $this->employer->toArray() : null,
+            'id' => $this->id ? $this->id->toArray() : null,
+            'years_in_service' => $this->years_in_service,
+            'salary_range' => $this->salary_range,
+            'industry' => $this->industry,
+            'department_name' => $this->department_name,
+            'type' => $this->type,
+        ];
+    }
 }
 
 class ContactEmploymentEmployerData extends Data
@@ -468,9 +526,8 @@ class ContactEmploymentEmployerData extends Data
         public string $name,
         public string $industry,
         public string $nationality,
-        public AddressData $address,
+        public ?AddressData $address,
         public string $contact_no,
-        public string $fax,
         //for GNC
         public ?string $employer_status,
         public ?string $type,
@@ -478,8 +535,25 @@ class ContactEmploymentEmployerData extends Data
         public ?string $year_established,
         public ?string $total_number_of_employees,
         public ?string $email,
-
+        public ?string $fax,
     ) {}
+
+    public function toArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'industry' => $this->industry,
+            'nationality' => $this->nationality,
+            'address' => $this->address ? $this->address->toArray() : [],
+            'contact_no' => $this->contact_no,
+            'employer_status' => $this->employer_status,
+            'type' => $this->type,
+            'status' => $this->status,
+            'year_established' => $this->year_established,
+            'total_number_of_employees' => $this->total_number_of_employees,
+            'email' => $this->email,
+        ];
+    }
 }
 
 class ContactEmploymentIdData extends Data
