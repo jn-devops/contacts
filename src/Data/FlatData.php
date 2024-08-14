@@ -289,7 +289,6 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $aif_salary_gross_income,
         public ?string $aif_company_phone_number,
 
-
     ) {}
 
     public static function fromModel(Contact $model): self
@@ -311,7 +310,7 @@ class FlatData extends \Spatie\LaravelData\Data
 
             buyer_tin: $data->employment->toCollection()->firstWhere('type', 'buyer')->id->tin,
             buyer_sss_gsis_number: $data->employment->toCollection()->firstWhere('type', 'buyer')->id->sss,
-            buyer_pagibig_number:  $data->employment->toCollection()->firstWhere('type', 'buyer')->id->pagibig,
+            buyer_pagibig_number: $data->employment->toCollection()->firstWhere('type', 'buyer')->id->pagibig,
 
             buyer_gender: $data->profile->sex,
             buyer_principal_email: $data->profile->email,
@@ -342,18 +341,18 @@ class FlatData extends \Spatie\LaravelData\Data
             spouse_fb_account_name: $data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name,
             spouse_age: $data->spouse->age,
             spouse_tin: $data->employment->toCollection()->firstWhere('type', 'spouse')->id->tin,
-            spouse_pagibig_number:  $data->employment->toCollection()->firstWhere('type', 'spouse')->id->pagibig,
-            spouse_employer_name:  $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->name,
-            spouse_employer_type:  $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->type,
-            spouse_employer_status:  $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->status,
-            spouse_employer_address:  $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->address->full_address,
-            spouse_employer_contact_number:  $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->contact_no,
-            spouse_company_email_address:  $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->email,
-            spouse_position:  $data->employment->toCollection()->firstWhere('type', 'spouse')->current_position,
-            spouse_years_in_service:  $data->employment->toCollection()->firstWhere('type', 'spouse')->years_in_service,
-            spouse_salary_gross_income:  $data->employment->toCollection()->firstWhere('type', 'spouse')->monthly_gross_income,
-            zip_code:  $data->addresses->toCollection()->firstWhere('type', 'spouse')->postal_code,
-            length_of_stay:  $data->employment->toCollection()->firstWhere('type', 'spouse')->years_in_service,
+            spouse_pagibig_number: $data->employment->toCollection()->firstWhere('type', 'spouse')->id->pagibig,
+            spouse_employer_name: $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->name,
+            spouse_employer_type: $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->type,
+            spouse_employer_status: $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->status,
+            spouse_employer_address: $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->address->full_address,
+            spouse_employer_contact_number: $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->contact_no,
+            spouse_company_email_address: $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->email,
+            spouse_position: $data->employment->toCollection()->firstWhere('type', 'spouse')->current_position,
+            spouse_years_in_service: $data->employment->toCollection()->firstWhere('type', 'spouse')->years_in_service,
+            spouse_salary_gross_income: $data->employment->toCollection()->firstWhere('type', 'spouse')->monthly_gross_income,
+            zip_code: $data->addresses->toCollection()->firstWhere('type', 'spouse')->postal_code,
+            length_of_stay: $data->employment->toCollection()->firstWhere('type', 'spouse')->years_in_service,
             buyer_address: $data->addresses->toCollection()->firstWhere('type', 'primary')->full_address,
             buyer_province: $data->addresses->toCollection()->firstWhere('type', 'primary')->administrative_area,
             buyer_residence_type: $data->addresses->toCollection()->firstWhere('type', 'primary')->type,
@@ -380,7 +379,6 @@ class FlatData extends \Spatie\LaravelData\Data
             unit: $data->addresses->toCollection()->firstWhere('type', 'primary')->unit,
 
             aif_address: $data->addresses->toCollection()->firstWhere('type', 'co_borrower')->full_address ?? '',
-
 
             company_name: $data->order->company_name,
             project_name: $data->order->project_name,
@@ -473,14 +471,13 @@ class FlatData extends \Spatie\LaravelData\Data
 
             aif_name: $data->co_borrower->aif_name ?? '',
 
-            co_borrower_name: ($data->co_borrower['first_name'] ?? '') .($data->co_borrower['middle_name'] ?? '') .($data->co_borrower['last_name'] ?? ''),
+            co_borrower_name: ($data->co_borrower['first_name'] ?? '').($data->co_borrower['middle_name'] ?? '').($data->co_borrower['last_name'] ?? ''),
 
             co_borrower_address: $data->addresses->toCollection()->firstWhere('type', 'co_borrower')->full_address ?? '',
             co_borrower_civil_status: $data->co_borrower['civil_status'] ?? '',
             co_borrower_nationality: $data->co_borrower['nationality'] ?? '',
             co_borrower_spouse: $data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name,
             co_borrower_tin: $data->employment->toCollection()->firstWhere('type', 'co_borrower')->id->tin,
-
 
             aif_last_name: $data->co_borrower['last_name'] ?? '',
             aif_first_name: $data->co_borrower['first_name'] ?? '',
@@ -504,7 +501,7 @@ class FlatData extends \Spatie\LaravelData\Data
             aif_primary_contact_number: $data->co_borrower['mobile'] ?? '',
             aif_email: $data->co_borrower['email'] ?? '',
             aif_relationship_to_buyer: $data->co_borrower['relationship_to_buyer'] ?? '',
-            aif_account_name: ($data->co_borrower['first_name'] ?? '') .($data->co_borrower['middle_name'] ?? '') .($data->co_borrower['last_name'] ?? ''),
+            aif_account_name: ($data->co_borrower['first_name'] ?? '').($data->co_borrower['middle_name'] ?? '').($data->co_borrower['last_name'] ?? ''),
             aif_username_or_email: $data->co_borrower['email'] ?? '',
             aif_tin: $data->employment->toCollection()->firstWhere('type', 'co_borrower')->id->tin,
             aif_sss: $data->employment->toCollection()->firstWhere('type', 'co_borrower')->id->sss,
@@ -520,7 +517,6 @@ class FlatData extends \Spatie\LaravelData\Data
             aif_industry: $data->employment->toCollection()->firstWhere('type', 'co_borrower')->industry,
             aif_salary_gross_income: $data->employment->toCollection()->firstWhere('type', 'co_borrower')->monthly_gross_income,
             aif_company_phone_number: $data->employment->toCollection()->firstWhere('type', 'co_borrower')->employer->contact_no,
-
 
             buyer_years_in_service: $data->employment->toCollection()->firstWhere('type', 'buyer')->years_in_service,
             buyer_employer_type: $data->employment->toCollection()->firstWhere('type', 'buyer')->employment_type,
@@ -596,7 +592,6 @@ class FlatData extends \Spatie\LaravelData\Data
             interest_in_words: $data->order->interest_in_words ?? '',
             logo: $data->order->logo ?? '',
             loan_period_months: $data->order->loan_period_months ?? '',
-
 
         );
     }

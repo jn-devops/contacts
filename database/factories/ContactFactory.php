@@ -69,7 +69,7 @@ class ContactFactory extends Factory
                 [
                     'type' => 'buyer',
                     'employment_status' => $this->faker->word(),
-                    'monthly_gross_income' =>(string) ($this->faker->numberBetween(12000, 25000) * 100),
+                    'monthly_gross_income' => (string) ($this->faker->numberBetween(12000, 25000) * 100),
                     'current_position' => $this->faker->word(),
                     'employment_type' => $this->faker->word(),
                     'employer' => [
@@ -119,7 +119,7 @@ class ContactFactory extends Factory
                         'sss' => $this->faker->word(),
                         'gsis' => $this->faker->word(),
                     ],
-                ]
+                ],
             ],
             'co_borrowers' => [
                 [
@@ -153,7 +153,7 @@ class ContactFactory extends Factory
                     'payments' => [],
                     'fess' => [],
                 ],
-                'seller'=>[],
+                'seller' => [],
             ],
             'idImage' => null,
             'selfieImage' => null,
