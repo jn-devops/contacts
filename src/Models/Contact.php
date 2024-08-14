@@ -536,7 +536,7 @@ class Contact extends Model implements BorrowerInterface, HasMedia
 
         return $buyerEmployment
             ? Money::of(Arr::get($buyerEmployment, 'monthly_gross_income', 0), 'PHP')
-            : 0;
+            : Money::of(0, 'PHP');
     }
 
     public function getRegional(): bool
@@ -570,6 +570,6 @@ class Contact extends Model implements BorrowerInterface, HasMedia
 
         return $buyerEmployment
             ? Price::make(Arr::get($buyerEmployment, 'monthly_gross_income', 0), 'PHP')
-            : 0;
+            : Price::make(0,'PHP');
     }
 }
