@@ -566,10 +566,6 @@ class Contact extends Model implements BorrowerInterface, HasMedia
 
     public function getGrossMonthlyIncome(): Price
     {
-        $buyerEmployment = collect($this->employment)->firstWhere('type', 'buyer');
-
-        return $buyerEmployment
-            ? Price::make(Arr::get($buyerEmployment, 'monthly_gross_income', 0), 'PHP')
-            : Price::make(0,'PHP');
+        return new Price($this->getWages()) ;
     }
 }
