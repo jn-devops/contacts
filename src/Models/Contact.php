@@ -570,6 +570,6 @@ class Contact extends Model implements BorrowerInterface, HasMedia
 
         return $buyerEmployment
             ? Price::make(Arr::get($buyerEmployment, 'monthly_gross_income', 0), 'PHP')
-            : Price::make(0,'PHP');
+            : Price::make(0, 'PHP');
     }
 }
