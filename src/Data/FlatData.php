@@ -327,8 +327,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $total_selling_price,
         public ?string $client_id_co_borrower,
         public ?string $client_id_aif,
-    
-    
+
     ) {}
 
     public static function fromModel(Contact $model): self
@@ -381,19 +380,19 @@ class FlatData extends \Spatie\LaravelData\Data
             spouse_fb_account_name: $data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name,
             spouse_age: $data->spouse->age,
             spouse_tin: $data->employment->toCollection()->firstWhere('type', 'spouse')->id->tin,
-            spouse_pagibig_number:  $data->employment->toCollection()->firstWhere('type', 'spouse')->id->pagibig,
-            spouse_employer_name:  $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->name,
-            spouse_employer_type:  $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->type,
-            spouse_employer_status:  $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->status,
-            spouse_employer_address:  $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->address->full_address,
-            spouse_employer_contact_number:  $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->contact_no,
-            spouse_company_email_address:  $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->email,
-            spouse_position:  $data->employment->toCollection()->firstWhere('type', 'spouse')->current_position,
-            spouse_years_in_service:  $data->employment->toCollection()->firstWhere('type', 'spouse')->years_in_service,
-            spouse_salary_gross_income:  $data->employment->toCollection()->firstWhere('type', 'spouse')->monthly_gross_income,
-            zip_code:  $data->addresses->toCollection()->firstWhere('type', 'spouse')->postal_code,
-            length_of_stay:  $data->employment->toCollection()->firstWhere('type', 'spouse')->years_in_service,
-            spouse_industry:  $data->employment->toCollection()->firstWhere('type', 'spouse')->industry,
+            spouse_pagibig_number: $data->employment->toCollection()->firstWhere('type', 'spouse')->id->pagibig,
+            spouse_employer_name: $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->name,
+            spouse_employer_type: $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->type,
+            spouse_employer_status: $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->status,
+            spouse_employer_address: $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->address->full_address,
+            spouse_employer_contact_number: $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->contact_no,
+            spouse_company_email_address: $data->employment->toCollection()->firstWhere('type', 'spouse')->employer->email,
+            spouse_position: $data->employment->toCollection()->firstWhere('type', 'spouse')->current_position,
+            spouse_years_in_service: $data->employment->toCollection()->firstWhere('type', 'spouse')->years_in_service,
+            spouse_salary_gross_income: $data->employment->toCollection()->firstWhere('type', 'spouse')->monthly_gross_income,
+            zip_code: $data->addresses->toCollection()->firstWhere('type', 'spouse')->postal_code,
+            length_of_stay: $data->employment->toCollection()->firstWhere('type', 'spouse')->years_in_service,
+            spouse_industry: $data->employment->toCollection()->firstWhere('type', 'spouse')->industry,
 
             buyer_address: $data->addresses->toCollection()->firstWhere('type', 'primary')->full_address,
             buyer_province: $data->addresses->toCollection()->firstWhere('type', 'primary')->administrative_area,
