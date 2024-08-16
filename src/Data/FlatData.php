@@ -335,10 +335,7 @@ class FlatData extends \Spatie\LaravelData\Data
         $numberToWords = new NumberToWords;
         $data = ContactData::fromModel($model);
 
-<<<<<<< HEAD
-        dd($data);
-=======
->>>>>>> 25a61a8a5f67bb3310018ce170f79f9dee4875bd
+        // dd($data);
         return new self(
             brn: $data->reference_code ?? '',
             buyer_first_name: $data->profile->first_name ?? '',
