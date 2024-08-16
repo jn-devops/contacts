@@ -334,6 +334,7 @@ class FlatData extends \Spatie\LaravelData\Data
     {
         $numberToWords = new NumberToWords;
         $data = ContactData::fromModel($model);
+
         return new self(
             brn: $data->reference_code ?? '',
             buyer_first_name: $data->profile->first_name ?? '',
@@ -530,9 +531,9 @@ class FlatData extends \Spatie\LaravelData\Data
             aif_relationship_to_buyer: $data->co_borrower['relationship_to_buyer'] ?? '',
             aif_account_name: ($data->co_borrower['first_name'] ?? '').($data->co_borrower['middle_name'] ?? '').($data->co_borrower['last_name'] ?? ''),
             aif_username_or_email: $data->co_borrower['email'] ?? '',
-            aif_tin: $data->employment?->toCollection()->firstWhere('type', 'co_borrower')->id->tin??'',
-            aif_sss: $data->employment?->toCollection()->firstWhere('type', 'co_borrower')->id->sss??'',
-            aif_pagibig: $data->employment?->toCollection()->firstWhere('type', 'co_borrower')->id->pagibig??'',
+            aif_tin: $data->employment?->toCollection()->firstWhere('type', 'co_borrower')->id->tin ?? '',
+            aif_sss: $data->employment?->toCollection()->firstWhere('type', 'co_borrower')->id->sss ?? '',
+            aif_pagibig: $data->employment?->toCollection()->firstWhere('type', 'co_borrower')->id->pagibig ?? '',
             aif_passport: $data->co_borrower['passport'] ?? '',
             aif_date_issued: $data->co_borrower['date_issued'] ?? '',
             aif_place_issued: $data->co_borrower['place_issued'] ?? '',
