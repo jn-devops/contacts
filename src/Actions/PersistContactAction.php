@@ -27,10 +27,10 @@ class PersistContactAction
     public function handle(array $attribs): Contact
     {
         $validated = Validator::validate($attribs, $this->rules());
-       
+
         return $this->persist($validated);
     }
-    
+
     /**
      * @return array[]
      */
