@@ -2,6 +2,7 @@
 
 namespace Homeful\Contacts\Data;
 
+use Carbon\Carbon;
 use Homeful\Contacts\Models\Contact;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
@@ -96,8 +97,9 @@ class ContactData extends Data
             transaction_sub_status: isset($order['payment_scheme']['transaction_sub_status']) && $order['payment_scheme']['transaction_sub_status'] !== null ? $order['payment_scheme']['transaction_sub_status'] : null,
         );
         $sellerData = isset($order['seller']) && is_array($order['seller'])
-            ? $order['seller']
+             ? $order['seller']
             : [];
+        // (isset($model->order['seller'])) ? $order['seller'] = SellerData::from($order['seller']) :null;
         // dd(new DataCollection(ContactEmploymentData::class, $model->employment));
         // Create DataCollection for employment data
         $employmentDataCollection = isset($model->employment) && is_array($model->employment)
@@ -122,7 +124,8 @@ class ContactData extends Data
                         status: $employment['employer']['status'] ?? null,
                         year_established: $employment['employer']['year_established'] ?? null,
                         total_number_of_employees: $employment['employer']['total_number_of_employees'] ?? null,
-                        email: $employment['employer']['email'] ?? null
+                        email: $employment['employer']['email'] ?? null,
+                        fax: $employment['employer']['fax'] ?? null
                     ),
                     id: isset($employment['id']) ? new ContactEmploymentIdData(
                         tin: $employment['id']['tin'] ?? '',
@@ -156,7 +159,7 @@ class ContactData extends Data
                 help_number: $model->help_number,
                 landline: $model->landline,
                 mothers_maiden_name: $model->mothers_maiden_name,
-                age: $model->age,
+                age: Carbon::parse($model->date_of_birth)->age,
                 relationship_to_buyer: $model->relationship_to_buyer,
                 passport: $model->passport,
                 date_issued: $model->date_issued,
@@ -403,6 +406,17 @@ class ContactOrderData extends Data
         public ?string $interest,
         public ?string $logo,
         public ?string $loan_period_months,
+        public ?string $page,
+        public ?string $lot_area_in_words,
+        public ?string $exec_signatories,
+        public ?string $exec_tin_no,
+        public ?string $loan_terms_in_word,
+        public ?string $company_tin,
+        public ?string $yes_for_faq_solaris_project,
+        public ?string $n_for_faq_solaris_project,
+        public ?string $loan_value_after_downpayment,
+        public ?string $client_id_aif,
+        public ?string $client_id_co_borrower,
 
         public ?PaymentSchemeData $payment_scheme,
         public ?SellerData $seller,
@@ -514,12 +528,14 @@ class ContactEmploymentEmployerData extends Data
         public string $nationality,
         public ?AddressData $address,
         public string $contact_no,
+        //for GNC
         public ?string $employer_status,
         public ?string $type,
         public ?string $status,
         public ?string $year_established,
         public ?string $total_number_of_employees,
         public ?string $email,
+        public ?string $fax,
     ) {}
 
     public function toArray(): array
