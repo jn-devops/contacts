@@ -7,6 +7,8 @@ use Homeful\Contacts\Models\Contact;
 use Illuminate\Support\Facades\Validator;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
+use Illuminate\Validation\ValidationException;
+
 
 class PersistContactAction
 {
@@ -19,14 +21,18 @@ class PersistContactAction
                 ['reference_code' => $validated['reference_code']], // Unique identifier, adjust as needed
                 $validated
             );
-
             ContactPersisted::dispatch($contact);
         });
     }
 
     public function handle(array $attribs): Contact
     {
-        $validated = Validator::validate($attribs, $this->rules());
+        $validator = Validator::make($attribs, $this->rules());
+
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
+        }
+        $validated = $validator->validated();
 
         return $this->persist($validated);
     }
@@ -184,7 +190,7 @@ class PersistContactAction
             'civil_status' => ['required', 'string'],
             'sex' => ['required', 'string'],
             'nationality' => ['required', 'string'],
-            'date_of_birth' => ['required', 'date'],
+            'date_of_birth' => ['required'],
             'email' => ['required', 'string'],
             'mobile' => ['required', 'string'],
             'other_mobile' => ['nullable', 'string'],
@@ -213,15 +219,15 @@ class PersistContactAction
             'addresses.*.length_of_stay' => ['nullable', 'string'],
 
             'spouse' => ['nullable', 'array'],
-            'spouse.first_name' => ['string'],
-            'spouse.middle_name' => ['string'],
-            'spouse.last_name' => ['string'],
-            'spouse.civil_status' => ['string'],
-            'spouse.sex' => ['string'],
-            'spouse.nationality' => ['string'],
-            'spouse.date_of_birth' => ['string'],
-            'spouse.email' => ['string'],
-            'spouse.mobile' => ['string'],
+            'spouse.first_name' => ['nullable', 'string'],
+            'spouse.middle_name' => ['nullable', 'string'],
+            'spouse.last_name' => ['nullable', 'string'],
+            'spouse.civil_status' => ['nullable', 'string'],
+            'spouse.sex' => ['nullable', 'string'],
+            'spouse.nationality' => ['nullable', 'string'],
+            'spouse.date_of_birth' => ['nullable', 'date'],
+            'spouse.email' =>['nullable', 'string'],
+            'spouse.mobile' =>['nullable', 'string'],
             'spouse.other_mobile' => ['nullable', 'string'],
             'spouse.help_number' => ['nullable', 'string'],
             'spouse.mothers_maiden_name' => ['nullable', 'string'],
@@ -275,7 +281,7 @@ class PersistContactAction
             'co_borrowers.*.civil_status' => ['nullable', 'string'],
             'co_borrowers.*.sex' => ['nullable', 'string'],
             'co_borrowers.*.nationality' => ['nullable', 'string'],
-            'co_borrowers.*.date_of_birth' => ['nullable', 'string'],
+            'co_borrowers.*.date_of_birth' => ['nullable'],
             'co_borrowers.*.email' => ['nullable', 'string'],
             'co_borrowers.*.mobile' => ['nullable', 'string'],
             'co_borrowers.*.other_mobile' => ['nullable', 'string'],
@@ -287,7 +293,7 @@ class PersistContactAction
             'order.seller_commission_code' => ['nullable', 'string'],
             'order.property_code' => ['nullable', 'string'],
             'order.baf_number' => ['nullable'],
-            'order.baf_date' => ['nullable', 'date'],
+            'order.baf_date' => ['nullable'],
             'order.client_id_buyer' => ['nullable'],
             'order.buyer_age' => ['nullable'],
 
@@ -376,8 +382,8 @@ class PersistContactAction
             'order.payment_scheme.*.payment' => ['nullable', 'array'],
             'order.payment_scheme.payment.*.type' => ['nullable', 'array'],
             'order.payment_scheme.payment.*.amount_paid' => ['nullable'],
-            'order.payment_scheme.payment.*.date' => ['nullable', 'string'],
-            'order.payment_scheme.payment.*.reference_number' => ['nullable', 'string'],
+            'order.payment_scheme.payment.*.date' => ['nullable'],
+            'order.payment_scheme.payment.*.reference_number' => ['nullable'],
 
             'order.payment_scheme.fees.*.name' => ['nullable', 'string'],
             'order.payment_scheme.fees.*.amount' => ['nullable'],
@@ -408,7 +414,7 @@ class PersistContactAction
             'order.equity_1_interest_rate' => ['nullable', 'string'],
             'order.equity_1_terms' => ['nullable', 'string'],
             'order.equity_1_monthly_payment' => ['nullable', 'string'],
-            'order.equity_1_effective_date' => ['nullable', 'string'],
+            'order.equity_1_effective_date' => ['nullable'],
             'order.equity_2_amount' => ['nullable', 'string'],
             'order.equity_2_percentage_rate' => ['nullable', 'string'],
             'order.equity_2_interest_rate' => ['nullable', 'string'],
@@ -422,7 +428,7 @@ class PersistContactAction
             'order.repricing_period' => ['nullable', 'string'],
             'order.company_address' => ['nullable', 'string'],
             'order.exec_position' => ['nullable', 'string'],
-            'order.board_resolution_date' => ['nullable', 'string'],
+            'order.board_resolution_date' => ['nullable'],
             'order.registry_of_deeds_address' => ['nullable', 'string'],
             'order.exec_tin' => ['nullable', 'string'],
             'order.loan_period_in_words' => ['nullable', 'string'],
