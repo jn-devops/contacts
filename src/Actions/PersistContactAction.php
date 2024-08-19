@@ -7,6 +7,8 @@ use Homeful\Contacts\Models\Contact;
 use Illuminate\Support\Facades\Validator;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
+use Illuminate\Validation\ValidationException;
+
 
 class PersistContactAction
 {
@@ -19,14 +21,18 @@ class PersistContactAction
                 ['reference_code' => $validated['reference_code']], // Unique identifier, adjust as needed
                 $validated
             );
-
             ContactPersisted::dispatch($contact);
         });
     }
 
     public function handle(array $attribs): Contact
     {
-        $validated = Validator::validate($attribs, $this->rules());
+        $validator = Validator::make($attribs, $this->rules());
+
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
+        }
+        $validated = $validator->validated();
 
         return $this->persist($validated);
     }
@@ -213,15 +219,15 @@ class PersistContactAction
             'addresses.*.length_of_stay' => ['nullable', 'string'],
 
             'spouse' => ['nullable', 'array'],
-            'spouse.first_name' => ['string'],
-            'spouse.middle_name' => ['string'],
-            'spouse.last_name' => ['string'],
-            'spouse.civil_status' => ['string'],
-            'spouse.sex' => ['string'],
-            'spouse.nationality' => ['string'],
-            'spouse.date_of_birth' => ['string'],
-            'spouse.email' => ['string'],
-            'spouse.mobile' => ['string'],
+            'spouse.first_name' => ['nullable', 'string'],
+            'spouse.middle_name' => ['nullable', 'string'],
+            'spouse.last_name' => ['nullable', 'string'],
+            'spouse.civil_status' => ['nullable', 'string'],
+            'spouse.sex' => ['nullable', 'string'],
+            'spouse.nationality' => ['nullable', 'string'],
+            'spouse.date_of_birth' => ['nullable', 'date'],
+            'spouse.email' =>['nullable', 'string'],
+            'spouse.mobile' =>['nullable', 'string'],
             'spouse.other_mobile' => ['nullable', 'string'],
             'spouse.help_number' => ['nullable', 'string'],
             'spouse.mothers_maiden_name' => ['nullable', 'string'],
