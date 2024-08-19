@@ -5,10 +5,9 @@ namespace Homeful\Contacts\Actions;
 use Homeful\Contacts\Events\ContactPersisted;
 use Homeful\Contacts\Models\Contact;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
-use Illuminate\Validation\ValidationException;
-
 
 class PersistContactAction
 {
@@ -226,8 +225,8 @@ class PersistContactAction
             'spouse.sex' => ['nullable', 'string'],
             'spouse.nationality' => ['nullable', 'string'],
             'spouse.date_of_birth' => ['nullable', 'date'],
-            'spouse.email' =>['nullable', 'string'],
-            'spouse.mobile' =>['nullable', 'string'],
+            'spouse.email' => ['nullable', 'string'],
+            'spouse.mobile' => ['nullable', 'string'],
             'spouse.other_mobile' => ['nullable', 'string'],
             'spouse.help_number' => ['nullable', 'string'],
             'spouse.mothers_maiden_name' => ['nullable', 'string'],
