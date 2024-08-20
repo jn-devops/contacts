@@ -547,7 +547,6 @@ class Contact extends Model implements BorrowerInterface, HasMedia
         return ! ($region == 'NCR' || $region == 'Metro Manila');
     }
 
-
     public function getMobile(): PhoneNumber
     {
         return new PhoneNumber($this->mobile, 'PH');
