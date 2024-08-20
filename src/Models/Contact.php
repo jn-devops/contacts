@@ -115,6 +115,7 @@ class Contact extends Model implements BorrowerInterface, HasMedia
     protected $casts = [
         'mobile' => RawPhoneNumberCast::class.':PH',
         'other_mobile' => RawPhoneNumberCast::class.':PH',
+        'help_number' => RawPhoneNumberCast::class.':PH',
         'spouse' => 'array',
         'addresses' => 'array',
         'employment' => 'array',
