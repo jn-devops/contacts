@@ -49,7 +49,7 @@ test('contact has schema attributes', function (Contact $contact) {
     expect($contact->nationality)->toBeString();
     expect($contact->date_of_birth)->toBeInstanceOf(Carbon::class);
     expect($contact->email)->toBeString();
-    expect($contact->mobile)->toBeInstanceOf(PhoneNumber::class);
+    expect($contact->getMobile())->toBeInstanceOf(PhoneNumber::class);
     expect($contact->addresses)->toBeArray();
     expect($contact->employment)->toBeArray();
     expect($contact->co_borrowers)->toBeArray();
@@ -210,7 +210,7 @@ test('contact has data', function (Contact $contact) {
     expect($data->profile->date_of_birth)->toBe($contact->date_of_birth->format('Y-m-d'));
     expect($data->profile->email)->toBe($contact->email);
 
-    expect($contact->mobile->equals(new \Propaganistas\LaravelPhone\PhoneNumber($data->profile->mobile, 'PH')))->toBeTrue();
+    expect($contact->getMobile()->equals(new \Propaganistas\LaravelPhone\PhoneNumber($data->profile->mobile, 'PH')))->toBeTrue();
 
     if ($contact->spouse) {
         expect($data->spouse->first_name)->toBe($contact->spouse['first_name']);

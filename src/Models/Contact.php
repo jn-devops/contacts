@@ -113,9 +113,9 @@ class Contact extends Model implements BorrowerInterface, HasMedia
     }
 
     protected $casts = [
-        'mobile' => RawPhoneNumberCast::class.':PH',
-        'other_mobile' => RawPhoneNumberCast::class.':PH',
-        'help_number' => RawPhoneNumberCast::class.':PH',
+        // 'mobile' => RawPhoneNumberCast::class.':PH',
+        // 'other_mobile' => RawPhoneNumberCast::class.':PH',
+        // 'help_number' => RawPhoneNumberCast::class.':PH',
         'spouse' => 'array',
         'addresses' => 'array',
         'employment' => 'array',
@@ -547,9 +547,21 @@ class Contact extends Model implements BorrowerInterface, HasMedia
         return ! ($region == 'NCR' || $region == 'Metro Manila');
     }
 
+
     public function getMobile(): PhoneNumber
     {
         return new PhoneNumber($this->mobile, 'PH');
+    }
+
+    public function setMobile($value): void
+    {
+        if ($value instanceof PhoneNumber) {
+            $this->attributes['mobile'] = $value->formatE164();
+        } elseif (is_string($value)) {
+            $this->attributes['mobile'] = $value;
+        } else {
+            throw new \InvalidArgumentException('Mobile must be a string or an instance of PhoneNumber.');
+        }
     }
 
     protected function DateOfBirth(): Attribute

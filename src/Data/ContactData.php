@@ -154,7 +154,7 @@ class ContactData extends Data
                 nationality: $model->nationality,
                 date_of_birth: $model->date_of_birth->format('Y-m-d'),
                 email: $model->email,
-                mobile: $model->mobile->formatNational(),
+                mobile: $model->getMobile()->formatNational(),
                 other_mobile: $model->other_mobile,
                 help_number: $model->help_number,
                 landline: $model->landline,
