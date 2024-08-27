@@ -299,6 +299,7 @@ class PersistContactAction
             'order.company_name' => ['nullable', 'string'],
             'order.project_name' => ['nullable', 'string'],
             'order.project_code' => ['nullable', 'string'],
+            'order.project_type' => ['nullable', 'string'],
             'order.property_name' => ['nullable', 'string'],
             'order.phase' => ['nullable', 'string'],
             'order.block' => ['nullable'],
