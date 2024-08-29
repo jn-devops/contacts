@@ -184,7 +184,7 @@ class PersistContactAction
             'reference_code' => ['nullable', 'string'],
 
             'first_name' => ['required', 'string'],
-            'middle_name' => ['required', 'string'],
+            'middle_name' => ['nullable', 'string'],
             'last_name' => ['required', 'string'],
             'name_suffix' => ['nullable', 'string'],
             'civil_status' => ['required', 'string'],
