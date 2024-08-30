@@ -84,7 +84,7 @@ class ContactData extends Data
             commissionable_amount: isset($order['payment_scheme']['commissionable_amount']) && $order['payment_scheme']['commissionable_amount'] !== null ? $order['payment_scheme']['commissionable_amount'] : null,
             evat_percentage: isset($order['payment_scheme']['evat_percentage']) && $order['payment_scheme']['evat_percentage'] !== null ? $order['payment_scheme']['evat_percentage'] : null,
             evat_amount: isset($order['payment_scheme']['evat_amount']) && $order['payment_scheme']['evat_amount'] !== null ? $order['payment_scheme']['evat_amount'] : null,
-            net_total_contact_price: isset($order['payment_scheme']['net_total_contract_price']) && $order['payment_scheme']['net_total_contract_price'] !== null ? $order['payment_scheme']['net_total_contract_price'] : null,
+            net_total_contract_price: isset($order['payment_scheme']['net_total_contract_price']) && $order['payment_scheme']['net_total_contract_price'] !== null ? $order['payment_scheme']['net_total_contract_price'] : null,
             total_contact_price: isset($order['payment_scheme']['total_contract_price']) && $order['payment_scheme']['total_contract_price'] !== null ? $order['payment_scheme']['total_contract_price'] : null,
             payments: isset($order['payment_scheme']['payments']) && $order['payment_scheme']['payments'] !== null
                 ? new DataCollection(PaymentData::class, $order['payment_scheme']['payments']) : null,
@@ -614,7 +614,7 @@ class PaymentSchemeData
         public ?string $commissionable_amount,
         public ?string $evat_percentage,
         public ?string $evat_amount,
-        public ?string $net_total_contact_price,
+        public ?string $net_total_contract_price,
         public ?string $total_contact_price,
         /** @var PaymentData[] */
         public ?DataCollection $payments,
