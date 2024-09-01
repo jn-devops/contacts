@@ -1,50 +1,52 @@
 <?php
 
-namespace Homeful\Contacts\Database\Factories;
-
-use Faker\Generator as BaseGenerator;
+use Homeful\Contacts\Actions\CreateContactAction;
+use Homeful\Contacts\Data\ContactData;
 use Homeful\Contacts\Models\Contact;
-use Illuminate\Database\Eloquent\Factories\Factory;
-use InvalidArgumentException;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Arr;
 
-class ContactFactory extends Factory
-{
-    protected $model = Contact::class;
+uses(RefreshDatabase::class, WithFaker::class);
 
-    public function definition()
-    {
-        $customFaker = new CustomFakerGenerator;
+beforeEach(function () {
+    $this->faker = $this->makeFaker('en_PH');
+    $migration = include 'vendor/spatie/laravel-medialibrary/database/migrations/create_media_table.php.stub';
+    $migration->up();
+});
 
-        return [
+dataset('attribs', function () {
+    return [
+        fn () => [
             'reference_code' => $this->faker->uuid(),
+
             'first_name' => $this->faker->firstName(),
             'middle_name' => $this->faker->lastName(),
             'last_name' => $this->faker->lastName(),
-            'name_suffix' => $customFaker->nameSuffix(),
-            'civil_status' => $this->faker->randomElement(['Single', 'Married', 'Annulled/Divorced', 'Legally Seperated', 'Widow/er']),
+            'name_suffix' => $this->faker->nameSuffix(),
+            'civil_status' => $this->faker->randomElement(['Single', 'Married', 'Annuled/Divorced', 'Legally Seperated', 'Widow/er']),
             'sex' => $this->faker->randomElement(['Male', 'Female']),
             'nationality' => 'Filipino',
             'date_of_birth' => $this->faker->date(),
             'email' => $this->faker->email(),
-            'mobile' => $customFaker->phoneNumber(),
-            'other_mobile' => $customFaker->phoneNumber(),
-            'help_number' => $customFaker->phoneNumber(),
-            'landline' => $customFaker->phoneNumber(),
+            'mobile' => '09177789989',
+            'other_mobile' => $this->faker->phoneNumber(),
+            'help_number' => $this->faker->phoneNumber(),
+            'landline' => $this->faker->phoneNumber(),
             'mothers_maiden_name' => $this->faker->lastName().', '.$this->faker->firstName().' '.$this->faker->lastName(),
             'spouse' => [
                 'first_name' => $this->faker->firstName(),
                 'middle_name' => $this->faker->lastName(),
                 'last_name' => $this->faker->lastName(),
-                'name_suffix' => $customFaker->nameSuffix(),
-                'civil_status' => $this->faker->randomElement(['Single', 'Married', 'Annulled/Divorced', 'Legally Seperated', 'Widow/er']),
+                'civil_status' => $this->faker->randomElement(['Single', 'Married', 'Annuled/Divorced', 'Legally Seperated', 'Widow/er']),
                 'sex' => $this->faker->randomElement(['Male', 'Female']),
                 'nationality' => 'Filipino',
                 'date_of_birth' => $this->faker->date(),
                 'email' => $this->faker->email(),
-                'mobile' => $customFaker->phoneNumber(),
-                'other_mobile' => $customFaker->phoneNumber(),
-                'help_number' => $customFaker->phoneNumber(),
-                'landline' => $customFaker->phoneNumber(),
+                'mobile' => $this->faker->phoneNumber(),
+                'other_mobile' => $this->faker->phoneNumber(),
+                'help_number' => $this->faker->phoneNumber(),
+                'landline' => $this->faker->phoneNumber(),
                 'mothers_maiden_name' => $this->faker->lastName().', '.$this->faker->firstName().' '.$this->faker->lastName(),
             ],
             'addresses' => [
@@ -53,7 +55,6 @@ class ContactFactory extends Factory
                     'ownership' => $this->faker->word(),
                     'address1' => $this->faker->address(),
                     'locality' => $this->faker->city(),
-                    'administrative_area' => $this->faker->randomElement(['NCR', 'Metro Manila', 'Cebu']),
                     'postal_code' => $this->faker->postcode(),
                     'country' => 'PH',
                 ],
@@ -68,38 +69,11 @@ class ContactFactory extends Factory
             ],
             'employment' => [
                 [
-                    'type' => 'buyer',
-                    'employment_status' => $this->faker->word(),
-                    'monthly_gross_income' => (string) ($this->faker->numberBetween(12000, 25000) * 100),
-                    'current_position' => $this->faker->word(),
                     'employment_type' => $this->faker->word(),
-                    'employer' => [
-                        'name' => $this->faker->word(),
-                        'industry' => $this->faker->word(),
-                        'nationality' => $this->faker->word(),
-                        'address' => [
-                            'type' => 'work',
-                            'ownership' => $this->faker->word(),
-                            'address1' => $this->faker->address(),
-                            'locality' => $this->faker->city(),
-                            'postal_code' => $this->faker->postcode(),
-                            'country' => 'PH',
-                        ],
-                        'contact_no' => $this->faker->word(),
-                    ],
-                    'id' => [
-                        'tin' => $this->faker->word(),
-                        'pagibig' => $this->faker->word(),
-                        'sss' => $this->faker->word(),
-                        'gsis' => $this->faker->word(),
-                    ],
-                ],
-                [
-                    'type' => 'spouse',
                     'employment_status' => $this->faker->word(),
-                    'monthly_gross_income' => (string) ($this->faker->numberBetween(12000, 25000) * 100),
+                    'monthly_gross_income' => $this->faker->word(),
                     'current_position' => $this->faker->word(),
-                    'employment_type' => $this->faker->word(),
+                    'employment_type' => 'regular',
                     'employer' => [
                         'name' => $this->faker->word(),
                         'industry' => $this->faker->word(),
@@ -132,7 +106,7 @@ class ContactFactory extends Factory
                     'nationality' => 'Filipino',
                     'date_of_birth' => $this->faker->date(),
                     'email' => $this->faker->email(),
-                    'mobile' => $customFaker->phoneNumber(),
+                    'mobile' => $this->faker->phoneNumber(),
                 ],
                 [
                     'first_name' => $this->faker->firstName(),
@@ -143,7 +117,7 @@ class ContactFactory extends Factory
                     'nationality' => 'Filipino',
                     'date_of_birth' => $this->faker->date(),
                     'email' => $this->faker->email(),
-                    'mobile' => $customFaker->phoneNumber(),
+                    'mobile' => $this->faker->phoneNumber(),
                 ],
             ],
             'order' => [
@@ -154,46 +128,31 @@ class ContactFactory extends Factory
                     'payments' => [],
                     'fess' => [],
                 ],
-                'seller' => [],
             ],
-            'idImage' => null,
-            'selfieImage' => null,
-            'payslipImage' => null,
-            'voluntarySurrenderFormDocument' => null,
-            'usufructAgreementDocument' => null,
-            'contractToSellDocument' => null,
-        ];
-    }
-}
-class CustomFakerGenerator extends BaseGenerator
-{
-    /**
-     * Get a random element from an array.
-     *
-     * @return mixed
-     */
-    public function randomElement(array $array)
-    {
-        if (empty($array)) {
-            throw new InvalidArgumentException('Array cannot be empty.');
-        }
+        ],
+    ];
+});
 
-        $index = array_rand($array);
+test('create contact action', function (array $attribs) {
+    expect(Contact::count())->toBe(0);
+    $original_queries_count = 2;
+    $image_query_count = 0; //5;
+    $contact_query_count = 1;
+    $data_query_count = 1;
+    $queries_count = $original_queries_count + $image_query_count + $contact_query_count + $data_query_count;
+    \Pest\Laravel\expectsDatabaseQueryCount($queries_count);
+    $action = app(CreateContactAction::class);
+    $contact = $action->run($attribs);
+    expect(Contact::count())->toBe(1);
+    expect($contact)->toBeInstanceOf(Contact::class);
+    expect($contact->toData())->toBe(ContactData::fromModel($contact)->toArray());
+})->with('attribs');
 
-        return $array[$index];
-    }
-
-    public function nameSuffix()
-    {
-        $suffixes = ['Jr.', 'Sr.', 'I', 'II', 'III', 'IV', 'V'];
-
-        return $this->randomElement($suffixes);
-    }
-
-    public function phoneNumber(): string
-    {
-        $randomNumber = str_pad(rand(0, 999999999), 9, '0', STR_PAD_LEFT);
-
-        return '+639'.$randomNumber;
-    }
-}
+//test('persist contact end point', function (array $attribs) {
+//    $response = $this->postJson(route('persist-contact'), $attribs);
+//    $response->assertStatus(200);
+//    $search = Arr::only($attribs, ['first_name', 'middle_name', 'last_name']);
+//    $contact = app(Contact::class)->where($search)->first();
+//    $response->assertJson(['code' => $contact->reference_code, 'status' => 1]);
+//
+//})->with('attribs')->skip();
