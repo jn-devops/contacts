@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.4.26 - 2024-09-01
+
+add create contact action based on persist contact action
+
 ## #v1.4.4 - 2024-07-18
 
 add fields in order, flat data
