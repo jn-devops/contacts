@@ -192,8 +192,8 @@ class ContactData extends Data
                 'company_name' => $this->order->company_name,
                 'project_name' => $this->order->project_name,
                 'project_code' => $this->order->project_code,
-                'property_type' => $this->order->property_type,
                 'property_name' => $this->order->property_name,
+                'property_type' => $this->order->property_type,
                 'phase' => $this->order->phase,
                 'block' => $this->order->block,
                 'lot' => $this->order->lot,
@@ -208,7 +208,6 @@ class ContactData extends Data
                 'reservation_rate' => $this->order->reservation_rate,
 
                 // for GNC
-                'property_type' => $this->order->property_type,
                 'os_status' => $this->order->os_status,
                 'class_field' => $this->order->class_field,
                 'segment_field' => $this->order->segment_field,
@@ -268,6 +267,7 @@ class ContactOrderData extends Data
         public ?string $project_name,
         public ?string $project_code,
         public ?string $property_name,
+        public ?string $property_type,
         public ?string $phase,
         public ?string $block,
         public ?string $lot,
@@ -281,7 +281,7 @@ class ContactOrderData extends Data
         public ?string $mrif_fee,
         public ?string $reservation_rate,
         //for GNC
-        public ?string $property_type,
+
         public ?string $os_status,
         public ?string $class_field,
         public ?string $segment_field,
@@ -637,7 +637,7 @@ class PaymentSchemeData
             'commissionable_amount' => $this->commissionable_amount,
             'evat_percentage' => $this->evat_percentage,
             'evat_amount' => $this->evat_amount,
-            'net_total_contact_price' => $this->net_total_contact_price,
+            'net_total_contract_price' => $this->net_total_contract_price,
             'total_contact_price' => $this->total_contact_price,
             'payments' => $this->payments ? $this->payments->toArray() : null,
             'fees' => $this->fees ? $this->fees->toArray() : null,

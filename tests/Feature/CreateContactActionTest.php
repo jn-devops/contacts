@@ -71,7 +71,7 @@ dataset('attribs', function () {
                 [
                     'employment_type' => $this->faker->word(),
                     'employment_status' => $this->faker->word(),
-                    'monthly_gross_income' => $this->faker->word(),
+                    'monthly_gross_income'=>$this->faker->numberBetween(12000, 25000) * 100,
                     'current_position' => $this->faker->word(),
                     'employment_type' => 'regular',
                     'employer' => [
