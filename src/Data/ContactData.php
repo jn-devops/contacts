@@ -565,6 +565,16 @@ class ContactEmploymentIdData extends Data
         public ?string $sss,
         public ?string $gsis,
     ) {}
+    public function toArray(): array
+    {
+        return [
+            'tin' => $this->tin,
+            'pagibig' => $this->pagibig,
+            'sss' => $this->sss,
+            'gsis' => $this->gsis,
+        ];
+    }
+
 }
 
 class UploadData extends Data
