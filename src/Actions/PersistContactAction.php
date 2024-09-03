@@ -227,7 +227,7 @@ class PersistContactAction
             'spouse.civil_status' => ['nullable', 'string'],
             'spouse.sex' => ['nullable', 'string'],
             'spouse.nationality' => ['nullable', 'string'],
-            'spouse.date_of_birth' => ['nullable', 'date'],
+            'spouse.date_of_birth' => ['nullable'],
             'spouse.email' => ['nullable', 'string'],
             'spouse.mobile' => ['nullable', 'string'],
             'spouse.other_mobile' => ['nullable', 'string'],
