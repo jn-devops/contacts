@@ -62,6 +62,8 @@ use Whitecube\Price\Price;
  * @property Media $invoiceDocument
  * @property Media $receiptDocument
  * @property Media $deedOfSaleDocument
+ * @property array $current_status
+ * @property array $current_status_code
  *
  * @method int getKey()
  */
@@ -104,7 +106,8 @@ class Contact extends Model implements BorrowerInterface, HasMedia
         'invoiceDocument',
         'receiptDocument',
         'deedOfSaleDocument',
-
+        'current_status',
+        'current_status_code',
     ];
 
     public function getContactId(): string

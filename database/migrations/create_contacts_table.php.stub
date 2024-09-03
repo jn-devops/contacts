@@ -30,6 +30,8 @@ return new class extends Migration
              $table->json('employment')->nullable();
              $table->json('co_borrowers')->nullable();
              $table->json('order')->nullable();
+             $table->string('current_status')->nullable();
+             $table->string('current_status_code')->nullable();
              $table->timestamps();
         });
     }
