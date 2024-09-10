@@ -125,7 +125,11 @@ class ContactData extends Data
                         year_established: $employment['employer']['year_established'] ?? null,
                         total_number_of_employees: $employment['employer']['total_number_of_employees'] ?? null,
                         email: $employment['employer']['email'] ?? null,
-                        fax: $employment['employer']['fax'] ?? null
+                        fax: $employment['employer']['fax'] ?? null,
+                        character_reference: new EmploymentCharacterReeference(
+                            name: $employment['employer']['character_reference_name'] ?? '',
+                            mobile: $employment['employer']['character_reference_mobile'] ?? ''
+                        ),
                     ),
                     id: isset($employment['id']) ? new ContactEmploymentIdData(
                         tin: $employment['id']['tin'] ?? '',
@@ -501,6 +505,7 @@ class ContactEmploymentData extends Data
         public ?string $industry,
         public ?string $department_name,
         public ?string $type, //spouse, co-borrower, buyer
+        public ?EmploymentCharacterReeference $character_reference,
     ) {}
 
     public function toArray(): array
@@ -517,6 +522,22 @@ class ContactEmploymentData extends Data
             'industry' => $this->industry,
             'department_name' => $this->department_name,
             'type' => $this->type,
+        ];
+    }
+}
+
+class EmploymentCharacterReeference extends Data
+{
+    public function __construct(
+        public ?string $name,
+        public ?string $mobile,
+    ) {}
+
+    public function toArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'mobile' => $this->mobile,
         ];
     }
 }
