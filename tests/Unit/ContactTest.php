@@ -215,6 +215,7 @@ test('contact has data', function (Contact $contact) {
     expect($contact->getMobile()->equals(new \Propaganistas\LaravelPhone\PhoneNumber($data->profile->mobile, 'PH')))->toBeTrue();
 
     if ($contact->spouse) {
+
         expect($data->spouse->first_name)->toBe($contact->spouse['first_name']);
         expect($data->spouse->middle_name)->toBe($contact->spouse['middle_name']);
         expect($data->spouse->last_name)->toBe($contact->spouse['last_name']);
