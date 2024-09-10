@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Propaganistas\LaravelPhone\PhoneNumber;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -40,6 +41,7 @@ dataset('contact', function () {
 });
 
 test('contact has schema attributes', function (Contact $contact) {
+    expect($contact->id)->toBeUuid();
     expect($contact->reference_code)->toBeString();
     expect($contact->first_name)->toBeString();
     expect($contact->middle_name)->toBeString();
@@ -255,3 +257,10 @@ test('contact implements BorrowerInterface', function (Contact $contact) {
     $region = Arr::get($contact->addresses, '0.administrative_area');
     expect($contact->getRegional())->toBe(! ($region == 'NCR' || $region == 'Metro Manila'));
 })->with('contact');
+
+test('contact can login', function () {
+    $contact = Contact::factory()->create();
+    expect(auth()->user())->toBeNull();
+    $this->actingAs($contact);
+    expect(auth()->user()->is($contact))->toBeTrue();
+});

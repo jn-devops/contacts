@@ -23,11 +23,12 @@ use Illuminate\Support\Str;
 use Spatie\Image\Enums\Fit;
 use Whitecube\Price\Price;
 use Brick\Money\Money;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class Contact
  *
- * @property int $id
+ * @property string $id
  * @property string $reference_code
  * @property string $first_name
  * @property string $middle_name
@@ -68,7 +69,7 @@ use Brick\Money\Money;
  *
  * @method int getKey()
  */
-class Contact extends Model implements BorrowerInterface, HasMedia
+class Contact extends Authenticatable implements BorrowerInterface, HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
@@ -127,6 +128,18 @@ class Contact extends Model implements BorrowerInterface, HasMedia
     protected array $dates = [
         'date_of_birth',
     ];
+
+    protected $keyType = 'string';
+
+    public $incrementing = false;
+
+    public static function booted(): void
+    {
+        static::creating(function (Contact $contact) {
+            $contact->id = Str::uuid()->toString();
+            $contact->setAttribute('password', Str::password());
+        });
+    }
 
     public function routeNotificationForEngageSpark(): string
     {

@@ -2,9 +2,9 @@
 
 namespace Homeful\Contacts\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Generator as BaseGenerator;
 use Homeful\Contacts\Models\Contact;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use InvalidArgumentException;
 
 class ContactFactory extends Factory
