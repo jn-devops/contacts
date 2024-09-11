@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v1.5.4 - 2024-09-11
+
+add employment contact reference, upper case names and number to words fields
+
 ## #v1.5.0 - 2024-09-03
 
 make Contact model notifiable
