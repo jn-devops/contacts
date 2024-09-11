@@ -647,7 +647,7 @@ class FlatData extends \Spatie\LaravelData\Data
             witness2: $data->order->witness2 ?? '',
             page: $data->order->page ?? '',
             buyer_extension_name: $data->order->buyer_extension_name ?? '',
-            exec_signatories: $data->order->exec_signatories ?? '',
+            exec_signatories: strtoupper($data->order->exec_signatories ?? ''),
             exec_position: $data->order->exec_position ?? '',
             exec_tin_no: $data->order->exec_tin_no ?? '',
             board_resolution_date: $data->order->board_resolution_date ?? '',
