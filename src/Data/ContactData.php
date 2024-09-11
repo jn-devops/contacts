@@ -102,17 +102,21 @@ class ContactData extends Data
         // (isset($model->order['seller'])) ? $order['seller'] = SellerData::from($order['seller']) :null;
         // dd(new DataCollection(ContactEmploymentData::class, $model->employment));
         // Create DataCollection for employment data
+        // dd($model->employment);
         $employmentDataCollection = isset($model->employment) && is_array($model->employment)
             ? new DataCollection(ContactEmploymentData::class, array_map(function ($employment) {
                 $addressData = isset($employment['employer']['address']) && is_array($employment['employer']['address'])
                     ? AddressData::from($employment['employer']['address'])
                     : null;
-
-                return new ContactEmploymentData(
+                    return new ContactEmploymentData(
                     employment_status: $employment['employment_status'] ?? '',
                     monthly_gross_income: $employment['monthly_gross_income'] ?? '0',
                     current_position: $employment['current_position'] ?? '',
                     employment_type: $employment['employment_type'] ?? '',
+                    character_reference: new EmploymentCharacterReeference(
+                        name: $employment['character_reference']['name'] ?? '',
+                        mobile: $employment['character_reference']['mobile'] ?? ''
+                    ),
                     employer: new ContactEmploymentEmployerData(
                         name: $employment['employer']['name'] ?? '',
                         industry: $employment['employer']['industry'] ?? '',
@@ -126,10 +130,6 @@ class ContactData extends Data
                         total_number_of_employees: $employment['employer']['total_number_of_employees'] ?? null,
                         email: $employment['employer']['email'] ?? null,
                         fax: $employment['employer']['fax'] ?? null,
-                        character_reference: new EmploymentCharacterReeference(
-                            name: $employment['employer']['character_reference_name'] ?? '',
-                            mobile: $employment['employer']['character_reference_mobile'] ?? ''
-                        ),
                     ),
                     id: isset($employment['id']) ? new ContactEmploymentIdData(
                         tin: $employment['id']['tin'] ?? '',
@@ -522,6 +522,7 @@ class ContactEmploymentData extends Data
             'industry' => $this->industry,
             'department_name' => $this->department_name,
             'type' => $this->type,
+            'character_reference' => $this->character_reference ? $this->character_reference->toArray() : null,
         ];
     }
 }

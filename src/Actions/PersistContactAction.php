@@ -200,7 +200,7 @@ class PersistContactAction
 
             'addresses' => ['required', 'array'],
             'addresses.*.type' => ['required', 'string'],
-            'addresses.*.ownership' => ['required', 'string'],
+            'addresses.*.ownership' => ['nullable', 'string'],
             'addresses.*.full_address' => ['nullable', 'string'],
             'addresses.*.address1' => ['nullable', 'string'], //improve this, required if full address
             'addresses.*.address2' => ['nullable', 'string'],
@@ -245,6 +245,8 @@ class PersistContactAction
             'employment.*.years_in_service' => ['nullable', 'string'],
             'employment.*.salary_range' => ['nullable', 'string'],
             'employment.*.department_name' => ['nullable', 'string'],
+            'employment.*.character_reference.name' => ['nullable', 'string'],
+            'employment.*.character_reference.mobile' => ['nullable', 'string'],
 
             'employment.*.employer' => ['nullable', 'array'],
             'employment.*.employer.name' => ['nullable', 'string'],
@@ -257,6 +259,7 @@ class PersistContactAction
             'employment.*.employer.nationality' => ['nullable', 'string'],
             'employment.*.employer.contact_no' => ['nullable', 'string'],
             'employment.*.employer.fax' => ['nullable', 'string'],
+            'employment.*.employer.character_reference' => ['nullable', 'array'],
 
             'employment.*.employer.address' => ['nullable', 'array'],
             'employment.*.employer.address.type' => ['nullable', 'string'],
