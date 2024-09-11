@@ -245,6 +245,7 @@ class PersistContactAction
             'employment.*.years_in_service' => ['nullable', 'string'],
             'employment.*.salary_range' => ['nullable', 'string'],
             'employment.*.department_name' => ['nullable', 'string'],
+            'employment.*.character_reference' => ['nullable', 'array'],
             'employment.*.character_reference.name' => ['nullable', 'string'],
             'employment.*.character_reference.mobile' => ['nullable', 'string'],
 
@@ -259,7 +260,6 @@ class PersistContactAction
             'employment.*.employer.nationality' => ['nullable', 'string'],
             'employment.*.employer.contact_no' => ['nullable', 'string'],
             'employment.*.employer.fax' => ['nullable', 'string'],
-            'employment.*.employer.character_reference' => ['nullable', 'array'],
 
             'employment.*.employer.address' => ['nullable', 'array'],
             'employment.*.employer.address.type' => ['nullable', 'string'],
