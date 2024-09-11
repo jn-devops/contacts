@@ -54,6 +54,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property Media $idImage
  * @property Media $selfieImage
  * @property Media $payslipImage
+ * @property Media $signatureImage
  * @property Media $voluntarySurrenderFormDocument
  * @property Media $usufructAgreementDocument
  * @property Media $contractToSellDocument
@@ -99,6 +100,7 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
         'idImage',
         'selfieImage',
         'payslipImage',
+        'signatureImage',
         'voluntarySurrenderFormDocument',
         'usufructAgreementDocument',
         'contractToSellDocument',
@@ -225,6 +227,29 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
             $this->addMediaFromUrl($url)
                 ->usingName('payslipImage')
                 ->toMediaCollection('payslip-images');
+        }
+
+        return $this;
+    }
+
+    public function getSignatureImageAttribute(): ?Media
+    {
+        return $this->getFirstMedia('signature-image');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setSignatureImageAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('signatureImage')
+                ->toMediaCollection('signature-image');
         }
 
         return $this;

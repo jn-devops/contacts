@@ -25,6 +25,7 @@ dataset('contact', function () {
                 'idImage' => 'https://jn-img.enclaves.ph/Test/idImage.jpg',
                 'selfieImage' => 'https://jn-img.enclaves.ph/Test/selfieImage.jpg',
                 'payslipImage' => 'https://jn-img.enclaves.ph/Test/payslipImage.jpg',
+                'signatureImage' => 'https://jn-img.enclaves.ph/Test/payslipImage.jpg',
                 'voluntarySurrenderFormDocument' => 'https://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf',
                 'usufructAgreementDocument' => 'https://jn-img.enclaves.ph/Microservices%20Logo/Level%200%20-Book%20Flight_Property.pdf',
                 'contractToSellDocument' => 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf',
@@ -75,6 +76,7 @@ test('contact can attach media', function () {
     $idImageUrl = 'https://jn-img.enclaves.ph/Test/idImage.jpg';
     $selfieImageUrl = 'https://jn-img.enclaves.ph/Test/selfieImage.jpg';
     $payslipImageUrl = 'https://jn-img.enclaves.ph/Test/payslipImage.jpg';
+    $signatureImageUrl = 'https://jn-img.enclaves.ph/Test/payslipImage.jpg';
     $voluntarySurrenderFormDocument = 'https://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf';
     $usufructAgreementDocument = 'https://jn-img.enclaves.ph/Microservices%20Logo/Level%200%20-Book%20Flight_Property.pdf';
     $contractToSellDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
@@ -89,6 +91,7 @@ test('contact can attach media', function () {
         'idImage' => null,
         'selfieImage' => null,
         'payslipImage' => null,
+        'signatureImage' => null,
         'voluntarySurrenderFormDocument' => null,
         'usufructAgreementDocument' => null,
         'contractToSellDocument' => null,
@@ -103,6 +106,7 @@ test('contact can attach media', function () {
     $contact->idImage = $idImageUrl;
     $contact->selfieImage = $selfieImageUrl;
     $contact->payslipImage = $payslipImageUrl;
+    $contact->signatureImage = $signatureImageUrl;
     $contact->voluntarySurrenderFormDocument = $voluntarySurrenderFormDocument;
     $contact->usufructAgreementDocument = $usufructAgreementDocument;
     $contact->contractToSellDocument = $contractToSellDocument;
@@ -118,6 +122,7 @@ test('contact can attach media', function () {
     expect($contact->idImage)->toBeInstanceOf(Media::class);
     expect($contact->selfieImage)->toBeInstanceOf(Media::class);
     expect($contact->payslipImage)->toBeInstanceOf(Media::class);
+    expect($contact->signatureImage)->toBeInstanceOf(Media::class);
     expect($contact->voluntarySurrenderFormDocument)->toBeInstanceOf(Media::class);
     expect($contact->usufructAgreementDocument)->toBeInstanceOf(Media::class);
     expect($contact->contractToSellDocument)->toBeInstanceOf(Media::class);
@@ -131,6 +136,7 @@ test('contact can attach media', function () {
     expect($contact->idImage->name)->toBe('idImage');
     expect($contact->selfieImage->name)->toBe('selfieImage');
     expect($contact->payslipImage->name)->toBe('payslipImage');
+    expect($contact->signatureImage->name)->toBe('signatureImage');
     expect($contact->voluntarySurrenderFormDocument->name)->toBe('voluntarySurrenderFormDocument');
     expect($contact->usufructAgreementDocument->name)->toBe('usufructAgreementDocument');
     expect($contact->contractToSellDocument->name)->toBe('contractToSellDocument');
@@ -144,6 +150,7 @@ test('contact can attach media', function () {
     expect($contact->idImage->file_name)->toBe('idImage.jpg');
     expect($contact->selfieImage->file_name)->toBe('selfieImage.jpg');
     expect($contact->payslipImage->file_name)->toBe('payslipImage.jpg');
+    expect($contact->signatureImage->file_name)->toBe('payslipImage.jpg');
     expect($contact->voluntarySurrenderFormDocument->file_name)->toBe('pdf-sample.pdf');
     expect($contact->usufructAgreementDocument->file_name)->toBe('Level-0--Book-Flight_Property.pdf');
     expect($contact->contractToSellDocument->file_name)->toBe('test.pdf');
@@ -160,6 +167,7 @@ test('contact can attach media', function () {
         expect($contact->idImage->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->idImage->getPathRelativeToRoot()]));
         expect($contact->selfieImage->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->selfieImage->getPathRelativeToRoot()]));
         expect($contact->payslipImage->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->payslipImage->getPathRelativeToRoot()]));
+        expect($contact->signatureImage->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->signatureImage->getPathRelativeToRoot()]));
         expect($contact->voluntarySurrenderFormDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->voluntarySurrenderFormDocument->getPathRelativeToRoot()]));
         expect($contact->usufructAgreementDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->usufructAgreementDocument->getPathRelativeToRoot()]));
         expect($contact->contractToSellDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->contractToSellDocument->getPathRelativeToRoot()]));
@@ -175,6 +183,7 @@ test('contact can attach media', function () {
     $contact->idImage->delete();
     $contact->selfieImage->delete();
     $contact->payslipImage->delete();
+    $contact->signatureImage->delete();
     $contact->voluntarySurrenderFormDocument->delete();
     $contact->usufructAgreementDocument->delete();
     $contact->contractToSellDocument->delete();
