@@ -217,6 +217,7 @@ class PersistContactAction
             'addresses.*.street' => ['nullable', 'string'],
             'addresses.*.building' => ['nullable', 'string'],
             'addresses.*.length_of_stay' => ['nullable', 'string'],
+            'addresses.*.region' => ['nullable', 'string'],
 
             'spouse' => ['nullable', 'array'],
             'spouse.first_name' => ['nullable', 'string'],

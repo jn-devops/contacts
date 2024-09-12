@@ -55,6 +55,7 @@ class ContactFactory extends Factory
                     'locality' => $this->faker->city(),
                     'administrative_area' => $this->faker->randomElement(['NCR', 'Metro Manila', 'Cebu']),
                     'postal_code' => $this->faker->postcode(),
+                    'region' => $this->faker->word(),
                     'country' => 'PH',
                 ],
                 [
@@ -63,6 +64,7 @@ class ContactFactory extends Factory
                     'address1' => $this->faker->address(),
                     'locality' => $this->faker->city(),
                     'postal_code' => $this->faker->postcode(),
+                    'region' => $this->faker->word(),
                     'country' => 'PH',
                 ],
             ],
