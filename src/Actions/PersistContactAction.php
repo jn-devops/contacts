@@ -242,6 +242,7 @@ class PersistContactAction
             'employment.*.employment_status' => ['nullable', 'string'],
             'employment.*.monthly_gross_income' => ['nullable', 'numeric'],
             'employment.*.current_position' => ['nullable', 'string'],
+            'employment.*.rank' => ['nullable', 'string'],
             'employment.*.employment_type' => ['nullable', 'string'],
             'employment.*.years_in_service' => ['nullable', 'string'],
             'employment.*.salary_range' => ['nullable', 'string'],

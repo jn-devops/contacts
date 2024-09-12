@@ -111,7 +111,8 @@ class ContactData extends Data
                     return new ContactEmploymentData(
                     employment_status: $employment['employment_status'] ?? '',
                     monthly_gross_income: $employment['monthly_gross_income'] ?? '0',
-                    current_position: $employment['current_position'] ?? '',
+                        current_position: $employment['current_position'] ?? '',
+                        rank: $employment['rank'] ?? '',
                     employment_type: $employment['employment_type'] ?? '',
                     character_reference: new EmploymentCharacterReeference(
                         name: $employment['character_reference']['name'] ?? '',
@@ -531,6 +532,7 @@ class ContactEmploymentData extends Data
         public string $employment_status,
         public string $monthly_gross_income,
         public string $current_position,
+        public ?string $rank,
         public string $employment_type,
         public ContactEmploymentEmployerData $employer,
         public ?ContactEmploymentIdData $id,
@@ -548,6 +550,7 @@ class ContactEmploymentData extends Data
             'employment_status' => $this->employment_status,
             'monthly_gross_income' => $this->monthly_gross_income,
             'current_position' => $this->current_position,
+            'rank' => $this->rank,
             'employment_type' => $this->employment_type,
             'employer' => $this->employer ? $this->employer->toArray() : null,
             'id' => $this->id ? $this->id->toArray() : null,
