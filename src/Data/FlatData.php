@@ -14,6 +14,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public string $buyer_last_name,
         public string $buyer_name,
         public string $buyer_civil_status,
+        public ?string $buyer_civil_status_to,
         public ?string $buyer_spouse_name,
         public string $buyer_nationality,
         public ?string $buyer_tin,
@@ -347,6 +348,7 @@ class FlatData extends \Spatie\LaravelData\Data
             buyer_name: strtoupper($data->profile->first_name.' '.$data->profile->middle_name.' '.$data->profile->last_name ?? ''),
             buyer_birthday: $data->profile->date_of_birth ?? '',
             buyer_civil_status: $data->profile->civil_status ?? '',
+            buyer_civil_status_to: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ? $data->profile->civil_status.' to ' : $data->profile->civil_status : '',
             buyer_spouse_name: strtoupper($data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name ?? ''),
             buyer_nationality: $data->profile->nationality ?? '',
 
