@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v1.5.7 - 2024-09-12
+
+Add rank to employement data
+
 ## v1.5.6 - 2024-09-12
 
 Add region to address data
