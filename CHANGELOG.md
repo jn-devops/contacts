@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v1.5.9 - 2024-09-13
+
+interest_in_words
+
 ## v1.5.8 - 2024-09-12
 
 buyer_civil_status_to flat data
