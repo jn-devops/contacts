@@ -626,7 +626,7 @@ class FlatData extends \Spatie\LaravelData\Data
             circular_no_312_379: $data->order->circular_no_312_379 ?? '',
             ltvr_slug: $data->order->ltvr_slug ?? '',
             interest: $data->order->interest ?? '',
-            interest_in_words: strtoupper($data->order->interest_in_words ?? ''),
+            interest_in_words: $data->order->interest ? strtoupper(\NumberFormatter::create('en', \NumberFormatter::SPELLOUT)->format((int)$data->order->interest)) . ' AND ' . str_pad((int)(($data->order->interest - (int)$data->order->interest) * 1000), 3, '0', STR_PAD_LEFT) . '/1000' : '',
             logo: $data->order->logo ?? '',
             loan_period_months: $data->order->loan_period_months ?? '',
             term_1: $data->order->term_1 ?? '',
