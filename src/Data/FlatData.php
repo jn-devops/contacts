@@ -435,12 +435,12 @@ class FlatData extends \Spatie\LaravelData\Data
             mrif_fee: number_format($data->order->mrif_fee ?? 0, 2),
             reservation_rate: $data->order->reservation_rate ?? '',
             lot_area: $data->order->lot_area ?? '',
-            lot_area_in_words: $data->order->lot_area == null ? '' : strtoupper($numberToWords->getNumberTransformer('en')->toWords($data->order->lot_area) ?? ''),
+            lot_area_in_words: strtoupper(self::convertNumberToWords($data->order->lot_area ?? '')),
             floor_area: $data->order->floor_area ?? '',
-            floor_area_in_words: $data->order->floor_area == null ? '' : strtoupper($numberToWords->getNumberTransformer('en')->toWords($data->order->floor_area) ?? ''),
+            floor_area_in_words: strtoupper(self::convertNumberToWords( $data->order->floor_area ?? '')),
 
             tcp: $data->order->tcp ?? '',
-            tcp_in_words: isset($data->order->payment_scheme->total_contact_price) ? strtoupper($numberToWords->getNumberTransformer('en')->toWords($data->order->payment_scheme->total_contact_price)) : '',
+            tcp_in_words: strtoupper(self::convertNumberToWords($data->order->payment_scheme->total_contact_price ?? '')),
             loan_term: $data->order->loan_term ?? '',
             loan_interest_rate: $data->order->loan_interest_rate ?? '',
             tct_no: $data->order->tct_no ?? '',
@@ -653,9 +653,9 @@ class FlatData extends \Spatie\LaravelData\Data
             exec_position: $data->order->exec_position ?? '',
             exec_tin_no: $data->order->exec_tin_no ?? '',
             board_resolution_date: $data->order->board_resolution_date ?? '',
-            repricing_period: $data->order->repricing_period ?? '',
-            loan_terms_in_word: $data->order->loan_terms_in_word ?? '',
-            repricing_period_in_words: strtoupper($data->order->repricing_period_in_words ?? ''),
+            repricing_period: $data->order->repricing_period ?? 0,
+            loan_terms_in_word: strtoupper(self::convertNumberToWords($data->order->loan_term ?? '')),
+            repricing_period_in_words: strtoupper(self::convertNumberToWords($data->order->repricing_period ?? '')),
             registry_of_deeds_address: $data->order->registry_of_deeds_address ?? '',
             scheme: $data->order->payment_scheme->scheme ?? '',
             company_tin: $data->order->company_tin ?? '',
@@ -667,5 +667,25 @@ class FlatData extends \Spatie\LaravelData\Data
             client_id_aif: $data->order->client_id_aif ?? '',
 
         );
+    }
+
+    public static function convertNumberToWords($number) {
+        if($number != ''){
+            $formatter = new \NumberFormatter('en', \NumberFormatter::SPELLOUT);
+            
+            // For decimal numbers, separate the whole part and the fractional part
+            if (strpos($number, '.') !== false) {
+                $parts = explode('.', $number);
+                $wholePart = $formatter->format($parts[0]);
+                $fractionalPart = $formatter->format($parts[1]);
+                
+                return $wholePart . ' POINT ' . $fractionalPart;
+            }
+        
+            // For whole numbers, convert directly
+            return $formatter->format($number);
+        }else{
+            return '';
+        }
     }
 }
