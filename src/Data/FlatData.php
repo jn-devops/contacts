@@ -512,7 +512,7 @@ class FlatData extends \Spatie\LaravelData\Data
             co_borrower_address: $data->addresses?->toCollection()->firstWhere('type', 'co_borrower')->full_address ?? '',
             co_borrower_civil_status: $data->co_borrowers[0]->civil_status ?? '',
             co_borrower_nationality: $data->co_borrowers[0]->nationality ?? '',
-            co_borrower_spouse: $data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name ?? '',
+            co_borrower_spouse: $data->co_borrowers[0]->spouse ?? '',
             co_borrower_tin: $data->employment?->toCollection()->firstWhere('type', 'co_borrower')->id->tin ?? '',
             aif_last_name: strtoupper($data->co_borrowers[0]->last_name ?? ''),
             aif_first_name: strtoupper($data->co_borrowers[0]->first_name ?? ''),
