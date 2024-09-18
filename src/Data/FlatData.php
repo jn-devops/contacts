@@ -70,6 +70,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $interest,
         public ?string $interest_in_words,
         public ?string $loan_term,
+        public ?string $loan_term_in_years,
         public ?string $loan_interest_rate,
         public ?string $tct_no,
         public ?string $sku,
@@ -320,6 +321,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $board_resolution_date,
         public ?string $repricing_period,
         public ?string $loan_terms_in_word,
+        public ?string $loan_terms_in_years_in_word,
         public ?string $repricing_period_in_words,
         public ?string $registry_of_deeds_address,
         public ?string $scheme,
@@ -442,6 +444,7 @@ class FlatData extends \Spatie\LaravelData\Data
             tcp: $data->order->tcp ?? '',
             tcp_in_words: strtoupper(self::convertNumberToWords($data->order->payment_scheme->total_contact_price ?? '')),
             loan_term: $data->order->loan_term ?? '',
+            loan_term_in_years : (string)((int)($data->order->loan_term ?? 0) / 12),
             loan_interest_rate: $data->order->loan_interest_rate ?? '',
             tct_no: $data->order->tct_no ?? '',
 
@@ -655,6 +658,7 @@ class FlatData extends \Spatie\LaravelData\Data
             board_resolution_date: $data->order->board_resolution_date ?? '',
             repricing_period: $data->order->repricing_period ?? 0,
             loan_terms_in_word: strtoupper(self::convertNumberToWords($data->order->loan_term ?? '')),
+            loan_terms_in_years_in_word: strtoupper(self::convertNumberToWords((int)($data->order->loan_term ?? 0) / 12)),
             repricing_period_in_words: strtoupper(self::convertNumberToWords($data->order->repricing_period ?? '')),
             registry_of_deeds_address: $data->order->registry_of_deeds_address ?? '',
             scheme: $data->order->payment_scheme->scheme ?? '',
@@ -672,16 +676,16 @@ class FlatData extends \Spatie\LaravelData\Data
     public static function convertNumberToWords($number) {
         if($number != ''){
             $formatter = new \NumberFormatter('en', \NumberFormatter::SPELLOUT);
-            
+
             // For decimal numbers, separate the whole part and the fractional part
             if (strpos($number, '.') !== false) {
                 $parts = explode('.', $number);
                 $wholePart = $formatter->format($parts[0]);
                 $fractionalPart = $formatter->format($parts[1]);
-                
+
                 return $wholePart . ' POINT ' . $fractionalPart;
             }
-        
+
             // For whole numbers, convert directly
             return $formatter->format($number);
         }else{
