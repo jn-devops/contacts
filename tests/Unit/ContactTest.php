@@ -271,7 +271,8 @@ test('contact implements BorrowerInterface', function (Contact $contact) {
 
 test('contact can login', function () {
     $contact = Contact::factory()->create();
-
+//    $flatData = \Homeful\Contacts\Data\FlatData::fromModel($contact);
+//    dd($flatData->both_of);
     expect(auth()->user())->toBeNull();
     $this->actingAs($contact);
     expect(auth()->user()->is($contact))->toBeTrue();

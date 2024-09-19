@@ -332,6 +332,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $total_selling_price,
         public ?string $client_id_co_borrower,
         public ?string $client_id_aif,
+        public ?string $both_of,
 
     ) {}
 
@@ -351,6 +352,7 @@ class FlatData extends \Spatie\LaravelData\Data
             buyer_birthday: $data->profile->date_of_birth ?? '',
             buyer_civil_status: $data->profile->civil_status ?? '',
             buyer_civil_status_to: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ? $data->profile->civil_status.' to ' : $data->profile->civil_status : '',
+            both_of: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ? 'both' : 'of' : 'of',
             buyer_spouse_name: strtoupper($data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name ?? ''),
             buyer_nationality: $data->profile->nationality ?? '',
 
