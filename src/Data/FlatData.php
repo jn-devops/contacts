@@ -333,6 +333,8 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $client_id_co_borrower,
         public ?string $client_id_aif,
         public ?string $both_of,
+        //TIMOTHY S. GOBIO TIN
+        public ?string $timothy_s_gobio_tin,
 
     ) {}
 
@@ -650,8 +652,8 @@ class FlatData extends \Spatie\LaravelData\Data
             monthly_amort2: $data->order->monthly_amort2 ?? '',
             monthly_amort3: $data->order->monthly_amort3 ?? '',
             cct: $data->order->cct ?? '',
-            witness1: $data->order->witness1 ?? '',
-            witness2: $data->order->witness2 ?? '',
+            witness1: $data->order->witness1 ?? 'WITNESS',
+            witness2: $data->order->witness2 ?? 'WITNESS',
             page: $data->order->page ?? '',
             buyer_extension_name: $data->order->buyer_extension_name ?? '',
             exec_signatories: strtoupper($data->order->exec_signatories ?? ''),
@@ -671,6 +673,7 @@ class FlatData extends \Spatie\LaravelData\Data
             total_selling_price: number_format($data->order->total_selling_price ?? 0, 2),
             client_id_co_borrower: $data->order->client_id_co_borrower ?? '',
             client_id_aif: $data->order->client_id_aif ?? '',
+            timothy_s_gobio_tin: '315-765-457-000'
 
         );
     }
