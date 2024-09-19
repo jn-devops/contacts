@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v1.5.16 - 2024-09-19
+
+both_of variable to flatdata
+
 ## v1.5.15 - 2024-09-18
 
 add loan_term_in_years and loan_term_in_years_in_words
