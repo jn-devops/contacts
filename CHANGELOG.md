@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v1.5.17 - 2024-09-19
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.16...v1.5.17
+
 ## v1.5.16 - 2024-09-19
 
 both_of variable to flatdata
