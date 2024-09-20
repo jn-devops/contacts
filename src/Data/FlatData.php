@@ -446,8 +446,8 @@ class FlatData extends \Spatie\LaravelData\Data
             floor_area: $data->order->floor_area ?? '',
             floor_area_in_words: strtoupper(self::convertNumberToWords( $data->order->floor_area ?? '')),
 
-            tcp: $data->order->tcp ?? '',
-            tcp_in_words: strtoupper(self::convertNumberToWords($data->order->payment_scheme->total_contact_price ?? '')),
+            tcp: $data->order->tcp ?? '0',
+            tcp_in_words: strtoupper(self::convertNumberToWords($data->order->payment_scheme->total_contact_price ?? '0')),
             loan_term: $data->order->loan_term ?? '',
             loan_term_in_years : (string)((int)($data->order->loan_term ?? 0) / 12),
             loan_interest_rate: $data->order->loan_interest_rate ?? '',
