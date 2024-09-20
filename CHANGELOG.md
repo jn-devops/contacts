@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v1.5.21 - 2024-09-20
+
+buyer_civil_status_to_lower_case
+
 ## v1.5.20 - 2024-09-20
 
 **Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.19...v1.5.20
