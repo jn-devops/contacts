@@ -456,7 +456,7 @@ class FlatData extends \Spatie\LaravelData\Data
             floor_area_in_words: strtoupper(self::convertNumberToWords( $data->order->floor_area ?? '')),
 
             tcp: $data->order->tcp ?? '0',
-            tcp_in_words: strtoupper(self::convertNumberToWords($data->order->payment_scheme->total_contact_price ?? '0')),
+            tcp_in_words: strtoupper(self::convertNumberToWords($data->order->payment_scheme->total_contract_price ?? '0')),
             loan_term: $data->order->loan_term ?? '',
             loan_term_in_years : (string)((int)($data->order->loan_term ?? 0) / 12),
             loan_interest_rate: $data->order->loan_interest_rate ?? '',
@@ -500,7 +500,7 @@ class FlatData extends \Spatie\LaravelData\Data
             discount_rate: $data->order->payment_scheme->discount_rate ?? '',
             conditional_discount: number_format($data->order->payment_scheme->conditional_discount ?? 0, 2),
             evat_percentage: number_format($data->order->payment_scheme->evat_percentage ?? 0, 2),
-            total_contract_price: number_format($data->order->payment_scheme->total_contact_price ?? 0, 2),
+            total_contract_price: number_format($data->order->payment_scheme->total_contract_price ?? 0, 2),
             evat_amount: number_format($data->order->payment_scheme->evat_amount ?? 0, 2),
             net_total_contract_price: number_format($data->order->payment_scheme->net_total_contract_price ?? 0, 2),
             payment_method_name: $data->order->payment_scheme->method ?? '',
