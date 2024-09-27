@@ -330,6 +330,16 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $total_selling_price,
         public ?string $client_id_co_borrower,
         public ?string $client_id_aif,
+        public ?string $loan_term_in_years,
+        public ?string $loan_term_in_years_in_words,
+        public ?string $retention_fee,
+        public ?string $service_fee,
+        public ?string $dslt_total,
+        public ?string $dst,
+        public ?string $total_deductions_from_loan_proceeds,
+        public ?string $net_loan_proceeds,
+        public ?string $vsr_no,
+        public ?string $technical_description,
 
     ) {}
 
@@ -665,6 +675,16 @@ class FlatData extends \Spatie\LaravelData\Data
             total_selling_price: number_format($data->order->total_selling_price ?? 0, 2),
             client_id_co_borrower: $data->order->client_id_co_borrower ?? '',
             client_id_aif: $data->order->client_id_aif ?? '',
+            loan_term_in_years: $data->order->loan_term_in_years ?? 0,
+            loan_term_in_years_in_words: isset($data->order->loan_term_in_years) ? strtoupper($numberToWords->getNumberTransformer('en')->toWords($data->order->loan_term_in_years)) : '',
+            retention_fee: number_format($data->order->retention_fee ?? 0, 2),
+            service_fee: number_format($data->order->service_fee ?? 0, 2),
+            dslt_total: number_format($data->order->dslt_total ?? 0, 2),
+            dst: number_format($data->order->dst ?? 0, 2),
+            total_deductions_from_loan_proceeds: number_format($data->order->total_deductions_from_loan_proceeds ?? 0, 2),
+            net_loan_proceeds: number_format($data->order->net_loan_proceeds ?? 0, 2),
+            vsr_no: $data->order->vsr_no ?? '',
+            technical_description: $data->order->technical_description ?? '',
 
         );
     }
