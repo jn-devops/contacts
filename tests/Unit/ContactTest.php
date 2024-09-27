@@ -211,6 +211,7 @@ test('contact can attach media', function () {
 
 test('contact has data', function (Contact $contact) {
     $data = ContactData::fromModel($contact);
+
     expect($data->reference_code)->toBe($contact->reference_code);
     expect($data->profile->first_name)->toBe($contact->first_name);
     expect($data->profile->middle_name)->toBe($contact->middle_name);
@@ -270,7 +271,10 @@ test('contact implements BorrowerInterface', function (Contact $contact) {
 
 test('contact can login', function () {
     $contact = Contact::factory()->create();
+//    $flatData = \Homeful\Contacts\Data\FlatData::fromModel($contact);
+//    dd($flatData->buyer_civil_status_lower_case,$flatData->spouse_civil_status_lower_case,$flatData->co_borrower_civil_status_lower_case,$flatData->aif_civil_status_lower_case ,$flatData->buyer_civil_status_to_lower_case);
     expect(auth()->user())->toBeNull();
     $this->actingAs($contact);
     expect(auth()->user()->is($contact))->toBeTrue();
+
 });

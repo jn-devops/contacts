@@ -85,7 +85,7 @@ class ContactData extends Data
             evat_percentage: isset($order['payment_scheme']['evat_percentage']) && $order['payment_scheme']['evat_percentage'] !== null ? $order['payment_scheme']['evat_percentage'] : null,
             evat_amount: isset($order['payment_scheme']['evat_amount']) && $order['payment_scheme']['evat_amount'] !== null ? $order['payment_scheme']['evat_amount'] : null,
             net_total_contract_price: isset($order['payment_scheme']['net_total_contract_price']) && $order['payment_scheme']['net_total_contract_price'] !== null ? $order['payment_scheme']['net_total_contract_price'] : null,
-            total_contact_price: isset($order['payment_scheme']['total_contract_price']) && $order['payment_scheme']['total_contract_price'] !== null ? $order['payment_scheme']['total_contract_price'] : null,
+            total_contract_price: isset($order['payment_scheme']['total_contract_price']) && $order['payment_scheme']['total_contract_price'] !== null ? $order['payment_scheme']['total_contract_price'] : null,
             payments: isset($order['payment_scheme']['payments']) && $order['payment_scheme']['payments'] !== null
                 ? new DataCollection(PaymentData::class, $order['payment_scheme']['payments']) : null,
             fees: isset($order['payment_scheme']['fees']) && $order['payment_scheme']['fees'] !== null
@@ -704,7 +704,7 @@ class PaymentSchemeData
         public ?string $evat_percentage,
         public ?string $evat_amount,
         public ?string $net_total_contract_price,
-        public ?string $total_contact_price,
+        public ?string $total_contract_price,
         /** @var PaymentData[] */
         public ?DataCollection $payments,
         /** @var FeesData[] */
@@ -727,7 +727,7 @@ class PaymentSchemeData
             'evat_percentage' => $this->evat_percentage,
             'evat_amount' => $this->evat_amount,
             'net_total_contract_price' => $this->net_total_contract_price,
-            'total_contact_price' => $this->total_contact_price,
+            'total_contract_price' => $this->total_contract_price,
             'payments' => $this->payments ? $this->payments->toArray() : null,
             'fees' => $this->fees ? $this->fees->toArray() : null,
             'payment_remarks' => $this->payment_remarks,

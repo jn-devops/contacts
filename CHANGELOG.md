@@ -2,6 +2,54 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v1.5.23 - 2024-09-26
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.22...v1.5.23
+
+## v1.5.22 - 2024-09-25
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.21...v1.5.22
+
+## v1.5.21 - 2024-09-20
+
+buyer_civil_status_to_lower_case
+
+## v1.5.20 - 2024-09-20
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.19...v1.5.20
+
+## v1.5.19 - 2024-09-19
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.18...v1.5.19
+
+## v1.5.18 - 2024-09-19
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.17...v1.5.18
+
+## v1.5.17 - 2024-09-19
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.16...v1.5.17
+
+## v1.5.16 - 2024-09-19
+
+both_of variable to flatdata
+
+## v1.5.15 - 2024-09-18
+
+add loan_term_in_years and loan_term_in_years_in_words
+
+## v1.5.12 - 2024-09-18
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.11...v1.5.12
+
+## v1.5.11 - 2024-09-17
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.10...v1.5.11
+
+## v1.5.10 - 2024-09-16
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.9...v1.5.10
+
 ## v1.5.9 - 2024-09-13
 
 interest_in_words

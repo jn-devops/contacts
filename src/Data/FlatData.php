@@ -14,7 +14,9 @@ class FlatData extends \Spatie\LaravelData\Data
         public string $buyer_last_name,
         public string $buyer_name,
         public string $buyer_civil_status,
+        public string $buyer_civil_status_lower_case,
         public ?string $buyer_civil_status_to,
+        public ?string $buyer_civil_status_to_lower_case,
         public ?string $buyer_spouse_name,
         public string $buyer_nationality,
         public ?string $buyer_tin,
@@ -38,6 +40,7 @@ class FlatData extends \Spatie\LaravelData\Data
 
         public ?string $spouse_name,
         public ?string $spouse_civil_status,
+        public ?string $spouse_civil_status_lower_case,
         public ?string $spouse_nationality,
         public ?string $spouse_gender,
         public ?string $spouse_principal_email,
@@ -70,6 +73,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $interest,
         public ?string $interest_in_words,
         public ?string $loan_term,
+        public ?string $loan_term_in_years,
         public ?string $loan_interest_rate,
         public ?string $tct_no,
         public ?string $sku,
@@ -250,8 +254,10 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $logo,
         public ?string $loan_period_months,
         public ?string $co_borrower_civil_status,
+        public ?string $co_borrower_civil_status_lower_case,
         public ?string $co_borrower_nationality,
         public ?string $co_borrower_spouse,
+        public ?string $co_borrower_spouse_tin,
         public ?string $co_borrower_tin,
         public ?string $aif_last_name,
         public ?string $aif_first_name,
@@ -270,6 +276,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $aif_age,
         public ?string $aif_gender,
         public ?string $aif_civil_status,
+        public ?string $aif_civil_status_lower_case,
         public ?string $aif_nationality,
         public ?string $aif_residence_landline,
         public ?string $aif_primary_contact_number,
@@ -309,6 +316,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $monthly_amort2,
         public ?string $monthly_amort3,
         public ?string $cct,
+        public ?string $witness,
         public ?string $witness1,
         public ?string $witness2,
         public ?string $page,
@@ -320,6 +328,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $board_resolution_date,
         public ?string $repricing_period,
         public ?string $loan_terms_in_word,
+        public ?string $loan_terms_in_years_in_word,
         public ?string $repricing_period_in_words,
         public ?string $registry_of_deeds_address,
         public ?string $scheme,
@@ -340,6 +349,9 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $net_loan_proceeds,
         public ?string $vsr_no,
         public ?string $technical_description,
+        public ?string $both_of,
+        //TIMOTHY S. GOBIO TIN
+        public ?string $timothy_s_gobio_tin,
 
     ) {}
 
@@ -358,7 +370,10 @@ class FlatData extends \Spatie\LaravelData\Data
             buyer_name: strtoupper($data->profile->first_name.' '.$data->profile->middle_name.' '.$data->profile->last_name ?? ''),
             buyer_birthday: $data->profile->date_of_birth ?? '',
             buyer_civil_status: $data->profile->civil_status ?? '',
+            buyer_civil_status_lower_case:strtolower($data->profile->civil_status ?? ''),
             buyer_civil_status_to: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ? $data->profile->civil_status.' to ' : $data->profile->civil_status : '',
+            buyer_civil_status_to_lower_case: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ?strtolower($data->profile->civil_status.' to ')  :strtolower($data->profile->civil_status ) : '',
+            both_of: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ? 'both' : 'of' : 'of',
             buyer_spouse_name: strtoupper($data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name ?? ''),
             buyer_nationality: $data->profile->nationality ?? '',
 
@@ -381,6 +396,7 @@ class FlatData extends \Spatie\LaravelData\Data
             buyer_spouse_last_name: $data->spouse->last_name ?? '',
             spouse_name: strtoupper($data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name ?? ''),
             spouse_civil_status: $data->spouse->civil_status ?? '',
+            spouse_civil_status_lower_case:strtolower($data->spouse->civil_status ?? ''),
             spouse_nationality: $data->spouse->nationality ?? '',
             spouse_gender: $data->spouse->sex ?? '',
             spouse_birthday: $data->spouse->date_of_birth ?? '',
@@ -445,13 +461,14 @@ class FlatData extends \Spatie\LaravelData\Data
             mrif_fee: number_format($data->order->mrif_fee ?? 0, 2),
             reservation_rate: $data->order->reservation_rate ?? '',
             lot_area: $data->order->lot_area ?? '',
-            lot_area_in_words: $data->order->lot_area == null ? '' : strtoupper($numberToWords->getNumberTransformer('en')->toWords($data->order->lot_area) ?? ''),
+            lot_area_in_words: strtoupper(self::convertNumberToWords($data->order->lot_area ?? '')),
             floor_area: $data->order->floor_area ?? '',
-            floor_area_in_words: $data->order->floor_area == null ? '' : strtoupper($numberToWords->getNumberTransformer('en')->toWords($data->order->floor_area) ?? ''),
+            floor_area_in_words: strtoupper(self::convertNumberToWords( $data->order->floor_area ?? '')),
 
-            tcp: $data->order->tcp ?? '',
-            tcp_in_words: isset($data->order->payment_scheme->total_contact_price) ? strtoupper($numberToWords->getNumberTransformer('en')->toWords($data->order->payment_scheme->total_contact_price)) : '',
+            tcp: $data->order->tcp ?? '0',
+            tcp_in_words: strtoupper(self::convertNumberToWords($data->order->payment_scheme->total_contract_price ?? '0')),
             loan_term: $data->order->loan_term ?? '',
+            loan_term_in_years : (string)((int)($data->order->loan_term ?? 0) / 12),
             loan_interest_rate: $data->order->loan_interest_rate ?? '',
             tct_no: $data->order->tct_no ?? '',
 
@@ -493,7 +510,7 @@ class FlatData extends \Spatie\LaravelData\Data
             discount_rate: $data->order->payment_scheme->discount_rate ?? '',
             conditional_discount: number_format($data->order->payment_scheme->conditional_discount ?? 0, 2),
             evat_percentage: number_format($data->order->payment_scheme->evat_percentage ?? 0, 2),
-            total_contract_price: number_format($data->order->payment_scheme->total_contact_price ?? 0, 2),
+            total_contract_price: number_format($data->order->payment_scheme->total_contract_price ?? 0, 2),
             evat_amount: number_format($data->order->payment_scheme->evat_amount ?? 0, 2),
             net_total_contract_price: number_format($data->order->payment_scheme->net_total_contract_price ?? 0, 2),
             payment_method_name: $data->order->payment_scheme->method ?? '',
@@ -521,8 +538,10 @@ class FlatData extends \Spatie\LaravelData\Data
             co_borrower_name: strtoupper(($data->co_borrowers[0]->first_name ?? '').($data->co_borrowers[0]->middle_name ?? '').($data->co_borrowers[0]->last_name ?? '')),
             co_borrower_address: $data->addresses?->toCollection()->firstWhere('type', 'co_borrower')->full_address ?? '',
             co_borrower_civil_status: $data->co_borrowers[0]->civil_status ?? '',
+            co_borrower_civil_status_lower_case:strtolower($data->co_borrowers[0]->civil_status ?? '') ,
             co_borrower_nationality: $data->co_borrowers[0]->nationality ?? '',
-            co_borrower_spouse: $data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name ?? '',
+            co_borrower_spouse: $data->co_borrowers[0]->spouse ?? '',
+            co_borrower_spouse_tin: $data->co_borrowers[0]->tin ?? '',
             co_borrower_tin: $data->employment?->toCollection()->firstWhere('type', 'co_borrower')->id->tin ?? '',
             aif_last_name: strtoupper($data->co_borrowers[0]->last_name ?? ''),
             aif_first_name: strtoupper($data->co_borrowers[0]->first_name ?? ''),
@@ -541,6 +560,7 @@ class FlatData extends \Spatie\LaravelData\Data
             aif_age: $data->co_borrowers[0]->age ?? '',
             aif_gender: $data->co_borrowers[0]->sex ?? '',
             aif_civil_status: $data->co_borrowers[0]->civil_status ?? '',
+            aif_civil_status_lower_case:strtolower($data->co_borrowers[0]->civil_status ?? '') ,
             aif_nationality: $data->co_borrowers[0]->nationality ?? '',
             aif_residence_landline: $data->co_borrowers[0]->landline ?? '',
             aif_primary_contact_number: $data->co_borrowers[0]->mobile ?? '',
@@ -655,17 +675,19 @@ class FlatData extends \Spatie\LaravelData\Data
             monthly_amort2: $data->order->monthly_amort2 ?? '',
             monthly_amort3: $data->order->monthly_amort3 ?? '',
             cct: $data->order->cct ?? '',
-            witness1: $data->order->witness1 ?? '',
-            witness2: $data->order->witness2 ?? '',
+            witness: 'WITNESS',
+            witness1:$data->order->witness1 ??  'WITNESS',
+            witness2:$data->order->witness2?? 'WITNESS',
             page: $data->order->page ?? '',
             buyer_extension_name: $data->order->buyer_extension_name ?? '',
             exec_signatories: strtoupper($data->order->exec_signatories ?? ''),
             exec_position: $data->order->exec_position ?? '',
             exec_tin_no: $data->order->exec_tin_no ?? '',
             board_resolution_date: $data->order->board_resolution_date ?? '',
-            repricing_period: $data->order->repricing_period ?? '',
-            loan_terms_in_word: $data->order->loan_terms_in_word ?? '',
-            repricing_period_in_words: strtoupper($data->order->repricing_period_in_words ?? ''),
+            repricing_period: $data->order->repricing_period ?? 0,
+            loan_terms_in_word: strtoupper(self::convertNumberToWords($data->order->loan_term ?? '')),
+            loan_terms_in_years_in_word: strtoupper(self::convertNumberToWords((int)($data->order->loan_term ?? 0) / 12)),
+            repricing_period_in_words: strtoupper(self::convertNumberToWords($data->order->repricing_period ?? '')),
             registry_of_deeds_address: $data->order->registry_of_deeds_address ?? '',
             scheme: $data->order->payment_scheme->scheme ?? '',
             company_tin: $data->order->company_tin ?? '',
@@ -685,7 +707,28 @@ class FlatData extends \Spatie\LaravelData\Data
             net_loan_proceeds: number_format($data->order->net_loan_proceeds ?? 0, 2),
             vsr_no: $data->order->vsr_no ?? '',
             technical_description: $data->order->technical_description ?? '',
+            timothy_s_gobio_tin: '315-765-457-000'
 
         );
+    }
+
+    public static function convertNumberToWords($number) {
+        if($number != ''){
+            $formatter = new \NumberFormatter('en', \NumberFormatter::SPELLOUT);
+
+            // For decimal numbers, separate the whole part and the fractional part
+            if (strpos($number, '.') !== false) {
+                $parts = explode('.', $number);
+                $wholePart = $formatter->format($parts[0]);
+                $fractionalPart = $formatter->format($parts[1]);
+
+                return $wholePart . ' POINT ' . $fractionalPart;
+            }
+
+            // For whole numbers, convert directly
+            return $formatter->format($number);
+        }else{
+            return '';
+        }
     }
 }
