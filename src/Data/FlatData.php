@@ -697,11 +697,11 @@ class FlatData extends \Spatie\LaravelData\Data
             client_id_aif: $data->order->client_id_aif ?? '',
             retention_fee: number_format($data->order->payment_scheme->fees?->toCollection()->firstWhere('name', 'retention_fee')->amount ?? 0, 2),
             service_fee: number_format($data->order->payment_scheme->fees?->toCollection()->firstWhere('name', 'service_fee')->amount ?? 0, 2),
-            dslt_total: number_format($data->order->dslt_total ?? 0, 2),
-            dst: number_format($data->order->dst ?? 0, 2),
+            dslt_total: number_format($data->order->disclosure_statement_on_loan_transaction_total ?? 0, 2),
+            dst: number_format($data->order->documentary_stamp ?? 0, 2),
             total_deductions_from_loan_proceeds: number_format($data->order->total_deductions_from_loan_proceeds ?? 0, 2),
             net_loan_proceeds: number_format($data->order->net_loan_proceeds ?? 0, 2),
-            vsr_no: $data->order->vsr_no ?? '',
+            vsr_no: $data->order->verified_survey_return_no ?? '',
             technical_description: $data->order->technical_description ?? '',
             timothy_s_gobio_tin: '315-765-457-000'
 
