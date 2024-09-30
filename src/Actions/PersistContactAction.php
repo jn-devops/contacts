@@ -454,7 +454,6 @@ class PersistContactAction
             'order.loan_period_months' => ['nullable'],
             'order.exec_signatories' => ['nullable'],
             'order.exec_tin_no' => ['nullable'],
-            'order.loan_terms_in_word' => ['nullable'],
             'order.loan_value_after_downpayment' => ['nullable'],
 
             'order.date_created' => ['nullable'],
@@ -481,10 +480,6 @@ class PersistContactAction
             'order.company_tin' => ['nullable'],
             'order.yes_for_faq_solaris_project' => ['nullable'],
             'order.n_for_faq_solaris_project' => ['nullable'],
-            'order.loan_term_in_years' => ['nullable'],
-            'order.loan_term_in_years_in_words' => ['nullable'],
-            'order.retention_fee' => ['nullable'],
-            'order.service_fee' => ['nullable'],
             'order.dslt_total' => ['nullable'],
             'order.dst' => ['nullable'],
             'order.total_deduction_from_loan_proceeds' => ['nullable'],

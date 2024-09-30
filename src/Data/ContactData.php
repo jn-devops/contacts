@@ -530,8 +530,6 @@ class ContactOrderData extends Data
             'client_id_buyer' => $this->client_id_buyer,
             'buyer_age' => $this->buyer_age,
             'client_id_spouse' => $this->client_id_spouse,
-            'loan_term_in_years' => $this->loan_term_in_years,
-            'loan_term_in_years_in_words' => $this->loan_term_in_years_in_words,
             'retention_fee' => $this->retention_fee,
             'service_fee' => $this->service_fee,
             'dslt_total' => $this->dslt_total,
@@ -752,7 +750,7 @@ class PaymentData extends Data
 class FeesData extends Data
 {
     public function __construct(
-        public ?string $name, //processing fee, home_utility_connection_fee, mrif, rental,
+        public ?string $name, //processing fee, home_utility_connection_fee, mrif, rental, retention_fee, service_fee
         public ?string $amount,
     ) {}
 }
