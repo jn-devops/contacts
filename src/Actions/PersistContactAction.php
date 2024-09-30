@@ -480,11 +480,11 @@ class PersistContactAction
             'order.company_tin' => ['nullable'],
             'order.yes_for_faq_solaris_project' => ['nullable'],
             'order.n_for_faq_solaris_project' => ['nullable'],
-            'order.dslt_total' => ['nullable'],
-            'order.dst' => ['nullable'],
+            'order.disclosure_statement_on_loan_transaction_total' => ['nullable'],
+            'order.documentary_stamp' => ['nullable'],
             'order.total_deduction_from_loan_proceeds' => ['nullable'],
             'order.net_loan_proceeds' => ['nullable'],
-            'order.vsr_no' => ['nullable'],
+            'order.verified_survey_return_no' => ['nullable'],
             'order.technical_description' => ['nullable'],
 
             'order.project_type' => ['nullable', 'string'], // Missing in Mapping
