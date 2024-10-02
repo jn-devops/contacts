@@ -482,7 +482,7 @@ class PersistContactAction
             'order.n_for_faq_solaris_project' => ['nullable'],
             'order.disclosure_statement_on_loan_transaction_total' => ['nullable'],
             'order.documentary_stamp' => ['nullable'],
-            'order.total_deduction_from_loan_proceeds' => ['nullable'],
+            'order.total_deductions_from_loan_proceeds' => ['nullable'],
             'order.net_loan_proceeds' => ['nullable'],
             'order.verified_survey_return_no' => ['nullable'],
             'order.technical_description' => ['nullable'],
