@@ -533,7 +533,7 @@ class ContactOrderData extends Data
             'retention_fee' => $this->retention_fee,
             'service_fee' => $this->service_fee,
             'disclosure_statement_on_loan_transaction_total' => $this->disclosure_statement_on_loan_transaction_total??0,
-            'documentary_stamp' => $this->documentary_stamp,
+            'documentary_stamp' => $this->documentary_stamp??0,
             'total_deductions_from_loan_proceeds' => $this->total_deductions_from_loan_proceeds??0,
             'net_loan_proceeds' => $this->net_loan_proceeds??0,
             'verified_survey_return_no' => $this->verified_survey_return_no,
