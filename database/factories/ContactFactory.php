@@ -153,6 +153,7 @@ class ContactFactory extends Factory
                 'seller_commission_code' => $this->faker->word(),
                 'property_code' => $this->faker->word(),
                 'loan_term'=>(string)$this->faker->numberBetween(180, 360),
+                'lot_area'=>$this->faker->numberBetween(23, 150),
                 'payment_scheme' => [
                     'payments' => [],
                     'fess' => [],

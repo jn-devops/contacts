@@ -459,7 +459,7 @@ class FlatData extends \Spatie\LaravelData\Data
             mrif_fee: number_format($data->order->mrif_fee ?? 0, 2),
             reservation_rate: $data->order->reservation_rate ?? '',
             lot_area: $data->order->lot_area ?? '',
-            lot_area_in_words: strtoupper(self::convertNumberToWords($data->order->lot_area ?? '')),
+            lot_area_in_words: str_replace('-', ' ', strtoupper(self::convertNumberToWords($data->order->lot_area ?? '0').' square meters')),
             floor_area: $data->order->floor_area ?? '',
             floor_area_in_words: strtoupper(self::convertNumberToWords( $data->order->floor_area ?? '')),
 
