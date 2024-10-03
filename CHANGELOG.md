@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v1.5.29 - 2024-10-03
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.28...v1.5.29
+
 ## v1.5.28 - 2024-10-02
 
 lot_area_in_words replace - with space and add lot_area in factory
