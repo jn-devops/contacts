@@ -532,6 +532,8 @@ class ContactOrderData extends Data
             'client_id_spouse' => $this->client_id_spouse,
             'retention_fee' => $this->retention_fee,
             'service_fee' => $this->service_fee,
+            'exec_tin' => $this->exec_tin,
+            'exec_tin_no' => $this->exec_tin_no,
             'disclosure_statement_on_loan_transaction_total' => is_numeric($this->disclosure_statement_on_loan_transaction_total) ? $this->disclosure_statement_on_loan_transaction_total : 0,
             'documentary_stamp' => is_numeric($this->documentary_stamp) ? $this->documentary_stamp : 0,
             'total_deductions_from_loan_proceeds' => is_numeric($this->total_deductions_from_loan_proceeds) ? $this->total_deductions_from_loan_proceeds : 0,
