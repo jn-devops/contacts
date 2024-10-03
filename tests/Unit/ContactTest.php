@@ -272,7 +272,7 @@ test('contact implements BorrowerInterface', function (Contact $contact) {
 test('contact can login', function () {
     $contact = Contact::factory()->create();
 //    $flatData = \Homeful\Contacts\Data\FlatData::fromModel($contact);
-//    dd($flatData->buyer_civil_status_lower_case,$flatData->spouse_civil_status_lower_case,$flatData->co_borrower_civil_status_lower_case,$flatData->aif_civil_status_lower_case ,$flatData->buyer_civil_status_to_lower_case);
+//    dd($flatData->exec_signatories, $flatData->exec_position,$flatData->exec_tin_no);
     expect(auth()->user())->toBeNull();
     $this->actingAs($contact);
     expect(auth()->user()->is($contact))->toBeTrue();

@@ -2,6 +2,38 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v1.5.29 - 2024-10-03
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.28...v1.5.29
+
+## v1.5.28 - 2024-10-02
+
+lot_area_in_words replace - with space and add lot_area in factory
+
+## v1.5.27 - 2024-10-02
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.26...v1.5.27
+
+## v1.5.26 - 2024-10-02
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.25...v1.5.26
+
+## v1.5.25 - 2024-10-02
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.24...v1.5.25
+
+## v1.5.24 - 2024-10-02
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.23...v1.5.24
+
+## v1.5.23 - 2024-09-26
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.22...v1.5.23
+
+## v1.5.22 - 2024-09-25
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.21...v1.5.22
+
 ## v1.5.21 - 2024-09-20
 
 buyer_civil_status_to_lower_case

@@ -85,7 +85,7 @@ class ContactData extends Data
             evat_percentage: isset($order['payment_scheme']['evat_percentage']) && $order['payment_scheme']['evat_percentage'] !== null ? $order['payment_scheme']['evat_percentage'] : null,
             evat_amount: isset($order['payment_scheme']['evat_amount']) && $order['payment_scheme']['evat_amount'] !== null ? $order['payment_scheme']['evat_amount'] : null,
             net_total_contract_price: isset($order['payment_scheme']['net_total_contract_price']) && $order['payment_scheme']['net_total_contract_price'] !== null ? $order['payment_scheme']['net_total_contract_price'] : null,
-            total_contact_price: isset($order['payment_scheme']['total_contract_price']) && $order['payment_scheme']['total_contract_price'] !== null ? $order['payment_scheme']['total_contract_price'] : null,
+            total_contract_price: isset($order['payment_scheme']['total_contract_price']) && $order['payment_scheme']['total_contract_price'] !== null ? $order['payment_scheme']['total_contract_price'] : null,
             payments: isset($order['payment_scheme']['payments']) && $order['payment_scheme']['payments'] !== null
                 ? new DataCollection(PaymentData::class, $order['payment_scheme']['payments']) : null,
             fees: isset($order['payment_scheme']['fees']) && $order['payment_scheme']['fees'] !== null
@@ -465,6 +465,16 @@ class ContactOrderData extends Data
         public ?string $loan_value_after_downpayment,
         public ?string $client_id_aif,
         public ?string $client_id_co_borrower,
+        public ?string $loan_term_in_years,
+        public ?string $loan_term_in_years_in_words,
+        public ?string $retention_fee,
+        public ?string $service_fee,
+        public ?string $disclosure_statement_on_loan_transaction_total,
+        public ?string $documentary_stamp,
+        public ?string $total_deductions_from_loan_proceeds,
+        public ?string $net_loan_proceeds,
+        public ?string $verified_survey_return_no,
+        public ?string $technical_description,
 
         public ?PaymentSchemeData $payment_scheme,
         public ?SellerData $seller,
@@ -627,6 +637,16 @@ class ContactOrderData extends Data
             'loan_value_after_downpayment' => $this->loan_value_after_downpayment,
             'client_id_aif' => $this->client_id_aif,
             'client_id_co_borrower' => $this->client_id_co_borrower,
+            'retention_fee' => $this->retention_fee,
+            'service_fee' => $this->service_fee,
+            'exec_tin' => $this->exec_tin,
+            'exec_tin_no' => $this->exec_tin_no,
+            'disclosure_statement_on_loan_transaction_total' => is_numeric($this->disclosure_statement_on_loan_transaction_total) ? $this->disclosure_statement_on_loan_transaction_total : 0,
+            'documentary_stamp' => is_numeric($this->documentary_stamp) ? $this->documentary_stamp : 0,
+            'total_deductions_from_loan_proceeds' => is_numeric($this->total_deductions_from_loan_proceeds) ? $this->total_deductions_from_loan_proceeds : 0,
+            'net_loan_proceeds' => is_numeric($this->net_loan_proceeds) ? $this->net_loan_proceeds : 0,
+            'verified_survey_return_no' => $this->verified_survey_return_no,
+            'technical_description' => $this->technical_description,
             'payment_scheme' => $this->payment_scheme ? $this->payment_scheme->toArray() : null,
             'seller' => $this->seller ? $this->seller->toArray() : null,
             'aif' => $this->aif ? $this->aif->toArray() : null,
@@ -833,7 +853,7 @@ class AifData extends Data
         public string $fax,
         public string $company_email,
     ) {}
-    
+
     public function toArray(): array
     {
         return [
@@ -894,7 +914,7 @@ class PaymentSchemeData
         public ?string $evat_percentage,
         public ?string $evat_amount,
         public ?string $net_total_contract_price,
-        public ?string $total_contact_price,
+        public ?string $total_contract_price,
         /** @var PaymentData[] */
         public ?DataCollection $payments,
         /** @var FeesData[] */
@@ -917,7 +937,7 @@ class PaymentSchemeData
             'evat_percentage' => $this->evat_percentage,
             'evat_amount' => $this->evat_amount,
             'net_total_contract_price' => $this->net_total_contract_price,
-            'total_contact_price' => $this->total_contact_price,
+            'total_contract_price' => $this->total_contract_price,
             'payments' => $this->payments ? $this->payments->toArray() : null,
             'fees' => $this->fees ? $this->fees->toArray() : null,
             'payment_remarks' => $this->payment_remarks,
@@ -942,7 +962,7 @@ class PaymentData extends Data
 class FeesData extends Data
 {
     public function __construct(
-        public ?string $name, //processing fee, home_utility_connection_fee, mrif, rental,
+        public ?string $name, //processing fee, home_utility_connection_fee, mrif, rental, retention_fee, service_fee
         public ?string $amount,
     ) {}
 }
@@ -973,7 +993,7 @@ class CoBorrowerData extends Data
         public ?string $spouse,
         public ?string $spouse_tin,
         ) {}
-        
+
         public function toArray(): array
         {
             return [

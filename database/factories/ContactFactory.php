@@ -153,11 +153,15 @@ class ContactFactory extends Factory
                 'seller_commission_code' => $this->faker->word(),
                 'property_code' => $this->faker->word(),
                 'loan_term'=>(string)$this->faker->numberBetween(180, 360),
+                'lot_area'=>$this->faker->numberBetween(23, 150),
+                'exec_tin_no' => $this->faker->numerify('###-###-###-###'),
                 'payment_scheme' => [
                     'payments' => [],
                     'fess' => [],
                 ],
-                'seller' => [],
+                'seller' => [
+                    'chief_seller_officer'=>$this->faker->firstName().' '.$this->faker->lastName(),
+                ],
             ],
             'idImage' => null,
             'selfieImage' => null,
