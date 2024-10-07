@@ -7,7 +7,7 @@ use Spatie\LaravelData\Data;
 class AddressData extends Data
 {
     public function __construct(
-        public string $type,
+        public string $type, //permanent, present, spouse, cobo_permanent, cobo_present, cobo_spouse,aif_present,aif_permanent
         public string $ownership, //owned or rented
         public ?string $full_address,
         public ?string $address1, //TODO: required dapat
