@@ -114,7 +114,7 @@ class ContactData extends Data
                         current_position: $employment['current_position'] ?? '',
                         rank: $employment['rank'] ?? '',
                     employment_type: $employment['employment_type'] ?? '',
-                    character_reference: new EmploymentCharacterReeference(
+                    character_reference: new EmploymentCharacterReference(
                         name: $employment['character_reference']['name'] ?? '',
                         mobile: $employment['character_reference']['mobile'] ?? ''
                     ),
@@ -146,7 +146,7 @@ class ContactData extends Data
                 );
             }, $model->employment))
             : new DataCollection(ContactEmploymentData::class, []);
-
+        // dd($order);
         return new self(
             reference_code: $model->reference_code,
             profile: new PersonData(
@@ -193,27 +193,50 @@ class ContactData extends Data
             //            employment: new DataCollection(ContactEmploymentData::class, $model->employment),
             co_borrowers: new DataCollection(CoBorrowerData::class, collect($model->co_borrowers)->map(function($coBorrower) {
                 return [
-                    'first_name' => $coBorrower['first_name'] ?? '',
-                    'middle_name' => $coBorrower['middle_name'] ?? '',
-                    'last_name' => $coBorrower['last_name'] ?? '',
-                    'name_suffix' => $coBorrower['name_suffix'] ?? '',
-                    'civil_status' => $coBorrower['civil_status'] ?? '',
-                    'sex' => $coBorrower['sex'] ?? '',
-                    'address' => $coBorrower['address'] ?? '',
-                    'nationality' => $coBorrower['nationality'] ?? '',
-                    'date_of_birth' => $coBorrower['date_of_birth'] ?? '',
-                    'email' => $coBorrower['email'] ?? '',
-                    'mobile' => $coBorrower['mobile'] ?? '',
-                    'other_mobile' => $coBorrower['other_mobile'] ?? '',
-                    'help_number' => $coBorrower['help_number'] ?? '',
-                    'landline' => $coBorrower['landline'] ?? '',
-                    'mothers_maiden_name' => $coBorrower['mothers_maiden_name'] ?? '',
-                    'age' => $coBorrower['age'] ?? '',
-                    'relationship_to_buyer' => $coBorrower['relationship_to_buyer'] ?? '',
-                    'passport' => $coBorrower['passport'] ?? '',
-                    'date_issued' => $coBorrower['date_issued'] ?? '',
-                    'place_issued' => $coBorrower['place_issued'] ?? '',
-                    'spouse' => $coBorrower['spouse'] ?? '',
+                    'profile' => PersonData::from([
+                        'first_name' => $coBorrower['profile']['first_name'] ?? '',
+                        'middle_name' => $coBorrower['profile']['middle_name'] ?? '',
+                        'last_name' => $coBorrower['profile']['last_name'] ?? '',
+                        'name_suffix' => $coBorrower['profile']['name_suffix'] ?? '',
+                        'civil_status' => $coBorrower['profile']['civil_status'] ?? '',
+                        'sex' => $coBorrower['profile']['sex'] ?? '',
+                        'nationality' => $coBorrower['profile']['nationality'] ?? '',
+                        'date_of_birth' => $coBorrower['profile']['date_of_birth'] ?? '',
+                        'email' => $coBorrower['profile']['email'] ?? '',
+                        'mobile' => $coBorrower['profile']['mobile'] ?? '',
+                        'other_mobile' => $coBorrower['profile']['other_mobile'] ?? '',
+                        'help_number' => $coBorrower['profile']['help_number'] ?? '',
+                        'landline' => $coBorrower['profile']['landline'] ?? '',
+                        'mothers_maiden_name' => $coBorrower['profile']['mothers_maiden_name'] ?? '',
+                        'age' => Carbon::parse($coBorrower['profile']['date_of_birth'])->age,
+                        'relationship_to_buyer' => $coBorrower['profile']['relationship_to_buyer'] ?? '',
+                        'passport' => $coBorrower['profile']['passport'] ?? '',
+                        'date_issued' => $coBorrower['profile']['date_issued'] ?? '',
+                        'place_issued' => $coBorrower['profile']['place_issued'] ?? '',
+                    ]),
+                    'spouse' => PersonData::from([
+                        'first_name' => $coBorrower['spouse']['first_name'] ?? '',
+                        'middle_name' => $coBorrower['spouse']['middle_name'] ?? '',
+                        'last_name' => $coBorrower['spouse']['last_name'] ?? '',
+                        'name_suffix' => $coBorrower['spouse']['name_suffix'] ?? '',
+                        'civil_status' => $coBorrower['spouse']['civil_status'] ?? '',
+                        'sex' => $coBorrower['spouse']['sex'] ?? '',
+                        'nationality' => $coBorrower['spouse']['nationality'] ?? '',
+                        'date_of_birth' => $coBorrower['spouse']['date_of_birth'] ?? '',
+                        'email' => $coBorrower['spouse']['email'] ?? '',
+                        'mobile' => $coBorrower['spouse']['mobile'] ?? '',
+                        'other_mobile' => $coBorrower['spouse']['other_mobile'] ?? '',
+                        'help_number' => $coBorrower['spouse']['help_number'] ?? '',
+                        'landline' => $coBorrower['spouse']['landline'] ?? '',
+                        'mothers_maiden_name' => $coBorrower['spouse']['mothers_maiden_name'] ?? '',
+                        'age' => Carbon::parse($coBorrower['spouse']['date_of_birth'])->age,
+                        'relationship_to_buyer' => $coBorrower['spouse']['relationship_to_buyer'] ?? '',
+                        'passport' => $coBorrower['spouse']['passport'] ?? '',
+                        'date_issued' => $coBorrower['spouse']['date_issued'] ?? '',
+                        'place_issued' => $coBorrower['spouse']['place_issued'] ?? '',
+                    ]),
+                    'id' => $coBorrower['id'] ?? '',
+                    'tin' => $coBorrower['tin'] ?? '',
                     'spouse_tin' => $coBorrower['spouse_tin'] ?? '',
                 ];
             })),
@@ -669,7 +692,7 @@ class ContactEmploymentData extends Data
         public ?string $industry,
         public ?string $department_name,
         public ?string $type, //spouse, co-borrower, buyer
-        public ?EmploymentCharacterReeference $character_reference,
+        public ?EmploymentCharacterReference $character_reference,
     ) {}
 
     public function toArray(): array
@@ -692,7 +715,7 @@ class ContactEmploymentData extends Data
     }
 }
 
-class EmploymentCharacterReeference extends Data
+class EmploymentCharacterReference extends Data
 {
     public function __construct(
         public ?string $name,
@@ -809,97 +832,19 @@ class SellerData extends Data
 class AifData extends Data
 {
     public function __construct(
-        public string $client_id,
-        public string $name,
-        public string $address,
-        public string $last_name,
-        public string $first_name,
-        public string $middle_name,
-        public string $extension_name,
-        public string $lot_unit,
-        public string $street,
-        public string $subdivision,
-        public string $barangay,
-        public string $city,
-        public string $province,
-        public string $zip_code,
-        public string $length_of_stay,
-        public string $ownership_type,
-        public ?string $birthday,
-        public string $age,
-        public string $gender,
-        public string $civil_status,
-        public string $nationality,
-        public string $residence_landline,
-        public string $primary_contact_number,
-        public string $email,
-        public string $relationship_to_buyer,
-        public string $account_name,
-        public string $username_or_email,
-        public string $tin,
-        public string $sss,
-        public string $pagibig,
-        public string $passport,
-        public string $date_issued,
-        public string $place_issued,
-        public string $employer_name,
-        public string $employer_address,
-        public string $employer_type,
-        public string $employment_status,
-        public string $position,
-        public string $industry,
-        public string $salary_gross_income,
-        public string $company_phone_number,
-        public string $fax,
-        public string $company_email,
+        public ?string $client_id,
+        public ?string $account_name,
+        public ?string $username_or_email,
+        public ?PersonData $profile,
     ) {}
 
     public function toArray(): array
     {
         return [
             'client_id' => $this->client_id ?? '',
-            'name' => $this->name ?? '',
-            'address' => $this->address ?? '',
-            'last_name' => $this->last_name ?? '',
-            'first_name' => $this->first_name ?? '',
-            'middle_name' => $this->middle_name ?? '',
-            'extension_name' => $this->extension_name ?? '',
-            'lot_unit' => $this->lot_unit ?? '',
-            'street' => $this->street ?? '',
-            'subdivision' => $this->subdivision ?? '',
-            'barangay' => $this->barangay ?? '',
-            'city' => $this->city ?? '',
-            'province' => $this->province ?? '',
-            'zip_code' => $this->zip_code ?? '',
-            'length_of_stay' => $this->length_of_stay ?? '',
-            'ownership_type' => $this->ownership_type ?? '',
-            'birthday' => $this->birthday ?? '',
-            'age' => $this->age ?? '',
-            'gender' => $this->gender ?? '',
-            'civil_status' => $this->civil_status ?? '',
-            'nationality' => $this->nationality ?? '',
-            'residence_landline' => $this->residence_landline ?? '',
-            'primary_contact_number' => $this->primary_contact_number ?? '',
-            'email' => $this->email ?? '',
-            'relationship_to_buyer' => $this->relationship_to_buyer ?? '',
             'account_name' => $this->account_name ?? '',
             'username_or_email' => $this->username_or_email ?? '',
-            'tin' => $this->tin ?? '',
-            'sss' => $this->sss ?? '',
-            'pagibig' => $this->pagibig ?? '',
-            'passport' => $this->passport ?? '',
-            'date_issued' => $this->date_issued ?? '',
-            'place_issued' => $this->place_issued ?? '',
-            'employer_name' => $this->employer_name ?? '',
-            'employer_address' => $this->employer_address ?? '',
-            'employer_type' => $this->employer_type ?? '',
-            'employment_status' => $this->employment_status ?? '',
-            'position' => $this->position ?? '',
-            'industry' => $this->industry ?? '',
-            'salary_gross_income' => $this->salary_gross_income ?? '',
-            'company_phone_number' => $this->company_phone_number ?? '',
-            'fax' => $this->fax ?? '',
-            'company_email' => $this->company_email ?? '',
+            'profile' => $this->profile ? $this->profile->toArray() : null,
         ];
     }
 }
@@ -970,55 +915,22 @@ class FeesData extends Data
 class CoBorrowerData extends Data
 {
     public function __construct(
-        public string $first_name,
-        public string $middle_name,
-        public string $last_name,
-        public ?string $name_suffix,
-        public string $civil_status,
-        public string $sex,
-        public string $address,
-        public string $nationality,
-        public string $date_of_birth,
-        public string $email,
-        public string $mobile,
-        public ?string $other_mobile,
-        public ?string $help_number,
-        public ?string $landline,
-        public ?string $mothers_maiden_name,
-        public ?string $age,
-        public ?string $relationship_to_buyer,
-        public ?string $passport,
-        public ?string $date_issued,
-        public ?string $place_issued,
-        public ?string $spouse,
+        /** @var PersonData */
+        public ?PersonData $profile,
+        public ?PersonData $spouse,
+        public ?string $id,
+        public ?string $tin,
         public ?string $spouse_tin,
         ) {}
 
         public function toArray(): array
         {
             return [
-                'first_name' => $this->first_name,
-                'middle_name' => $this->middle_name,
-                'last_name' => $this->last_name,
-                'name_suffix' => $this->name_suffix,
-                'civil_status' => $this->civil_status,
-                'sex' => $this->sex,
-                'address' => $this->address,
-                'nationality' => $this->nationality,
-                'date_of_birth' => $this->date_of_birth,
-                'email' => $this->email,
-                'mobile' => $this->mobile,
-                'other_mobile' => $this->other_mobile,
-                'help_number' => $this->help_number,
-                'landline' => $this->landline,
-                'mothers_maiden_name' => $this->mothers_maiden_name,
-                'age' => $this->age,
-                'relationship_to_buyer' => $this->relationship_to_buyer,
-                'passport' => $this->passport,
-                'date_issued' => $this->date_issued,
-                'place_issued' => $this->place_issued,
-                'spouse' => $this->spouse,
-                'spouse_tin' => $this->spouse_tin,
+                'profile' => $this->profile ? $this->profile->toArray() : null,
+                'spouse' => $this->spouse ? $this->spouse->toArray() : null,
+                'id' => $this->id ?? '',
+                'tin' => $this->tin ?? '',
+                'spouse_tin' => $this->spouse_tin ?? '',
         ];
     }
 }
