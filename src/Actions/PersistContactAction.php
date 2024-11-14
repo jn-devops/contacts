@@ -272,6 +272,7 @@ class PersistContactAction
             'employment.*.employer.address.sublocality' => ['nullable', 'string'],
             'employment.*.employer.address.locality' => ['nullable', 'string'],
             'employment.*.employer.address.administrative_area' => ['nullable', 'string'],
+            'employment.*.employer.address.region' => ['nullable', 'string'],
             'employment.*.employer.address.postal_code' => ['nullable', 'string'],
             'employment.*.employer.address.sorting_code' => ['nullable', 'string'],
             'employment.*.employer.address.country' => ['nullable', 'string'],
