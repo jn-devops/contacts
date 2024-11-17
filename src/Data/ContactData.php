@@ -545,6 +545,24 @@ class ContactOrderData extends Data
             'technical_description' => $this->technical_description,
             'payment_scheme' => $this->payment_scheme ? $this->payment_scheme->toArray() : null,
             'seller' => $this->seller ? $this->seller->toArray() : null,
+
+            //for lazarus
+            'equity_1_amount' =>$this->equity_1_amount,
+            'equity_1_percentage_rate' =>$this->equity_1_percentage_rate,
+            'equity_1_interest_rate' =>$this->equity_1_interest_rate,
+            'equity_1_terms' =>$this->equity_1_terms,
+            'equity_1_monthly_payment' =>$this->equity_1_monthly_payment,
+            'equity_1_effective_date'=>$this->equity_1_effective_date,
+
+            'bp_1_amount' =>$this->equity_1_amount,
+            'bp_1_percentage_rate' =>$this->bp_1_percentage_rate,
+            'bp_1_interest_rate' =>$this->bp_1_interest_rate,
+            'bp_1_terms' =>$this->bp_1_terms,
+            'bp_1_monthly_payment' =>$this->bp_1_monthly_payment,
+            'bp_1_effective_date'=>$this->bp_1_monthly_payment,
+
+            'repricing_period'=>$this->repricing_period,
+//
         ];
     }
 }
