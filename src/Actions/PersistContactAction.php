@@ -305,10 +305,13 @@ class PersistContactAction
             'co_borrowers.*.other_mobile' => ['nullable', 'string'],
             'co_borrowers.*.relationship_to_buyer' => ['nullable', 'string'],
             'co_borrowers.*.help_number' => ['nullable', 'string'],
+            'co_borrowers.*.landline' => ['nullable', 'string'],
             'co_borrowers.*.mothers_maiden_name' => ['nullable', 'string'],
             'co_borrowers.*.passport' => ['nullable', 'string'],
             'co_borrowers.*.date_issued' => ['nullable', 'string'],
             'co_borrowers.*.place_issued' => ['nullable', 'string'],
+            'co_borrowers.*.spouse_name' => ['nullable', 'string'],
+            'co_borrowers.*.spouse_tin' => ['nullable', 'string'],
 
             'order' => ['nullable', 'array'],
             'order.sku' => ['nullable', 'string'],
