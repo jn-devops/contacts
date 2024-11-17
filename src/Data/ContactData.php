@@ -563,6 +563,8 @@ class ContactOrderData extends Data
             'bp_1_effective_date'=>$this->bp_1_effective_date,
 
             'repricing_period'=>$this->repricing_period,
+            'witness1'=>$this->witness1,
+            'witness2'=>$this->witness2,
 //
         ];
     }
