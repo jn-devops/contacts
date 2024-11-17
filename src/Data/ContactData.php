@@ -559,7 +559,7 @@ class ContactOrderData extends Data
             'bp_1_interest_rate' =>$this->bp_1_interest_rate,
             'bp_1_terms' =>$this->bp_1_terms,
             'bp_1_monthly_payment' =>$this->bp_1_monthly_payment,
-            'bp_1_effective_date'=>$this->bp_1_monthly_payment,
+            'bp_1_effective_date'=>$this->bp_1_effective_date,
 
             'repricing_period'=>$this->repricing_period,
 //
