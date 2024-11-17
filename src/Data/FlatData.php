@@ -77,6 +77,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $loan_interest_rate,
         public ?string $tct_no,
         public ?string $sku,
+        public ?string $promo_code,
         public ?string $seller_commission_code,
         public ?string $property_code,
         public ?string $property_type,
@@ -471,6 +472,7 @@ class FlatData extends \Spatie\LaravelData\Data
             tct_no: $data->order->tct_no ?? '',
 
             sku: $data->order->sku ?? '',
+            promo_code: $data->order->promo_code ?? '',
             seller_commission_code: $data->order->seller_commission_code ?? '',
             property_code: $data->order->property_code ?? '',
             property_type: $data->order->property_type ?? '',

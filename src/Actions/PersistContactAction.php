@@ -312,6 +312,7 @@ class PersistContactAction
 
             'order' => ['nullable', 'array'],
             'order.sku' => ['nullable', 'string'],
+            'order.promo_code' => ['nullable', 'string'],
             'order.seller_commission_code' => ['nullable', 'string'],
             'order.property_code' => ['nullable', 'string'],
             'order.property_type' => ['nullable', 'string'],

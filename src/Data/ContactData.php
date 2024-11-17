@@ -225,6 +225,7 @@ class ContactData extends Data
             'co_borrowers' => $this->co_borrowers->toArray(),
             'order' => [
                 'sku' => $this->order->sku,
+                'promo_code' => $this->order->promo_code,
                 'seller_commission_code' => $this->order->seller_commission_code,
                 'property_code' => $this->order->property_code,
                 // for GNC
@@ -299,6 +300,7 @@ class ContactOrderData extends Data
 {
     public function __construct(
         public string $sku,
+        public ?string $promo_code,
         public string $seller_commission_code,
         public string $property_code,
         //for GNC
@@ -477,6 +479,7 @@ class ContactOrderData extends Data
     {
         return [
             'sku' => $this->sku,
+            'promo_code' => $this->promo_code,
             'seller_commission_code' => $this->seller_commission_code,
             'property_code' => $this->property_code,
             'property_type' => $this->property_type,
