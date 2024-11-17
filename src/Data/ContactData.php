@@ -484,6 +484,7 @@ class ContactOrderData extends Data
             'property_code' => $this->property_code,
             'property_type' => $this->property_type,
             'company_name' => $this->company_name,
+            'registry_of_deeds_address' => $this->registry_of_deeds_address,
             'project_name' => $this->project_name,
             'project_code' => $this->project_code,
             'property_name' => $this->property_name,
