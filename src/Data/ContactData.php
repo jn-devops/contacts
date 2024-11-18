@@ -472,6 +472,7 @@ class ContactOrderData extends Data
 
         public ?PaymentSchemeData $payment_scheme,
         public ?SellerData $seller,
+        Public ?PersonData $aif,
 
     ) {}
 
@@ -565,6 +566,7 @@ class ContactOrderData extends Data
             'repricing_period'=>$this->repricing_period,
             'witness1'=>$this->witness1,
             'witness2'=>$this->witness2,
+            'aif' => $this->aif ? $this->aif->toArray() : null,
 //
         ];
     }
