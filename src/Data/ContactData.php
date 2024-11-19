@@ -572,6 +572,7 @@ class ContactOrderData extends Data
             'witness2'=>$this->witness2,
             'aif' => $this->aif ? $this->aif->toArray() : null,
 
+            'interest'=>$this->interest,
             'comencement_period'=>$this->comencement_period,
             'mrisri_docstamp_total'=>$this->mrisri_docstamp_total,
             'non_life_insurance'=>$this->non_life_insurance,
