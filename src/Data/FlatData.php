@@ -355,6 +355,10 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $both_of,
         //TIMOTHY S. GOBIO TIN
         public ?string $timothy_s_gobio_tin,
+        //
+        public ?string $non_life_insurance,
+        public ?string $mrisri_docstamp_total,
+        public ?string $comencement_period,
 
     ) {}
 
@@ -713,8 +717,11 @@ class FlatData extends \Spatie\LaravelData\Data
             net_loan_proceeds: number_format($data->order->net_loan_proceeds ?? 0, 2),
             vsr_no: $data->order->verified_survey_return_no ?? '',
             technical_description: $data->order->technical_description ?? '',
-            timothy_s_gobio_tin: '315-765-457-000'
-
+            timothy_s_gobio_tin: '315-765-457-000',
+            //
+            comencement_period: $data->order->comencement_period ?? '',
+            non_life_insurance: $data->order->non_life_insurance ?? '',
+            mrisri_docstamp_total: $data->order->mrisri_docstamp_total ?? '',
         );
     }
 

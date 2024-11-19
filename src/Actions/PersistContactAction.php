@@ -541,6 +541,10 @@ class PersistContactAction
             'order.payment_scheme.transaction_sub_status' => ['nullable', 'string'],
             'order.total_selling_price' => ['nullable', 'numeric'],
 
+            'order.comencement_period' => ['nullable'],
+            'order.mrisri_docstamp_total' => ['nullable'],
+            'order.non_life_insurance' => ['nullable'],
+
             'order.aif' => ['nullable', 'array'],
             'order.aif.first_name' => ['nullable', 'string'],
             'order.aif.middle_name' => ['nullable', 'string'],

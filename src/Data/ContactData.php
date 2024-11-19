@@ -470,6 +470,10 @@ class ContactOrderData extends Data
         public ?string $verified_survey_return_no,
         public ?string $technical_description,
 
+        public ?string $non_life_insurance,
+        public ?string $mrisri_docstamp_total,
+        public ?string $comencement_period,
+
         public ?PaymentSchemeData $payment_scheme,
         public ?SellerData $seller,
         Public ?PersonData $aif,
@@ -567,7 +571,26 @@ class ContactOrderData extends Data
             'witness1'=>$this->witness1,
             'witness2'=>$this->witness2,
             'aif' => $this->aif ? $this->aif->toArray() : null,
-//
+
+            'comencement_period'=>$this->comencement_period,
+            'mrisri_docstamp_total'=>$this->mrisri_docstamp_total,
+            'non_life_insurance'=>$this->non_life_insurance,
+            'loan_period_months'=>$this->loan_period_months,
+            'term_1'=>$this->term_1,
+            'term_2'=>$this->term_2,
+            'term_3'=>$this->term_3,
+            'amort_mrisri1'=>$this->amort_mrisri1,
+            'amort_mrisri2'=>$this->amort_mrisri2,
+            'amort_mrisri3'=>$this->amort_mrisri3,
+            'amort_nonlife1'=>$this->amort_nonlife1,
+            'amort_nonlife2'=>$this->amort_nonlife2,
+            'amort_nonlife3'=>$this->amort_nonlife3,
+            'amort_princ_int1'=>$this->amort_princ_int1,
+            'amort_princ_int2'=>$this->amort_princ_int2,
+            'amort_princ_int3'=>$this->amort_princ_int3,
+            'monthly_amort1'=>$this->monthly_amort1,
+            'monthly_amort2'=>$this->monthly_amort2,
+            'monthly_amort3'=>$this->monthly_amort3,
         ];
     }
 }
