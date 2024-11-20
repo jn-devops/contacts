@@ -542,6 +542,7 @@ class PersistContactAction
             'order.total_selling_price' => ['nullable', 'numeric'],
 
             'order.comencement_period' => ['nullable'],
+            'order.repricing_period_affordable' => ['nullable'],
             'order.mrisri_docstamp_total' => ['nullable'],
             'order.non_life_insurance' => ['nullable'],
 

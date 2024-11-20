@@ -473,6 +473,7 @@ class ContactOrderData extends Data
         public ?string $non_life_insurance,
         public ?string $mrisri_docstamp_total,
         public ?string $comencement_period,
+        public ?string $repricing_period_affordable,
 
         public ?PaymentSchemeData $payment_scheme,
         public ?SellerData $seller,
@@ -574,6 +575,7 @@ class ContactOrderData extends Data
 
             'interest'=>$this->interest,
             'comencement_period'=>$this->comencement_period,
+            'repricing_period_affordable'=>$this->repricing_period_affordable,
             'mrisri_docstamp_total'=>$this->mrisri_docstamp_total,
             'non_life_insurance'=>$this->non_life_insurance,
             'loan_period_months'=>$this->loan_period_months,
