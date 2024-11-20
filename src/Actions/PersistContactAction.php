@@ -355,9 +355,9 @@ class PersistContactAction
             'order.reservation_date' => ['nullable'],
             'order.circular_number' => ['nullable', 'string'],
 
-            'order.term_1' => ['nullable', 'string'],
-            'order.term_2' => ['nullable', 'string'],
-            'order.term_3' => ['nullable', 'string'],
+            'order.term_1' => ['nullable'],
+            'order.term_2' => ['nullable'],
+            'order.term_3' => ['nullable'],
             'order.amort_mrisri1' => ['nullable'],
             'order.amort_mrisri2' => ['nullable'],
             'order.amort_mrisri3' => ['nullable'],
