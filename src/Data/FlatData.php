@@ -552,7 +552,7 @@ class FlatData extends \Spatie\LaravelData\Data
             equity_payment_date: $data->order->payment_scheme->payments?->toCollection()->firstWhere('type', 'equity')->date ?? '',
             rental_fee: number_format($data->order->payment_scheme->fees?->toCollection()->firstWhere('name', 'rental')->amount ?? 0),
             present_rental_fee: number_format($data->order->payment_scheme->fees?->toCollection()->firstWhere('name', 'present_rental_fee')->amount ?? 0),
-            co_borrower_name: strtoupper(($data->co_borrowers[0]->first_name ?? ' ').($data->co_borrowers[0]->middle_name ?? ' ').($data->co_borrowers[0]->last_name ?? ' ')),
+            co_borrower_name: strtoupper(($data->co_borrowers[0]->first_name ?? '').' '.($data->co_borrowers[0]->middle_name ?? '').' '.($data->co_borrowers[0]->last_name ?? '')),
             co_borrower_address: $data->addresses?->toCollection()->firstWhere('type', 'co_borrower')->full_address ?? '',
             co_borrower_civil_status: $data->co_borrowers[0]->civil_status ?? '',
             co_borrower_civil_status_lower_case:strtolower($data->co_borrowers[0]->civil_status ?? '') ,
