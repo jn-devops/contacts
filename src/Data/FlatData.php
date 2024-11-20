@@ -366,7 +366,17 @@ class FlatData extends \Spatie\LaravelData\Data
     {
         $numberToWords = new NumberToWords;
         $data = ContactData::fromModel($model);
+        $co_borrower_spouse_name = '';
+        $co_borrower_spouse_tin = '';
 
+        if (isset($model->co_borrowers[0]['spouse'])) {
+            $spouse = $model->co_borrowers[0]['spouse'];
+            $co_borrower_spouse_name =
+                ($spouse['first_name'] ?? '') . ' ' .
+                ($spouse['middle_name'] ?? '') . ' ' .
+                ($spouse['last_name'] ?? '');
+            $co_borrower_spouse_tin = $spouse['tin'] ?? '';
+        }
         // dd($data);
 
         return new self(
@@ -548,8 +558,8 @@ class FlatData extends \Spatie\LaravelData\Data
             co_borrower_civil_status_lower_case:strtolower($data->co_borrowers[0]->civil_status ?? '') ,
             co_borrower_civil_status_to: ($data->co_borrowers[0]->civil_status) ? (strtoupper($data->co_borrowers[0]->civil_status) == 'MARRIED') ? $data->co_borrowers[0]->civil_status.' to ' : $data->co_borrowers[0]->civil_status : '',
             co_borrower_nationality: $data->co_borrowers[0]->nationality ?? '',
-            co_borrower_spouse: $data->co_borrowers[0]->spouse ?? '',
-            co_borrower_spouse_tin: $data->co_borrowers[0]->tin ?? '',
+            co_borrower_spouse: $co_borrower_spouse_name,
+            co_borrower_spouse_tin: $co_borrower_spouse_tin,
             co_borrower_tin: $data->employment?->toCollection()->firstWhere('type', 'co_borrower')->id->tin ?? '',
             aif_name: $data->order->aif ? strtoupper("{$data->order->aif->first_name} {$data->order->aif->middle_name} {$data->order->aif->last_name} {$data->order->aif->name_suffix}") : '',
             aif_last_name: $data->order->aif ? strtoupper($data->order->aif->last_name ?? '') : '',
