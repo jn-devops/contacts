@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.5.55 - 2024-11-21
+
+updated the spouse_salary_gross_incom in flatdata
+
 ## v1.5.54 - 2024-11-21
 
 **Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.53...v1.5.54
