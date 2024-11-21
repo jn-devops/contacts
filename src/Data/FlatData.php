@@ -440,7 +440,7 @@ class FlatData extends \Spatie\LaravelData\Data
             spouse_company_email_address: $data->employment?->toCollection()->firstWhere('type', 'spouse')->employer->email ?? '',
             spouse_position: $data->employment?->toCollection()->firstWhere('type', 'spouse')->current_position ?? '',
             spouse_years_in_service: $data->employment?->toCollection()->firstWhere('type', 'spouse')->years_in_service ?? '',
-            spouse_salary_gross_income:$data->employment?->toCollection()->firstWhere('type', 'spouse')->monthly_gross_income ,
+            spouse_salary_gross_income:$data->employment?->toCollection()->firstWhere('type', 'spouse')->monthly_gross_income ?? 0,
             zip_code: $data->addresses?->toCollection()->firstWhere('type', 'spouse')->postal_code ?? '',
             length_of_stay: $data->employment?->toCollection()->firstWhere('type', 'spouse')->years_in_service ?? '',
             spouse_industry: $data->employment?->toCollection()->firstWhere('type', 'spouse')->industry ?? '',
