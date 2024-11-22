@@ -362,6 +362,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $mrisri_docstamp_total,
         public ?string $comencement_period,
         public ?string $repricing_period_affordable,
+        public ?string $loan_period_in_years,
 
     ) {}
 
@@ -738,6 +739,7 @@ class FlatData extends \Spatie\LaravelData\Data
             non_life_insurance: $data->order->non_life_insurance ?? '',
             mrisri_docstamp_total: $data->order->mrisri_docstamp_total ?? '',
             repricing_period_affordable: $data->order->repricing_period_affordable ?? '',
+            loan_period_in_years: intdiv($data->order->loan_period_months ?? 0, 12),
         );
     }
 
