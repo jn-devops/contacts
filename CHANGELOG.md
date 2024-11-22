@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.5.56 - 2024-11-22
+
+added loan_period_in_years on flat data
+
 ## #v1.5.55 - 2024-11-21
 
 updated the spouse_salary_gross_incom in flatdata
