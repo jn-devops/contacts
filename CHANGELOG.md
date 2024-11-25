@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.5.58 - 2024-11-25
+
+Fix formats for hdmf inputs in FlatData
+
 ## #v1.5.57 - 2024-11-25
 
 added aif_attorney details in order, modify the convertNumberToWords in FlatData
