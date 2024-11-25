@@ -474,6 +474,10 @@ class ContactOrderData extends Data
         public ?string $mrisri_docstamp_total,
         public ?string $comencement_period,
         public ?string $repricing_period_affordable,
+        public ?string $aif_attorney_first_name,
+        public ?string $aif_attorney_last_name,
+        public ?string $aif_attorney_middle_name,
+        public ?string $aif_attorney_name_suffix,
 
         public ?PaymentSchemeData $payment_scheme,
         public ?SellerData $seller,
@@ -594,6 +598,10 @@ class ContactOrderData extends Data
             'monthly_amort1'=>$this->monthly_amort1,
             'monthly_amort2'=>$this->monthly_amort2,
             'monthly_amort3'=>$this->monthly_amort3,
+            'aif_attorney_last_name'=>$this->aif_attorney_last_name,
+            'aif_attorney_first_name'=>$this->aif_attorney_first_name,
+            'aif_attorney_middle_name'=>$this->aif_attorney_middle_name,
+            'aif_attorney_name_suffix'=>$this->aif_attorney_name_suffix,
         ];
     }
 }

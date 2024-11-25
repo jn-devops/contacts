@@ -561,6 +561,10 @@ class PersistContactAction
             'order.aif.other_mobile' => ['nullable', 'string'],
             'order.aif.help_number' => ['nullable', 'string'],
             'order.aif.landline' => ['nullable'],
+            'order.aif_attorney_first_name' => ['nullable'],
+            'order.aif_attorney_last_name' => ['nullable'],
+            'order.aif_attorney_middle_name' => ['nullable'],
+            'order.aif_attorney_name_suffix' => ['nullable'],
 
             // 'co_borrower' => ['nullable', 'array'],
             'co_borrower.*.unit_lot' => ['nullable', 'string'],

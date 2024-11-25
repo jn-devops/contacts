@@ -363,6 +363,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $comencement_period,
         public ?string $repricing_period_affordable,
         public ?string $loan_period_in_years,
+        public ?string $aif_attorney,
 
     ) {}
 
@@ -482,7 +483,7 @@ class FlatData extends \Spatie\LaravelData\Data
             mrif_fee: number_format($data->order->mrif_fee ?? 0, 2),
             reservation_rate: $data->order->reservation_rate ?? '',
             lot_area: $data->order->lot_area ?? '',
-            lot_area_in_words: str_replace('-', ' ', strtoupper(self::convertNumberToWords($data->order->lot_area ?? '0').' square meters')),
+            lot_area_in_words: str_replace('-', ' ', strtoupper(self::convertNumberToWords($data->order->lot_area ?? '0'))),
             floor_area: $data->order->floor_area ?? '',
             floor_area_in_words: strtoupper(self::convertNumberToWords( $data->order->floor_area ?? '')),
 
@@ -688,19 +689,19 @@ class FlatData extends \Spatie\LaravelData\Data
             term_1: $data->order->term_1 ?? '',
             term_2: $data->order->term_2 ?? '',
             term_3: $data->order->term_3 ?? '',
-            amort_mrisri1: $data->order->amort_mrisri1 ?? '',
-            amort_mrisri2: $data->order->amort_mrisri2 ?? '',
-            amort_mrisri3: $data->order->amort_mrisri3 ?? '',
-            amort_nonlife1: $data->order->amort_nonlife1 ?? '',
-            amort_nonlife2: $data->order->amort_nonlife2 ?? '',
-            amort_nonlife3: $data->order->amort_nonlife3 ?? '',
-            amort_princ_int1: $data->order->amort_princ_int1 ?? '',
-            amort_princ_int2: $data->order->amort_princ_int2 ?? '',
-            amort_princ_int3: $data->order->amort_princ_int3 ?? '',
-            monthly_amort1: $data->order->monthly_amort1 ?? '',
-            monthly_amort1_in_words: strtoupper(self::convertNumberToWords($data->order->monthly_amort1 ?? '')),
-            monthly_amort2: $data->order->monthly_amort2 ?? '',
-            monthly_amort3: $data->order->monthly_amort3 ?? '',
+            amort_mrisri1: number_format($data->order->amort_mrisri1 ?? 0, 2),
+            amort_mrisri2: number_format($data->order->amort_mrisri2 ?? 0, 2),
+            amort_mrisri3: number_format($data->order->amort_mrisri3 ?? 0, 2),
+            amort_nonlife1: number_format($data->order->amort_nonlife1 ?? 0, 2),
+            amort_nonlife2: number_format($data->order->amort_nonlife2 ?? 0, 2),
+            amort_nonlife3: number_format($data->order->amort_nonlife3 ?? 0, 2),
+            amort_princ_int1: number_format($data->order->amort_princ_int1 ?? 0, 2),
+            amort_princ_int2: number_format($data->order->amort_princ_int2 ?? 0, 2),
+            amort_princ_int3: number_format($data->order->amort_princ_int3 ?? 0, 2),
+            monthly_amort1: number_format($data->order->monthly_amort1 ?? 0, 2),
+            monthly_amort2: number_format($data->order->monthly_amort2 ?? 0, 2),
+            monthly_amort3: number_format($data->order->monthly_amort3 ?? 0, 2),
+            monthly_amort1_in_words: strtoupper(self::convertNumberToWords(number_format($data->order->monthly_amort1 ?? 0, 2, '.', ''))),
             cct: $data->order->cct ?? '',
             witness: 'WITNESS',
             witness1:$data->order->witness1 ??  'WITNESS',
@@ -740,6 +741,7 @@ class FlatData extends \Spatie\LaravelData\Data
             mrisri_docstamp_total: $data->order->mrisri_docstamp_total ?? '',
             repricing_period_affordable: $data->order->repricing_period_affordable ?? '',
             loan_period_in_years: intdiv($data->order->loan_period_months ?? 0, 12),
+            aif_attorney: $data->order->aif ? strtoupper("{$data->order->aif_attorney_first_name} {$data->order->aif_attorney_last_name} {$data->order->aif_attorney_middle_name} {$data->order->aif_attorney_name_suffix}") : '',
         );
     }
 
