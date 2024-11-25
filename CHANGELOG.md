@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.5.57 - 2024-11-25
+
+added aif_attorney details in order, modify the convertNumberToWords in FlatData
+
 ## #v1.5.56 - 2024-11-22
 
 added loan_period_in_years on flat data
