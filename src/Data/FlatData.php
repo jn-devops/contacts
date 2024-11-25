@@ -745,19 +745,21 @@ class FlatData extends \Spatie\LaravelData\Data
 
     public static function convertNumberToWords($number) {
         if($number != ''){
-            $formatter = new \NumberFormatter('en', \NumberFormatter::SPELLOUT);
+            // $formatter = new \NumberFormatter('en', \NumberFormatter::SPELLOUT);
 
-            // For decimal numbers, separate the whole part and the fractional part
-            if (strpos($number, '.') !== false) {
-                $parts = explode('.', $number);
-                $wholePart = $formatter->format($parts[0]);
-                $fractionalPart = $formatter->format($parts[1]);
+            // // For decimal numbers, separate the whole part and the fractional part
+            // if (strpos($number, '.') !== false) {
+            //     $parts = explode('.', $number);
+            //     $wholePart = $formatter->format($parts[0]);
+            //     $fractionalPart = $formatter->format($parts[1]);
 
-                return $wholePart . ' POINT ' . $fractionalPart;
-            }
+            //     return $wholePart . ' AND ' . $fractionalPart;
+            // }
 
-            // For whole numbers, convert directly
-            return $formatter->format($number);
+            // // For whole numbers, convert directly
+            // return $formatter->format($number);
+            return strtoupper(\NumberFormatter::create('en', \NumberFormatter::SPELLOUT)
+                    ->format((int)$number)) . ' AND ' . str_pad((int)(($number - (int)$number) * 1000), 3, '0', STR_PAD_LEFT) . '/1000';
         }else{
             return '';
         }
