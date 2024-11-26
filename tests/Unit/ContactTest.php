@@ -273,6 +273,7 @@ test('contact can login', function () {
     $contact = Contact::factory()->create();
 //    $flatData = \Homeful\Contacts\Data\FlatData::fromModel($contact);
 //    dd($flatData->exec_signatories, $flatData->exec_position,$flatData->exec_tin_no);
+//    dd($flatData->spouse_tin_with_label);
     expect(auth()->user())->toBeNull();
     $this->actingAs($contact);
     expect(auth()->user()->is($contact))->toBeTrue();
