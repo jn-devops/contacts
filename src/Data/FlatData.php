@@ -737,8 +737,8 @@ class FlatData extends \Spatie\LaravelData\Data
             timothy_s_gobio_tin: '315-765-457-000',
             //
             comencement_period: $data->order->comencement_period ?? '',
-            non_life_insurance: $data->order->non_life_insurance ?? '',
-            mrisri_docstamp_total: $data->order->mrisri_docstamp_total ?? '',
+            non_life_insurance: number_format($data->order->non_life_insurance ?? 0, 2),
+            mrisri_docstamp_total: number_format($data->order->mrisri_docstamp_total ?? 0, 2),
             repricing_period_affordable: $data->order->repricing_period_affordable ?? '',
             loan_period_in_years: intdiv($data->order->loan_period_months ?? 0, 12),
             aif_attorney: $data->order->aif ? strtoupper("{$data->order->aif_attorney_first_name} {$data->order->aif_attorney_last_name} {$data->order->aif_attorney_middle_name} {$data->order->aif_attorney_name_suffix}") : '',
