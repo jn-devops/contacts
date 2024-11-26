@@ -483,7 +483,7 @@ class FlatData extends \Spatie\LaravelData\Data
             mrif_fee: number_format($data->order->mrif_fee ?? 0, 2),
             reservation_rate: $data->order->reservation_rate ?? '',
             lot_area: $data->order->lot_area ?? '',
-            lot_area_in_words: str_replace('-', ' ', strtoupper(self::convertNumberToWords($data->order->lot_area ?? '0'))),
+            lot_area_in_words: str_replace('-', ' ', strtoupper(self::convertNumberToWords($data->order->lot_area ?? '0', false))),
             floor_area: $data->order->floor_area ?? '',
             floor_area_in_words: strtoupper(self::convertNumberToWords( $data->order->floor_area ?? '')),
 
@@ -745,23 +745,41 @@ class FlatData extends \Spatie\LaravelData\Data
         );
     }
 
-    public static function convertNumberToWords($number) {
+    public static function convertNumberToWords($number, $isFraction = true) {
         if($number != ''){
-            // $formatter = new \NumberFormatter('en', \NumberFormatter::SPELLOUT);
-
-            // // For decimal numbers, separate the whole part and the fractional part
-            // if (strpos($number, '.') !== false) {
-            //     $parts = explode('.', $number);
-            //     $wholePart = $formatter->format($parts[0]);
-            //     $fractionalPart = $formatter->format($parts[1]);
-
-            //     return $wholePart . ' AND ' . $fractionalPart;
-            // }
-
-            // // For whole numbers, convert directly
-            // return $formatter->format($number);
-            return strtoupper(\NumberFormatter::create('en', \NumberFormatter::SPELLOUT)
-                    ->format((int)$number)) . ' AND ' . str_pad((int)(($number - (int)$number) * 1000), 3, '0', STR_PAD_LEFT) . '/1000';
+            if($isFraction){
+                if (fmod($number, 1) == 0) {
+                    // If the number is an integer
+                    return strtoupper(\NumberFormatter::create('en', \NumberFormatter::SPELLOUT)
+                                        ->format((int)$number));
+                } else {
+                    // If the number has a fractional part
+                    return strtoupper(\NumberFormatter::create('en', \NumberFormatter::SPELLOUT)
+                                        ->format((int)$number)) 
+                                . ' AND ' 
+                                . str_pad((int)(($number - (int)$number) * 1000), 3, '0', STR_PAD_LEFT) 
+                                . '/1000';
+                }
+            }else{
+                $formatter = new \NumberFormatter('en', \NumberFormatter::SPELLOUT);
+    
+                if (strpos($number, '.') !== false) {
+                    $parts = explode('.', $number);
+                    $wholePart = $formatter->format($parts[0]);
+                
+                    // Check if the fractional part is not zero
+                    if ((int)$parts[1] !== 0) {
+                        $fractionalPart = $formatter->format($parts[1]);
+                        return $wholePart . ' AND ' . $fractionalPart;
+                    }
+                
+                    // If the fractional part is zero, return only the whole part
+                    return $wholePart;
+                }
+                
+                // For whole numbers, convert directly
+                return $formatter->format($number);
+            }
         }else{
             return '';
         }
