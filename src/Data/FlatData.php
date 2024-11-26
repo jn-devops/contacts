@@ -434,7 +434,7 @@ class FlatData extends \Spatie\LaravelData\Data
             spouse_residence_landline: $data->spouse->landline ?? '',
             spouse_fb_account_name: $data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name ?? '',
             spouse_age: $data->spouse->age ?? '',
-            spouse_tin_with_label: $data->employment?->toCollection()->firstWhere('type', 'spouse')->id?->tin ==null?'':'TIN: '.$data->employment?->toCollection()->firstWhere('type', 'spouse')->id->tin,
+            spouse_tin_with_label: $data->employment?->toCollection()->firstWhere('type', 'spouse')->id?->tin ? 'TIN: ' . $data->employment->toCollection()->firstWhere('type', 'spouse')->id->tin : '',
             spouse_tin: $data->employment?->toCollection()->firstWhere('type', 'spouse')->id->tin ??'',
             spouse_pagibig_number: $data->employment?->toCollection()->firstWhere('type', 'spouse')->id->pagibig ?? '',
             spouse_employer_name: strtoupper($data->employment?->toCollection()->firstWhere('type', 'spouse')->employer->name ?? ''),
