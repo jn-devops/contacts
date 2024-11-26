@@ -378,10 +378,12 @@ class FlatData extends \Spatie\LaravelData\Data
 
         if (isset($model->co_borrowers[0]['spouse'])) {
             $spouse = $model->co_borrowers[0]['spouse'];
-            $co_borrower_spouse_name =
-                ($spouse['first_name'] ?? '') . ' ' .
-                ($spouse['middle_name'] ?? '') . ' ' .
-                ($spouse['last_name'] ?? '');
+            $co_borrower_spouse_name =implode(' ', array_filter([
+                $spouse['first_name'] ?? '',
+                $spouse['middle_name'] ?? '',
+                $spouse['last_name'] ?? '',
+                $spouse['name_suffix'] ?? ''
+            ]));
             $co_borrower_spouse_tin = $spouse['tin'] ?? '';
         }
 
@@ -393,14 +395,14 @@ class FlatData extends \Spatie\LaravelData\Data
             buyer_first_name: strtoupper($data->profile->first_name ?? ''),
             buyer_middle_name: strtoupper($data->profile->middle_name ?? ''),
             buyer_last_name: strtoupper($data->profile->last_name ?? ''),
-            buyer_name: strtoupper($data->profile->first_name.' '.$data->profile->middle_name.' '.$data->profile->last_name ?? ''),
+            buyer_name: strtoupper(collect([$data->profile->first_name, $data->profile->middle_name, $data->profile->last_name,$data->profile->name_suffix])->filter()->implode(' ')),
             buyer_birthday: $data->profile->date_of_birth ?? '',
             buyer_civil_status: $data->profile->civil_status ?? '',
             buyer_civil_status_lower_case:strtolower($data->profile->civil_status ?? ''),
             buyer_civil_status_to: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ? $data->profile->civil_status.' to ' : $data->profile->civil_status : '',
             buyer_civil_status_to_lower_case: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ?strtolower($data->profile->civil_status.' to ')  :strtolower($data->profile->civil_status ) : '',
             both_of: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ? 'both' : 'of' : 'of',
-            buyer_spouse_name: strtoupper($data->spouse->first_name.' '.$data->spouse->middle_name.' '.$data->spouse->last_name ?? ''),
+            buyer_spouse_name: strtoupper(collect([$data->spouse->first_name, $data->spouse->middle_name, $data->spouse->last_name,$data->spouse->name_suffix])->filter()->implode(' ')),
             buyer_nationality: $data->profile->nationality ?? '',
 
             buyer_tin: $data->employment?->toCollection()->firstWhere('type', 'buyer')->id->tin ?? '',
@@ -563,7 +565,12 @@ class FlatData extends \Spatie\LaravelData\Data
             equity_payment_date: $data->order->payment_scheme->payments?->toCollection()->firstWhere('type', 'equity')->date ?? '',
             rental_fee: number_format($data->order->payment_scheme->fees?->toCollection()->firstWhere('name', 'rental')->amount ?? 0),
             present_rental_fee: number_format($data->order->payment_scheme->fees?->toCollection()->firstWhere('name', 'present_rental_fee')->amount ?? 0),
-            co_borrower_name: strtoupper(($data->co_borrowers[0]->first_name ?? '').' '.($data->co_borrowers[0]->middle_name ?? '').' '.($data->co_borrowers[0]->last_name ?? '')),
+            co_borrower_name: strtoupper((collect([
+                $data->co_borrowers[0]->first_name ?? '',
+                $data->co_borrowers[0]->middle_name ?? '',
+                $data->co_borrowers[0]->last_name ?? '',
+                $data->co_borrowers[0]->name_suffix ?? '',
+            ])->filter()->implode(' '))),
             co_borrower_address: $data->addresses?->toCollection()->firstWhere('type', 'co_borrower')->full_address ?? '',
             co_borrower_civil_status: $data->co_borrowers[0]->civil_status ?? '',
             co_borrower_civil_status_lower_case:strtolower($data->co_borrowers[0]->civil_status ?? '') ,
