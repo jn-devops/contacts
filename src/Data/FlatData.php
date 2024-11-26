@@ -725,7 +725,7 @@ class FlatData extends \Spatie\LaravelData\Data
             company_tin: $data->order->company_tin ?? '',
             company_address: $data->order->company_address ?? '',
             loan_value_after_downpayment: $data->order->loan_value_after_downpayment ?? '',
-            loan_value_after_downpayment_in_words: strtoupper(self::convertNumberToWords($data->order->loan_value_after_downpayment ?? '')).' PESOS',
+            loan_value_after_downpayment_in_words: strtoupper(self::convertNumberToWords($data->order->loan_value_after_downpayment ?? '0')).' PESOS',
             company_acronym: $data->order->company_acronym ?? '',
             total_selling_price: number_format($data->order->total_selling_price ?? 0, 2),
             client_id_co_borrower: $data->order->client_id_co_borrower ?? '',
