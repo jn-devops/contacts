@@ -755,28 +755,28 @@ class FlatData extends \Spatie\LaravelData\Data
                 } else {
                     // If the number has a fractional part
                     return strtoupper(\NumberFormatter::create('en', \NumberFormatter::SPELLOUT)
-                                        ->format((int)$number)) 
-                                . ' AND ' 
-                                . str_pad((int)(($number - (int)$number) * 1000), 3, '0', STR_PAD_LEFT) 
-                                . '/1000';
+                                        ->format((int)$number))
+                                . ' AND '
+                                . str_pad((int)(($number - (int)$number) * 100), 3, '0', STR_PAD_LEFT)
+                                . '/100';
                 }
             }else{
                 $formatter = new \NumberFormatter('en', \NumberFormatter::SPELLOUT);
-    
+
                 if (strpos($number, '.') !== false) {
                     $parts = explode('.', $number);
                     $wholePart = $formatter->format($parts[0]);
-                
+
                     // Check if the fractional part is not zero
                     if ((int)$parts[1] !== 0) {
                         $fractionalPart = $formatter->format($parts[1]);
                         return $wholePart . ' AND ' . $fractionalPart;
                     }
-                
+
                     // If the fractional part is zero, return only the whole part
                     return $wholePart;
                 }
-                
+
                 // For whole numbers, convert directly
                 return $formatter->format($number);
             }
