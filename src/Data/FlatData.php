@@ -496,7 +496,7 @@ class FlatData extends \Spatie\LaravelData\Data
             tcp_in_words: strtoupper(self::convertNumberToWords($data->order->payment_scheme->total_contract_price ?? '0')),
             loan_term: $data->order->loan_term ?? '',
             loan_term_in_years : (string)((int)($data->order->loan_term ?? 0) / 12),
-            loan_term_in_years_in_words : strtoupper(self::convertNumberToWords((int)($data->order->loan_term ?? 0) / 12)),
+            loan_term_in_years_in_words : strtoupper(self::convertNumberToWords((int)($data->order->loan_term ?? 0) / 12),false),
             loan_interest_rate: $data->order->loan_interest_rate ?? '',
             tct_no: $data->order->tct_no ?? '',
 
@@ -727,7 +727,7 @@ class FlatData extends \Spatie\LaravelData\Data
             company_tin: $data->order->company_tin ?? '',
             company_address: $data->order->company_address ?? '',
             loan_value_after_downpayment: $data->order->loan_value_after_downpayment ?? '0',
-            loan_value_after_downpayment_in_words: strtoupper(self::convertNumberToWords($data->order->loan_value_after_downpayment ?? 'ZERO')).' PESOS',
+            loan_value_after_downpayment_in_words: strtoupper(self::convertNumberToWords($data->order->loan_value_after_downpayment ?? 0)).' PESOS',
             company_acronym: $data->order->company_acronym ?? '',
             total_selling_price: number_format($data->order->total_selling_price ?? 0, 2),
             client_id_co_borrower: $data->order->client_id_co_borrower ?? '',
