@@ -74,6 +74,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $interest_in_words,
         public ?string $loan_term,
         public ?string $loan_term_in_years,
+        public ?string $loan_term_in_years_in_words,
         public ?string $loan_interest_rate,
         public ?string $tct_no,
         public ?string $sku,
@@ -491,6 +492,7 @@ class FlatData extends \Spatie\LaravelData\Data
             tcp_in_words: strtoupper(self::convertNumberToWords($data->order->payment_scheme->total_contract_price ?? '0')),
             loan_term: $data->order->loan_term ?? '',
             loan_term_in_years : (string)((int)($data->order->loan_term ?? 0) / 12),
+            loan_term_in_years_in_words : strtoupper(self::convertNumberToWords((string)((int)($data->order->loan_term ?? 0) / 12)),
             loan_interest_rate: $data->order->loan_interest_rate ?? '',
             tct_no: $data->order->tct_no ?? '',
 
