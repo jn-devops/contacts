@@ -598,6 +598,7 @@ class ContactOrderData extends Data
             'monthly_amort1'=>$this->monthly_amort1,
             'monthly_amort2'=>$this->monthly_amort2,
             'monthly_amort3'=>$this->monthly_amort3,
+            'loan_value_after_downpayment'=>$this->loan_value_after_downpayment,
             'aif_attorney_last_name'=>$this->aif_attorney_last_name,
             'aif_attorney_first_name'=>$this->aif_attorney_first_name,
             'aif_attorney_middle_name'=>$this->aif_attorney_middle_name,
