@@ -264,6 +264,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $co_borrower_civil_status_lower_case,
         public ?string $co_borrower_nationality,
         public ?string $co_borrower_spouse,
+        public ?string $co_borrower_spouse_with_middle_initial,
         public ?string $co_borrower_spouse_tin,
         public ?string $co_borrower_tin,
         public ?string $aif_last_name,
@@ -378,12 +379,18 @@ class FlatData extends \Spatie\LaravelData\Data
         $data = ContactData::fromModel($model);
         $co_borrower_spouse_name = '';
         $co_borrower_spouse_tin = '';
-
+        $co_borrower_spouse_name_with_middle_initial='';
         if (isset($model->co_borrowers[0]['spouse'])) {
             $spouse = $model->co_borrowers[0]['spouse'];
             $co_borrower_spouse_name =implode(' ', array_filter([
                 $spouse['first_name'] ?? '',
                 $spouse['middle_name'] ?? '',
+                $spouse['last_name'] ?? '',
+                $spouse['name_suffix'] ?? ''
+            ]));
+            $co_borrower_spouse_name_with_middle_initial =implode(' ', array_filter([
+                $spouse['first_name'] ?? '',
+                mb_substr($spouse['middle_name'] ?? '', 0, 1),
                 $spouse['last_name'] ?? '',
                 $spouse['name_suffix'] ?? ''
             ]));
@@ -608,6 +615,7 @@ class FlatData extends \Spatie\LaravelData\Data
             co_borrower_civil_status_to: ($data->co_borrowers[0]->civil_status) ? (strtoupper($data->co_borrowers[0]->civil_status) == 'MARRIED') ? $data->co_borrowers[0]->civil_status.' to ' : $data->co_borrowers[0]->civil_status : '',
             co_borrower_nationality: $data->co_borrowers[0]->nationality ?? '',
             co_borrower_spouse: $co_borrower_spouse_name,
+            co_borrower_spouse_with_middle_initial: $co_borrower_spouse_name_with_middle_initial,
             co_borrower_spouse_tin: $co_borrower_spouse_tin,
             co_borrower_tin: $data->employment?->toCollection()->firstWhere('type', 'co_borrower')->id->tin ?? '',
             aif_name: $data->order->aif ? strtoupper("{$data->order->aif->first_name} {$data->order->aif->middle_name} {$data->order->aif->last_name} {$data->order->aif->name_suffix}") : '',
