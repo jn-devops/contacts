@@ -19,6 +19,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $buyer_civil_status_to,
         public ?string $buyer_civil_status_to_lower_case,
         public ?string $buyer_spouse_name,
+        public ?string $buyer_spouse_name_with_middle_initial,
         public string $buyer_nationality,
         public ?string $buyer_tin,
         public string $buyer_gender,
@@ -415,7 +416,18 @@ class FlatData extends \Spatie\LaravelData\Data
             buyer_civil_status_to: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ? $data->profile->civil_status.' to ' : $data->profile->civil_status : '',
             buyer_civil_status_to_lower_case: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ?strtolower($data->profile->civil_status.' to ')  :strtolower($data->profile->civil_status ) : '',
             both_of: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ? 'both' : 'of' : 'of',
-            buyer_spouse_name: strtoupper(collect([$data->spouse->first_name, $data->spouse->middle_name, $data->spouse->last_name,$data->spouse->name_suffix])->filter()->implode(' ')),
+            buyer_spouse_name: strtoupper(collect([
+                $data->spouse->first_name,
+                $data->spouse->middle_name,
+                $data->spouse->last_name,
+                $data->spouse->name_suffix
+            ])->filter()->implode(' ')),
+            buyer_spouse_name_with_middle_initial: strtoupper(collect([
+                $data->spouse->first_name,
+                mb_substr($data->spouse->middle_name ?? '', 0, 1),
+                $data->spouse->last_name,
+                $data->spouse->name_suffix
+            ])->filter()->implode(' ')),
             buyer_nationality: $data->profile->nationality ?? '',
 
             buyer_tin: $data->employment?->toCollection()->firstWhere('type', 'buyer')->id->tin ?? '',
