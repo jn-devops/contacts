@@ -770,7 +770,7 @@ class FlatData extends \Spatie\LaravelData\Data
                     return strtoupper(\NumberFormatter::create('en', \NumberFormatter::SPELLOUT)
                                         ->format((int)$number))
                                 . ' AND '
-                                . str_pad((int)round(($number - (int)$number) * 100), 3, '0', STR_PAD_LEFT)
+                                . str_pad((int)round(($number - (int)$number) * 100), 2, '0', STR_PAD_LEFT)
                                 . '/100' 
                                 . $postfix;
                 }
