@@ -13,6 +13,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $buyer_middle_name,
         public string $buyer_last_name,
         public string $buyer_name,
+        public string $buyer_name_with_middle_initial,
         public string $buyer_civil_status,
         public string $buyer_civil_status_lower_case,
         public ?string $buyer_civil_status_to,
@@ -396,7 +397,18 @@ class FlatData extends \Spatie\LaravelData\Data
             buyer_first_name: strtoupper($data->profile->first_name ?? ''),
             buyer_middle_name: strtoupper($data->profile->middle_name ?? ''),
             buyer_last_name: strtoupper($data->profile->last_name ?? ''),
-            buyer_name: strtoupper(collect([$data->profile->first_name, $data->profile->middle_name, $data->profile->last_name,$data->profile->name_suffix])->filter()->implode(' ')),
+            buyer_name: strtoupper(collect([
+                $data->profile->first_name,
+                $data->profile->middle_name,
+                $data->profile->last_name,
+                $data->profile->name_suffix
+            ])->filter()->implode(' ')),
+            buyer_name_with_middle_initial: strtoupper(collect([
+                $data->profile->first_name,
+                mb_substr($data->profile->middle_name ?? '', 0, 1),
+                $data->profile->last_name,
+                $data->profile->name_suffix
+            ])->filter()->implode(' ')),
             buyer_birthday: $data->profile->date_of_birth ?? '',
             buyer_civil_status: $data->profile->civil_status ?? '',
             buyer_civil_status_lower_case:strtolower($data->profile->civil_status ?? ''),
