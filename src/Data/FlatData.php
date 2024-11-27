@@ -610,7 +610,7 @@ class FlatData extends \Spatie\LaravelData\Data
             aif_username_or_email: $data->co_borrowers[0]->email ?? '',
             aif_sss: $data->employment?->toCollection()->firstWhere('type', 'co_borrower')->id->sss ?? '',
             aif_pagibig: $data->employment?->toCollection()->firstWhere('type', 'co_borrower')->id->pagibig ?? '',
-            aif_tin: $data->employment?->toCollection()->firstWhere('type', 'co_borrower')->id->tin ?? '',
+            aif_tin: $data->order->aif ? $data->order->aif->tin ?? '' : '',
             aif_passport: $data->co_borrowers[0]->passport ?? '',
             aif_date_issued: $data->co_borrowers[0]->date_issued ?? '',
             aif_place_issued: $data->co_borrowers[0]->place_issued ?? '',
@@ -771,7 +771,7 @@ class FlatData extends \Spatie\LaravelData\Data
                                         ->format((int)$number))
                                 . ' AND '
                                 . str_pad((int)round(($number - (int)$number) * 100), 2, '0', STR_PAD_LEFT)
-                                . '/100' 
+                                . '/100'
                                 . $postfix;
                 }
             }else{
