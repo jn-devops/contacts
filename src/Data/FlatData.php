@@ -168,6 +168,7 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $aif_name,
         public ?string $aif_address,
         public ?string $co_borrower_name,
+        public ?string $co_borrower_name_with_middle_initial,
         public ?string $co_borrower_address,
         public ?string $buyer_years_in_service,
         public ?string $buyer_employer_type,
@@ -568,6 +569,12 @@ class FlatData extends \Spatie\LaravelData\Data
             co_borrower_name: strtoupper((collect([
                 $data->co_borrowers[0]->first_name ?? '',
                 $data->co_borrowers[0]->middle_name ?? '',
+                $data->co_borrowers[0]->last_name ?? '',
+                $data->co_borrowers[0]->name_suffix ?? '',
+            ])->filter()->implode(' '))),
+            co_borrower_name_with_middle_initial: strtoupper((collect([
+                $data->co_borrowers[0]->first_name ?? '',
+                mb_substr($data->co_borrowers[0]->middle_name ?? '', 0, 1),
                 $data->co_borrowers[0]->last_name ?? '',
                 $data->co_borrowers[0]->name_suffix ?? '',
             ])->filter()->implode(' '))),
