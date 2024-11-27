@@ -390,7 +390,7 @@ class FlatData extends \Spatie\LaravelData\Data
             ]));
             $co_borrower_spouse_name_with_middle_initial =implode(' ', array_filter([
                 $spouse['first_name'] ?? '',
-                mb_substr($spouse['middle_name'] ?? '', 0, 1),
+                mb_substr($spouse['middle_name'] ?? '', 0, 1) ? mb_substr($spouse['middle_name'], 0, 1) . '.' : '',
                 $spouse['last_name'] ?? '',
                 $spouse['name_suffix'] ?? ''
             ]));
@@ -413,7 +413,7 @@ class FlatData extends \Spatie\LaravelData\Data
             ])->filter()->implode(' ')),
             buyer_name_with_middle_initial: strtoupper(collect([
                 $data->profile->first_name,
-                mb_substr($data->profile->middle_name ?? '', 0, 1),
+                mb_substr($data->profile->middle_name ?? '', 0, 1) ? mb_substr($data->profile->middle_name, 0, 1) . '.' : '',
                 $data->profile->last_name,
                 $data->profile->name_suffix
             ])->filter()->implode(' ')),
@@ -431,7 +431,7 @@ class FlatData extends \Spatie\LaravelData\Data
             ])->filter()->implode(' ')),
             buyer_spouse_name_with_middle_initial: strtoupper(collect([
                 $data->spouse->first_name,
-                mb_substr($data->spouse->middle_name ?? '', 0, 1),
+                mb_substr($data->spouse->middle_name ?? '', 0, 1) ? mb_substr($data->spouse->middle_name, 0, 1) . '.' : '',
                 $data->spouse->last_name,
                 $data->spouse->name_suffix
             ])->filter()->implode(' ')),
@@ -605,7 +605,7 @@ class FlatData extends \Spatie\LaravelData\Data
             ])->filter()->implode(' '))),
             co_borrower_name_with_middle_initial: strtoupper((collect([
                 $data->co_borrowers[0]->first_name ?? '',
-                mb_substr($data->co_borrowers[0]->middle_name ?? '', 0, 1),
+                mb_substr($data->co_borrowers[0]->middle_name ?? '', 0, 1) ? mb_substr($data->co_borrowers[0]->middle_name, 0, 1) . '.' : '',
                 $data->co_borrowers[0]->last_name ?? '',
                 $data->co_borrowers[0]->name_suffix ?? '',
             ])->filter()->implode(' '))),
