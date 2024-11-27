@@ -734,7 +734,7 @@ class FlatData extends \Spatie\LaravelData\Data
             company_tin: $data->order->company_tin ?? '',
             company_address: $data->order->company_address ?? '',
             loan_value_after_downpayment: $data->order->loan_value_after_downpayment ?? '0',
-            loan_value_after_downpayment_in_words: strtoupper(self::convertNumberToWords($data->order->loan_value_after_downpayment ?? 0)).' PESOS',
+            loan_value_after_downpayment_in_words: strtoupper(self::convertNumberToWords($data->order->loan_value_after_downpayment ?? 0, true, ' PESOS')),
             company_acronym: $data->order->company_acronym ?? '',
             total_selling_price: number_format($data->order->total_selling_price ?? 0, 2),
             client_id_co_borrower: $data->order->client_id_co_borrower ?? '',
@@ -758,20 +758,21 @@ class FlatData extends \Spatie\LaravelData\Data
         );
     }
 
-    public static function convertNumberToWords($number, $isFraction = true) {
-        if($number != ''){
+    public static function convertNumberToWords($number, $isFraction = true, $postfix = '') {
+        if($number != '' && $number != 0){
             if($isFraction){
                 if (fmod($number, 1) == 0) {
                     // If the number is an integer
                     return strtoupper(\NumberFormatter::create('en', \NumberFormatter::SPELLOUT)
-                                        ->format((int)$number));
+                                        ->format((int)$number)) . $postfix;
                 } else {
                     // If the number has a fractional part
                     return strtoupper(\NumberFormatter::create('en', \NumberFormatter::SPELLOUT)
                                         ->format((int)$number))
                                 . ' AND '
-                                . str_pad((int)(($number - (int)$number) * 100), 3, '0', STR_PAD_LEFT)
-                                . '/100';
+                                . str_pad((int)round(($number - (int)$number) * 100), 3, '0', STR_PAD_LEFT)
+                                . '/100' 
+                                . $postfix;
                 }
             }else{
                 $formatter = new \NumberFormatter('en', \NumberFormatter::SPELLOUT);
@@ -787,11 +788,11 @@ class FlatData extends \Spatie\LaravelData\Data
                     }
 
                     // If the fractional part is zero, return only the whole part
-                    return $wholePart;
+                    return $wholePart . $postfix;
                 }
 
                 // For whole numbers, convert directly
-                return $formatter->format($number);
+                return $formatter->format($number) . $postfix;
             }
         }else{
             return '';
