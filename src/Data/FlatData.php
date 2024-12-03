@@ -372,6 +372,8 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $repricing_period_affordable,
         public ?string $loan_period_in_years,
         public ?string $aif_attorney,
+        public ?string $loan_base,
+        public ?string $loan_base_in_words,
 
     ) {}
 
@@ -797,7 +799,14 @@ class FlatData extends \Spatie\LaravelData\Data
             mrisri_docstamp_total: number_format($data->order->mrisri_docstamp_total ?? 0, 2),
             repricing_period_affordable: $data->order->repricing_period_affordable ?? '',
             loan_period_in_years: intdiv($data->order->loan_period_months ?? 0, 12),
-            aif_attorney: $data->order->aif ? strtoupper("{$data->order->aif_attorney_first_name} {$data->order->aif_attorney_last_name} {$data->order->aif_attorney_middle_name} {$data->order->aif_attorney_name_suffix}") : '',
+            aif_attorney: strtoupper(collect([
+                $data->order->aif_attorney_first_name,
+                mb_substr($data->order->aif_attorney_middle_name ?? '', 0, 1) ? mb_substr($data->order->aif_attorney_middle_name, 0, 1) . '.' : '',
+                $data->order->aif_attorney_last_name,
+                $data->order->aif_attorney_name_suffix,
+            ])->filter()->implode(' ')),
+            loan_base: number_format($data->order->loan_base ?? 0, 2),
+            loan_base_in_words: strtoupper(self::convertNumberToWords($data->order->loan_base ?? 0, true, ' PESOS')),
         );
     }
 
