@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v1.5.84 - 2024-12-05
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.83...v1.5.84
+
 ## v1.5.80 - 2024-11-27
 
 **Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.5.79...v1.5.80
