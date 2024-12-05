@@ -805,8 +805,8 @@ class FlatData extends \Spatie\LaravelData\Data
                 $data->order->aif_attorney_last_name,
                 $data->order->aif_attorney_name_suffix,
             ])->filter()->implode(' ')),
-            loan_base: number_format($data->order->loan_base ?? 0, 2),
-            loan_base_in_words: strtoupper(self::convertNumberToWords($data->order->loan_base ?? 0, true, ' PESOS')),
+            loan_base:is_numeric($data->order->loan_base)? number_format($data->order->loan_base , 2):0,
+            loan_base_in_words: strtoupper(self::convertNumberToWords(is_numeric($data->order->loan_base)?$data->order->loan_base:0, true, ' PESOS')),
         );
     }
 
