@@ -535,7 +535,7 @@ class FlatData extends \Spatie\LaravelData\Data
             loan_term: $data->order->loan_term ?? '',
             loan_term_in_years : (string)((int)($data->order->loan_term ?? 0) / 12),
             loan_term_in_years_in_words : strtoupper(self::convertNumberToWords((int)($data->order->loan_term ?? 0) / 12)),
-            loan_interest_rate:is_numeric($data->order->loan_interest_rate) ? $data->order->loan_interest_rate*100:'',
+            loan_interest_rate:is_numeric($data->order->loan_interest_rate) ? $data->order->loan_interest_rate:'',
             tct_no: $data->order->tct_no ?? '',
 
             sku: $data->order->sku ?? '',
