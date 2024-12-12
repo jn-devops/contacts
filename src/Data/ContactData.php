@@ -566,7 +566,7 @@ class ContactOrderData extends Data
             'equity_1_monthly_payment' =>$this->equity_1_monthly_payment,
             'equity_1_effective_date'=>$this->equity_1_effective_date,
 
-            'bp_1_amount' =>$this->equity_1_amount,
+            'bp_1_amount' =>$this->bp_1_amount,
             'bp_1_percentage_rate' =>$this->bp_1_percentage_rate,
             'bp_1_interest_rate' =>$this->bp_1_interest_rate,
             'bp_1_terms' =>$this->bp_1_terms,
