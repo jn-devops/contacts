@@ -93,6 +93,7 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
         'landline',
         'mothers_maiden_name',
         'spouse',
+        'aif',
         'addresses',
         'employment',
         'co_borrowers',
@@ -120,6 +121,7 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
         // 'other_mobile' => RawPhoneNumberCast::class.':PH',
         // 'help_number' => RawPhoneNumberCast::class.':PH',
         'spouse' => 'array',
+        'aif' => 'array',
         'addresses' => 'array',
         'employment' => 'array',
         'co_borrowers' => 'array',
@@ -139,7 +141,7 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
     {
         static::creating(function (Contact $contact) {
             $contact->id = Str::uuid()->toString();
-            $contact->setAttribute('password', Str::password());
+//            $contact->setAttribute('password', Str::password());
         });
     }
 

@@ -47,6 +47,22 @@ class ContactFactory extends Factory
                 'landline' => $customFaker->phoneNumber(),
                 'mothers_maiden_name' => $this->faker->lastName().', '.$this->faker->firstName().' '.$this->faker->lastName(),
             ],
+            'aif' => [
+                'first_name' => $this->faker->firstName(),
+                'middle_name' => $this->faker->lastName(),
+                'last_name' => $this->faker->lastName(),
+                'name_suffix' => $customFaker->nameSuffix(),
+                'civil_status' => $this->faker->randomElement(['Single', 'Married', 'Annulled/Divorced', 'Legally Seperated', 'Widow/er']),
+                'sex' => $this->faker->randomElement(['Male', 'Female']),
+                'nationality' => 'Filipino',
+                'date_of_birth' => $this->faker->date(),
+                'email' => $this->faker->email(),
+                'mobile' => $customFaker->phoneNumber(),
+                'other_mobile' => $customFaker->phoneNumber(),
+                'help_number' => $customFaker->phoneNumber(),
+                'landline' => $customFaker->phoneNumber(),
+                'mothers_maiden_name' => $this->faker->lastName().', '.$this->faker->firstName().' '.$this->faker->lastName(),
+            ],
             'addresses' => [
                 [
                     'type' => 'primary',

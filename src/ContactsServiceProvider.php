@@ -21,6 +21,7 @@ class ContactsServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasRoute('api')
             ->hasMigration('create_contacts_table')
+            ->hasMigration('update_fields_and_then_add_some_in_contacts_table')
             ->hasCommand(ContactsCommand::class);
     }
 }
