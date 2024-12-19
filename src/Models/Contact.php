@@ -7,6 +7,7 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Homeful\Common\Traits\HasPackageFactory as HasFactory;
 use Propaganistas\LaravelPhone\Casts\RawPhoneNumberCast;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Homeful\Common\Interfaces\BorrowerInterface;
@@ -16,6 +17,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Homeful\Contacts\Data\ContactData;
+use Spatie\ModelStatus\HasStatuses;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Arr;
@@ -23,7 +25,7 @@ use Illuminate\Support\Str;
 use Spatie\Image\Enums\Fit;
 use Whitecube\Price\Price;
 use Brick\Money\Money;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+
 
 /**
  * Class Contact
@@ -76,6 +78,7 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
     use HasFactory;
     use InteractsWithMedia;
     use Notifiable;
+    use HasStatuses;
 
     protected $fillable = [
         'reference_code',
