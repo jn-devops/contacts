@@ -67,6 +67,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property Media $deedOfSaleDocument
  * @property array $current_status
  * @property array $current_status_code
+ * @property string $status_reason
  *
  * @method int getKey()
  */
@@ -114,6 +115,7 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
         'deedOfSaleDocument',
         'current_status',
         'current_status_code',
+        'status_reason',
     ];
 
     protected $casts = [
