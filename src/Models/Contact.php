@@ -131,7 +131,6 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
         'employment' => 'array',
         'co_borrowers' => 'array',
         'order' => 'array',
-
     ];
 
     protected array $dates = [
@@ -172,12 +171,14 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
 
     public function getNameAttribute(): string
     {
-        if (trim($this->middle_name)) {
-            return $this->name ?? "$this->first_name $this->middle_name $this->last_name";
-        }
-        else {
-            return $this->name ?? "$this->first_name $this->last_name";
-        }
+//        if (trim($this->middle_name)) {
+//            return $this->name ?? "$this->first_name $this->middle_name $this->last_name";
+//        }
+//        else {
+//            return $this->name ?? "$this->first_name $this->last_name";
+//        }
+
+        return $this->name ?? implode(' ', array_filter([$this->first_name, $this->middle_name, $this->last_name, $this->name_suffix]));
     }
 
     public function getIdImageAttribute(): ?Media
