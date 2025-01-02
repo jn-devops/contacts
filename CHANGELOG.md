@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.6.6 - 2025-01-02
+
+fix getNameAttribute if no middle name
+
 ## #v1.6.5 - 2025-01-02
 
 add enums and metadata
