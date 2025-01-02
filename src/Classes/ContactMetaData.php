@@ -43,6 +43,6 @@ class ContactMetaData extends Data
         public ?DataCollection $co_borrowers,
         public ?AIFMetadata $aif
     ) {
-        $this->name = implode(' ', array_filter([$this->first_name, $this->middle_name, $this->last_name]));
+        $this->name = implode(' ', array_filter([$this->first_name, $this->middle_name, $this->last_name, $this->name_suffix]));
     }
 }
