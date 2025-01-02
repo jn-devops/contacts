@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.6.8 - 2025-01-02
+
+add name suffix to name attribute
+
 ## #v1.6.7 - 2025-01-02
 
 add datetime format in date_of_birth'
