@@ -172,8 +172,12 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
 
     public function getNameAttribute(): string
     {
-
-        return $this->name?? "$this->first_name $this->middle_name $this->last_name";
+        if (trim($this->middle_name)) {
+            return $this->name ?? "$this->first_name $this->middle_name $this->last_name";
+        }
+        else {
+            return $this->name ?? "$this->first_name $this->last_name";
+        }
     }
 
     public function getIdImageAttribute(): ?Media
