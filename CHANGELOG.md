@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.6.7 - 2025-01-02
+
+add datetime format in date_of_birth'
+
 ## #v1.6.6 - 2025-01-02
 
 fix getNameAttribute if no middle name
