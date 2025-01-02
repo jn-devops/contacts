@@ -32,7 +32,7 @@ class ContactMetaData extends Data
         public Sex|null $sex,
         public Nationality|null $nationality,
         #[WithTransformer(DateTimeInterfaceTransformer::class, format: 'Y-m-d')]
-        #[WithCast(DateTimeInterfaceCast::class, timeZone: 'Asia/Manila')]
+        #[WithCast(DateTimeInterfaceCast::class, timeZone: 'Asia/Manila', format: 'Y-m-d')]
         public Carbon|null $date_of_birth,
         /** @var AddressMetadata[] */
         public ?DataCollection $addresses,
@@ -41,7 +41,6 @@ class ContactMetaData extends Data
         public ?SpouseMetadata $spouse,
         /** @var CoBorrowerMetadata[] */
         public ?DataCollection $co_borrowers,
-        #[MapInputName('order')]
         public ?AIFMetadata $aif
     ) {
         $this->name = implode(' ', array_filter([$this->first_name, $this->middle_name, $this->last_name]));

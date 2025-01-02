@@ -279,3 +279,15 @@ test('contact can login', function () {
     expect(auth()->user()->is($contact))->toBeTrue();
 
 });
+
+test('conjure contact from metadata', function () {
+    $array = [
+        'first_name' => 'Lester',
+        'last_name' => 'Hurtado',
+        'mobile' => '09171234567',
+        'email' => 'lester@hurtado.ph',
+        'date_of_birth' => '1970-04-21',
+    ];
+    $metadata = \Homeful\Contacts\Classes\ContactMetaData::from($array);
+    expect($metadata)->toBeInstanceOf(\Homeful\Contacts\Classes\ContactMetaData::class);
+});
