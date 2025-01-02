@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.6.5 - 2025-01-02
+
+add enums and metadata
+
 ## v1.6.3 - 2024-12-19
 
 **Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.6.2...v1.6.3
