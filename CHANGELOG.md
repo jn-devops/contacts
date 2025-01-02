@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.6.9 - 2025-01-02
+
+fix name suffix in contact meta data'
+
 ## #v1.6.8 - 2025-01-02
 
 add name suffix to name attribute
