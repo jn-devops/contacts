@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.7.0 - 2025-01-08
+
+Update Enums
+
 ## #v1.6.9 - 2025-01-02
 
 fix name suffix in contact meta data'
