@@ -9,8 +9,8 @@ enum Ownership: string
     use EnumUtils;
 
     case OWNED = 'Owned';
+    case LIVING_WITH_RELATIVES = 'Living with Relatives';
     case RENTED = 'Rented';
-    case UNKNOWN = 'Unknown';
 
     static function default(): self {
         return self::UNKNOWN;

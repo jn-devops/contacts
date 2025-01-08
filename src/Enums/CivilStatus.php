@@ -10,9 +10,11 @@ enum CivilStatus: string
 
     case SINGLE = 'Single';
     case MARRIED = 'Married';
-    case DIVORCED = 'Divorced';
-    case LEGALLY_SEPARATED = 'Legally Separated';
     case WIDOWED = 'Widowed';
+    case DIVORCED = 'Divorced';
+    case SEPARATED = 'Separated';
+    case WIDOW_ER = 'Widow/er';
+
 
     static function default(): self {
         return self::MARRIED;

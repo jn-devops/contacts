@@ -10,6 +10,10 @@ enum EmploymentStatus: string
 
     case REGULAR = 'Regular';
     case CONTRACTUAL = 'Contractual';
+    case LOCALLY_EMPLOYED = 'Locally Employed';
+    case OFW = 'Overseas Filipino Worker (OFW)';
+    case SELF_EMPLOYED = 'Self Employed with Business';
+
 
     static function default(): self {
         return self::REGULAR;

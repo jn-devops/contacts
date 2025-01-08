@@ -10,7 +10,7 @@ enum EmploymentType: string
 
     case LOCALLY_EMPLOYED = 'Locally Employed';
     case SELF_EMPLOYED = 'Self-Employed';
-    case OFW = 'OFW';
+    case OFW = 'Overseas Filipino Worker (OFW)';
 
     static function default(): self {
         return self::LOCALLY_EMPLOYED;
