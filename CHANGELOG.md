@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.7.1 - 2025-01-12
+
+add fromModel in ContactMetadata
+
 ## #v1.7.0 - 2025-01-08
 
 Update Enums
