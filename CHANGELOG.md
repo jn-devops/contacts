@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.7.5 - 2025-01-12
+
+re-release v1.7.4
+
 ## #v1.7.4 - 2025-01-12
 
 remove fromModel from ContactMetadata'
