@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v1.7.3 - 2025-01-12
+
+add fromContactModelToContactMetadata to Contacts facade
+
 ## #v1.7.2 - 2025-01-12
 
 comment fromModel in ContactMetadata'
