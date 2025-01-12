@@ -14,14 +14,27 @@ beforeEach(function () {
     $migration->up();
 });
 
-test('contact metadata from contact model using action', function () {
+test('contact metadata from contact factory using action', function () {
     $contact = Contact::factory()->create();
     $data = app(GetContactMetadataFromContactModel::class)->run($contact);
     expect($data)->toBeInstanceOf(ContactMetaData::class);
 });
 
-test('contact metadata from contact model using facade', function () {
+test('contact metadata from contact model using action', function () {
+    $contact = Contact::create([
+        'first_name' => fake()->firstName(),
+        'last_name' => fake()->lastName(),
+        'date_of_birth' => fake()->date(),
+        'email' => fake()->email(),
+        'mobile' => '09171234567',
+    ]);
+    $data = app(GetContactMetadataFromContactModel::class)->run($contact);
+    expect($data)->toBeInstanceOf(ContactMetaData::class);
+});
+
+test('contact metadata from contact factory using facade', function () {
     $contact = Contact::factory()->create();
     $data = Contacts::fromContactModelToContactMetadata($contact);
     expect($data)->toBeInstanceOf(ContactMetaData::class);
 });
+
