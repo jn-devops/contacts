@@ -1,64 +1,36 @@
 <?php
 
-namespace Homeful\Contacts\Classes;
+namespace Homeful\Contacts\Actions;
 
-use Spatie\LaravelData\Transformers\DateTimeInterfaceTransformer;
-use Spatie\LaravelData\Attributes\{WithCast, WithTransformer};
-use Homeful\Contacts\Enums\{AddressType,
-    CivilStatus,
-    CoBorrowerType,
-    Employment,
-    EmploymentStatus,
-    EmploymentType,
-    Industry,
-    Nationality,
-    Ownership,
-    Sex};
-use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
-use Spatie\LaravelData\Attributes\MapInputName;
-use Spatie\LaravelData\{Data, DataCollection};
+use Homeful\Contacts\Classes\AddressMetadata;
+use Homeful\Contacts\Classes\AIFMetadata;
+use Homeful\Contacts\Classes\CoBorrowerMetadata;
+use Homeful\Contacts\Classes\ContactMetaData;
+use Homeful\Contacts\Classes\EmployerMetadata;
+use Homeful\Contacts\Classes\EmploymentMetadata;
+use Homeful\Contacts\Classes\IdMetadata;
+use Homeful\Contacts\Classes\SpouseMetadata;
+use Homeful\Contacts\Enums\AddressType;
+use Homeful\Contacts\Enums\CivilStatus;
+use Homeful\Contacts\Enums\CoBorrowerType;
+use Homeful\Contacts\Enums\Employment;
+use Homeful\Contacts\Enums\EmploymentStatus;
+use Homeful\Contacts\Enums\EmploymentType;
+use Homeful\Contacts\Enums\Industry;
+use Homeful\Contacts\Enums\Nationality;
+use Homeful\Contacts\Enums\Ownership;
+use Homeful\Contacts\Enums\Sex;
+use Lorisleiva\Actions\Concerns\AsAction;
 use Homeful\Contacts\Models\Contact;
-use Homeful\Common\Traits\WithAck;
-use Illuminate\Support\Carbon;
+use Spatie\LaravelData\DataCollection;
 
-class ContactMetaData extends Data
+class GetContactMetadataFromContactModel
 {
-    use WithAck;
+    use AsAction;
 
-    public string $name;
-
-    public function __construct(
-        public string $first_name,
-        public ?string $middle_name,
-        public string $last_name,
-        public ?string $name_suffix,
-        public ?string $mothers_maiden_name,
-        public string $email,
-        public string $mobile,
-        public ?string $other_mobile,
-        public ?string $help_number,
-        public ?string $landline,
-        public CivilStatus|null $civil_status,
-        public Sex|null $sex,
-        public Nationality|null $nationality,
-        #[WithTransformer(DateTimeInterfaceTransformer::class, format: 'Y-m-d')]
-        #[WithCast(DateTimeInterfaceCast::class, timeZone: 'Asia/Manila', format: 'Y-m-d')]
-        public Carbon|null $date_of_birth,
-        /** @var AddressMetadata[] */
-        public ?DataCollection $addresses,
-        /** @var EmploymentMetadata[] */
-        public ?DataCollection $employment,
-        public ?SpouseMetadata $spouse,
-        /** @var CoBorrowerMetadata[] */
-        public ?DataCollection $co_borrowers,
-        public ?AIFMetadata $aif
-    ) {
-        $this->name = implode(' ', array_filter([$this->first_name, $this->middle_name, $this->last_name, $this->name_suffix]));
-    }
-
-    public static function fromModel(Contact $model): self
+    public function handle(Contact $model): ContactMetaData
     {
-        return new self(
+        return new ContactMetaData(
             first_name: $model->first_name,
             middle_name: $model->middle_name,
             last_name: $model->last_name,
