@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.7.8 - 2025-01-25
+
+add dummy class to house dummy TIN
+
 ## #v1.7.7 - 2025-01-25
 
 add customer model
