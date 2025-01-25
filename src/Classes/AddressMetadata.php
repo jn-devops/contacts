@@ -3,6 +3,8 @@
 namespace Homeful\Contacts\Classes;
 
 use Homeful\Contacts\Enums\{AddressType, Ownership};
+use Spatie\LaravelData\Attributes\WithCast;
+use Spatie\LaravelData\Casts\EnumCast;
 use Homeful\Common\Traits\WithAck;
 use Spatie\LaravelData\Data;
 
@@ -13,7 +15,9 @@ class AddressMetadata extends Data
     public string $address;
 
     public function __construct(
+        #[WithCast(EnumCast::class)]
         public AddressType $type,
+        #[WithCast(EnumCast::class)]
         public Ownership $ownership,
         public string $address1,
         public string $locality,

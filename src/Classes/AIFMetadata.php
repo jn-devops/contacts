@@ -3,8 +3,10 @@
 namespace Homeful\Contacts\Classes;
 
 use Homeful\Contacts\Enums\{CivilStatus, Nationality, Sex};
-use Spatie\LaravelData\{Data, DataCollection};
+use Spatie\LaravelData\Attributes\WithCast;
+use Spatie\LaravelData\Casts\EnumCast;
 use Homeful\Common\Traits\WithAck;
+use Spatie\LaravelData\Data;
 
 class AIFMetadata extends Data
 {
@@ -14,12 +16,15 @@ class AIFMetadata extends Data
 
     public function __construct(
         public string $first_name,
-        public string $middle_name,
+        public ?string $middle_name,
         public string $last_name,
         public ?string $name_suffix,
         public ?string $mothers_maiden_name,
+        #[WithCast(EnumCast::class)]
         public CivilStatus $civil_status,
+        #[WithCast(EnumCast::class)]
         public Sex $sex,
+        #[WithCast(EnumCast::class)]
         public Nationality $nationality,
         public $date_of_birth,
         public ?string $email,
@@ -28,5 +33,10 @@ class AIFMetadata extends Data
         public ?string $landline,
     ) {
         $this->name = implode(' ', array_filter([$this->first_name, $this->middle_name, $this->last_name]));
+    }
+
+    public static function prepareForPipeline($properties) : array
+    {
+        return array_filter($properties);
     }
 }
