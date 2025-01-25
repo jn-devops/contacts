@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.7.7 - 2025-01-25
+
+add customer model
+
 ## #v1.7.6 - 2025-01-12
 
 fix GetContactMetadataFromContactModel to address null attributes
