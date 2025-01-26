@@ -67,8 +67,14 @@ class Customer extends Contact
 
     public function setEmploymentAttribute($value): self
     {
-        $value = is_array($value) ? $value : json_decode($value, true);
-        $this->attributes['employment'] = json_encode(array_map(fn ($item) => array_filter($item), $value));
+        if (! is_array($value)) {
+            $value = json_decode($value, true);
+        }
+
+        // Recursively filter null or '' from each sub-level
+        $value = filter_trim_recursive_array($value);
+//dd($value);
+        $this->attributes['employment'] = json_encode($value);
 
         return $this;
     }

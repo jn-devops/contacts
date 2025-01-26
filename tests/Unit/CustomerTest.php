@@ -1,7 +1,7 @@
 <?php
 
+use Homeful\Contacts\Enums\{AddressType, CivilStatus, CoBorrowerType, Employment, EmploymentStatus, EmploymentType,  Industry, Nationality, Ownership, Sex};
 use Homeful\Contacts\Classes\{AddressMetadata, AIFMetadata, CoBorrowerMetadata, ContactMetaData, EmploymentMetadata, SpouseMetadata};
-use Homeful\Contacts\Enums\{AddressType, CivilStatus, CoBorrowerType, Employment, EmploymentStatus, Nationality, Ownership, Sex};
 use Illuminate\Foundation\Testing\{RefreshDatabase, WithFaker};
 use Illuminate\Support\Facades\Notification;
 use Spatie\LaravelData\DataCollection;
@@ -74,19 +74,35 @@ test('customer can accept addresses', function (Customer $contact) {
 })->with('customer');
 
 test('contact can accept employment', function (Customer $contact) {
-    $contact->employment = json_encode([
+    $contact->employment = [
         [
             'type' => Employment::default()->value,
             'monthly_gross_income' => 100000,
             'employment_status' => EmploymentStatus::default()->value,
-            'employer' => '',
-            'employment_type' => null,
+            'employer' => [
+                "name" => "3neti",
+                "email" => "lester@hurtado.ph",
+                "address" => [
+                    "type" => "Primary",
+                    "region" => "NCR",
+                    "country" => "PH",
+                    "address1" => "8 West Maya Drive, Philam Homes, QC",
+                    "locality" => "Pasig City",
+                    "ownership" => "Owned",
+                    "postal_code" => "1400",
+                    "administrative_area" => "Metro Manila"
+                ],
+                "industry" => Industry::random()->value,
+                "contact_no" => '',
+                "nationality" => Nationality::random()->value
+            ],
+            'employment_type' => EmploymentType::default()->value,
             'current_position' => null,
             'id' =>  [
                 'tin' => '123-456-789'
             ]
         ]
-    ]);
+    ];
     $contact->save();
     expect($contact->employment)->toBeInstanceOf(DataCollection::class);
     expect($contact->employment->first())->toBeInstanceOf(EmploymentMetadata::class);

@@ -3,7 +3,10 @@
 namespace Homeful\Contacts\Classes;
 
 use Homeful\Contacts\Enums\{Industry, Nationality};
+use Spatie\LaravelData\Attributes\WithCast;
+use Spatie\LaravelData\Casts\EnumCast;
 use Homeful\Common\Traits\WithAck;
+use Spatie\LaravelData\Optional;
 use Spatie\LaravelData\Data;
 
 class EmployerMetadata extends Data
@@ -14,8 +17,10 @@ class EmployerMetadata extends Data
         public string $name,
         public ?string $email,
         public ?string $contact_no,
+        #[WithCast(EnumCast::class)]
         public ?Nationality $nationality,
+        #[WithCast(EnumCast::class)]
         public ?Industry $industry,
-        public ?AddressMetadata $address
+        public AddressMetadata|Optional $address
     ) {}
 }

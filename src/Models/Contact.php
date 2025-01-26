@@ -50,6 +50,7 @@ use Brick\Money\Money;
  * @property array $addresses
  * @property array $employment
  * @property array $co_borrowers
+ * @property array $aif
  * @property array $uploads
  * @property array $order
  * @property array $media
