@@ -168,6 +168,17 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
             : parent::getTable();
     }
 
+    protected static function newFactory()
+    {
+        $factoryClass = config('contacts.models.contact.factory_class');
+
+        if (!empty($factoryClass) && class_exists($factoryClass)) {
+            return $factoryClass::new();
+        }
+
+        return parent::newFactory();
+    }
+
     public function routeNotificationForEngageSpark(): string
     {
         return $this->mobile;
