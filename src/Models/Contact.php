@@ -7,6 +7,7 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Homeful\Common\Traits\HasPackageFactory as HasFactory;
 use Propaganistas\LaravelPhone\Casts\RawPhoneNumberCast;
+use Homeful\Contacts\Database\Factories\ContactFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -146,7 +147,6 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
     {
         static::creating(function (Contact $contact) {
             $contact->id = Str::uuid()->toString();
-//            $contact->setAttribute('password', Str::password());
         });
     }
 
@@ -176,7 +176,7 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
             return $factoryClass::new();
         }
 
-        return parent::newFactory();
+        return ContactFactory::new();
     }
 
     public function routeNotificationForEngageSpark(): string
