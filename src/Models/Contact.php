@@ -150,6 +150,24 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
         });
     }
 
+    public function getConnectionName()
+    {
+        $connection = config('contacts.models.contact.connection');
+
+        return !empty($connection)
+            ? $connection
+            : parent::getConnectionName();
+    }
+
+    public function getTable()
+    {
+        $table = config('contacts.models.contact.table');
+
+        return !empty($table)
+            ? $table
+            : parent::getTable();
+    }
+
     public function routeNotificationForEngageSpark(): string
     {
         return $this->mobile;
