@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.8.1 - 2025-01-28
+
+add configurable factory class to contact model
+
 ## #v1.8.0 - 2025-01-28
 
 add configurable connection
