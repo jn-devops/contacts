@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.8.3 - 2025-01-29
+
+add code to employment type and employment status
+
 ## #v1.8.2 - 2025-01-28
 
 add new factory fallback
