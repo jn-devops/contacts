@@ -39,4 +39,12 @@ enum EmploymentStatus: string
 
         throw new \InvalidArgumentException("Invalid EmploymentStatus code: {$code}");
     }
+
+    static function tryFromCode(string $code): self {
+        try {
+            return self::fromCode($code);
+        } catch (\InvalidArgumentException $e) {
+            return static::default();
+        }
+    }
 }
