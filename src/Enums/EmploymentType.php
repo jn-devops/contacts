@@ -16,7 +16,7 @@ enum EmploymentType: string
         return self::LOCALLY_EMPLOYED;
     }
 
-    public function sync_id(): string
+    public function code(): string
     {
         return match($this) {
             self::LOCALLY_EMPLOYED => '001',
@@ -25,12 +25,13 @@ enum EmploymentType: string
         };
     }
 
-    public function code(): string
-    {
-        return match($this) {
-            self::LOCALLY_EMPLOYED => '001',
-            self::SELF_EMPLOYED => '002',
-            self::OFW => '003'
-        };
+    static function fromCode(string $code): self {
+        foreach (self::cases() as $case) {
+            if ($case->code() === $code) {
+                return $case;
+            }
+        }
+
+        throw new \InvalidArgumentException("Invalid EmploymentType code: {$code}");
     }
 }

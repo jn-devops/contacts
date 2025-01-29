@@ -29,4 +29,14 @@ enum EmploymentStatus: string
             self::SELF_EMPLOYED => '005',
         };
     }
+
+    static function fromCode(string $code): self {
+        foreach (self::cases() as $case) {
+            if ($case->code() === $code) {
+                return $case;
+            }
+        }
+
+        throw new \InvalidArgumentException("Invalid EmploymentStatus code: {$code}");
+    }
 }
