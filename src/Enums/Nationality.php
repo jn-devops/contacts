@@ -3,10 +3,12 @@
 namespace Homeful\Contacts\Enums;
 
 use Homeful\Common\Traits\EnumUtils;
+use Homeful\Contacts\Traits\HasCode;
 
 enum Nationality: string
 {
     use EnumUtils;
+    use HasCode;
 
     case AFGHAN = 'Afghan';
     case ALBANIAN = 'Albanian';
@@ -209,5 +211,13 @@ enum Nationality: string
 
     static function default(): self {
         return self::FILIPINO;
+    }
+
+    public function code(): string
+    {
+        return match ($this) {
+            self::AMERICAN => '004',
+            default => '076'
+        };
     }
 }
