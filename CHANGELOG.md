@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.8.9 - 2025-01-30
+
+make address1 nullable in AddressMetadata
+
 ## #v1.8.8 - 2025-01-30
 
 add has code to civil status
