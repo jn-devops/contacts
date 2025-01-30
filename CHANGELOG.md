@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.8.6 - 2025-01-30
+
+add has code trait
+
 ## #v1.8.5 - 2025-01-29
 
 add tryFromCode to employment type and employment status
