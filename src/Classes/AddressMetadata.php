@@ -19,7 +19,7 @@ class AddressMetadata extends Data
         public AddressType $type,
         #[WithCast(EnumCast::class)]
         public Ownership $ownership,
-        public string $address1,
+        public ?string $address1,
         public string $locality,
         public string $administrative_area,
         public string $postal_code,
