@@ -3,10 +3,12 @@
 namespace Homeful\Contacts\Enums;
 
 use Homeful\Common\Traits\EnumUtils;
+use Homeful\Contacts\Traits\HasCode;
 
 enum EmploymentType: string
 {
     use EnumUtils;
+    use HasCode;
 
     case LOCALLY_EMPLOYED = 'Locally Employed';
     case SELF_EMPLOYED = 'Self-Employed';
@@ -23,23 +25,5 @@ enum EmploymentType: string
             self::SELF_EMPLOYED => '002',
             self::OFW => '003'
         };
-    }
-
-    static function fromCode(string $code): self {
-        foreach (self::cases() as $case) {
-            if ($case->code() === $code) {
-                return $case;
-            }
-        }
-
-        throw new \InvalidArgumentException("Invalid EmploymentType code: {$code}");
-    }
-
-    static function tryFromCode(string $code): self {
-        try {
-            return self::fromCode($code);
-        } catch (\InvalidArgumentException $e) {
-            return static::default();
-        }
     }
 }
