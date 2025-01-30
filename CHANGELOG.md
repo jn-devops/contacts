@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.9.0 - 2025-01-30
+
+add other function to sex enum
+
 ## #v1.8.9 - 2025-01-30
 
 make address1 nullable in AddressMetadata
