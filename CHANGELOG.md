@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.9.8 - 2025-01-31
+
+make all fields nullable
+
 ## #v1.9.7 - 2025-01-31
 
 make locality optional in AddressMetadata
