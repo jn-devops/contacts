@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.9.7 - 2025-01-31
+
+make locality optional in AddressMetadata
+
 ## #v1.9.6 - 2025-01-31
 
 fix type in Nationality::FAROESE
