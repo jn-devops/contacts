@@ -3,10 +3,12 @@
 namespace Homeful\Contacts\Enums;
 
 use Homeful\Common\Traits\EnumUtils;
+use Homeful\Contacts\Traits\HasCode;
 
 enum Industry: string
 {
     use EnumUtils;
+    use HasCode;
 
     case ACCOUNTING = 'Accounting';
     case ACTIVITIES_OF_PRIVATE_HOUSEHOLDS = "Activities of Private Households as Employer's & Undifferentiated Production Activities of Private Households";
@@ -110,8 +112,15 @@ enum Industry: string
     case WHOLESALE_RETAIL_TRADE_REPAIR = 'Wholesale & Retail Trade; Repair of Motor vehicles, Motorcycles, Personal and Household Goods';
     case WIRELESS_TELECOMMUNICATION_SERVICES = 'Wireless Telecommunication Services';
 
-
     static function default(): self {
-        return self::BPO;
+        return self::UNEMPLOYED;
+    }
+
+    public function code(): string
+    {
+        return match ($this) {
+            self::BUSINESS_PROCESS_OUTSOURCING_BPO => '014',
+            default => '102' //UNEMPLOYED
+        };
     }
 }
