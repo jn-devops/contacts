@@ -21,10 +21,10 @@ class AddressMetadata extends Data
         public Ownership $ownership,
         public ?string $address1,
         public ?string $locality,
-        public string $administrative_area,
-        public string $postal_code,
-        public string $region,
-        public string $country
+        public ?string $administrative_area,
+        public ?string $postal_code,
+        public ?string $region,
+        public ?string $country
     ) {
         $this->address = implode(', ', array_filter([$this->address1, $this->locality, $this->administrative_area, $this->postal_code]));
     }
