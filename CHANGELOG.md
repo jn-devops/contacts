@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.9.5 - 2025-01-31
+
+correct typos in position and nationality enums
+
 ## #v1.9.4 - 2025-01-31
 
 add industry, nationality, position enums
