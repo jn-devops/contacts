@@ -187,7 +187,7 @@ enum Nationality: string
     case SAO_TOMEAN = 'Sao Tomean';
     case SAUDI_ARABIAN = 'Saudi Arabian';
     case SCOTTISH = 'Scottish';
-    case SENEGALese = 'Senegalese';
+    case SENEGALESE = 'Senegalese';
     case SERBIAN = 'Serbian';
     case SIERRA_LEONEAN = 'Sierra Leonean';
     case SINGAPOREAN = 'Singaporean';
