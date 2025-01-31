@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.9.3 - 2025-01-31
+
+add specialty retail to code in industry
+
 ## #v1.9.2 - 2025-01-31
 
 add position and tenure enums
