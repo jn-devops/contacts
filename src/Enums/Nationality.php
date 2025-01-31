@@ -289,7 +289,7 @@ enum Nationality: string
             self::ERITREAN => '71',
             self::ESTONIAN => '72',
             self::ETHIOPIAN => '73',
-            self::FAROES => '74',
+            self::FAROESE => '74',
             self::FIJIAN => '75',
             self::FILIPINO => '76',
             self::FINNISH => '77',
