@@ -120,6 +120,7 @@ enum Industry: string
     {
         return match ($this) {
             self::BUSINESS_PROCESS_OUTSOURCING_BPO => '014',
+            self::SPECIALTY_RETAIL => '092',
             default => '102' //UNEMPLOYED
         };
     }
