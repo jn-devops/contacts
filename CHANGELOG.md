@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.9.91 - 2025-02-01
+
+add relation enum
+
 ## #v1.9.9 - 2025-02-01
 
 add customer factory
