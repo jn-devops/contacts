@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.9.9 - 2025-02-01
+
+add customer factory
+
 ## #v1.9.8 - 2025-01-31
 
 make all fields nullable
