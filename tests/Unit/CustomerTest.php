@@ -2,6 +2,7 @@
 
 use Homeful\Contacts\Enums\{AddressType, CivilStatus, CoBorrowerType, Employment, EmploymentStatus, EmploymentType,  Industry, Nationality, Ownership, Sex};
 use Homeful\Contacts\Classes\{AddressMetadata, AIFMetadata, CoBorrowerMetadata, ContactMetaData, EmploymentMetadata, SpouseMetadata};
+use Homeful\Contacts\Actions\GetContactMetadataFromContactModel;
 use Illuminate\Foundation\Testing\{RefreshDatabase, WithFaker};
 use Illuminate\Support\Facades\Notification;
 use Spatie\LaravelData\DataCollection;
@@ -184,3 +185,22 @@ test('contact can accept co-borrowers', function (Customer $contact) {
     expect($contact->co_borrowers)->toBeInstanceOf(DataCollection::class);
     expect($contact->co_borrowers->first())->toBeInstanceOf(CoBorrowerMetadata::class);
 })->with('customer');
+
+test('customer has factory', function () {
+    $customer = Customer::factory()->create();
+    if ($customer instanceof Customer) {
+        expect($customer->addresses)->toBeInstanceOf(DataCollection::class);
+        expect($customer->addresses->first())->toBeInstanceOf(AddressMetadata::class);
+        expect($customer->employment)->toBeInstanceOf(DataCollection::class);
+        expect($customer->employment->first())->toBeInstanceOf(EmploymentMetadata::class);
+        expect($customer->spouse)->toBeInstanceOf(SpouseMetadata::class);
+        expect($customer->co_borrowers)->toBeInstanceOf(DataCollection::class);
+        expect($customer->co_borrowers->first())->toBeInstanceOf(CoBorrowerMetadata::class);
+        expect($customer->aif)->toBeInstanceOf(AIFMetadata::class);
+        expect($customer->getData())->toBeInstanceOf(ContactMetaData::class);
+        dd(app(GetContactMetadataFromContactModel::class)->run($customer));
+    }
+    else {
+        dd($customer);
+    }
+});

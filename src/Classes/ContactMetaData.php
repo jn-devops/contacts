@@ -50,8 +50,35 @@ class ContactMetaData extends Data
         $this->name = implode(' ', array_filter([$this->first_name, $this->middle_name, $this->last_name, $this->name_suffix]));
     }
 
-    public static function prepareForPipeline($properties) : array
+    public static function prepareForPipeline($properties): array
     {
+        // Ensure addresses are properly prepared
+        if (isset($properties['addresses']) && $properties['addresses'] instanceof DataCollection) {
+            $properties['addresses'] = $properties['addresses']->toArray();
+        }
+
+        // Ensure employment are properly prepared
+        if (isset($properties['employment']) && $properties['employment'] instanceof DataCollection) {
+            $properties['employment'] = $properties['employment']->toArray();
+        }
+
+        // Ensure spouse is properly prepared
+        if (isset($properties['spouse']) && $properties['spouse'] instanceof SpouseMetadata) {
+            $properties['spouse'] = $properties['spouse']->toArray();
+        }
+
+        // Ensure aif is properly prepared
+        if (isset($properties['aif']) && $properties['aif'] instanceof AIFMetadata) {
+            $properties['aif'] = $properties['aif']->toArray();
+        }
+
+        // Ensure co_borrowers are properly prepared
+        if (isset($properties['co_borrowers']) && $properties['co_borrowers'] instanceof DataCollection) {
+            $properties['co_borrowers'] = $properties['co_borrowers']->toArray();
+        }
+
+        // Filter and clean up the properties
         return array_filter($properties);
     }
 }
+

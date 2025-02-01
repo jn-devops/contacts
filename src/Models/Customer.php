@@ -5,10 +5,17 @@ namespace Homeful\Contacts\Models;
 use Homeful\Contacts\Classes\{AddressMetadata, AIFMetadata, CoBorrowerMetadata, ContactMetaData, EmploymentMetadata, SpouseMetadata};
 use Propaganistas\LaravelPhone\Exceptions\CountryCodeException;
 use Homeful\Contacts\Enums\{CivilStatus, Nationality, Sex};
+use Homeful\Contacts\Database\Factories\CustomerFactory;
 use Spatie\LaravelData\{DataCollection, WithData};
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Spatie\LaravelData\Data;
 use DateTimeInterface;
 
+/**
+ * Class Customer
+ *
+ * @method Data getData()
+ */
 class Customer extends Contact
 {
     use WithData;
@@ -34,6 +41,11 @@ class Customer extends Contact
             'co_borrowers' => DataCollection::class . ':' . CoBorrowerMetadata::class,
             'aif' => AIFMetadata::class,
         ];
+    }
+
+    protected static function newFactory(): CustomerFactory
+    {
+        return CustomerFactory::new();
     }
 
     protected function Mobile(): Attribute
