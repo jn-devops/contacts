@@ -2,9 +2,9 @@
 
 namespace Homeful\Contacts\Classes;
 
+use Homeful\Contacts\Enums\{CivilStatus, Nationality, Sex, Suffix};
 use Spatie\LaravelData\Transformers\DateTimeInterfaceTransformer;
 use Spatie\LaravelData\Attributes\{WithCast, WithTransformer};
-use Homeful\Contacts\Enums\{CivilStatus, Nationality, Sex};
 use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\{Data, DataCollection};
 use Spatie\LaravelData\Casts\EnumCast;
@@ -22,7 +22,8 @@ class ContactMetaData extends Data
         public string $first_name,
         public ?string $middle_name,
         public string $last_name,
-        public ?string $name_suffix,
+        #[WithCast(EnumCast::class)]
+        public Suffix|null $name_suffix,
         public ?string $mothers_maiden_name,
         public string $email,
         public string $mobile,

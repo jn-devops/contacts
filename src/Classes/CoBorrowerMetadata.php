@@ -2,8 +2,8 @@
 
 namespace Homeful\Contacts\Classes;
 
-use Homeful\Contacts\Enums\{CivilStatus, CoBorrowerType, Nationality, Sex};
-use Spatie\LaravelData\{Data, DataCollection};
+use Homeful\Contacts\Enums\{CivilStatus, CoBorrowerType, Nationality, Relation, Sex};
+use Spatie\LaravelData\{Data, DataCollection, Optional};
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Casts\EnumCast;
 use Homeful\Common\Traits\WithAck;
@@ -35,6 +35,8 @@ class CoBorrowerMetadata extends Data
         public ?string $mobile,
         public ?string $other_mobile,
         public ?string $landline,
+        #[WithCast(EnumCast::class)]
+        public Relation|Optional $relation
     ) {
         $this->name = implode(' ', array_filter([$this->first_name, $this->middle_name, $this->last_name]));
     }
