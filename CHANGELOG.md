@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.9.96 - 2025-02-02
+
+fix suffix in CustomerFactory
+
 ## #v1.9.95 - 2025-02-02
 
 fix name suffix in computed name
