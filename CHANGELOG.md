@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.9.93 - 2025-02-02
+
+add suffix cast to name_suffix attribute of spouse and co-borrower
+
 ## #v1.9.92 - 2025-02-02
 
 add relation to co-borrower, add suffix enum and update contact metadata
