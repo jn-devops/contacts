@@ -2,16 +2,8 @@
 
 namespace Homeful\Contacts\Database\Factories;
 
-use Homeful\Contacts\Enums\{AddressType,
-    CivilStatus,
-    CoBorrowerType,
-    Employment,
-    EmploymentStatus,
-    EmploymentType,
-    Industry,
-    Nationality,
-    Ownership,
-    Sex};
+use Homeful\Contacts\Enums\{AddressType, CivilStatus, CoBorrowerType, Employment, EmploymentStatus,
+    EmploymentType, Industry, Nationality, Ownership, Sex, Suffix};
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Generator as BaseGenerator;
 use Homeful\Contacts\Models\Customer;
@@ -29,7 +21,7 @@ class CustomerFactory extends Factory
             'first_name' => $this->faker->firstName(),
             'middle_name' => $this->faker->lastName(),
             'last_name' => $this->faker->lastName(),
-            'name_suffix' => $customFaker->nameSuffix(),
+            'name_suffix' => Suffix::random()->value,
             'civil_status' => CivilStatus::random()->value,
             'sex' => Sex::random()->value,
             'nationality' => Nationality::random()->value,
@@ -120,7 +112,7 @@ class CustomerFactory extends Factory
                 'first_name' => $this->faker->firstName(),
                 'middle_name' => $this->faker->lastName(),
                 'last_name' => $this->faker->lastName(),
-                'name_suffix' => $customFaker->nameSuffix(),
+                'name_suffix' => Suffix::random()->value,
                 'civil_status' => CivilStatus::random()->value,
                 'sex' => Sex::random()->value,
                 'nationality' => Nationality::random()->value,
@@ -278,7 +270,7 @@ class CustomerFactory extends Factory
                 'first_name' => $this->faker->firstName(),
                 'middle_name' => $this->faker->lastName(),
                 'last_name' => $this->faker->lastName(),
-                'name_suffix' => $customFaker->nameSuffix(),
+                'name_suffix' => Suffix::random()->value,
                 'civil_status' => CivilStatus::random()->value,
                 'sex' => Sex::random()->value,
                 'nationality' => Nationality::random()->value,

@@ -198,7 +198,7 @@ test('customer has factory', function () {
         expect($customer->co_borrowers->first())->toBeInstanceOf(CoBorrowerMetadata::class);
         expect($customer->aif)->toBeInstanceOf(AIFMetadata::class);
         expect($customer->getData())->toBeInstanceOf(ContactMetaData::class);
-        dd(app(GetContactMetadataFromContactModel::class)->run($customer));
+//        dd(app(GetContactMetadataFromContactModel::class)->run($customer));
     }
     else {
         dd($customer);
