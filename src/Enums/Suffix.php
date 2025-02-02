@@ -10,7 +10,7 @@ enum Suffix: string
     use EnumUtils;
     use HasCode;
 
-    case NA = 'N/A';
+    case NA = '';
     case JR = 'Jr.';
     case SR = 'Sr.';
     case II = 'II';
