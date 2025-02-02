@@ -2,7 +2,7 @@
 
 namespace Homeful\Contacts\Classes;
 
-use Homeful\Contacts\Enums\{CivilStatus, Nationality, Sex};
+use Homeful\Contacts\Enums\{CivilStatus, Nationality, Sex, Suffix};
 use Spatie\LaravelData\{Data, DataCollection};
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Casts\EnumCast;
@@ -19,7 +19,8 @@ class SpouseMetadata extends Data
         public string $first_name,
         public ?string $middle_name,
         public string $last_name,
-        public ?string $name_suffix,
+        #[WithCast(EnumCast::class)]
+        public Suffix|null $name_suffix,
         public ?string $mothers_maiden_name,
         #[WithCast(EnumCast::class)]
         public CivilStatus $civil_status,
