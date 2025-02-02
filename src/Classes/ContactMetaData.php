@@ -48,7 +48,7 @@ class ContactMetaData extends Data
         public DataCollection|Optional $co_borrowers,
         public AIFMetadata|Optional $aif
     ) {
-        $this->name = implode(' ', array_filter([$this->first_name, $this->middle_name, $this->last_name, $this->name_suffix]));
+        $this->name = implode(' ', array_filter([$this->first_name, $this->middle_name, $this->last_name, $name_suffix?->value]));
     }
 
     public static function prepareForPipeline($properties): array
