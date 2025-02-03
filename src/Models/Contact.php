@@ -69,6 +69,37 @@ use Brick\Money\Money;
  * @property Media $invoiceDocument
  * @property Media $receiptDocument
  * @property Media $deedOfSaleDocument
+ * @property Media $governmentId1
+ * @property Media $governmentId2
+ * @property Media $certificateOfEmployment
+ * @property Media $oneMonthLatestPayslip
+ * @property Media $esav
+ * @property Media $birthCertificate
+ * @property Media $photo4x1WhiteBackground
+ * @property Media $proofOfBillingAddress
+ * @property Media $letterOfConsentEmployer
+ * @property Media $threeMonthsCertifiedPayslips
+ * @property Media $employmentContract
+ * @property Media $ofwEmploymentCertificate
+ * @property Media $passportWithVisa
+ * @property Media $workingPermit
+ * @property Media $notarizedSpa
+ * @property Media $authorizedRepInfoSheet
+ * @property Media $validIdAif
+ * @property Media $workingPermitCard
+ * @property Media $itrBir1701
+ * @property Media $auditedFinancialStatement
+ * @property Media $officialReceiptTaxPayment
+ * @property Media $businessMayorsPermit
+ * @property Media $dtiBusinessRegistration
+ * @property Media $sketchOfBusinessLocation
+ * @property Media $letterOfConsentCreditBackgroundInvestigation
+ * @property Media $marriageCertificate
+ * @property Media $governmentIdOfSpouse
+ * @property Media $courtDecisionAnnulment
+ * @property Media $marriageContract
+ * @property Media $courtDecisionSeparation
+ * @property Media $deathCertificate
  * @property array $current_status
  * @property array $current_status_code
  * @property string $status_reason
@@ -118,6 +149,37 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
         'invoiceDocument',
         'receiptDocument',
         'deedOfSaleDocument',
+        'governmentId1',
+        'governmentId2',
+        'certificateOfEmployment',
+        'oneMonthLatestPayslip',
+        'esav',
+        'birthCertificate',
+        'photo4x1WhiteBackground',
+        'proofOfBillingAddress',
+        'letterOfConsentEmployer',
+        'threeMonthsCertifiedPayslips',
+        'employmentContract',
+        'ofwEmploymentCertificate',
+        'passportWithVisa',
+        'workingPermit',
+        'notarizedSpa',
+        'authorizedRepInfoSheet',
+        'validIdAif',
+        'workingPermitCard',
+        'itrBir1701',
+        'auditedFinancialStatement',
+        'officialReceiptTaxPayment',
+        'businessMayorsPermit',
+        'dtiBusinessRegistration',
+        'sketchOfBusinessLocation',
+        'letterOfConsentCreditBackgroundInvestigation',
+        'marriageCertificate',
+        'governmentIdOfSpouse',
+        'courtDecisionAnnulment',
+        'marriageContract',
+        'courtDecisionSeparation',
+        'deathCertificate',
         'current_status',
         'current_status_code',
         'status_reason',
@@ -528,6 +590,750 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
             $this->addMediaFromUrl($url)
                 ->usingName('deedOfSaleDocument')
                 ->toMediaCollection('deed_of_sale-documents');
+        }
+
+        return $this;
+    }
+
+    // Government ID 1
+    public function getGovernmentId1(): ?Media
+    {
+        return $this->getFirstMedia('government-id-1');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setGovernmentId1Attribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('governmentId1')
+                ->toMediaCollection('government-id-1');
+        }
+
+        return $this;
+    }
+
+// Government ID 2
+    public function getGovernmentId2(): ?Media
+    {
+        return $this->getFirstMedia('government-id-2');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setGovernmentId2Attribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('governmentId2')
+                ->toMediaCollection('government-id-2');
+        }
+
+        return $this;
+    }
+
+// Certificate of Employment
+    public function getCertificateOfEmployment(): ?Media
+    {
+        return $this->getFirstMedia('certificate-of-employment');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setCertificateOfEmploymentAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('certificateOfEmployment')
+                ->toMediaCollection('certificate-of-employment');
+        }
+
+        return $this;
+    }
+
+// One Month Latest Payslip
+    public function getOneMonthLatestPayslip(): ?Media
+    {
+        return $this->getFirstMedia('one-month-latest-payslip');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setOneMonthLatestPayslipAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('oneMonthLatestPayslip')
+                ->toMediaCollection('one-month-latest-payslip');
+        }
+
+        return $this;
+    }
+
+// ESAV
+    public function getEsav(): ?Media
+    {
+        return $this->getFirstMedia('esav');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setEsavAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('esav')
+                ->toMediaCollection('esav');
+        }
+
+        return $this;
+    }
+
+// Birth Certificate
+    public function getBirthCertificate(): ?Media
+    {
+        return $this->getFirstMedia('birth-certificate');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setBirthCertificateAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('birthCertificate')
+                ->toMediaCollection('birth-certificate');
+        }
+
+        return $this;
+    }
+
+// Photo 4x1 White Background
+    public function getPhoto4x1WhiteBackground(): ?Media
+    {
+        return $this->getFirstMedia('photo-4x1-white-background');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setPhoto4x1WhiteBackgroundAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('photo4x1WhiteBackground')
+                ->toMediaCollection('photo-4x1-white-background');
+        }
+
+        return $this;
+    }
+
+// Proof of Billing Address
+    public function getProofOfBillingAddress(): ?Media
+    {
+        return $this->getFirstMedia('proof-of-billing-address');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setProofOfBillingAddressAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('proofOfBillingAddress')
+                ->toMediaCollection('proof-of-billing-address');
+        }
+
+        return $this;
+    }
+
+// Letter of Consent Employer
+    public function getLetterOfConsentEmployer(): ?Media
+    {
+        return $this->getFirstMedia('letter-of-consent-employer');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setLetterOfConsentEmployerAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('letterOfConsentEmployer')
+                ->toMediaCollection('letter-of-consent-employer');
+        }
+
+        return $this;
+    }
+
+// Three Months Certified Payslips
+    public function getThreeMonthsCertifiedPayslips(): ?Media
+    {
+        return $this->getFirstMedia('three-months-certified-payslips');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setThreeMonthsCertifiedPayslipsAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('threeMonthsCertifiedPayslips')
+                ->toMediaCollection('three-months-certified-payslips');
+        }
+
+        return $this;
+    }
+
+// Employment Contract
+    public function getEmploymentContract(): ?Media
+    {
+        return $this->getFirstMedia('employment-contract');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setEmploymentContractAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('employmentContract')
+                ->toMediaCollection('employment-contract');
+        }
+
+        return $this;
+    }
+
+// OFW Employment Certificate
+    public function getOfwEmploymentCertificate(): ?Media
+    {
+        return $this->getFirstMedia('ofw-employment-certificate');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setOfwEmploymentCertificateAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('ofwEmploymentCertificate')
+                ->toMediaCollection('ofw-employment-certificate');
+        }
+
+        return $this;
+    }
+
+// Passport With Visa
+    public function getPassportWithVisa(): ?Media
+    {
+        return $this->getFirstMedia('passport-with-visa');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setPassportWithVisaAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('passportWithVisa')
+                ->toMediaCollection('passport-with-visa');
+        }
+
+        return $this;
+    }
+
+// Working Permit
+    public function getWorkingPermit(): ?Media
+    {
+        return $this->getFirstMedia('working-permit');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setWorkingPermitAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('workingPermit')
+                ->toMediaCollection('working-permit');
+        }
+
+        return $this;
+    }
+
+    // Notarized SPA
+    public function getNotarizedSpa(): ?Media
+    {
+        return $this->getFirstMedia('notarized-spa');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setNotarizedSpaAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('notarizedSpa')
+                ->toMediaCollection('notarized-spa');
+        }
+
+        return $this;
+    }
+
+// Authorized Rep Information Sheet
+    public function getAuthorizedRepInfoSheet(): ?Media
+    {
+        return $this->getFirstMedia('authorized-rep-info-sheet');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setAuthorizedRepInfoSheetAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('authorizedRepInfoSheet')
+                ->toMediaCollection('authorized-rep-info-sheet');
+        }
+
+        return $this;
+    }
+
+// Valid ID AIF
+    public function getValidIdAif(): ?Media
+    {
+        return $this->getFirstMedia('valid-id-aif');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setValidIdAifAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('validIdAif')
+                ->toMediaCollection('valid-id-aif');
+        }
+
+        return $this;
+    }
+
+// Working Permit Card
+    public function getWorkingPermitCard(): ?Media
+    {
+        return $this->getFirstMedia('working-permit-card');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setWorkingPermitCardAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('workingPermitCard')
+                ->toMediaCollection('working-permit-card');
+        }
+
+        return $this;
+    }
+
+// Income Tax Return BIR 1701
+    public function getItrBir1701(): ?Media
+    {
+        return $this->getFirstMedia('itr-bir1701');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setItrBir1701Attribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('itrBir1701')
+                ->toMediaCollection('itr-bir1701');
+        }
+
+        return $this;
+    }
+
+// Audited Financial Statement
+    public function getAuditedFinancialStatement(): ?Media
+    {
+        return $this->getFirstMedia('audited-financial-statement');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setAuditedFinancialStatementAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('auditedFinancialStatement')
+                ->toMediaCollection('audited-financial-statement');
+        }
+
+        return $this;
+    }
+
+// Official Receipt Tax Payment
+    public function getOfficialReceiptTaxPayment(): ?Media
+    {
+        return $this->getFirstMedia('official-receipt-tax-payment');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setOfficialReceiptTaxPaymentAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('officialReceiptTaxPayment')
+                ->toMediaCollection('official-receipt-tax-payment');
+        }
+
+        return $this;
+    }
+
+// Business Mayor's Permit
+    public function getBusinessMayorsPermit(): ?Media
+    {
+        return $this->getFirstMedia('business-mayors-permit');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setBusinessMayorsPermitAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('businessMayorsPermit')
+                ->toMediaCollection('business-mayors-permit');
+        }
+
+        return $this;
+    }
+
+// DTI Business Registration
+    public function getDtiBusinessRegistration(): ?Media
+    {
+        return $this->getFirstMedia('dti-business-registration');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setDtiBusinessRegistrationAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('dtiBusinessRegistration')
+                ->toMediaCollection('dti-business-registration');
+        }
+
+        return $this;
+    }
+
+// Sketch of Business Location
+    public function getSketchOfBusinessLocation(): ?Media
+    {
+        return $this->getFirstMedia('sketch-of-business-location');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setSketchOfBusinessLocationAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('sketchOfBusinessLocation')
+                ->toMediaCollection('sketch-of-business-location');
+        }
+
+        return $this;
+    }
+
+// Letter of Consent Credit Background Investigation
+    public function getLetterOfConsentCreditBackgroundInvestigation(): ?Media
+    {
+        return $this->getFirstMedia('letter-of-consent-credit-background-investigation');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setLetterOfConsentCreditBackgroundInvestigationAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('letterOfConsentCreditBackgroundInvestigation')
+                ->toMediaCollection('letter-of-consent-credit-background-investigation');
+        }
+
+        return $this;
+    }
+
+// Marriage Certificate
+    public function getMarriageCertificate(): ?Media
+    {
+        return $this->getFirstMedia('marriage-certificate');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setMarriageCertificateAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('marriageCertificate')
+                ->toMediaCollection('marriage-certificate');
+        }
+
+        return $this;
+    }
+
+// Government ID of Spouse
+    public function getGovernmentIdOfSpouse(): ?Media
+    {
+        return $this->getFirstMedia('government-id-of-spouse');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setGovernmentIdOfSpouseAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('governmentIdOfSpouse')
+                ->toMediaCollection('government-id-of-spouse');
+        }
+
+        return $this;
+    }
+
+// Court Decision Annulment
+    public function getCourtDecisionAnnulment(): ?Media
+    {
+        return $this->getFirstMedia('court-decision-annulment');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setCourtDecisionAnnulmentAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('courtDecisionAnnulment')
+                ->toMediaCollection('court-decision-annulment');
+        }
+
+        return $this;
+    }
+
+// Marriage Contract
+    public function getMarriageContract(): ?Media
+    {
+        return $this->getFirstMedia('marriage-contract');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setMarriageContractAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('marriageContract')
+                ->toMediaCollection('marriage-contract');
+        }
+
+        return $this;
+    }
+
+// Court Decision Separation
+    public function getCourtDecisionSeparation(): ?Media
+    {
+        return $this->getFirstMedia('court-decision-separation');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setCourtDecisionSeparationAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('courtDecisionSeparation')
+                ->toMediaCollection('court-decision-separation');
+        }
+
+        return $this;
+    }
+
+// Death Certificate
+    public function getDeathCertificate(): ?Media
+    {
+        return $this->getFirstMedia('death-certificate');
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws FileCannotBeAdded
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function setDeathCertificateAttribute(?string $url): static
+    {
+        if ($url) {
+            $this->addMediaFromUrl($url)
+                ->usingName('deathCertificate')
+                ->toMediaCollection('death-certificate');
         }
 
         return $this;
