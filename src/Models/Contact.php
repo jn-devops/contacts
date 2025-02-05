@@ -75,7 +75,7 @@ use Brick\Money\Money;
  * @property Media $oneMonthLatestPayslip
  * @property Media $esav
  * @property Media $birthCertificate
- * @property Media $photo4x1WhiteBackground
+ * @property Media photoImage
  * @property Media $proofOfBillingAddress
  * @property Media $letterOfConsentEmployer
  * @property Media $threeMonthsCertifiedPayslips
@@ -155,7 +155,7 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
         'oneMonthLatestPayslip',
         'esav',
         'birthCertificate',
-        'photo4x1WhiteBackground',
+        'photoImage',
         'proofOfBillingAddress',
         'letterOfConsentEmployer',
         'threeMonthsCertifiedPayslips',
@@ -740,9 +740,9 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
     }
 
 // Photo 4x1 White Background
-    public function getPhoto4x1WhiteBackground(): ?Media
+    public function getPhotoImageAttribute(): ?Media
     {
-        return $this->getFirstMedia('photo-4x1-white-background');
+        return $this->getFirstMedia('photo-images');
     }
 
     /**
@@ -752,12 +752,12 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
-    public function setPhoto4x1WhiteBackgroundAttribute(?string $url): static
+    public function setPhotoImageAttribute(?string $url): static
     {
         if ($url) {
             $this->addMediaFromUrl($url)
-                ->usingName('photo4x1WhiteBackground')
-                ->toMediaCollection('photo-4x1-white-background');
+                ->usingName('photoImage')
+                ->toMediaCollection('photo-images');
         }
 
         return $this;
@@ -1355,6 +1355,7 @@ class Contact extends Authenticatable implements BorrowerInterface, HasMedia
             'invoice-documents' => 'application/pdf',
             'receipt-documents' => 'application/pdf',
             'deed_of_sale-documents' => 'application/pdf',
+            'photo-images' => ['image/jpeg', 'image/png', 'image/webp'],
         ];
 
         foreach ($collections as $collection => $mimeTypes) {

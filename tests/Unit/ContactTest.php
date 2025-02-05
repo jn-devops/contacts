@@ -87,6 +87,7 @@ test('contact can attach media', function () {
     $invoiceDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
     $receiptDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
     $deedOfSaleDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $photoImage = 'https://jn-img.enclaves.ph/Test/selfieImage.jpg';
     $contact = Contact::factory()->create([
         'idImage' => null,
         'selfieImage' => null,
@@ -102,6 +103,7 @@ test('contact can attach media', function () {
         'invoiceDocument' => null,
         'receiptDocument' => null,
         'deedOfSaleDocument' => null,
+        'photoImage' => null,
     ]);
     $contact->idImage = $idImageUrl;
     $contact->selfieImage = $selfieImageUrl;
@@ -117,6 +119,7 @@ test('contact can attach media', function () {
     $contact->invoiceDocument = $invoiceDocument;
     $contact->receiptDocument = $receiptDocument;
     $contact->deedOfSaleDocument = $deedOfSaleDocument;
+    $contact->photoImage = $photoImage;
 
     $contact->save();
     expect($contact->idImage)->toBeInstanceOf(Media::class);
@@ -133,6 +136,7 @@ test('contact can attach media', function () {
     expect($contact->invoiceDocument)->toBeInstanceOf(Media::class);
     expect($contact->receiptDocument)->toBeInstanceOf(Media::class);
     expect($contact->deedOfSaleDocument)->toBeInstanceOf(Media::class);
+    expect($contact->photoImage)->toBeInstanceOf(Media::class);
     expect($contact->idImage->name)->toBe('idImage');
     expect($contact->selfieImage->name)->toBe('selfieImage');
     expect($contact->payslipImage->name)->toBe('payslipImage');
@@ -161,6 +165,7 @@ test('contact can attach media', function () {
     expect($contact->invoiceDocument->file_name)->toBe('test.pdf');
     expect($contact->receiptDocument->file_name)->toBe('test.pdf');
     expect($contact->deedOfSaleDocument->file_name)->toBe('test.pdf');
+    expect($contact->photoImage->file_name)->toBe('selfieImage.jpg');
     $host = (config('app.url'));
     config()->set('app.url', '');
     tap(config('app.url'), function ($host) use ($contact) {
