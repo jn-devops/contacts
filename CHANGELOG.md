@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.9.98 - 2025-02-05
+
+rename photo4x1WhiteBackground to photoImage
+
 ## #v1.9.97 - 2025-02-03
 
 Update Contact Model
