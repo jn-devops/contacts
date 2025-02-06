@@ -74,9 +74,9 @@ class OrderData extends Data
         public ?string                              $registry_of_deeds_address,
         public ?string                              $repricing_period_affordable,
         public ?string                              $disclosure_statement_on_loan_transaction_total,
-        public \App\Data\HDMFData|Optional          $hdmf,
-        public \App\Data\SellerData|Optional        $seller,
-        public \App\Data\PaymentSchemeData|Optional $payment_scheme,
+        public HDMFData|Optional          $hdmf,
+        public SellerData|Optional        $seller,
+        public PaymentSchemeData|Optional $payment_scheme,
     ) {
     }
 }
@@ -85,7 +85,7 @@ class HDMFData extends Data
 {
     public function __construct(
         public ?string $file,
-        public \App\Data\InputData|Optional $input
+        public InputData|Optional $input
     ){}
 }
 
