@@ -18,13 +18,13 @@ class OrderData extends Data
         public ?string $lot_area,
         public ?string $witness1,
         public ?string $witness2,
-        public ?float $loan_base,
+        public ?string $loan_base,
         public ?string $loan_term,
         public ?string $unit_type,
         public ?string $bp_1_terms,
         public ?string $floor_area,
         public ?string $promo_code,
-        public ?float $bp_1_amount,
+        public ?string $bp_1_amount,
         public ?string $exec_tin_no,
         public ?string $company_name,
         public ?string $project_code,
@@ -39,10 +39,10 @@ class OrderData extends Data
         public ?string $amort_nonlife2,
         public ?string $amort_nonlife3, //***
         public ?string $equity_1_terms,
-        public ?float $monthly_amort1,
-        public ?float $monthly_amort2,
-        public ?float $monthly_amort3,
-        public ?float $equity_1_amount,
+        public ?string $monthly_amort1,
+        public ?string $monthly_amort2,
+        public ?string $monthly_amort3,
+        public ?string $equity_1_amount,
         public ?string $project_address,
         public ?string $amort_princ_int1,
         public ?string $amort_princ_int2, //***
@@ -50,41 +50,42 @@ class OrderData extends Data
         public ?string $project_location,
         public ?string $repricing_period,
         public ?string $reservation_date,
-        public ?float $reservation_rate,
-        public ?float $net_loan_proceeds,
-        public ?float $bp_1_interest_rate,
+        public ?string $reservation_rate,
+        public ?string $net_loan_proceeds,
+        public ?string $bp_1_interest_rate,
         #[MapInputName('comencement_period')]
         public ?string $commencement_period,
         public ?string $loan_interest_rate,
         public ?string $loan_period_months,
         public ?string $unit_type_interior,
         public ?string $bp_1_effective_date,
-        public ?float $bp_1_monthly_payment,
-        public ?float $bp_1_percentage_rate,
+        public ?string $bp_1_monthly_payment,
+        public ?string $bp_1_percentage_rate,
         public ?string $mrisri_docstamp_total,
         public ?string $technical_description,
         public ?string $aif_attorney_last_name,
-        public ?float $equity_1_interest_rate,
-        public ?string $seller_commission_code,
-        public ?string $aif_attorney_first_name,
-        public ?string $aif_attorney_middle_name,
-        public ?string $aif_attorney_name_suffix,
-        public ?float $equity_1_monthly_payment,
-        public ?float $equity_1_percentage_rate,
-        public ?string $registry_of_deeds_address,
-        public ?string $repricing_period_affordable,
-        public ?float $disclosure_statement_on_loan_transaction_total,
-        public HDMFData|Optional $hdmf,
-        public SellerData|Optional $seller,
-        public PaymentSchemeData|Optional $payment_scheme,
-    ) {}
+        public ?string                              $equity_1_interest_rate,
+        public ?string                              $seller_commission_code,
+        public ?string                              $aif_attorney_first_name,
+        public ?string                              $aif_attorney_middle_name,
+        public ?string                              $aif_attorney_name_suffix,
+        public ?string                              $equity_1_monthly_payment,
+        public ?string                              $equity_1_percentage_rate,
+        public ?string                              $registry_of_deeds_address,
+        public ?string                              $repricing_period_affordable,
+        public ?string                              $disclosure_statement_on_loan_transaction_total,
+        public \App\Data\HDMFData|Optional          $hdmf,
+        public \App\Data\SellerData|Optional        $seller,
+        public \App\Data\PaymentSchemeData|Optional $payment_scheme,
+    ) {
+    }
 }
 
 class HDMFData extends Data
 {
     public function __construct(
         public ?string $file,
-        public InputData|Optional $input
+        public \App\Data\InputData|Optional $input
     ){}
 }
 
@@ -114,7 +115,7 @@ class InputData extends Data
         #[MapInputName('COBORROWER_2')]
         public ?string $coborrower_2,
         #[MapInputName('DESIRED_LOAN')]
-        public ?float $desired_loan,
+        public ?string $desired_loan,
         #[MapInputName('HOUSING_TYPE')]
         public ?string $housing_type,
         #[MapInputName('PROJECT_TYPE')]
@@ -136,7 +137,7 @@ class InputData extends Data
         #[MapInputName('TOTAL_FLOOR_NUMBER')]
         public ?string $total_floor_number,
         #[MapInputName('APPRAISED_VALUE_LOT')]
-        public ?float $appraised_value_lot,
+        public ?string $appraised_value_lot,
         #[MapInputName('TYPE_OF_DEVELOPMENT')]
         public ?string $type_of_development,
         #[MapInputName('APPRAISED_VALUE_HOUSE')]
@@ -164,7 +165,8 @@ class SellerData extends Data
         public ?string $team_head,
         public ?string $chief_seller_officer,
         public ?string $deputy_chief_seller_officer,
-    ){}
+    ){
+    }
 }
 
 class PaymentSchemeData extends Data
@@ -173,9 +175,9 @@ class PaymentSchemeData extends Data
         public ?array $fees,
         public ?string $method,
         public ?string $scheme,
-        public ?float $discount_rate,
-        public ?float $conditional_discount,
-        public ?float $total_contract_price,
-        public ?float $net_total_contract_price,
+        public ?string $discount_rate,
+        public ?string $conditional_discount,
+        public ?string $total_contract_price,
+        public ?string $net_total_contract_price,
     ){}
 }
