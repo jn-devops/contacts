@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.9.9994 - 2025-02-06
+
+Update Attributes
+
 ## #v1.9.993 - 2025-02-06
 
 add order property to ContactMetadata
