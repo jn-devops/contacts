@@ -3,6 +3,7 @@
 namespace Homeful\Contacts\Classes;
 
 use Homeful\Contacts\Enums\{CivilStatus, Nationality, Sex, Suffix};
+use Homeful\Contacts\Data\OrderData;
 use Spatie\LaravelData\Transformers\DateTimeInterfaceTransformer;
 use Spatie\LaravelData\Attributes\{WithCast, WithTransformer};
 use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
@@ -46,7 +47,8 @@ class ContactMetaData extends Data
         public SpouseMetadata|Optional $spouse,
         /** @var CoBorrowerMetadata[] */
         public DataCollection|Optional $co_borrowers,
-        public AIFMetadata|Optional $aif
+        public AIFMetadata|Optional $aif,
+        public OrderData|Optional $order
     ) {
         $this->name = implode(' ', array_filter([$this->first_name, $this->middle_name, $this->last_name, $name_suffix?->value]));
     }
