@@ -2,6 +2,11 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v1.9.9995 - 2025-02-07
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v1.9.9994...v1.9.9995
+pagibig_filing_site on flat_data and relationship_to_owner on co_borrower
+
 ## #v1.9.9994 - 2025-02-06
 
 Update Attributes
