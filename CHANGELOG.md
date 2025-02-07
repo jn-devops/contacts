@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.9.9998 - 2025-02-07
+
+expose id in ContactMetadata
+
 ## #v1.9.9996 - 2025-02-07
 
 update the work of Anaïs re documents
