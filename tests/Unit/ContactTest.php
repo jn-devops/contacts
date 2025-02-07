@@ -4,9 +4,7 @@ use Homeful\Contacts\Data\ContactData;
 use Homeful\Contacts\Models\Contact;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\{Arr, Carbon, Str};
 use Propaganistas\LaravelPhone\PhoneNumber;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -36,6 +34,7 @@ dataset('contact', function () {
                 'invoiceDocument' => 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf',
                 'receiptDocument' => 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf',
                 'deedOfSaleDocument' => 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf',
+                'governmentId1Image' => 'https://jn-img.enclaves.ph/Test/payslipImage.jpg',
             ]),
         ],
     ];
@@ -70,6 +69,7 @@ test('contact has schema attributes', function (Contact $contact) {
     expect($contact->invoiceDocument)->toBeInstanceOf(Media::class);
     expect($contact->receiptDocument)->toBeInstanceOf(Media::class);
     expect($contact->deedOfSaleDocument)->toBeInstanceOf(Media::class);
+    expect($contact->governmentId1Image)->toBeInstanceOf(Media::class);
 })->with('contact');
 
 test('contact can attach media', function () {
@@ -87,7 +87,39 @@ test('contact can attach media', function () {
     $invoiceDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
     $receiptDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
     $deedOfSaleDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $governmentId1Image = 'https://jn-img.enclaves.ph/Test/idImage.jpg';
+    $governmentId2Image = 'https://jn-img.enclaves.ph/Test/idImage.jpg';
+    $certificateOfEmploymentDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $oneMonthLatestPayslipDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $esavDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $birthCertificateDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
     $photoImage = 'https://jn-img.enclaves.ph/Test/selfieImage.jpg';
+    $proofOfBillingAddressDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+
+    $letterOfConsentEmployerDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $threeMonthsCertifiedPayslipsDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $employmentContractDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $ofwEmploymentCertificateDocument= 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $passportWithVisaDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $workingPermitDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $notarizedSpaDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $authorizedRepInfoSheetDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $validIdAifImage = 'https://jn-img.enclaves.ph/Test/selfieImage.jpg';
+    $workingPermitCardDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $itrBir1701Document = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $auditedFinancialStatementDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $officialReceiptTaxPaymentDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $businessMayorsPermitDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $dtiBusinessRegistrationDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $sketchOfBusinessLocationDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $letterOfConsentCreditBackgroundInvestigationDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $marriageCertificateDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $governmentIdOfSpouseImage = 'https://jn-img.enclaves.ph/Test/selfieImage.jpg';
+    $courtDecisionAnnulmentDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $marriageContractDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $courtDecisionSeparationDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $deathCertificateDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+
     $contact = Contact::factory()->create([
         'idImage' => null,
         'selfieImage' => null,
@@ -103,7 +135,38 @@ test('contact can attach media', function () {
         'invoiceDocument' => null,
         'receiptDocument' => null,
         'deedOfSaleDocument' => null,
+        'governmentId1Image' => null,
+        'governmentId2Image' => null,
+        'certificateOfEmploymentDocument' => null,
+        'oneMonthLatestPayslipDocument' => null,
+        'esavDocument' => null,
+        'birthCertificateDocument' => null,
         'photoImage' => null,
+        'proofOfBillingAddressDocument' => null,
+        'letterOfConsentEmployerDocument' => null,
+
+        'threeMonthsCertifiedPayslipsDocument' => null,
+        'employmentContractDocument' => null,
+        'ofwEmploymentCertificateDocument' => null,
+        'passportWithVisaDocument' => null,
+        'workingPermitDocument' => null,
+        'notarizedSpaDocument' => null,
+        'authorizedRepInfoSheetDocument' => null,
+        'validIdAifImage' => null,
+        'workingPermitCardDocument' => null,
+        'itrBir1701Document' => null,
+        'auditedFinancialStatementDocument' => null,
+        'officialReceiptTaxPaymentDocument' => null,
+        'businessMayorsPermitDocument' => null,
+        'dtiBusinessRegistrationDocument' => null,
+        'sketchOfBusinessLocationDocument' => null,
+        'letterOfConsentCreditBackgroundInvestigationDocument' => null,
+        'marriageCertificateDocument' => null,
+        'governmentIdOfSpouseImage' => null,
+        'courtDecisionAnnulmentDocument' => null,
+        'marriageContractDocument' => null,
+        'courtDecisionSeparationDocument' => null,
+        'deathCertificateDocument' => null,
     ]);
     $contact->idImage = $idImageUrl;
     $contact->selfieImage = $selfieImageUrl;
@@ -119,7 +182,38 @@ test('contact can attach media', function () {
     $contact->invoiceDocument = $invoiceDocument;
     $contact->receiptDocument = $receiptDocument;
     $contact->deedOfSaleDocument = $deedOfSaleDocument;
+    $contact->governmentId1Image = $governmentId1Image;
+    $contact->governmentId2Image = $governmentId2Image;
+    $contact->certificateOfEmploymentDocument = $certificateOfEmploymentDocument;
+    $contact->oneMonthLatestPayslipDocument = $oneMonthLatestPayslipDocument;
+    $contact->esavDocument = $esavDocument;
+    $contact->birthCertificateDocument = $birthCertificateDocument;
     $contact->photoImage = $photoImage;
+    $contact->proofOfBillingAddressDocument = $proofOfBillingAddressDocument;
+
+    $contact->letterOfConsentEmployerDocument = $letterOfConsentEmployerDocument;
+    $contact->threeMonthsCertifiedPayslipsDocument = $threeMonthsCertifiedPayslipsDocument;
+    $contact->employmentContractDocument = $employmentContractDocument;
+    $contact->ofwEmploymentCertificateDocument= $ofwEmploymentCertificateDocument;
+    $contact->passportWithVisaDocument = $passportWithVisaDocument;
+    $contact->workingPermitDocument = $workingPermitDocument;
+    $contact->notarizedSpaDocument = $notarizedSpaDocument;
+    $contact->authorizedRepInfoSheetDocument = $authorizedRepInfoSheetDocument;
+    $contact->validIdAifImage = $validIdAifImage;
+    $contact->workingPermitCardDocument = $workingPermitCardDocument;
+    $contact->itrBir1701Document = $itrBir1701Document;
+    $contact->auditedFinancialStatementDocument = $auditedFinancialStatementDocument;
+    $contact->officialReceiptTaxPaymentDocument = $officialReceiptTaxPaymentDocument;
+    $contact->businessMayorsPermitDocument = $businessMayorsPermitDocument;
+    $contact->dtiBusinessRegistrationDocument = $dtiBusinessRegistrationDocument;
+    $contact->sketchOfBusinessLocationDocument = $sketchOfBusinessLocationDocument;
+    $contact->letterOfConsentCreditBackgroundInvestigationDocument = $letterOfConsentCreditBackgroundInvestigationDocument;
+    $contact->marriageCertificateDocument = $marriageCertificateDocument;
+    $contact->governmentIdOfSpouseImage = $governmentIdOfSpouseImage;
+    $contact->courtDecisionAnnulmentDocument = $courtDecisionAnnulmentDocument;
+    $contact->marriageContractDocument = $marriageContractDocument;
+    $contact->courtDecisionSeparationDocument = $courtDecisionSeparationDocument;
+    $contact->deathCertificateDocument = $deathCertificateDocument;
 
     $contact->save();
     expect($contact->idImage)->toBeInstanceOf(Media::class);
@@ -136,7 +230,39 @@ test('contact can attach media', function () {
     expect($contact->invoiceDocument)->toBeInstanceOf(Media::class);
     expect($contact->receiptDocument)->toBeInstanceOf(Media::class);
     expect($contact->deedOfSaleDocument)->toBeInstanceOf(Media::class);
+    expect($contact->governmentId1Image)->toBeInstanceOf(Media::class);
+    expect($contact->governmentId2Image)->toBeInstanceOf(Media::class);
+    expect($contact->certificateOfEmploymentDocument)->toBeInstanceOf(Media::class);
+    expect($contact->oneMonthLatestPayslipDocument)->toBeInstanceOf(Media::class);
+    expect($contact->esavDocument)->toBeInstanceOf(Media::class);
+    expect($contact->birthCertificateDocument)->toBeInstanceOf(Media::class);
     expect($contact->photoImage)->toBeInstanceOf(Media::class);
+    expect($contact->proofOfBillingAddressDocument)->toBeInstanceOf(Media::class);
+
+    expect($contact->letterOfConsentEmployerDocument)->toBeInstanceOf(Media::class);
+    expect($contact->threeMonthsCertifiedPayslipsDocument)->toBeInstanceOf(Media::class);
+    expect($contact->employmentContractDocument)->toBeInstanceOf(Media::class);
+    expect($contact->ofwEmploymentCertificateDocument)->toBeInstanceOf(Media::class);
+    expect($contact->passportWithVisaDocument)->toBeInstanceOf(Media::class);
+    expect($contact->workingPermitDocument)->toBeInstanceOf(Media::class);
+    expect($contact->notarizedSpaDocument)->toBeInstanceOf(Media::class);
+    expect($contact->authorizedRepInfoSheetDocument)->toBeInstanceOf(Media::class);
+    expect($contact->validIdAifImage)->toBeInstanceOf(Media::class);
+    expect($contact->workingPermitCardDocument)->toBeInstanceOf(Media::class);
+    expect($contact->itrBir1701Document)->toBeInstanceOf(Media::class);
+    expect($contact->auditedFinancialStatementDocument)->toBeInstanceOf(Media::class);
+    expect($contact->officialReceiptTaxPaymentDocument)->toBeInstanceOf(Media::class);
+    expect($contact->businessMayorsPermitDocument)->toBeInstanceOf(Media::class);
+    expect($contact->dtiBusinessRegistrationDocument )->toBeInstanceOf(Media::class);
+    expect($contact->sketchOfBusinessLocationDocument)->toBeInstanceOf(Media::class);
+    expect($contact->letterOfConsentCreditBackgroundInvestigationDocument)->toBeInstanceOf(Media::class);
+    expect($contact->marriageCertificateDocument)->toBeInstanceOf(Media::class);
+    expect($contact->governmentIdOfSpouseImage)->toBeInstanceOf(Media::class);
+    expect($contact->courtDecisionAnnulmentDocument)->toBeInstanceOf(Media::class);
+    expect($contact->marriageContractDocument)->toBeInstanceOf(Media::class);
+    expect($contact->courtDecisionSeparationDocument)->toBeInstanceOf(Media::class);
+    expect($contact->deathCertificateDocument)->toBeInstanceOf(Media::class);
+
     expect($contact->idImage->name)->toBe('idImage');
     expect($contact->selfieImage->name)->toBe('selfieImage');
     expect($contact->payslipImage->name)->toBe('payslipImage');
@@ -151,7 +277,38 @@ test('contact can attach media', function () {
     expect($contact->invoiceDocument->name)->toBe('invoiceDocument');
     expect($contact->receiptDocument->name)->toBe('receiptDocument');
     expect($contact->deedOfSaleDocument->name)->toBe('deedOfSaleDocument');
-    expect($contact->idImage->file_name)->toBe('idImage.jpg');
+    expect($contact->governmentId1Image->name)->toBe('governmentId1Image');
+    expect($contact->certificateOfEmploymentDocument->name)->toBe('certificateOfEmploymentDocument');
+    expect($contact->oneMonthLatestPayslipDocument->name)->toBe('oneMonthLatestPayslipDocument');
+    expect($contact->esavDocument->name)->toBe('esavDocument');
+    expect($contact->birthCertificateDocument->name)->toBe('birthCertificateDocument');
+    expect($contact->photoImage->name)->toBe('photoImage');
+    expect($contact->proofOfBillingAddressDocument->name)->toBe('proofOfBillingAddressDocument');
+
+    expect($contact->letterOfConsentEmployerDocument->name)->toBe('letterOfConsentEmployerDocument');
+    expect($contact->threeMonthsCertifiedPayslipsDocument->name)->toBe('threeMonthsCertifiedPayslipsDocument');
+    expect($contact->employmentContractDocument->name)->toBe('employmentContractDocument');
+    expect($contact->ofwEmploymentCertificateDocument->name)->toBe('ofwEmploymentCertificateDocument');
+    expect($contact->passportWithVisaDocument->name)->toBe('passportWithVisaDocument');
+    expect($contact->workingPermitDocument->name)->toBe('workingPermitDocument');
+    expect($contact->notarizedSpaDocument->name)->toBe('notarizedSpaDocument');
+    expect($contact->authorizedRepInfoSheetDocument->name)->toBe('authorizedRepInfoSheetDocument');
+    expect($contact->validIdAifImage->name)->toBe('validIdAifImage');
+    expect($contact->workingPermitCardDocument->name)->toBe('workingPermitCardDocument');
+    expect($contact->itrBir1701Document->name)->toBe('itrBir1701Document');
+    expect($contact->auditedFinancialStatementDocument->name)->toBe('auditedFinancialStatementDocument');
+    expect($contact->officialReceiptTaxPaymentDocument->name)->toBe('officialReceiptTaxPaymentDocument');
+    expect($contact->businessMayorsPermitDocument->name)->toBe('businessMayorsPermitDocument');
+    expect($contact->dtiBusinessRegistrationDocument->name)->toBe('dtiBusinessRegistrationDocument');
+    expect($contact->sketchOfBusinessLocationDocument->name)->toBe('sketchOfBusinessLocationDocument');
+    expect($contact->letterOfConsentCreditBackgroundInvestigationDocument->name)->toBe('letterOfConsentCreditBackgroundInvestigationDocument');
+    expect($contact->marriageCertificateDocument->name)->toBe('marriageCertificateDocument');
+    expect($contact->governmentIdOfSpouseImage->name)->toBe('governmentIdOfSpouseImage');
+    expect($contact->courtDecisionAnnulmentDocument->name)->toBe('courtDecisionAnnulmentDocument');
+    expect($contact->marriageContractDocument->name)->toBe('marriageContractDocument');
+    expect($contact->courtDecisionSeparationDocument->name)->toBe('courtDecisionSeparationDocument');
+    expect($contact->deathCertificateDocument->name)->toBe('deathCertificateDocument');
+
     expect($contact->selfieImage->file_name)->toBe('selfieImage.jpg');
     expect($contact->payslipImage->file_name)->toBe('payslipImage.jpg');
     expect($contact->signatureImage->file_name)->toBe('payslipImage.jpg');
@@ -165,7 +322,39 @@ test('contact can attach media', function () {
     expect($contact->invoiceDocument->file_name)->toBe('test.pdf');
     expect($contact->receiptDocument->file_name)->toBe('test.pdf');
     expect($contact->deedOfSaleDocument->file_name)->toBe('test.pdf');
+    expect($contact->governmentId1Image->file_name)->toBe('idImage.jpg');
+    expect($contact->governmentId2Image->file_name)->toBe('idImage.jpg');
+    expect($contact->certificateOfEmploymentDocument->file_name)->toBe('test.pdf');
+    expect($contact->oneMonthLatestPayslipDocument->file_name)->toBe('test.pdf');
+    expect($contact->esavDocument->file_name)->toBe('test.pdf');
+    expect($contact->birthCertificateDocument->file_name)->toBe('test.pdf');
     expect($contact->photoImage->file_name)->toBe('selfieImage.jpg');
+    expect($contact->proofOfBillingAddressDocument->file_name)->toBe('test.pdf');
+
+    expect($contact->letterOfConsentEmployerDocument->file_name)->toBe('test.pdf');
+    expect($contact->threeMonthsCertifiedPayslipsDocument->file_name)->toBe('test.pdf');
+    expect($contact->employmentContractDocument->file_name)->toBe('test.pdf');
+    expect($contact->ofwEmploymentCertificateDocument->file_name)->toBe('test.pdf');
+    expect($contact->passportWithVisaDocument->file_name)->toBe('test.pdf');
+    expect($contact->workingPermitDocument->file_name)->toBe('test.pdf');
+    expect($contact->notarizedSpaDocument->file_name)->toBe('test.pdf');
+    expect($contact->authorizedRepInfoSheetDocument->file_name)->toBe('test.pdf');
+    expect($contact->validIdAifImage->file_name)->toBe('selfieImage.jpg');
+    expect($contact->workingPermitCardDocument->file_name)->toBe('test.pdf');
+    expect($contact->itrBir1701Document->file_name)->toBe('test.pdf');
+    expect($contact->auditedFinancialStatementDocument->file_name)->toBe('test.pdf');
+    expect($contact->officialReceiptTaxPaymentDocument->file_name)->toBe('test.pdf');
+    expect($contact->businessMayorsPermitDocument->file_name)->toBe('test.pdf');
+    expect($contact->dtiBusinessRegistrationDocument->file_name)->toBe('test.pdf');
+    expect($contact->sketchOfBusinessLocationDocument->file_name)->toBe('test.pdf');
+    expect($contact->letterOfConsentCreditBackgroundInvestigationDocument->file_name)->toBe('test.pdf');
+    expect($contact->marriageCertificateDocument->file_name)->toBe('test.pdf');
+    expect($contact->governmentIdOfSpouseImage->file_name)->toBe('selfieImage.jpg');
+    expect($contact->courtDecisionAnnulmentDocument->file_name)->toBe('test.pdf');
+    expect($contact->marriageContractDocument->file_name)->toBe('test.pdf');
+    expect($contact->courtDecisionSeparationDocument->file_name)->toBe('test.pdf');
+    expect($contact->deathCertificateDocument->file_name)->toBe('test.pdf');
+
     $host = (config('app.url'));
     config()->set('app.url', '');
     tap(config('app.url'), function ($host) use ($contact) {
@@ -183,6 +372,38 @@ test('contact can attach media', function () {
         expect($contact->invoiceDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->invoiceDocument->getPathRelativeToRoot()]));
         expect($contact->receiptDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->receiptDocument->getPathRelativeToRoot()]));
         expect($contact->deedOfSaleDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->deedOfSaleDocument->getPathRelativeToRoot()]));
+        expect($contact->governmentId1Image->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->governmentId1Image->getPathRelativeToRoot()]));
+        expect($contact->governmentId2Image->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->governmentId2Image->getPathRelativeToRoot()]));
+        expect($contact->certificateOfEmploymentDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->certificateOfEmploymentDocument->getPathRelativeToRoot()]));
+        expect($contact->oneMonthLatestPayslipDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->oneMonthLatestPayslipDocument->getPathRelativeToRoot()]));
+        expect($contact->esavDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->esavDocument->getPathRelativeToRoot()]));
+        expect($contact->birthCertificateDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->birthCertificateDocument->getPathRelativeToRoot()]));
+        expect($contact->photoImage->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->photoImage->getPathRelativeToRoot()]));
+        expect($contact->proofOfBillingAddressDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->proofOfBillingAddressDocument->getPathRelativeToRoot()]));
+
+        expect($contact->letterOfConsentEmployerDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->letterOfConsentEmployerDocument->getPathRelativeToRoot()]));
+        expect($contact->threeMonthsCertifiedPayslipsDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->threeMonthsCertifiedPayslipsDocument->getPathRelativeToRoot()]));
+        expect($contact->employmentContractDocument)->getUrl()->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->employmentContractDocument->getPathRelativeToRoot()]));
+        expect($contact->ofwEmploymentCertificateDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->ofwEmploymentCertificateDocument->getPathRelativeToRoot()]));
+        expect($contact->passportWithVisaDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->passportWithVisaDocument->getPathRelativeToRoot()]));
+        expect($contact->workingPermitDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->workingPermitDocument->getPathRelativeToRoot()]));
+        expect($contact->notarizedSpaDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->notarizedSpaDocument->getPathRelativeToRoot()]));
+        expect($contact->authorizedRepInfoSheetDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->authorizedRepInfoSheetDocument->getPathRelativeToRoot()]));
+        expect($contact->validIdAifImage->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->validIdAifImage->getPathRelativeToRoot()]));
+        expect($contact->workingPermitCardDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->workingPermitCardDocument->getPathRelativeToRoot()]));
+        expect($contact->itrBir1701Document->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->itrBir1701Document->getPathRelativeToRoot()]));
+        expect($contact->auditedFinancialStatementDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->auditedFinancialStatementDocument->getPathRelativeToRoot()]));
+        expect($contact->officialReceiptTaxPaymentDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->officialReceiptTaxPaymentDocument->getPathRelativeToRoot()]));
+        expect($contact->businessMayorsPermitDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->businessMayorsPermitDocument->getPathRelativeToRoot()]));
+        expect($contact->dtiBusinessRegistrationDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->dtiBusinessRegistrationDocument->getPathRelativeToRoot()]));
+        expect($contact->sketchOfBusinessLocationDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->sketchOfBusinessLocationDocument->getPathRelativeToRoot()]));
+        expect($contact->letterOfConsentCreditBackgroundInvestigationDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->letterOfConsentCreditBackgroundInvestigationDocument->getPathRelativeToRoot()]));
+        expect($contact->marriageCertificateDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->marriageCertificateDocument->getPathRelativeToRoot()]));
+        expect($contact->governmentIdOfSpouseImage->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->governmentIdOfSpouseImage->getPathRelativeToRoot()]));
+        expect($contact->courtDecisionAnnulmentDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->courtDecisionAnnulmentDocument->getPathRelativeToRoot()]));
+        expect($contact->marriageContractDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->marriageContractDocument->getPathRelativeToRoot()]));
+        expect($contact->courtDecisionSeparationDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->courtDecisionSeparationDocument->getPathRelativeToRoot()]));
+        expect($contact->deathCertificateDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->deathCertificateDocument->getPathRelativeToRoot()]));
     });
     config()->set('app.url', $host);
     $contact->idImage->delete();
@@ -199,6 +420,39 @@ test('contact can attach media', function () {
     $contact->invoiceDocument->delete();
     $contact->receiptDocument->delete();
     $contact->deedOfSaleDocument->delete();
+    $contact->governmentId1Image->delete();
+    $contact->governmentId2Image->delete();
+    $contact->certificateOfEmploymentDocument->delete();
+    $contact->oneMonthLatestPayslipDocument->delete();
+    $contact->esavDocument->delete();
+    $contact->birthCertificateDocument->delete();
+    $contact->photoImage->delete();
+    $contact->proofOfBillingAddressDocument->delete();
+
+    $contact->letterOfConsentEmployerDocument->delete();
+    $contact->threeMonthsCertifiedPayslipsDocument->delete();
+    $contact->employmentContractDocument->delete();
+    $contact->ofwEmploymentCertificateDocument->delete();
+    $contact->passportWithVisaDocument->delete();
+    $contact->workingPermitDocument->delete();
+    $contact->notarizedSpaDocument->delete();
+    $contact->authorizedRepInfoSheetDocument->delete();
+    $contact->validIdAifImage->delete();
+    $contact->workingPermitCardDocument->delete();
+    $contact->itrBir1701Document->delete();
+    $contact->auditedFinancialStatementDocument->delete();
+    $contact->officialReceiptTaxPaymentDocument->delete();
+    $contact->businessMayorsPermitDocument->delete();
+    $contact->dtiBusinessRegistrationDocument->delete();
+    $contact->sketchOfBusinessLocationDocument->delete();
+    $contact->letterOfConsentCreditBackgroundInvestigationDocument->delete();
+    $contact->marriageCertificateDocument->delete();
+    $contact->governmentIdOfSpouseImage->delete();
+    $contact->courtDecisionAnnulmentDocument->delete();
+    $contact->marriageContractDocument->delete();
+    $contact->courtDecisionSeparationDocument->delete();
+    $contact->deathCertificateDocument->delete();
+
     $contact->clearMediaCollection('id-images');
     $contact->clearMediaCollection('selfie-images');
     $contact->clearMediaCollection('payslip-images');
@@ -212,6 +466,96 @@ test('contact can attach media', function () {
     $contact->clearMediaCollection('invoice-documents');
     $contact->clearMediaCollection('receipt-documents');
     $contact->clearMediaCollection('deed_of_sale-documents');
+    $contact->clearMediaCollection('government_id1-images');
+    $contact->clearMediaCollection('government_id2-images');
+    $contact->clearMediaCollection('certificate_of_employment-documents');
+    $contact->clearMediaCollection('one_month_latest_payment_slip-documents');
+    $contact->clearMediaCollection('esav-documents');
+    $contact->clearMediaCollection('birth_certificate-documents');
+    $contact->clearMediaCollection('photo-images');
+    $contact->clearMediaCollection('proof_of_billing_address-document');
+
+    $contact->clearMediaCollection('letter_of_consent_employer-documents');
+    $contact->clearMediaCollection('three_months_certified_payslips-documents');
+    $contact->clearMediaCollection('employment_contract-documents');
+    $contact->clearMediaCollection('ofw_employment_certificate-documents');
+    $contact->clearMediaCollection('passport_with_visa-documents');
+    $contact->clearMediaCollection('working_permit-documents');
+    $contact->clearMediaCollection('notarized_spa-documents');
+    $contact->clearMediaCollection('authorized_rep_info_sheet-documents');
+    $contact->clearMediaCollection('valid_id_aif-images');
+    $contact->clearMediaCollection('working_permit_card-documents');
+    $contact->clearMediaCollection('itr_bir1701-documents');
+    $contact->clearMediaCollection('audited_financial_statement-documents');
+    $contact->clearMediaCollection('official_receipt_tax_payment-documents');
+    $contact->clearMediaCollection('business_mayors_permit-documents');
+    $contact->clearMediaCollection('dti_business_registration-documents');
+    $contact->clearMediaCollection('sketch_of_business_location-documents');
+    $contact->clearMediaCollection('letter_of_consent_credit_background_investigation-documents');
+    $contact->clearMediaCollection('marriage_certificate-documents');
+    $contact->clearMediaCollection('government_id_of_spouse-images');
+    $contact->clearMediaCollection('court_decision_annulment-documents');
+    $contact->clearMediaCollection('marriage_contract-documents');
+    $contact->clearMediaCollection('court_decision_separation-documents');
+    $contact->clearMediaCollection('death_certificate-documents');
+});
+
+
+it('correctly maps media uploads to their names and URLs', function () {
+    // Mocked media data similar to Spatie's output
+    $mockMedia = [
+        [
+            'collection_name' => 'id-images',
+            'original_url' => 'https://example.com/uploads/id_image1.png',
+        ],
+        [
+            'collection_name' => 'selfie-images',
+            'original_url' => 'https://example.com/uploads/selfie_image1.png',
+        ],
+        [
+            'collection_name' => 'payslip-images',
+            'original_url' => 'https://example.com/uploads/payslip_image1.pdf',
+        ],
+    ];
+
+    // Mock a model with the media property and getUploadsAttribute method
+    $model = new class {
+        public array $media = [];
+
+        public function getUploadsAttribute(): array
+        {
+            return collect($this->media)->mapWithKeys(function ($mediaItem, $index) {
+                return [
+                    $index => [
+                        'name' => Str::camel(Str::singular($mediaItem['collection_name'])),
+                        'url' => $mediaItem['original_url'],
+                    ],
+                ];
+            })->toArray();
+        }
+    };
+
+    // Assign mocked media to the model
+    $model->media = $mockMedia;
+
+    // Expected result
+    $expected = [
+        0 => [
+            'name' => 'idImage',
+            'url' => 'https://example.com/uploads/id_image1.png',
+        ],
+        1 => [
+            'name' => 'selfieImage',
+            'url' => 'https://example.com/uploads/selfie_image1.png',
+        ],
+        2 => [
+            'name' => 'payslipImage',
+            'url' => 'https://example.com/uploads/payslip_image1.pdf',
+        ],
+    ];
+
+    // Assert that the method returns the expected mapping
+    expect($model->getUploadsAttribute())->toBe($expected);
 });
 
 test('contact has data', function (Contact $contact) {
