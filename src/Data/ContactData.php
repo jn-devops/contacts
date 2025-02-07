@@ -208,6 +208,7 @@ class ContactData extends Data
                 'client_id' => $coBorrower['client_id'] ?? '',
                 'landline' => $coBorrower['landline'] ?? '',
                 'age' => $coBorrower['age'] ?? '',
+                'relationship_to_buyer' => $coBorrower['relationship_to_buyer'] ?? '',
             ]))->toArray()),
             order: $model->order ? ContactOrderData::from($order) : null,
             uploads: new DataCollection(UploadData::class, $model->uploads),
