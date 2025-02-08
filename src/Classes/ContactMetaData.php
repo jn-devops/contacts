@@ -12,12 +12,14 @@ use Spatie\LaravelData\Casts\EnumCast;
 use Homeful\Common\Traits\WithAck;
 use Spatie\LaravelData\Optional;
 use Illuminate\Support\Carbon;
+use function Pest\Laravel\instance;
 
 class ContactMetaData extends Data
 {
     use WithAck;
 
     public string $name;
+    public float $monthly_gross_income;
 
     public function __construct(
         public string $id,
@@ -51,7 +53,9 @@ class ContactMetaData extends Data
         public AIFMetadata|Optional $aif,
         public OrderData|Optional $order
     ) {
-        $this->name = implode(' ', array_filter([$this->first_name, $this->middle_name, $this->last_name, $name_suffix?->value]));
+        $this->name = implode(' ', array_filter([$first_name, $middle_name, $last_name, $name_suffix?->value]));
+
+        $this->monthly_gross_income = $this->getMonthlyGrossIncome();
     }
 
     public static function prepareForPipeline($properties): array
@@ -83,6 +87,21 @@ class ContactMetaData extends Data
 
         // Filter and clean up the properties
         return array_filter($properties);
+    }
+
+    /**
+     * @return float
+     */
+    public function getMonthlyGrossIncome(): float
+    {
+        $mainEmploymentIncome = resolveOptionalCollection($this->employment)
+            ->sum(fn($employment) => $employment->monthly_gross_income);
+
+        $coBorrowerIncome = resolveOptionalCollection($this->co_borrowers)
+            ->flatMap(fn($coBorrower) => resolveOptionalCollection($coBorrower->employment))
+            ->sum(fn($employment) => $employment->monthly_gross_income);
+
+        return $mainEmploymentIncome + $coBorrowerIncome;
     }
 }
 

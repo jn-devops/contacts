@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\{RefreshDatabase, WithFaker};
 use Illuminate\Support\Facades\Notification;
 use Spatie\LaravelData\DataCollection;
 use Homeful\Contacts\Models\Customer;
+use Homeful\Common\Classes\Amount;
 
 uses(RefreshDatabase::class, WithFaker::class);
 
@@ -188,38 +189,41 @@ test('contact can accept co-borrowers', function (Customer $contact) {
 
 test('customer has factory', function () {
     $customer = Customer::factory()
+        ->state(['date_of_birth' => '1999-03-17'])
         ->withEmployment([
             0 => [
                 'type' => 'Primary',
-                'monthly_gross_income' => 50000,
+                'monthly_gross_income' => 60000.0,
                 'current_position' => 'Developer',
             ],
             1 => [
                 'type' => 'Sideline',
-                'monthly_gross_income' => 20000,
+                'monthly_gross_income' => 20000.0,
                 'current_position' => 'Freelancer',
             ]
         ])
         ->withCoBorrowers([
-        0 => [
-            'employment' => [
-                0 => [
-                    'type' => 'Primary',
-                    'monthly_gross_income' => 50000,
-                    'current_position' => 'Engineer',
+            0 => [
+                'date_of_birth' => '1998-08-12',
+                'employment' => [
+                    0 => [
+                        'type' => 'Primary',
+                        'monthly_gross_income' => 50000.0,
+                        'current_position' => 'Engineer',
+                    ]
+                ]
+            ],
+            1 => [
+                'date_of_birth' => '1995-01-24',
+                'employment' => [
+                    0 => [
+                        'type' => 'Sideline',
+                        'monthly_gross_income' => 40000.0,
+                        'current_position' => 'Developer',
+                    ]
                 ]
             ]
-        ],
-        1 => [
-            'employment' => [
-                0 => [
-                    'type' => 'Sideline',
-                    'monthly_gross_income' => 40000,
-                    'current_position' => 'Developer',
-                ]
-            ]
-        ]
-    ])->create();
+        ])->create();
 
     if ($customer instanceof Customer) {
         expect($customer->addresses)->toBeInstanceOf(DataCollection::class);
@@ -231,7 +235,12 @@ test('customer has factory', function () {
         expect($customer->co_borrowers->first())->toBeInstanceOf(CoBorrowerMetadata::class);
         expect($customer->aif)->toBeInstanceOf(AIFMetadata::class);
         expect($customer->getData())->toBeInstanceOf(ContactMetaData::class);
-//        dd(app(GetContactMetadataFromContactModel::class)->run($customer));
+        $data = $customer->getData();
+        expect($data->date_of_birth->format('Y-m-d'))->toBe('1999-03-17');
+        expect($customer->getTotalMonthlyGrossIncome())->toBe(170000.0);
+        expect($data->date_of_birth->format('Y-m-d'))->toBe('1999-03-17');
+        expect($data->monthly_gross_income)->toBe(170000.0);
+        expect($customer->getWages()->compareTo($data->monthly_gross_income))->toBe(Amount::EQUAL);
     }
     else {
         dd($customer);
