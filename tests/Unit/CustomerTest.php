@@ -187,7 +187,40 @@ test('contact can accept co-borrowers', function (Customer $contact) {
 })->with('customer');
 
 test('customer has factory', function () {
-    $customer = Customer::factory()->create();
+    $customer = Customer::factory()
+        ->withEmployment([
+            0 => [
+                'type' => 'Primary',
+                'monthly_gross_income' => 50000,
+                'current_position' => 'Developer',
+            ],
+            1 => [
+                'type' => 'Sideline',
+                'monthly_gross_income' => 20000,
+                'current_position' => 'Freelancer',
+            ]
+        ])
+        ->withCoBorrowers([
+        0 => [
+            'employment' => [
+                0 => [
+                    'type' => 'Primary',
+                    'monthly_gross_income' => 50000,
+                    'current_position' => 'Engineer',
+                ]
+            ]
+        ],
+        1 => [
+            'employment' => [
+                0 => [
+                    'type' => 'Sideline',
+                    'monthly_gross_income' => 40000,
+                    'current_position' => 'Developer',
+                ]
+            ]
+        ]
+    ])->create();
+
     if ($customer instanceof Customer) {
         expect($customer->addresses)->toBeInstanceOf(DataCollection::class);
         expect($customer->addresses->first())->toBeInstanceOf(AddressMetadata::class);
