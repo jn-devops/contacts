@@ -2,6 +2,11 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v2.0.0 - 2025-02-09
+
+about time to make this a full upgrade release
+add withId in customer factory
+
 ## #v1.9.9998 - 2025-02-07
 
 expose id in ContactMetadata
