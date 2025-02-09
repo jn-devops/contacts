@@ -292,6 +292,19 @@ class CustomerFactory extends Factory
     }
 
     /**
+     * Include the `id` attribute in the factory on demand.
+     *
+     * @param string|null $customId If null, it will generate a random UUID.
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function withId(?string $customId = null): Factory
+    {
+        return $this->state(fn(array $attributes) => [
+            'id' => $customId ?? $this->faker->uuid(),
+        ]);
+    }
+
+    /**
      * Customize the `employment` attribute of the factory with user-defined overrides.
      *
      * This method allows overriding the `employment` sub-arrays within the factory definition dynamically.
@@ -331,7 +344,7 @@ class CustomerFactory extends Factory
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    public function withEmployment(array $employmentOverrides)
+    public function withEmployment(array $employmentOverrides): Factory
     {
         return $this->state(fn(array $attributes) => [
             'employment' => array_map(function ($overrides, $index) {
@@ -394,7 +407,7 @@ class CustomerFactory extends Factory
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    public function withCoBorrowers(array $coBorrowerOverrides)
+    public function withCoBorrowers(array $coBorrowerOverrides): Factory
     {
         return $this->state(fn(array $attributes) => [
             'co_borrowers' => array_map(function ($overrides, $index) {

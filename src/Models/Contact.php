@@ -211,7 +211,7 @@ class Contact extends Model implements BorrowerInterface, HasMedia
     public static function booted(): void
     {
         static::creating(function (Contact $contact) {
-            $contact->id = Str::uuid()->toString();
+            $contact->id = empty($contact->id) ? Str::uuid()->toString() : $contact->id;
         });
     }
 

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Notification;
 use Spatie\LaravelData\DataCollection;
 use Homeful\Contacts\Models\Customer;
 use Homeful\Common\Classes\Amount;
+use Illuminate\Support\Str;
 
 uses(RefreshDatabase::class, WithFaker::class);
 
@@ -189,7 +190,10 @@ test('contact can accept co-borrowers', function (Customer $contact) {
 
 test('customer has factory', function () {
     $customer = Customer::factory()
-        ->state(['date_of_birth' => '1999-03-17'])
+        ->state([
+            'date_of_birth' => '1999-03-17'
+        ])
+        ->withId($uuid = Str::uuid()->toString())
         ->withEmployment([
             0 => [
                 'type' => 'Primary',
@@ -226,6 +230,7 @@ test('customer has factory', function () {
         ])->create();
 
     if ($customer instanceof Customer) {
+        expect($customer->id)->toBe($uuid);
         expect($customer->addresses)->toBeInstanceOf(DataCollection::class);
         expect($customer->addresses->first())->toBeInstanceOf(AddressMetadata::class);
         expect($customer->employment)->toBeInstanceOf(DataCollection::class);
