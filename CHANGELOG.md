@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v2.0.1 - 2025-02-13
+
+add canMatch attribute
+
 ## #v2.0.0 - 2025-02-09
 
 about time to make this a full upgrade release
