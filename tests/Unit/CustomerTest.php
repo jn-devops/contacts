@@ -40,6 +40,9 @@ test('customer has minimum attributes', function () {
         'mobile' => '09181234567',
     ]);
     expect($customer)->toBeInstanceOf(Customer::class);
+    expect($customer->getRawOriginal('date_of_birth'))->toBeNull();
+    expect($customer->getMonthlyGrossIncome())->toBe(0.0);
+    expect($customer->canMatch)->toBeFalse();
     expect(ContactMetaData::from($customer->toArray()))->toBeInstanceOf(ContactMetaData::class);
 });
 
@@ -241,8 +244,10 @@ test('customer has factory', function () {
         expect($customer->aif)->toBeInstanceOf(AIFMetadata::class);
         expect($customer->getData())->toBeInstanceOf(ContactMetaData::class);
         $data = $customer->getData();
+        expect($data->id)->toBe($uuid);
         expect($data->date_of_birth->format('Y-m-d'))->toBe('1999-03-17');
-        expect($customer->getTotalMonthlyGrossIncome())->toBe(170000.0);
+//        expect($customer->getTotalMonthlyGrossIncome())->toBe(170000.0);
+        expect($customer->getMonthlyGrossIncome())->toBe(170000.0);
         expect($data->date_of_birth->format('Y-m-d'))->toBe('1999-03-17');
         expect($data->monthly_gross_income)->toBe(170000.0);
         expect($customer->getWages()->compareTo($data->monthly_gross_income))->toBe(Amount::EQUAL);

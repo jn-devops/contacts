@@ -2,11 +2,11 @@
 
 namespace Homeful\Contacts\Models;
 
+use Homeful\Contacts\Traits\{HasDocs, HasMonthlyGrossIncome, HasUploads};
 use Homeful\Common\Traits\HasPackageFactory as HasFactory;
 use Homeful\Contacts\Classes\EmploymentMetadata;
 use Homeful\Contacts\Database\Factories\ContactFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Homeful\Contacts\Traits\{HasDocs, HasUploads};
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Homeful\Common\Interfaces\BorrowerInterface;
 use Propaganistas\LaravelPhone\PhoneNumber;
@@ -100,12 +100,14 @@ use Brick\Money\Money;
  * @property array $current_status
  * @property array $current_status_code
  * @property string $status_reason
+ * @property bool $canMatch
  *
  * @method int getKey()
  * @method array getDocumentCollections()
  */
 class Contact extends Model implements BorrowerInterface, HasMedia
 {
+    use HasMonthlyGrossIncome;
     use InteractsWithMedia {
         HasDocs::registerMediaCollections insteadof InteractsWithMedia;
         HasDocs::registerMediaConversions insteadof InteractsWithMedia;
@@ -273,62 +275,10 @@ class Contact extends Model implements BorrowerInterface, HasMedia
         return new Carbon($this->date_of_birth);
     }
 
-    /**
-     * Calculate the total monthly gross income from both the customer's main employment
-     * and the employment records of all co-borrowers.
-     *
-     * This method uses Laravel collections and Spatie DataCollection to handle nested data efficiently.
-     *
-     * ## Step-by-Step Explanation:
-     *
-     * 1. **Main Employment Collection:**
-     * - The customer's employment data is converted into a collection using `resolveOptionalCollection()`.
-     * - The `sum()` method is applied to accumulate the `monthly_gross_income` values.
-     *
-     * 2. **Co-Borrowers’ Employment Collection:**
-     * - The co-borrowers' employment data is processed using `flatMap()` to handle nested arrays.
-     * - `flatMap()` flattens the nested arrays into a single collection for summing the `monthly_gross_income`.
-     *
-     * ## Why We Use `flatMap()`:
-     * Co-borrowers' employment records are nested arrays within the co-borrowers collection.
-     * `flatMap()` flattens this nested structure into a single collection, allowing us to directly sum the values.
-     *
-     * **Example:**
-     * - The main `employment` collection:
-     *     - Job 1: 60,000
-     *     - Job 2: 20,000
-     *
-     * - Co-borrowers’ employment:
-     *     - Co-borrower 1: Job 1: 50,000
-     *     - Co-borrower 2: Job 1: 40,000
-     *
-     * **Total Calculation:**
-     * 60,000 + 20,000 + 50,000 + 40,000 = **170,000**
-     *
-     * ## Edge Case Handling:
-     * - If `employment` or `co_borrowers` is null or empty, `resolveOptionalCollection()` ensures the result is an empty collection,
-     *   preventing errors and returning `0.0` as the sum.
-     *
-     * @return float The total monthly gross income.
-     */
-    public function getTotalMonthlyGrossIncome(): float
-    {
-        // Sum from the main employment collection
-        $mainEmploymentIncome = resolveOptionalCollection($this->employment)
-            ->sum(fn(EmploymentMetadata $employment) => $employment->monthly_gross_income);
-
-        // Sum from the co-borrowers' employment collections
-        $coBorrowerIncome = resolveOptionalCollection($this->co_borrowers)
-            ->flatMap(fn($coBorrower) => resolveOptionalCollection($coBorrower->employment))
-            ->sum(fn(EmploymentMetadata $employment) => $employment->monthly_gross_income);
-
-        // Return total income
-        return $mainEmploymentIncome + $coBorrowerIncome;
-    }
-
     public function getWages(): Money|float
     {
-        return Money::of($this->getTotalMonthlyGrossIncome(), 'PHP');
+        //TODO: maybe use $this->getMonthlyGrossIncome() here
+        return Money::of($this->getMonthlyGrossIncome(), 'PHP');
     }
 
     public function getRegional(): bool
@@ -369,6 +319,16 @@ class Contact extends Model implements BorrowerInterface, HasMedia
 
     public function getGrossMonthlyIncome(): Price
     {
-        return new Price($this->getWages());
+        return new Price($this->getWages());//TODO: maybe use $this->getMonthlyGrossIncome() here
+    }
+
+    public function getCanMatch(): bool
+    {
+        return ($this->getRawOriginal('date_of_birth') != null) && ($this->getMonthlyGrossIncome() > 0.00);
+    }
+
+    public function getCanMatchAttribute(): bool
+    {
+        return $this->getCanMatch();
     }
 }

@@ -3,19 +3,20 @@
 namespace Homeful\Contacts\Classes;
 
 use Homeful\Contacts\Enums\{CivilStatus, Nationality, Sex, Suffix};
-use Homeful\Contacts\Data\OrderData;
 use Spatie\LaravelData\Transformers\DateTimeInterfaceTransformer;
 use Spatie\LaravelData\Attributes\{WithCast, WithTransformer};
+use Homeful\Contacts\Traits\HasMonthlyGrossIncome;
 use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\{Data, DataCollection};
 use Spatie\LaravelData\Casts\EnumCast;
+use Homeful\Contacts\Data\OrderData;
 use Homeful\Common\Traits\WithAck;
 use Spatie\LaravelData\Optional;
 use Illuminate\Support\Carbon;
-use function Pest\Laravel\instance;
 
 class ContactMetaData extends Data
 {
+    use HasMonthlyGrossIncome;
     use WithAck;
 
     public string $name;
@@ -54,7 +55,6 @@ class ContactMetaData extends Data
         public OrderData|Optional $order
     ) {
         $this->name = implode(' ', array_filter([$first_name, $middle_name, $last_name, $name_suffix?->value]));
-
         $this->monthly_gross_income = $this->getMonthlyGrossIncome();
     }
 
@@ -87,21 +87,6 @@ class ContactMetaData extends Data
 
         // Filter and clean up the properties
         return array_filter($properties);
-    }
-
-    /**
-     * @return float
-     */
-    public function getMonthlyGrossIncome(): float
-    {
-        $mainEmploymentIncome = resolveOptionalCollection($this->employment)
-            ->sum(fn($employment) => $employment->monthly_gross_income);
-
-        $coBorrowerIncome = resolveOptionalCollection($this->co_borrowers)
-            ->flatMap(fn($coBorrower) => resolveOptionalCollection($coBorrower->employment))
-            ->sum(fn($employment) => $employment->monthly_gross_income);
-
-        return $mainEmploymentIncome + $coBorrowerIncome;
     }
 }
 
