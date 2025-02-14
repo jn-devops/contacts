@@ -31,7 +31,7 @@ class CoBorrowerMetadata extends Data
         public Nationality $nationality,
         public $date_of_birth,
         /** @var EmploymentMetadata[] */
-        public DataCollection $employment,
+        public ?DataCollection $employment,
         public ?string $email,
         public ?string $mobile,
         public ?string $other_mobile,
