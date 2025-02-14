@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.0.2 - 2025-02-14
+
+make the employment optional in CoBorrowerMetadata
+
 ## #v2.0.1 - 2025-02-13
 
 add canMatch attribute
