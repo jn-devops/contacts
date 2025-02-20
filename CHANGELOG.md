@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v2.0.3 - 2025-02-20
+
+add dummy short_address in address metadata
+
 ## v2.0.2 - 2025-02-14
 
 make the employment optional in CoBorrowerMetadata
