@@ -13,6 +13,7 @@ class AddressMetadata extends Data
     use WithAck;
 
     public string $address;
+    public string $short_address;
 
     public function __construct(
         #[WithCast(EnumCast::class)]
@@ -27,5 +28,6 @@ class AddressMetadata extends Data
         public ?string $country
     ) {
         $this->address = implode(', ', array_filter([$this->address1, $this->locality, $this->administrative_area, $this->postal_code]));
+        $this->short_address = '156 Soliven St., Pasig Green Park Village, Barangay Manggahan, Pasig City 1605';
     }
 }
