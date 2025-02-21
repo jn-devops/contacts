@@ -21,7 +21,7 @@ class ContactMetaData extends Data
 
     public string $name;
     public float $monthly_gross_income;
-    public string $civil_connection;
+    public string $civil_connection = '';
 
     public function __construct(
         public string $id,
@@ -58,14 +58,11 @@ class ContactMetaData extends Data
         $this->name = implode(' ', array_filter([$first_name, $middle_name, $last_name, $name_suffix?->value]));
         $this->monthly_gross_income = $this->getMonthlyGrossIncome();
 
-        if ($this->civil_status instanceof Optional)
-            $this->civil_connection = '';
-        else {
+        if ($this->civil_status instanceof CivilStatus)
             $this->civil_connection = $this->civil_status == CivilStatus::MARRIED
                 ? $this->civil_status->value . ' to '
                 : $this->civil_status->value
             ;
-        }
     }
 
     public static function prepareForPipeline($properties): array
