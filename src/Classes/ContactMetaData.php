@@ -58,18 +58,10 @@ class ContactMetaData extends Data
         $this->name = implode(' ', array_filter([$first_name, $middle_name, $last_name, $name_suffix?->value]));
         $this->monthly_gross_income = $this->getMonthlyGrossIncome();
 
-    // Extract the actual CivilStatus value from $this->civil_status
-        $civil = $this->civil_status instanceof CivilStatus
-            ? $this->civil_status
-            : ($this->civil_status instanceof Optional
-                ? $this->civil_status->value
-                : null);
-
-        if ($civil instanceof CivilStatus) {
-            $this->civil_connection = $civil === CivilStatus::MARRIED
-                ? $civil->value . ' to '
-                : $civil->value;
-        }
+        $this->civil_connection = $this->civil_status instanceof CivilStatus
+            ? ($this->civil_status == CivilStatus::MARRIED ? $this->civil_status->value . ' to ' : $this->civil_status->value
+            : ''
+        ;
     }
 
     public static function prepareForPipeline($properties): array
