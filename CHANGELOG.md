@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v2.1.2 - 2025-02-21
+
+$this->civil_status instanceof CivilStatus
+
 ## #v2.1.1 - 2025-02-21
 
 fix civi_connection
