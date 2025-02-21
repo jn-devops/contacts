@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v2.1.0 - 2025-02-21
+
+add civil_connection computed attribute
+
 ## #v2.0.3 - 2025-02-20
 
 add dummy short_address in address metadata
