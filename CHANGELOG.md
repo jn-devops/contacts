@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v2.1.1 - 2025-02-21
+
+fix civi_connection
+
 ## #v2.1.0 - 2025-02-21
 
 add civil_connection computed attribute
