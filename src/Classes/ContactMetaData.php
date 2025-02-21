@@ -59,7 +59,7 @@ class ContactMetaData extends Data
         $this->monthly_gross_income = $this->getMonthlyGrossIncome();
 
         $this->civil_connection = $this->civil_status instanceof CivilStatus
-            ? ($this->civil_status == CivilStatus::MARRIED ? $this->civil_status->value . ' to ' : $this->civil_status->value
+            ? ($this->civil_status == CivilStatus::MARRIED ? $this->civil_status->value . ' to ' : $this->civil_status->value)
             : ''
         ;
     }
