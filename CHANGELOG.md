@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v1.2.6 - 2025-02-26
+
+add civil connection computed property to spouse, co-borrower and aif metadata
+
 ## #v2.1.5 - 2025-02-26
 
 fix contact metadata civil_connection computed property
