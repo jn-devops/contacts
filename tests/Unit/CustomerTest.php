@@ -62,6 +62,14 @@ dataset('customer', function () {
     ];
 });
 
+test('customer has computed data properties', function (Customer $customer) {
+    $data = $customer->getData();
+    expect($data->name)->toBe(implode(' ', array_filter([$data->first_name, $data->middle_name, $data->last_name, $data->name_suffix?->value])));
+    expect($data->civil_connection)->toBe($data->civil_status instanceof CivilStatus
+        ? ($data->civil_status == CivilStatus::MARRIED ? $data->civil_status->value . ' to ' : $data->civil_status->value)
+        : '');
+})->with('customer');
+
 test('customer can accept addresses', function (Customer $contact) {
     $contact->addresses = json_encode([
         [
