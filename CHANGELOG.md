@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v2.1.6 - 2025-02-26
+
+add name_with_middle_initial computed property to customer, spouse, co-borrower and aif metadata
+
 ## #v1.2.6 - 2025-02-26
 
 add civil connection computed property to spouse, co-borrower and aif metadata
