@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v2.1.5 - 2025-02-26
+
+fix contact metadata civil_connection computed property
+
 ## #v2.1.4 - 2025-02-21
 
 fix the fix
