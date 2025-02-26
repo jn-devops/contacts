@@ -68,6 +68,12 @@ test('customer has computed data properties', function (Customer $customer) {
     expect($data->civil_connection)->toBe($data->civil_status instanceof CivilStatus
         ? ($data->civil_status == CivilStatus::MARRIED ? $data->civil_status->value . ' to ' : $data->civil_status->value)
         : '');
+    expect($data->name_with_middle_initial)->toBe(collect([
+        $data->first_name,
+        mb_substr($data->middle_name ?? '', 0, 1) ? mb_substr($data->middle_name, 0, 1) . '.' : '',
+        $data->last_name,
+        $data->name_suffix?->value
+    ])->filter()->implode(' '));
 })->with('customer');
 
 test('customer can accept addresses', function (Customer $contact) {

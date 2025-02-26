@@ -15,6 +15,7 @@ class SpouseMetadata extends Data
 
     public string $name;
     public string $civil_connection;
+    public string $name_with_middle_initial;
 
     public function __construct(
         public string $first_name,
@@ -41,6 +42,12 @@ class SpouseMetadata extends Data
         $this->civil_connection = $this->civil_status instanceof CivilStatus
             ? ($this->civil_status == CivilStatus::MARRIED ? $this->civil_status->value . ' to ' : $this->civil_status->value)
             : '';
+        $this->name_with_middle_initial = collect([
+            $first_name,
+            mb_substr($middle_name ?? '', 0, 1) ? mb_substr($middle_name, 0, 1) . '.' : '',
+            $last_name,
+            $name_suffix?->value
+        ])->filter()->implode(' ');
     }
 
     public static function prepareForPipeline($properties) : array
