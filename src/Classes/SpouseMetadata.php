@@ -14,6 +14,7 @@ class SpouseMetadata extends Data
     use WithAck;
 
     public string $name;
+    public string $civil_connection;
 
     public function __construct(
         public string $first_name,
@@ -37,6 +38,9 @@ class SpouseMetadata extends Data
         public ?string $landline,
     ) {
         $this->name = implode(' ', array_filter([$this->first_name, $this->middle_name, $this->last_name]));
+        $this->civil_connection = $this->civil_status instanceof CivilStatus
+            ? ($this->civil_status == CivilStatus::MARRIED ? $this->civil_status->value . ' to ' : $this->civil_status->value)
+            : '';
     }
 
     public static function prepareForPipeline($properties) : array

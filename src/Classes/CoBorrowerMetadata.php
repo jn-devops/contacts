@@ -13,6 +13,7 @@ class CoBorrowerMetadata extends Data
     use WithAck;
 
     public string $name;
+    public string $civil_connection;
 
     public function __construct(
         #[WithCast(EnumCast::class)]
@@ -40,6 +41,9 @@ class CoBorrowerMetadata extends Data
         public Relation|Optional $relation
     ) {
         $this->name = implode(' ', array_filter([$this->first_name, $this->middle_name, $this->last_name]));
+        $this->civil_connection = $this->civil_status instanceof CivilStatus
+            ? ($this->civil_status == CivilStatus::MARRIED ? $this->civil_status->value . ' to ' : $this->civil_status->value)
+            : '';
     }
 
     public static function prepareForPipeline($properties) : array
