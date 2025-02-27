@@ -42,7 +42,7 @@ class AIFMetadata extends Data
             $first_name,
             mb_substr($middle_name ?? '', 0, 1) ? mb_substr($middle_name, 0, 1) . '.' : '',
             $last_name,
-            $name_suffix?->value
+            $name_suffix
         ])->filter()->implode(' ');
     }
 
