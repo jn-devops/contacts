@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.8 - 2025-02-27
+
+added sublocality in addresses
+
 ## #v2.1.7 - 2025-02-27
 
 add spouse and address to co-borrower metadata
