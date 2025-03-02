@@ -33,6 +33,7 @@ class AIFMetadata extends Data
         public ?string $mobile,
         public ?string $other_mobile,
         public ?string $landline,
+        public ?string $tin,
     ) {
         $this->name = implode(' ', array_filter([$this->first_name, $this->middle_name, $this->last_name]));
         $this->civil_connection = $this->civil_status instanceof CivilStatus

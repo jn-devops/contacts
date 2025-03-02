@@ -362,6 +362,7 @@ class CustomerFactory extends Factory
                 'help_number' => $customFaker->phoneNumber(),
                 'landline' => $customFaker->phoneNumber(),
                 'mothers_maiden_name' => $this->faker->lastName().', '.$this->faker->firstName().' '.$this->faker->lastName(),
+                'tin' => $this->faker->word(),
             ],
             'idImage' => null,
             'selfieImage' => null,

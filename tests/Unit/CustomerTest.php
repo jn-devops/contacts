@@ -157,6 +157,7 @@ test('contact can accept aif', function (Customer $contact) {
         'sex' => Sex::random()->value,
         'nationality' => Nationality::random()->value,
         'date_of_birth' => fake()->date(),
+        'tin' => fake()->uuid(),
     ];
     $contact->save();
     expect($contact->aif)->toBeInstanceOf(AIFMetadata::class);
