@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.9 - 2025-03-02
+
+added tin in AIDMetadata
+
 ## v2.1.8 - 2025-02-27
 
 added sublocality in addresses
