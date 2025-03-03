@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## #v2.1.12 - 2025-03-03
+
+add media model
+
 ## v2.1.11 - 2025-03-03
 
 **Full Changelog**: https://github.com/jn-devops/contacts/compare/v2.1.10...v2.1.11
