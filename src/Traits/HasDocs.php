@@ -76,7 +76,7 @@ trait HasDocs
     public function getAttribute($key): mixed
     {
         return array_key_exists($key, $this->documentCollections)
-            ? $this->getFirstMedia(UploadFile::deriveCollectionNameFromAttribute($key))
+            ? $this->getMedia(UploadFile::deriveCollectionNameFromAttribute($key))->last()
             : parent::getAttribute($key);
     }
 
