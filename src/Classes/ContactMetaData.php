@@ -23,6 +23,7 @@ class ContactMetaData extends Data
     public float $monthly_gross_income;
     public string $civil_connection;
     public string $name_with_middle_initial;
+    public array $media_urls;
 
     public function __construct(
         public string $id,
@@ -67,6 +68,7 @@ class ContactMetaData extends Data
             $last_name,
             $name_suffix?->value
         ])->filter()->implode(' ');
+        $this->media_urls = $this->getMedia()->map(fn ($media) => [$media->name,$media->url])->toArray();
     }
 
     public static function prepareForPipeline($properties): array
