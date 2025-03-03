@@ -68,7 +68,9 @@ class ContactMetaData extends Data
             $last_name,
             $name_suffix?->value
         ])->filter()->implode(' ');
-        $this->media_urls = $this->getMedia()->map(fn ($media) => [$media->name,$media->url])->toArray();
+        $this->media_urls = method_exists($this, 'getMedia')
+            ? $this->getMedia()->map(fn ($media) => [$media->name, $media->getUrl()])->toArray()
+            : [];
     }
 
     public static function prepareForPipeline($properties): array
