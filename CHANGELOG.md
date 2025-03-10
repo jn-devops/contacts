@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.14 - 2025-03-10
+
+added dynamic notation for lot_area_in_words
+
 ## v2.1.13 - 2025-03-04
 
 chnage in pagibig_filing_site value
