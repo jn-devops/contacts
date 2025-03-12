@@ -17,9 +17,9 @@ class AddressMetadata extends Data
 
     public function __construct(
         #[WithCast(EnumCast::class)]
-        public AddressType $type,
+        public ?AddressType $type,
         #[WithCast(EnumCast::class)]
-        public Ownership $ownership,
+        public ?Ownership $ownership,
         public ?string $address1,
         public ?string $sublocality,
         public ?string $locality,
