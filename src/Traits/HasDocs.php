@@ -99,7 +99,7 @@ trait HasDocs
             ? ($value ? $this->addMediaFromUrl($value)
                 ->usingName($key)
                 ->toMediaCollection(UploadFile::deriveCollectionNameFromAttribute($key)
-                ->)
+                )
                 : $this)
             : parent::setAttribute($key, $value);
     }
