@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.15 - 2025-03-12
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v2.1.14...v2.1.15
+
 ## v2.1.14 - 2025-03-10
 
 added dynamic notation for lot_area_in_words
