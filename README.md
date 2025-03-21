@@ -5,80 +5,121 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/jn-devops/contacts/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/jn-devops/contacts/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/jn-devops/contacts.svg?style=flat-square)](https://packagist.org/packages/jn-devops/contacts)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+---
 
-## Support us
+## Description
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/contacts.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/contacts)
+The **Homeful Contacts Package** is a comprehensive solution for managing customer and borrower contact details, including personal information, employment data, addresses, and uploaded documents. It features advanced metadata handling to ensure structured and reliable contact management.
 
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
+### Key Features:
+- **Customer & Contact Models**: Supports customer and borrower contact details.
+- **Contact Metadata**: Provides structured metadata for employment, addresses, and uploaded documents.
+- **Media Handling**: Supports various document types such as IDs, contracts, invoices, and receipts.
+- **Integration with Borrower Interface**: Ensures seamless connection with the borrowing system.
+- **Phone Number Validation**: Uses Laravel Phone for formatted phone number management.
 
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+---
 
 ## Installation
 
-You can install the package via composer:
+Install via Composer:
 
 ```bash
 composer require jn-devops/contacts
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="contacts-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="contacts-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="contacts-views"
-```
+---
 
 ## Usage
 
+### 🔹 Creating a Contact
+
 ```php
-$contacts = new Homeful\Contacts();
-echo $contacts->echoPhrase('Hello, Homeful!');
+use Homeful\Contacts\Models\Contact;
+
+$contact = Contact::create([
+    'first_name' => 'Juan',
+    'last_name' => 'Dela Cruz',
+    'email' => 'juan.delacruz@example.com',
+    'mobile' => '09171234567',
+    'date_of_birth' => '1990-05-15',
+]);
 ```
 
+### 🔹 Creating a Customer
+
+```php
+use Homeful\Contacts\Models\Customer;
+
+$customer = Customer::create([
+    'first_name' => 'Maria',
+    'last_name' => 'Santos',
+    'email' => 'maria.santos@example.com',
+    'mobile' => '09181234567',
+]);
+```
+
+### 🔹 Associating Employment Details
+
+```php
+$customer->employment = [
+    [
+        'type' => 'Primary',
+        'monthly_gross_income' => 50000,
+        'employment_status' => 'Regular',
+        'employer' => [
+            "name" => "Tech Solutions Inc.",
+            "email" => "hr@techsolutions.com",
+            "address" => [
+                "type" => "Primary",
+                "region" => "NCR",
+                "country" => "PH",
+                "address1" => "123 Makati Avenue, Makati City",
+                "postal_code" => "1200"
+            ],
+            "industry" => "Technology",
+        ]
+    ]
+];
+
+$customer->save();
+```
+
+### 🔹 Handling Uploaded Documents
+
+```php
+$customer->addMediaFromUrl('https://example.com/uploads/id_image.jpg')->toMediaCollection('id-images');
+$customer->addMediaFromUrl('https://example.com/uploads/contract.pdf')->toMediaCollection('contract-documents');
+```
+
+### 🔹 Retrieving Contact Metadata
+
+```php
+use Homeful\Contacts\Classes\ContactMetaData;
+
+$contactMetadata = ContactMetaData::from($customer->toArray());
+```
+
+---
+
 ## Testing
+
+Run tests using:
 
 ```bash
 composer test
 ```
 
-## Changelog
+---
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+## Author
 
-## Contributing
+- **Lester B. Hurtado**  
+  Email: [devops@joy-nostalg.com](mailto:devops@joy-nostalg.com)  
+  GitHub: [jn-devops](https://github.com/jn-devops)
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
-
-## Credits
-
-- [Lester B. Hurtado](https://github.com/jn-devops)
-- [All Contributors](../../contributors)
+---
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+This package is open-source software licensed under the **MIT License**. See the [License File](LICENSE.md) for details.
