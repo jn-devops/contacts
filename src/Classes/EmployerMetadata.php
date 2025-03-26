@@ -21,6 +21,7 @@ class EmployerMetadata extends Data
         public ?Nationality $nationality,
         #[WithCast(EnumCast::class)]
         public ?Industry $industry,
-        public AddressMetadata|Optional $address
+        public AddressMetadata|Optional $address,
+        public ?string $year_established,
     ) {}
 }

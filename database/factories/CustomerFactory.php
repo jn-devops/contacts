@@ -59,10 +59,13 @@ class CustomerFactory extends Factory
                     'monthly_gross_income' => $this->faker->numberBetween(12000, 25000) * 100,
                     'current_position' => $this->faker->word(),
                     'employment_type' => EmploymentType::LOCALLY_EMPLOYED->value,
+                    'rank' => 'Staff',
+                    'years_in_service' => 'less than 1 year',
                     'employer' => [
                         'name' => $this->faker->word(),
                         'industry' => Industry::random()->value,
                         'nationality' => Nationality::random()->value,
+                        'year_established' => '2000',
                         'address' => [
                             'type' => AddressType::PRIMARY->value,
                             'ownership' => Ownership::random()->value,

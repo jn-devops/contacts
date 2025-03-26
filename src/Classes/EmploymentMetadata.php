@@ -24,7 +24,9 @@ class EmploymentMetadata extends Data
         #[WithCast(EnumCast::class)]
         public EmploymentType|Optional $employment_type,
         public string|null $current_position,
-        public IdMetadata $id
+        public IdMetadata $id,
+        public ?string $rank,
+        public ?string $years_in_service,
     ) {}
 
     public static function prepareForPipeline($properties) : array
