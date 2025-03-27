@@ -715,7 +715,7 @@ class FlatData extends \Spatie\LaravelData\Data
             cash_outlay_3_terms: $data->order->cash_outlay_3_terms ?? '',
             cash_outlay_3_monthly_payment: number_format($data->order->cash_outlay_3_monthly_payment ?? 0, 2),
             cash_outlay_3_effective_date: $data->order->cash_outlay_3_effective_date ?? '',
-            equity_1_amount: number_format($data->order->equity_1_amount ?? 0),
+            equity_1_amount: number_format($data->order->equity_1_amount ?? 0, 2),
             equity_1_amount_in_words: strtoupper(self::convertNumberToWords($data->order->equity_1_amount ?? '0')),
             equity_1_percentage_rate: $data->order->equity_1_percentage_rate ?? '',
             equity_1_interest_rate: is_numeric($data->order->equity_1_interest_rate) ? number_format($data->order->equity_1_interest_rate ?? 0, 3) : '',
