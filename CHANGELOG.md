@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.19 - 2025-03-27
+
+updated the equity_1_amount in flat data
+
 ## v2.1.18 - 2025-03-27
 
 updated the EmploymentType enums
