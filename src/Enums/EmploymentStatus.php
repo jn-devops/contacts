@@ -12,9 +12,6 @@ enum EmploymentStatus: string
 
     case CONTRACTUAL = 'Contractual';
     case REGULAR = 'Regular';
-    case LOCALLY_EMPLOYED = 'Locally Employed';
-    case OFW = 'Overseas Filipino Worker (OFW)';
-    case SELF_EMPLOYED = 'Self Employed with Business';
 
     static function default(): self {
         return self::REGULAR;
@@ -25,9 +22,6 @@ enum EmploymentStatus: string
         return match($this) {
             self::CONTRACTUAL => '001',
             self::REGULAR => '002',
-            self::LOCALLY_EMPLOYED => '003',
-            self::OFW => '004',
-            self::SELF_EMPLOYED => '005',
         };
     }
 }
