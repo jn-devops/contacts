@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.18 - 2025-03-27
+
+updated the EmploymentType enums
+
 ## v2.1.17 - 2025-03-26
 
 added rank and years_in_service in EmploymentMetaData and year_established in EmployerMetaData
