@@ -105,6 +105,7 @@ test('contact can accept employment', function (Customer $contact) {
             'employer' => [
                 "name" => "3neti",
                 "email" => "lester@hurtado.ph",
+                "total_number_of_employees" => "1000",
                 "address" => [
                     "type" => "Primary",
                     "region" => "NCR",

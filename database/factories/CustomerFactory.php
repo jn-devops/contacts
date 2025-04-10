@@ -66,6 +66,7 @@ class CustomerFactory extends Factory
                         'industry' => Industry::random()->value,
                         'nationality' => Nationality::random()->value,
                         'year_established' => '2000',
+                        'total_number_of_employees' => $this->faker->word(),
                         'address' => [
                             'type' => AddressType::PRIMARY->value,
                             'ownership' => Ownership::random()->value,
@@ -95,6 +96,8 @@ class CustomerFactory extends Factory
                         'name' => $this->faker->word(),
                         'industry' => Industry::random()->value,
                         'nationality' => Nationality::random()->value,
+                        'year_established' => '2000',
+                        'total_number_of_employees' => $this->faker->word(),
                         'address' => [
                             'type' => AddressType::PRIMARY->value,
                             'ownership' => Ownership::random()->value,
@@ -150,10 +153,14 @@ class CustomerFactory extends Factory
                             'monthly_gross_income' => $this->faker->numberBetween(12000, 25000) * 100,
                             'current_position' => $this->faker->word(),
                             'employment_type' => EmploymentType::LOCALLY_EMPLOYED->value,
+                            'rank' => $this->faker->word(),
+                            'years_in_service' => $this->faker->word(),
                             'employer' => [
                                 'name' => $this->faker->word(),
                                 'industry' => Industry::random()->value,
                                 'nationality' => Nationality::random()->value,
+                                'year_established' => '2000',
+                                'total_number_of_employees' => $this->faker->word(),
                                 'address' => [
                                     'type' => AddressType::PRIMARY->value,
                                     'ownership' => Ownership::random()->value,
@@ -179,10 +186,14 @@ class CustomerFactory extends Factory
                             'monthly_gross_income' => (string) ($this->faker->numberBetween(12000, 25000) * 100),
                             'current_position' => $this->faker->word(),
                             'employment_type' => EmploymentType::LOCALLY_EMPLOYED->value,
+                            'rank' => $this->faker->word(),
+                            'years_in_service' => $this->faker->word(),
                             'employer' => [
                                 'name' => $this->faker->word(),
                                 'industry' => Industry::random()->value,
                                 'nationality' => Nationality::random()->value,
+                                'year_established' => '2000',
+                                'total_number_of_employees' => $this->faker->word(),
                                 'address' => [
                                     'type' => AddressType::PRIMARY->value,
                                     'ownership' => Ownership::random()->value,
