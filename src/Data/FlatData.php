@@ -528,7 +528,7 @@ class FlatData extends \Spatie\LaravelData\Data
             mrif_fee: number_format($data->order->mrif_fee ?? 0, 2),
             reservation_rate: $data->order->reservation_rate ?? '',
             lot_area: $data->order->lot_area ?? '',
-            lot_area_in_words: str_replace('-', ' ', strtoupper(self::convertNumberToWords($data->order->lot_area ?? '0', false)).' SQUARE METERS'),
+            lot_area_in_words: str_replace('-', ' ', strtoupper(self::convertNumberToWordsWithDynamicNotation($data->order->lot_area ?? '0', ' SQUARE METERS', ' DECIMETERS', 'SQUARE METERS AND'))),
             floor_area: $data->order->floor_area ?? '',
             floor_area_in_words: strtoupper(self::convertNumberToWords( $data->order->floor_area ?? '')),
 
@@ -715,7 +715,7 @@ class FlatData extends \Spatie\LaravelData\Data
             cash_outlay_3_terms: $data->order->cash_outlay_3_terms ?? '',
             cash_outlay_3_monthly_payment: number_format($data->order->cash_outlay_3_monthly_payment ?? 0, 2),
             cash_outlay_3_effective_date: $data->order->cash_outlay_3_effective_date ?? '',
-            equity_1_amount: number_format($data->order->equity_1_amount ?? 0),
+            equity_1_amount: number_format($data->order->equity_1_amount ?? 0, 2),
             equity_1_amount_in_words: strtoupper(self::convertNumberToWords($data->order->equity_1_amount ?? '0')),
             equity_1_percentage_rate: $data->order->equity_1_percentage_rate ?? '',
             equity_1_interest_rate: is_numeric($data->order->equity_1_interest_rate) ? number_format($data->order->equity_1_interest_rate ?? 0, 3) : '',
@@ -850,6 +850,31 @@ class FlatData extends \Spatie\LaravelData\Data
                 // For whole numbers, convert directly
                 return $formatter->format($number) . $postfix;
             }
+        }else{
+            return '';
+        }
+    }
+
+    public static function convertNumberToWordsWithDynamicNotation($number, $postfix_default = '', $postfix = '', $infix = ' AND ') {
+        if($number != '' && $number != 0){
+            $formatter = new \NumberFormatter('en', \NumberFormatter::SPELLOUT);
+    
+            if (strpos($number, '.') !== false) {
+                $parts = explode('.', $number);
+                $wholePart = $formatter->format($parts[0]);
+    
+                // Check if the fractional part is not zero
+                if ((int)$parts[1] !== 0) {
+                    $fractionalPart = $formatter->format($parts[1]);
+                    return $wholePart . ' '. $infix .' ' . $fractionalPart . $postfix;
+                }
+    
+                // If the fractional part is zero, return only the whole part
+                return $wholePart . $postfix_default;
+            }
+    
+            // For whole numbers, convert directly
+            return $formatter->format($number) . $postfix_default;
         }else{
             return '';
         }

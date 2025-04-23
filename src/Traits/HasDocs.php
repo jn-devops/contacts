@@ -98,7 +98,8 @@ trait HasDocs
         return array_key_exists($key, $this->documentCollections)
             ? ($value ? $this->addMediaFromUrl($value)
                 ->usingName($key)
-                ->toMediaCollection(UploadFile::deriveCollectionNameFromAttribute($key))
+                ->toMediaCollection(UploadFile::deriveCollectionNameFromAttribute($key)
+                )
                 : $this)
             : parent::setAttribute($key, $value);
     }

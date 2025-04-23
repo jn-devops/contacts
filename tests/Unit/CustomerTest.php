@@ -100,9 +100,12 @@ test('contact can accept employment', function (Customer $contact) {
             'type' => Employment::default()->value,
             'monthly_gross_income' => 100000,
             'employment_status' => EmploymentStatus::default()->value,
+            'rank' => 'Staff',
+            'years_in_service' => 'less than 1 year',
             'employer' => [
                 "name" => "3neti",
                 "email" => "lester@hurtado.ph",
+                "total_number_of_employees" => "1000",
                 "address" => [
                     "type" => "Primary",
                     "region" => "NCR",
@@ -116,6 +119,7 @@ test('contact can accept employment', function (Customer $contact) {
                 ],
                 "industry" => Industry::random()->value,
                 "contact_no" => '',
+                'year_established' => '2000',
                 "nationality" => Nationality::random()->value
             ],
             'employment_type' => EmploymentType::default()->value,

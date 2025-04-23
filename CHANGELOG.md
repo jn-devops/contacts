@@ -2,6 +2,34 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.20 - 2025-04-10
+
+added total_number_of_employees in employer metadata class
+
+## v2.1.19 - 2025-03-27
+
+updated the equity_1_amount in flat data
+
+## v2.1.18 - 2025-03-27
+
+updated the EmploymentType enums
+
+## v2.1.17 - 2025-03-26
+
+added rank and years_in_service in EmploymentMetaData and year_established in EmployerMetaData
+
+## v2.1.16 - 2025-03-12
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v2.1.15...v2.1.16
+
+## v2.1.15 - 2025-03-12
+
+**Full Changelog**: https://github.com/jn-devops/contacts/compare/v2.1.14...v2.1.15
+
+## v2.1.14 - 2025-03-10
+
+added dynamic notation for lot_area_in_words
+
 ## v2.1.13 - 2025-03-04
 
 chnage in pagibig_filing_site value
