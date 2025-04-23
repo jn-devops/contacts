@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.21 - 2025-04-23
+
+added government_id_1_type on order
+
 ## v2.1.20 - 2025-04-10
 
 added total_number_of_employees in employer metadata class
