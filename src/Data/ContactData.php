@@ -480,6 +480,7 @@ class ContactOrderData extends Data
         public ?string $aif_attorney_middle_name,
         public ?string $aif_attorney_name_suffix,
         public ?string $loan_base,
+        public ?string $government_id_1_type,
 
         public ?PaymentSchemeData $payment_scheme,
         public ?SellerData $seller,
@@ -606,6 +607,7 @@ class ContactOrderData extends Data
             'aif_attorney_middle_name'=>$this->aif_attorney_middle_name,
             'aif_attorney_name_suffix'=>$this->aif_attorney_name_suffix,
             'loan_base'=>$this->loan_base,
+            'government_id_1_type'=>$this->government_id_1_type,
         ];
     }
 }
