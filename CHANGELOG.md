@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.22 - 2025-04-30
+
+added cashDepositProofOfPaymentDocument on contact attachment
+
 ## v2.1.21 - 2025-04-23
 
 added government_id_1_type on order
