@@ -119,6 +119,7 @@ test('contact can attach media', function () {
     $marriageContractDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
     $courtDecisionSeparationDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
     $deathCertificateDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
+    $cashDepositProofOfPaymentDocument = 'https://s29.q4cdn.com/175625835/files/doc_downloads/test.pdf';
 
     $contact = Contact::factory()->create([
         'idImage' => null,
@@ -167,6 +168,7 @@ test('contact can attach media', function () {
         'marriageContractDocument' => null,
         'courtDecisionSeparationDocument' => null,
         'deathCertificateDocument' => null,
+        'cashDepositProofOfPaymentDocument' => null,
     ]);
     $contact->idImage = $idImageUrl;
     $contact->selfieImage = $selfieImageUrl;
@@ -214,6 +216,7 @@ test('contact can attach media', function () {
     $contact->marriageContractDocument = $marriageContractDocument;
     $contact->courtDecisionSeparationDocument = $courtDecisionSeparationDocument;
     $contact->deathCertificateDocument = $deathCertificateDocument;
+    $contact->cashDepositProofOfPaymentDocument = $cashDepositProofOfPaymentDocument;
 
     $contact->save();
     expect($contact->idImage)->toBeInstanceOf(Media::class);
@@ -262,6 +265,7 @@ test('contact can attach media', function () {
     expect($contact->marriageContractDocument)->toBeInstanceOf(Media::class);
     expect($contact->courtDecisionSeparationDocument)->toBeInstanceOf(Media::class);
     expect($contact->deathCertificateDocument)->toBeInstanceOf(Media::class);
+    expect($contact->cashDepositProofOfPaymentDocument)->toBeInstanceOf(Media::class);
 
     expect($contact->idImage->name)->toBe('idImage');
     expect($contact->selfieImage->name)->toBe('selfieImage');
@@ -308,6 +312,7 @@ test('contact can attach media', function () {
     expect($contact->marriageContractDocument->name)->toBe('marriageContractDocument');
     expect($contact->courtDecisionSeparationDocument->name)->toBe('courtDecisionSeparationDocument');
     expect($contact->deathCertificateDocument->name)->toBe('deathCertificateDocument');
+    expect($contact->cashDepositProofOfPaymentDocument->name)->toBe('cashDepositProofOfPaymentDocument');
 
     expect($contact->selfieImage->file_name)->toBe('selfieImage.jpg');
     expect($contact->payslipImage->file_name)->toBe('payslipImage.jpg');
@@ -354,6 +359,7 @@ test('contact can attach media', function () {
     expect($contact->marriageContractDocument->file_name)->toBe('test.pdf');
     expect($contact->courtDecisionSeparationDocument->file_name)->toBe('test.pdf');
     expect($contact->deathCertificateDocument->file_name)->toBe('test.pdf');
+    expect($contact->cashDepositProofOfPaymentDocument->file_name)->toBe('test.pdf');
 
     $host = (config('app.url'));
     config()->set('app.url', '');
@@ -404,6 +410,7 @@ test('contact can attach media', function () {
         expect($contact->marriageContractDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->marriageContractDocument->getPathRelativeToRoot()]));
         expect($contact->courtDecisionSeparationDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->courtDecisionSeparationDocument->getPathRelativeToRoot()]));
         expect($contact->deathCertificateDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->deathCertificateDocument->getPathRelativeToRoot()]));
+        expect($contact->cashDepositProofOfPaymentDocument->getUrl())->toBe(__(':host/storage/:path', ['host' => $host, 'path' => $contact->cashDepositProofOfPaymentDocument->getPathRelativeToRoot()]));
     });
     config()->set('app.url', $host);
     $contact->idImage->delete();
@@ -452,6 +459,7 @@ test('contact can attach media', function () {
     $contact->marriageContractDocument->delete();
     $contact->courtDecisionSeparationDocument->delete();
     $contact->deathCertificateDocument->delete();
+    $contact->cashDepositProofOfPaymentDocument->delete();
 
     $contact->clearMediaCollection('id-images');
     $contact->clearMediaCollection('selfie-images');
@@ -498,6 +506,7 @@ test('contact can attach media', function () {
     $contact->clearMediaCollection('marriage_contract-documents');
     $contact->clearMediaCollection('court_decision_separation-documents');
     $contact->clearMediaCollection('death_certificate-documents');
+    $contact->clearMediaCollection('cash_deposit_proof_of_payment-documents');
 });
 
 

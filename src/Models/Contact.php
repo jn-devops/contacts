@@ -185,6 +185,7 @@ class Contact extends Model implements BorrowerInterface, HasMedia
         'marriageContractDocument',
         'courtDecisionSeparationDocument',
         'deathCertificateDocument',
+        'cashDepositProofOfPaymentDocument',
         'current_status',
         'current_status_code',
         'status_reason',

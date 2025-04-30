@@ -58,6 +58,7 @@ trait HasDocs
         'marriageContractDocument' => ['application/pdf', 'image/jpeg', 'image/png', 'image/webp'],
         'courtDecisionSeparationDocument' => ['application/pdf', 'image/jpeg', 'image/png', 'image/webp'],
         'deathCertificateDocument' => ['application/pdf', 'image/jpeg', 'image/png', 'image/webp'],
+        'cashDepositProofOfPaymentDocument' => ['application/pdf', 'image/jpeg', 'image/png', 'image/webp'],
     ];
 
     /**
@@ -154,6 +155,7 @@ trait HasDocs
      * - marriage_contract-documents => marriageContractDocument
      * - court_decision_separation-documents => courtDecisionSeparationDocument
      * - death_certificate-documents => deathCertificateDocument
+     * - cash_deposit_proof_of_payment-documents => cashDepositProofOfPaymentDocument
      *
      * @return array An array of attribute names derived from the registered media collection names.
      */
