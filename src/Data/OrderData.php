@@ -75,6 +75,8 @@ class OrderData extends Data
         public ?string $repricing_period_affordable,
         public ?string $disclosure_statement_on_loan_transaction_total,
         public ?string $government_id_1_type,
+        public ?string $brn,
+        public ?string $homeful_id,
         public HDMFData|Optional          $hdmf,
         public SellerData|Optional        $seller,
         public PaymentSchemeData|Optional $payment_scheme,
