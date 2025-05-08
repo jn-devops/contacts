@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.25 - 2025-05-08
+
+added s_name in flat data
+
 ## v2.1.24 - 2025-05-08
 
 updated the structure of buyer_name
