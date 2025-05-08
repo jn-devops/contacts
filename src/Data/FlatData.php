@@ -413,7 +413,7 @@ class FlatData extends \Spatie\LaravelData\Data
             buyer_last_name: strtoupper($data->profile->last_name ?? ''),
             buyer_name: strtoupper(collect([
                 $data->profile->first_name,
-                $data->profile->middle_name,
+                mb_substr($data->profile->middle_name ?? '', 0, 1) ? mb_substr($data->profile->middle_name, 0, 1) . '.' : '',
                 $data->profile->last_name,
                 $data->profile->name_suffix
             ])->filter()->implode(' ')),
