@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.24 - 2025-05-08
+
+updated the structure of buyer_name
+
 ## v2.1.23 - 2025-05-05
 
 added brn and homeful_id on contacts order
