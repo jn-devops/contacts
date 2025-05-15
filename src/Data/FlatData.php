@@ -438,7 +438,7 @@ class FlatData extends \Spatie\LaravelData\Data
             both_of: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ? 'both' : 'of' : 'of',
             buyer_spouse_name: strtoupper(collect([
                 $data->spouse->first_name,
-                $data->spouse->middle_name,
+                mb_substr($data->spouse->middle_name ?? '', 0, 1) ? mb_substr($data->spouse->middle_name, 0, 1) . '.' : '',
                 $data->spouse->last_name,
                 $data->spouse->name_suffix
             ])->filter()->implode(' ')),
