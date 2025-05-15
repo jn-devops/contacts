@@ -391,7 +391,7 @@ class FlatData extends \Spatie\LaravelData\Data
             $spouse = $model->co_borrowers[0]['spouse'];
             $co_borrower_spouse_name =implode(' ', array_filter([
                 $spouse['first_name'] ?? '',
-                $spouse['middle_name'] ?? '',
+                mb_substr($spouse['middle_name'] ?? '', 0, 1) ? mb_substr($spouse['middle_name'], 0, 1) . '.' : '',
                 $spouse['last_name'] ?? '',
                 $spouse['name_suffix'] ?? ''
             ]));
@@ -613,7 +613,7 @@ class FlatData extends \Spatie\LaravelData\Data
             present_rental_fee: number_format($data->order->payment_scheme->fees?->toCollection()->firstWhere('name', 'present_rental_fee')->amount ?? 0),
             co_borrower_name: strtoupper((collect([
                 $data->co_borrowers[0]->first_name ?? '',
-                $data->co_borrowers[0]->middle_name ?? '',
+                mb_substr($data->co_borrowers[0]->middle_name ?? '', 0, 1) ? mb_substr($data->co_borrowers[0]->middle_name, 0, 1) . '.' : '',
                 $data->co_borrowers[0]->last_name ?? '',
                 $data->co_borrowers[0]->name_suffix ?? '',
             ])->filter()->implode(' '))),
@@ -865,21 +865,21 @@ class FlatData extends \Spatie\LaravelData\Data
     public static function convertNumberToWordsWithDynamicNotation($number, $postfix_default = '', $postfix = '', $infix = ' AND ') {
         if($number != '' && $number != 0){
             $formatter = new \NumberFormatter('en', \NumberFormatter::SPELLOUT);
-    
+
             if (strpos($number, '.') !== false) {
                 $parts = explode('.', $number);
                 $wholePart = $formatter->format($parts[0]);
-    
+
                 // Check if the fractional part is not zero
                 if ((int)$parts[1] !== 0) {
                     $fractionalPart = $formatter->format($parts[1]);
                     return $wholePart . ' '. $infix .' ' . $fractionalPart . $postfix;
                 }
-    
+
                 // If the fractional part is zero, return only the whole part
                 return $wholePart . $postfix_default;
             }
-    
+
             // For whole numbers, convert directly
             return $formatter->format($number) . $postfix_default;
         }else{
