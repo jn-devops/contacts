@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.28 - 2025-05-20
+
+updated the flat data, making the spouses field value N/A when civil status is Single
+
 ## v2.1.25 - 2025-05-08
 
 added s_name in flat data
