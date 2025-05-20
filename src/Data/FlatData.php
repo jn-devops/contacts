@@ -436,13 +436,13 @@ class FlatData extends \Spatie\LaravelData\Data
             buyer_civil_status_to: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ? $data->profile->civil_status.' to ' : $data->profile->civil_status : '',
             buyer_civil_status_to_lower_case: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ?strtolower($data->profile->civil_status.' to ')  :strtolower($data->profile->civil_status ) : '',
             both_of: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ? 'both' : 'of' : 'of',
-            buyer_spouse_name: strtoupper(collect([
+            buyer_spouse_name: (($data->profile->civil_status ?? '') == 'Single') ? 'N/A' : strtoupper(collect([
                 $data->spouse->first_name,
                 mb_substr($data->spouse->middle_name ?? '', 0, 1) ? mb_substr($data->spouse->middle_name, 0, 1) . '.' : '',
                 $data->spouse->last_name,
                 $data->spouse->name_suffix
             ])->filter()->implode(' ')),
-            buyer_spouse_name_with_middle_initial: strtoupper(collect([
+            buyer_spouse_name_with_middle_initial: (($data->profile->civil_status ?? '') == 'Single') ? 'N/A' : strtoupper(collect([
                 $data->spouse->first_name,
                 mb_substr($data->spouse->middle_name ?? '', 0, 1) ? mb_substr($data->spouse->middle_name, 0, 1) . '.' : '',
                 $data->spouse->last_name,
@@ -626,9 +626,9 @@ class FlatData extends \Spatie\LaravelData\Data
             co_borrower_address: $data->addresses?->toCollection()->firstWhere('type', 'co_borrower')->full_address ?? '',
             co_borrower_civil_status: $data->co_borrowers[0]->civil_status ?? '',
             co_borrower_civil_status_lower_case:strtolower($data->co_borrowers[0]->civil_status ?? '') ,
-            co_borrower_civil_status_to: ($data->co_borrowers[0]->civil_status) ? (strtoupper($data->co_borrowers[0]->civil_status) == 'MARRIED') ? $data->co_borrowers[0]->civil_status.' to ' : $data->co_borrowers[0]->civil_status : '',
+            co_borrower_civil_status_to: ($data->co_borrowers[0]->civil_status) ? ((strtoupper($data->co_borrowers[0]->civil_status) == 'MARRIED') ? $data->co_borrowers[0]->civil_status.' to ' : $data->co_borrowers[0]->civil_status) : '',
             co_borrower_nationality: $data->co_borrowers[0]->nationality ?? '',
-            co_borrower_spouse: $co_borrower_spouse_name,
+            co_borrower_spouse: (($data->co_borrowers[0]->civil_status ?? '') == 'Single' || ($data->co_borrowers[0]->civil_status ?? '') == '') ? 'N/A' : $co_borrower_spouse_name,
             co_borrower_spouse_with_middle_initial: $co_borrower_spouse_name_with_middle_initial,
             co_borrower_spouse_tin: $co_borrower_spouse_tin,
             co_borrower_tin: $data->employment?->toCollection()->firstWhere('type', 'co_borrower')->id->tin ?? '',
