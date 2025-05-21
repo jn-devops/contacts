@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.29 - 2025-05-21
+
+set default value for coborrowers to be N/A in flatdata
+
 ## v2.1.28 - 2025-05-20
 
 updated the flat data, making the spouses field value N/A when civil status is Single
