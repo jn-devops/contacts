@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.30 - 2025-06-13
+
+added relationship_to_buyer in aif via data class
+
 ## v2.1.29 - 2025-05-21
 
 set default value for coborrowers to be N/A in flatdata
