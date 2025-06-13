@@ -486,7 +486,7 @@ class ContactOrderData extends Data
 
         public ?PaymentSchemeData $payment_scheme,
         public ?SellerData $seller,
-        Public ?PersonData $aif,
+        public ?AIFData $aif,
 
     ) {}
 
