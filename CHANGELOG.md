@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.32 - 2025-06-23
+
+added new order field for booking bypass
+
 ## v2.1.31 - 2025-06-13
 
 added relationship_to_buyer field in aif metadata
