@@ -483,6 +483,11 @@ class ContactOrderData extends Data
         public ?string $government_id_1_type,
         public ?string $brn,
         public ?string $homeful_id,
+        public ?string $referral_code,
+        public ?string $source_of_sale,
+        public ?string $preferred_project,
+        public ?string $seller_voucher_code,
+        public ?string $campaign_author,
 
         public ?PaymentSchemeData $payment_scheme,
         public ?SellerData $seller,
