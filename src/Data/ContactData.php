@@ -617,6 +617,11 @@ class ContactOrderData extends Data
             'government_id_1_type'=>$this->government_id_1_type,
             'brn'=>$this->brn,
             'homeful_id'=>$this->homeful_id,
+            'referral_code' => $this->referral_code,
+            'source_of_sale' => $this->source_of_sale,
+            'preferred_project' => $this->preferred_project,
+            'seller_voucher_code' => $this->seller_voucher_code,
+            'campaign_author' => $this->campaign_author,
         ];
     }
 }
