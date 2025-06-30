@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.34 - 2025-06-30
+
+updated the FlatData
+
 ## v2.1.33 - 2025-06-23
 
 updated the toArray field in contact data
