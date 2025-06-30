@@ -52,6 +52,8 @@ class FlatData extends \Spatie\LaravelData\Data
         public ?string $spouse_fb_account_name,
 
         public ?string $buyer_address,
+        public ?string $buyer_zip_code,
+        public ?string $buyer_address1,
 
         public ?string $company_name,
         public ?string $project_name,
@@ -499,6 +501,8 @@ class FlatData extends \Spatie\LaravelData\Data
             length_of_stay: $data->employment?->toCollection()->firstWhere('type', 'spouse')->years_in_service ?? '',
             spouse_industry: $data->employment?->toCollection()->firstWhere('type', 'spouse')->industry ?? '',
             buyer_address: $data->addresses?->toCollection()->firstWhere('type', 'primary')->full_address ?? '',
+            buyer_address1: $data->addresses?->toCollection()->firstWhere('type', 'primary')->address1 ?? '',
+            buyer_zip_code: $data->addresses?->toCollection()->firstWhere('type', 'primary')->postal_code ?? '',
             buyer_province: $data->addresses?->toCollection()->firstWhere('type', 'primary')->administrative_area ?? '',
             buyer_residence_type: $data->addresses?->toCollection()->firstWhere('type', 'primary')->type ?? '',
             buyer_ownership_type: $data->addresses?->toCollection()->firstWhere('type', 'primary')->ownership ?? '',
