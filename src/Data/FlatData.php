@@ -822,10 +822,18 @@ class FlatData extends \Spatie\LaravelData\Data
             return $flatdata;
 
         } catch (\Throwable $e) {
-            $message = 'Please double check the fields. Check on '.$e->getLine();
+            $message = 'Please complete and double check all the fields. '.$e->getLine().'. '.$e->getMessage();
             if($e instanceof \TypeError){
                 throw new Exception(self::determineFieldName($e->getLine()));
             }else{
+                $trace = $e->getTrace();
+                foreach ($trace as $frame) {
+                    if (isset($frame['file']) && str_contains($frame['file'], 'FlatData.php')) {
+                        throw new Exception(self::determineFieldName($frame['line']));
+                        break;
+                    }
+                }
+
                 throw new Exception($message);
             }
             
