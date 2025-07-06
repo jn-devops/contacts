@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.36 - 2025-07-06
+
+updated the condition for flat data on error handling
+
 ## v2.1.35 - 2025-07-06
 
 added exception handling for FlatData.php
