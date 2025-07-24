@@ -587,7 +587,7 @@ class FlatData extends \Spatie\LaravelData\Data
             discount_rate: $data->order->payment_scheme->discount_rate ?? '',
             conditional_discount: number_format($data->order->payment_scheme->conditional_discount ?? 0, 2),
             evat_percentage: number_format($data->order->payment_scheme->evat_percentage ?? 0, 2),
-            total_contract_price: number_format(($data->order?->payment_scheme?->total_contract_price ?? '') === '' ?? 0, 2),
+            total_contract_price: number_format(($data->order?->payment_scheme?->total_contract_price) ?? 0, 2),
             evat_amount: number_format($data->order->payment_scheme->evat_amount ?? 0, 2),
             net_total_contract_price: number_format($data->order->payment_scheme->net_total_contract_price ?? 0, 2),
             ntcp_in_words: strtoupper(self::convertNumberToWords($data->order->payment_scheme->net_total_contract_price ?? '0')),
