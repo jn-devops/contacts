@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.37 - 2025-07-24
+
+updated the total_contract_price in FlatData
+
 ## v2.1.36 - 2025-07-06
 
 updated the condition for flat data on error handling
