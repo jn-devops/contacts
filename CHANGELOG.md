@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.38 - 2025-08-05
+
+remove the enums in metaclasses
+
 ## v2.1.37 - 2025-07-24
 
 updated the total_contract_price in FlatData
