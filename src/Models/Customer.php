@@ -32,9 +32,9 @@ class Customer extends Contact
     protected function casts(): array
     {
         return [
-            'sex' => Sex::class,
-            'civil_status' => CivilStatus::class,
-            'nationality' => Nationality::class,
+            // 'sex' => Sex::class,
+            // 'civil_status' => CivilStatus::class,
+            // 'nationality' => Nationality::class,
             'addresses' => DataCollection::class . ':' . AddressMetadata::class,
             'employment' => DataCollection::class . ':' . EmploymentMetadata::class,
             'spouse' => SpouseMetadata::class,

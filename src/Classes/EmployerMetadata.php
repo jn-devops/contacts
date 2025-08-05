@@ -17,10 +17,8 @@ class EmployerMetadata extends Data
         public string $name,
         public ?string $email,
         public ?string $contact_no,
-        #[WithCast(EnumCast::class)]
-        public ?Nationality $nationality,
-        #[WithCast(EnumCast::class)]
-        public ?Industry $industry,
+        public ?string $nationality,
+        public ?string $industry,
         public AddressMetadata|Optional $address,
         public ?string $year_established,
         public ?string $total_number_of_employees,

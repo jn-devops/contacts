@@ -21,15 +21,11 @@ class SpouseMetadata extends Data
         public string $first_name,
         public ?string $middle_name,
         public string $last_name,
-        #[WithCast(EnumCast::class)]
-        public Suffix|null $name_suffix,
+        public string|null $name_suffix,
         public ?string $mothers_maiden_name,
-        #[WithCast(EnumCast::class)]
-        public CivilStatus $civil_status,
-        #[WithCast(EnumCast::class)]
-        public Sex $sex,
-        #[WithCast(EnumCast::class)]
-        public Nationality $nationality,
+        public string $civil_status,
+        public string $sex,
+        public string $nationality,
         public $date_of_birth,
         /** @var EmploymentMetadata[] */
         public DataCollection|Optional $employment,
@@ -46,7 +42,7 @@ class SpouseMetadata extends Data
             $first_name,
             mb_substr($middle_name ?? '', 0, 1) ? mb_substr($middle_name, 0, 1) . '.' : '',
             $last_name,
-            $name_suffix?->value
+            $name_suffix
         ])->filter()->implode(' ');
     }
 

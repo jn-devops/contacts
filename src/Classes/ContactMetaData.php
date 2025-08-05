@@ -30,20 +30,16 @@ class ContactMetaData extends Data
         public string $first_name,
         public ?string $middle_name,
         public string $last_name,
-        #[WithCast(EnumCast::class)]
-        public Suffix|null $name_suffix,
+        public string|null $name_suffix,
         public ?string $mothers_maiden_name,
         public string $email,
         public string $mobile,
         public ?string $other_mobile,
         public ?string $help_number,
         public ?string $landline,
-        #[WithCast(EnumCast::class)]
-        public CivilStatus|Optional $civil_status,
-        #[WithCast(EnumCast::class)]
-        public Sex|null $sex,
-        #[WithCast(EnumCast::class)]
-        public Nationality|Optional $nationality,
+        public string|Optional $civil_status,
+        public string|null $sex,
+        public string|Optional $nationality,
         #[WithTransformer(DateTimeInterfaceTransformer::class, format: 'Y-m-d')]
         #[WithCast(DateTimeInterfaceCast::class, timeZone: 'Asia/Manila', format: 'Y-m-d')]
         public Carbon|null $date_of_birth,
@@ -57,7 +53,7 @@ class ContactMetaData extends Data
         public AIFMetadata|Optional $aif,
         public OrderData|Optional $order
     ) {
-        $this->name = implode(' ', array_filter([$first_name, $middle_name, $last_name, $name_suffix?->value]));
+        $this->name = implode(' ', array_filter([$first_name, $middle_name, $last_name, $name_suffix]));
         $this->monthly_gross_income = $this->getMonthlyGrossIncome();
         $this->civil_connection = $this->civil_status instanceof CivilStatus
             ? ($this->civil_status == CivilStatus::MARRIED ? $this->civil_status->value . ' to ' : $this->civil_status->value)
@@ -66,7 +62,7 @@ class ContactMetaData extends Data
             $first_name,
             mb_substr($middle_name ?? '', 0, 1) ? mb_substr($middle_name, 0, 1) . '.' : '',
             $last_name,
-            $name_suffix?->value
+            $name_suffix
         ])->filter()->implode(' ');
         $this->media_urls = method_exists($this, 'getMedia')
             ? $this->getMedia()->map(fn ($media) => [$media->name, $media->getUrl()])->toArray()

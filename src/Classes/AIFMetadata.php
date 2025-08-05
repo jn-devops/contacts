@@ -22,12 +22,9 @@ class AIFMetadata extends Data
         public string $last_name,
         public ?string $name_suffix,
         public ?string $mothers_maiden_name,
-        #[WithCast(EnumCast::class)]
-        public CivilStatus $civil_status,
-        #[WithCast(EnumCast::class)]
-        public Sex $sex,
-        #[WithCast(EnumCast::class)]
-        public Nationality $nationality,
+        public string $civil_status,
+        public string $sex,
+        public string $nationality,
         public $date_of_birth,
         public ?string $email,
         public ?string $mobile,
