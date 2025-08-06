@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.39 - 2025-08-06
+
+added full_address on AddressMetadata
+
 ## v2.1.38 - 2025-08-05
 
 remove the enums in metaclasses
