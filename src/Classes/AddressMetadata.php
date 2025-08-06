@@ -24,6 +24,7 @@ class AddressMetadata extends Data
         public ?string $administrative_area,
         public ?string $postal_code,
         public ?string $region,
+        public ?string $full_address,
         public ?string $country
     ) {
         $this->address = implode(', ', array_filter([$this->address1, $this->sublocality, $this->locality, $this->administrative_area, $this->postal_code]));

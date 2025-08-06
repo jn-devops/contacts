@@ -438,7 +438,7 @@ class FlatData extends \Spatie\LaravelData\Data
             buyer_birthday: $data->profile->date_of_birth ?? '',
             buyer_civil_status: $data->profile->civil_status ?? '',
             buyer_civil_status_lower_case:strtolower($data->profile->civil_status ?? ''),
-            buyer_civil_status_to: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ? $data->profile->civil_status.' to ' : $data->profile->civil_status : '',
+            buyer_civil_status_to: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ? $data->profile->civil_status.' to ' : 'single/married' : '',
             buyer_civil_status_to_lower_case: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ?strtolower($data->profile->civil_status.' to ')  :strtolower($data->profile->civil_status ) : '',
             both_of: ($data->profile->civil_status) ? (strtoupper($data->profile->civil_status) == 'MARRIED') ? 'both' : 'of' : 'of',
             buyer_spouse_name: (($data->profile->civil_status ?? '') == 'Single') ? 'N/A' : strtoupper(collect([
