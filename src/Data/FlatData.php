@@ -816,7 +816,8 @@ class FlatData extends \Spatie\LaravelData\Data
             ])->filter()->implode(' ')),
             loan_base: is_numeric($data->order->loan_base)? number_format($data->order->loan_base , 2):0,
             loan_base_in_words: strtoupper(self::convertNumberToWords(is_numeric($data->order->loan_base)?$data->order->loan_base:0, true, ' PESOS')),
-            pagibig_filing_site: (strpos(strtoupper($data->order->project_location ?? ''), 'PAMPANGA') !== false) ? 'SAN FERNANDO HOUSING BUSINESS CENTER, Suburbia Commercial Center,Maimpis City of San Fernando, Pampanga Tel:(02)8422-3000 local 6297' : '11F JELP Business Solution Center, #409 Shaw Boulevard, Mandaluyong City, Trunk line: (02) 422-3000',
+            // pagibig_filing_site: (strpos(strtoupper($data->order->project_location ?? ''), 'PAMPANGA') !== false) ? 'SAN FERNANDO HOUSING BUSINESS CENTER, Suburbia Commercial Center,Maimpis City of San Fernando, Pampanga Tel:(02)8422-3000 local 6297' : '11F JELP Business Solution Center, #409 Shaw Boulevard, Mandaluyong City, Trunk line: (02) 422-3000',
+            pagibig_filing_site: '11F JELP Business Solution Center, #409 Shaw Boulevard, Mandaluyong City, Trunk line: (02) 422-3000',
             );
 
             return $flatdata;
