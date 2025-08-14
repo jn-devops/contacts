@@ -2,6 +2,10 @@
 
 All notable changes to `contacts` will be documented in this file.
 
+## v2.1.41 - 2025-08-14
+
+change the pagibig_filing_site to a fix value
+
 ## v2.1.40 - 2025-08-11
 
 alter the buyer_civil_status_to_lower_case field in the FlatData class to match the buyer_civil_status_to field
